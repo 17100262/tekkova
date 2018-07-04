@@ -11,10 +11,47 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require jquery
+//= require jquery3
 //= require turbolinks
+//= require jquery.steps
 //= require_tree .
 
 $(document).ready(function() {
    $('.alert').delay(2000).fadeOut();
+   $('#multi-form input[type="text"]').addClass('form-control');
+   $('#multi-form input[type="number"]').addClass('form-control');
+   $('#multi-form input[type="date"]').addClass('form-control');
+   $('#multi-form select').addClass('form-control');
+   $('#multi-form textarea').addClass('form-control');
+});
+
+$(function (){
+    var form = $("#multi-form");
+form.validate({
+    errorPlacement: function errorPlacement(error, element) { element.before(error); },
+    rules: {
+        confirm: {
+            equalTo: "#password"
+        }
+    }
+});
+form.children("#wizard").steps({
+    headerTag: "h2",
+    bodyTag: "section",
+    transitionEffect: "slideLeft",
+    onStepChanging: function (event, currentIndex, newIndex)
+    {
+        form.validate().settings.ignore = ":disabled,:hidden";
+        return form.valid();
+    },
+    onFinishing: function (event, currentIndex)
+    {
+        form.validate().settings.ignore = ":disabled";
+        return form.valid();
+    },
+    onFinished: function (event, currentIndex)
+    {
+        alert("Submitted!");
+    }
+});
 });

@@ -1,0 +1,22 @@
+<%= form_with(model: car_feature, local: true) do |form| %>
+  <% if car_feature.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(car_feature.errors.count, "error") %> prohibited this car_feature from being saved:</h2>
+
+      <ul>
+      <% car_feature.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :car_feature_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

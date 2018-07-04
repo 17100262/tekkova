@@ -10,10 +10,83 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180224072504) do
+ActiveRecord::Schema.define(version: 2018_06_03_170430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "car_features", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "car_features_cars", id: false, force: :cascade do |t|
+    t.bigint "car_id", null: false
+    t.bigint "car_feature_id", null: false
+    t.index ["car_id", "car_feature_id"], name: "index_car_features_cars_on_car_id_and_car_feature_id"
+  end
+
+  create_table "cars", force: :cascade do |t|
+    t.string "year"
+    t.string "make"
+    t.string "model"
+    t.string "series"
+    t.string "odometer"
+    t.string "trans_mission"
+    t.string "body_type"
+    t.string "color"
+    t.string "fuel_type"
+    t.string "power"
+    t.integer "number_of_seats"
+    t.string "drive_type"
+    t.text "description"
+    t.string "liecense_plate_number"
+    t.string "state"
+    t.string "insurance_provider"
+    t.string "availibility_days"
+    t.string "pickup_suburb"
+    t.string "pickup_postcode"
+    t.string "pickup_state"
+    t.string "driving_liecense_country"
+    t.string "driving_liecense_state"
+    t.integer "driving_liecense_number"
+    t.string "driving_liecense_firstname"
+    t.string "driving_liecense_middlename"
+    t.string "driving_liecense_lastname"
+    t.integer "personal_house_number"
+    t.string "personal_street_name"
+    t.string "personal_suburb"
+    t.string "personal_state"
+    t.string "personal_postcode"
+    t.date "personal_dob"
+    t.string "personal_mobile"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_cars_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,34 +99,14 @@ ActiveRecord::Schema.define(version: 20180224072504) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.string "name"
-    t.string "username"
-    t.string "phone_number"
-    t.string "identifier"
-    t.string "company_name"
-    t.string "linkedin_link"
-    t.string "githhub_link"
-    t.string "website_link"
-    t.string "portfolio"
-    t.string "other_link1"
-    t.string "other_link2"
-    t.string "other_link3"
-    t.text "experience"
+    t.string "firstname"
+    t.string "lastname"
+    t.boolean "send_updates"
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "provider"
-    t.string "uid"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.integer "failed_attempts", default: 0, null: false
-    t.string "unlock_token"
-    t.datetime "locked_at"
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
 end

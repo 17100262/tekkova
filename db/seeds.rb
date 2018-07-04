@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+car_features = ['Bike Rack', 'Heated Seats', 'Convertible','Bluetooth', 'GPS','Sun Roof','AuX','Child Seat','Pet Friendly','USB Input', 'Window Tint', 'Alarm']
+car_features.each do |feature|
+    CarFeature.create(name: feature)
+end

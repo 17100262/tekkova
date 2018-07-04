@@ -1,0 +1,24 @@
+<div class="container-fluid pt-5 pb-5" >
+  <div class="row">
+  	  <div class="loginmodal-container">
+  			<div class="loginmodal-container-2">
+  				<h1>Join Car Project</h1>
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= devise_error_messages! %>
+          				
+                <%= f.text_field :firstname , autofocus: true,required: true,class: "form-control form-control-md", placeholder: "Enter Your First Name" %>
+                <%= f.text_field :lastname , autofocus: true,required: true,class: "form-control form-control-md", placeholder: "Enter Your Last Name" %>
+                <%= f.email_field :email, autocomplete: "email",required: true, class: "form-control form-control-md", placeholder: "Enter Your Email" , id: "join_email" %>
+                <%= f.password_field :password, autocomplete: "off",required: true, class: "form-control form-control-md", placeholder: "Enter Your Password"  , id: "join_pword" %>
+                <%= f.password_field :password_confirmation, autocomplete: "off",required: true, class: "form-control form-control-md", placeholder: "Confirm Your Password", id: "join_cpword" %>
+    					
+    					  <%= f.submit "Sign Up", class: "login loginmodal-button loginmodal-submit" %>
+      			<% end %>
+  				
+  			</div>
+  				<hr class="hr-or">
+  				<p style="text-align: center;">Already a Member? <a href="/users/sign_in"> Login </a></p>
+  		</div> 
+  </div>
+</div>
+
