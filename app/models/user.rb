@@ -4,12 +4,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
+  attr_accessor :terms_of_service
   validates :terms_of_service, acceptance: true
   has_many :cars
 
   
   def make_admin
     self.update!(admin: true)
+  end
+  
+  def name
+    [self.firstname,self.lastname].join(" ")
   end
   
   # def self.from_omniauth(auth)

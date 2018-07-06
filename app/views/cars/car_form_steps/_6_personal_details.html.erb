@@ -1,0 +1,66 @@
+<%= form_for(@car) do |form| %>
+  <% if @car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+      <% @car.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div id="wizard">
+    
+    
+    <h2>Personal Details</h2>
+    <section>
+      <h5>Address</h5>
+      <div class="row">
+        <div class="col-md-6">
+          <%= form.label "House / Unit / Street Number" %> 
+          <%= form.number_field :personal_house_number, id:"required"  %>
+        </div>
+        <div class="col-md-6">
+          <%= form.label "Steet Name & Type" %> 
+          <%= form.text_field :personal_street_name, id:"required"  %>
+        </div>
+      </div>  
+      <div class="row">
+        <div class="col-md-4">
+          <%= form.label "Suburb" %> 
+          <%= form.text_field :personal_suburb, id:"required"  %>
+        </div>
+        <div class="col-md-4">
+          <%= form.label "State" %> 
+          <%= form.text_field :personal_state, id:"required"  %>
+        </div>
+        <div class="col-md-4">
+          <%= form.label "Postcode" %> 
+          <%= form.text_field :personal_postcode, id:"required"  %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <%= form.label "Date of Birth" %> 
+          <%= form.date_field :personal_dob, id:"required"  %>
+        </div>
+        <div class="col-md-6">
+          <%= form.label "Mobile Number" %> 
+          <%= form.text_field :personal_mobile, id:"required"  %>
+      </div>  
+      </div>
+    </section>
+  <%= form.hidden_field :step, value: 6 %>
+  <%= form.hidden_field :status, value: "completed" %>
+  </div>
+  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 5) ,class: "btn btn-primary",role: "button" %>
+  <%= form.submit "Submit" %>
+<% end %>
+  
+  
+  
+
+  
+  

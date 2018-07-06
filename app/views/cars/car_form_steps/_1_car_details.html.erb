@@ -1,0 +1,136 @@
+<%= form_for(@car) do |form| %>
+  <% if @car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+      <% @car.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div id="wizard">
+    <h2>Car Details</h2>
+    <section>
+    <div class="row">
+      <div class="col-md-3">
+        <%= form.label :year %>
+        <%#= form.text_field :year, id:"required" %>
+        <%= form.select :year, (2013..2019).to_a, prompt: "Select Year"%>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :make %> 
+        <%= form.text_field :make, id:"required"  %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :model %> 
+        <%=  form.text_field :model, id:"required"  %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :series %> 
+        <%=  form.text_field :series, id:"required"  %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :odometer %> 
+        <%=  form.text_field :odometer, id:"required"  %>
+      </div>
+      <div class="col-md-3">
+        <label>Transmission </label>
+        <%=  form.text_field :trans_mission, id:"required"  %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :body_type %> 
+        <%#= form.text_field :body_type, id:"required"  %>
+        <%= form.select :body_type, [" Convertible",  "Coupe",  "Sedan",  "SUV",  "Wagon"], prompt: "Select Body Type" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :color %> 
+        <%= form.text_field :color, id:"required"  %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :fuel_type %> 
+        <%#= form.text_field :fuel_type, id:"required"  %>
+        <%= form.select :fuel_type, ["Unleaded 91",  "Unleaded 95",  "Unleaded 98",  "LPG",  "Electrical"], prompt: "Select Fuel Type" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :power %> 
+        <%= form.text_field :power, id:"required"  %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :number_of_seats %> 
+        <%= form.number_field :number_of_seats, id:"required"  %>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <h5><%= form.label :drive_type %> </h5>
+      </div>
+    </div>  
+    <div class="row">
+      <div class="col-md-4">
+        <%= form.radio_button :drive_type, 'all_wheel'%> 
+        <%= label :drive_type, 'All wheel drive' %>
+        </div>
+        <div class="col-md-4">
+        <%= form.radio_button :drive_type, 'front_wheel' %>
+        <%= label :drive_type, 'Front Wheel Drive' %>
+        </div>
+        <div class="col-md-4">
+        <%= form.radio_button :drive_type, 'rear_wheel' %>
+        <%= label :drive_type, 'Rear Wheel Drive' %>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <h5>Please provide a description of your car to reuters</h5>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="col-md-12">
+        <%= form.text_area :description, id:"required", placeholder:"Please provide modifications that you might have done to the car"  %>
+      </div>
+    </div> 
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <h5><%= form.label :car_features %></h5>
+      </div>
+    </div>  
+    <div class="checkbox-form">
+    <%= form.collection_check_boxes(:car_feature_ids, CarFeature.all, :id, :name) %> 
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <%= form.label :liecense_plate_number %> 
+        <%= form.text_field :liecense_plate_number, id:"required"  %>
+      </div>
+      <div class="col-md-4">
+        <%= form.label :state %> 
+        <%#= form.text_field :state, id:"required"  %>
+        <%= form.select :state, ["New South Wales","Northern Territory","Queensland","South Australia","Tasmania","Victoria","Western Australia"], prompt: "Select State" %>
+      </div>
+      <div class="col-md-4">
+        <%= form.label :insurance_provider %> 
+        <%= form.text_field :insurance_provider, id:"required"  %>
+      </div>
+      
+      <div class="col-md-4">
+        <%= form.label :agreed_insurance_value %> 
+        <%= form.text_field :agreed_insurance_value, id:"required"  %>
+      </div>
+    </div>
+    </section>
+    
+    <%= form.hidden_field :step, value: 1 %>
+
+  </div>
+  <br>
+  <%= form.submit "Next", class:"btn btn-primary" %>
+<% end %>
+  
+  
+  
+
+  
+  

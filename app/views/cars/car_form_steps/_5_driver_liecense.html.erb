@@ -1,0 +1,59 @@
+<%= form_for(@car) do |form| %>
+  <% if @car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+      <% @car.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div id="wizard">
+    
+    <h2>Drivers License</h2>
+    <section>
+      <div class="row">
+        <div class="col-md-4">
+          <label>Isssuing Country</label>
+          <%= form.text_field :driving_liecense_country, id:"required"  %>
+        </div>
+        <div class="col-md-4">
+          <label>State</label>
+          <%= form.text_field :driving_liecense_state, id:"required"  %>
+        </div>
+        <div class="col-md-4">
+          <label>Driver's Licence Number</label>
+          <%= form.number_field :driving_liecense_number, id:"required"  %>
+        </div>
+        <div class="col-md-4">
+          <label>First Name</label>
+          <%= form.text_field :driving_liecense_firstname, id:"required"  %>
+        </div>
+        <div class="col-md-4">
+          <label>Middle Name</label>
+          <%= form.text_field :driving_liecense_middlename  %>
+        </div>
+        <div class="col-md-4">
+          <label>Last Name</label>
+          <%= form.text_field :driving_liecense_lastname, id:"required"  %>
+        </div>
+      </div>
+      <p class="font-weight-bold mt-3">Please enter your name as it appears on your Driver's license</p>
+      <p class="font-weight-bold mt-3">Your  information  will  not  be  made  public</p>
+    </section>
+  
+  <%= form.hidden_field :step, value: 5 %>  
+    
+  </div>
+  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 4) ,class: "btn btn-primary",role: "button" %>
+  <%= form.submit "Next", class: "btn btn-primary" %>
+<% end %>
+  
+  
+  
+
+  
+  

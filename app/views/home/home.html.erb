@@ -1,5 +1,10 @@
-hello world
-asdas
-saddddddddddddd
-asdddddddddddd
-asddddddddddddd
+<% if current_user.sign_in_count <= 1 %>
+    <%= render 'cars/congrats' %>
+    <script>
+        $(document).ready(function() {
+    
+            $('#myModal').modal('show')
+        
+        });
+    </script>
+<% end %>

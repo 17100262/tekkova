@@ -1,0 +1,80 @@
+<%= form_for(@car) do |form| %>
+  <% if @car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+      <% @car.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+    <h2>Availibility and Pickup</h2>
+    <section>
+      <h5>What is your car's pickup location?</h5>
+      <div class="row">
+        <div class="col-md-4">
+          <label>Suburb</label>
+          <%= form.text_field :pickup_suburb, id:"required"  %>
+        </div>
+        <div class="col-md-4">
+          <label>Postcode</label>
+        <%= form.text_field :pickup_postcode, id:"required"  %>
+        </div>
+        <div class="col-md-4">
+          <label>State</label>
+        <%= form.text_field :pickup_state, id:"required"  %>
+        </div>
+      </div>  
+      <h5 class="mt-4">What day of the week is your car available?</h5>
+      <div class="checkbox-form">
+      <% ["Anyday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each do |day| %>
+    		
+        <%= check_box_tag "car[availibility_days][]", day,@car.availibility_days.include?(day) %>
+        <%= form.label day %>
+    	<% end %>	
+    	</div>
+    	
+    	<h5 class="mt-4">Do you prefer short term or long term rentals?</h5>
+      <div class="checkbox-form">
+        <%= radio_button_tag "car[rental]","short_term",@car.rental=="short_term"  %>
+        <%= form.label "Short Term, 1 to 3 days per week" %>
+        <%= radio_button_tag "car[rental]","long_term",@car.rental=="long_term"  %>
+        <%= form.label "Long Term, 4 to 7 days per week" %>
+      
+    	</div>
+    	
+    	<h5 class="mt-4">How much advance notice do you need?</h5>
+      <div class="checkbox-form">
+        <%= radio_button_tag "car[advance_notice]","Anytime",@car.advance_notice=="Anytime"  %>
+        <%= form.label "Pickup Availible at any time" %>
+        
+        <%= radio_button_tag "car[advance_notice]","6 to 12 hours",@car.advance_notice=="6 to 12 hours"  %>
+        <%= form.label "6 to 12 hours" %>
+        
+        <%= radio_button_tag "car[advance_notice]","Two days",@car.advance_notice=="Two days"  %>
+        <%= form.label "Two days" %>
+        
+        <%= radio_button_tag "car[advance_notice]","1 to 6 hours",@car.advance_notice=="1 to 6 hours"  %>
+        <%= form.label "1 to 6 hours" %>
+        
+        <%= radio_button_tag "car[advance_notice]","12 to 24 hours",@car.advance_notice=="12 to 24 hours"  %>
+        <%= form.label "12 to 24 hours" %>
+        
+        <%= radio_button_tag "car[advance_notice]","3 days",@car.advance_notice=="3 days"  %>
+        <%= form.label "3 days" %>
+      
+    	</div>
+    </section>
+  <%= form.hidden_field :step, value: 3 %>
+  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 2) ,class: "btn btn-primary",role: "button" %>  
+  <%= form.submit "Next", class: "btn btn-primary" %>
+<% end %>
+  
+  
+  
+
+  
+  

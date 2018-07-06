@@ -6,7 +6,7 @@
 					<div class="header-row">
 						<div class="header-logo">
 							<a href="/" style="text-decoration:none;">
-								<strong style="font-size:25px; vertical-align: middle;">CAR PROJECT</strong>
+								<strong style="font-size:25px; vertical-align: middle;">TEKKOVA</strong>
 							</a>
 						</div>
 					</div>
@@ -23,13 +23,7 @@
                                     <li class="nav-item">
                                       <a class="nav-link" href="<%= cars_path %>">Cars <span class="sr-only">(current)</span></a>
                                     </li>
-                                    <li class="nav-item">
-                                      <% if user_signed_in? %>
-                                          <a class="nav-link" href="<%= destroy_user_session_path %>" data-method="delete">Log Out</a>
-                                      <% else %>
-                                          <a class="nav-link" href="<%= new_user_registration_path %>">Sign Up</a>
-                                      <% end %>
-                                    </li>
+                                    
                                       <% if user_signed_in? %>
                                     
                                         <li class="nav-item">
@@ -37,7 +31,7 @@
                                         </li>
                                         
                                         <li class="nav-item">
-                                          <a class="nav-link" href="<%= edit_user_path(current_user) %>">Profile</a>
+                                          <a class="nav-link" href="<%= user_path(current_user) %>">Profile</a>
                                         </li>
                                         
                                         <% if current_user.admin %>
@@ -45,6 +39,13 @@
                                             <a class="nav-link" href="<%= admin_path %>">Admin Dashboard</a>
                                           </li>
                                         <% end %>
+                                        <li class="nav-item">
+                                      <% if user_signed_in? %>
+                                          <a class="nav-link" href="<%= destroy_user_session_path %>" data-method="delete">Log Out</a>
+                                      <% else %>
+                                          <a class="nav-link" href="<%= new_user_registration_path %>">Sign Up</a>
+                                      <% end %>
+                                    </li>
                                         
                                       <% end %>
                                     <!--<li class="nav-item">-->

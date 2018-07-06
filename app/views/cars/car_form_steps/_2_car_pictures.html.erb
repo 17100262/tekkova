@@ -1,10 +1,10 @@
-<%= form_with(model: car, local: true, :id => "multi-form") do |form| %>
-  <% if car.errors.any? %>
+<%= form_for(@car) do |form| %>
+  <% if @car.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
+      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this @car from being saved:</h2>
 
       <ul>
-      <% car.errors.full_messages.each do |message| %>
+      <% @car.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -30,10 +30,11 @@
 
     
     
-    
+  <%= form.hidden_field :step, value: 2 %>
     
   </div>
-  <%= form.submit %>
+  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 1) ,class: "btn btn-primary",role: "button" %>
+  <%= form.submit "Next", class: "btn btn-primary" %>
 <% end %>
   
   

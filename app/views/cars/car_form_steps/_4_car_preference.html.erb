@@ -1,0 +1,54 @@
+<%= form_for(@car) do |form| %>
+  <% if @car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+      <% @car.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+    <h2>Car Preference</h2>
+    <section>
+      <h5 class="mt-4">Select your preffered daily drive kilometer limit?</h5>
+        
+      <div class="checkbox-form">
+        <%= radio_button_tag "car[daily_drive_limit]",150,@car.daily_drive_limit == 150  %>
+        <%= form.label "150 kms" %>
+        
+        <%= radio_button_tag "car[daily_drive_limit]",200,@car.daily_drive_limit == 200  %>
+        <%= form.label "200 kms" %>
+        
+        <%= radio_button_tag "car[daily_drive_limit]",250,@car.daily_drive_limit == 250  %>
+        <%= form.label "250 kms" %>
+        
+        <%= radio_button_tag "car[daily_drive_limit]",300,@car.daily_drive_limit == 300  %>
+        <%= form.label "300 kms" %>
+        
+      
+      </div>
+    	
+    	<h5 class="mt-4">Do you allow travellers to use your car for personal and commercial purposes such as Uber trips or courier deliveries? Please note that we ask this question, as a part of our listing process regardless of make and models of all our hosts</h5>
+      <div class="checkbox-form">
+        <%= radio_button_tag "car[allow_personal_commercial_use]",true,@car.allow_personal_commercial_use == true  %>
+        <%= form.label "Yes" %>
+        
+        <%= radio_button_tag "car[allow_personal_commercial_use]", false, @car.allow_personal_commercial_use == false  %>
+        <%= form.label "No, only private use" %>
+        
+    	</div>
+    </section>
+  <%= form.hidden_field :step, value: 4 %>
+  
+  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 3) ,class: "btn btn-primary",role: "button" %>  
+  <%= form.submit "Next", class: "btn btn-primary" %>
+<% end %>
+  
+  
+  
+
+  
+  

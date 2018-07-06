@@ -1,0 +1,220 @@
+<%= form_with(model: car, local: true) do |form| %>
+  
+  <div class="section1">
+  <h2> Car Details </h2>
+  
+  
+    <%= form.label :year %> 
+    <%= form.text_field :year  %>
+  </div>
+  
+  
+    <%= form.label :make %> 
+    <%= form.text_field :make  %>
+  </div>
+  
+  
+    <%= form.label :model %> 
+    <%=  form.text_field :model  %>
+  </div>
+
+  
+  
+    <%= form.label :series %> 
+    <%=  form.text_field :series  %>
+  </div>
+
+  
+    <%= form.label :odometer %> 
+    <%=  form.text_field :odometer  %>
+  </div>
+  
+  
+    <%= form.label :trans_mission %> 
+    <%=  form.text_field :trans_mission  %>
+  </div>
+
+  
+    <%= form.label :body_type %> 
+    <%= form.text_field :body_type  %>
+  </div>
+
+  
+    <%= form.label :color %> 
+    <%= form.text_field :color  %>
+  </div>
+
+  
+    <%= form.label :fuel_type %> 
+    <%= form.text_field :fuel_type  %>
+  </div>
+
+  
+    <%= form.label :power %> 
+    <%= form.text_field :power  %>
+  </div>
+
+  
+    <%= form.label :number_of_seats %> 
+    <%= form.number_field :number_of_seats  %>
+  </div>
+
+  
+    <%= form.label :drive_type %> 
+    <%= form.radio_button :drive_type, '4x4'%> 
+    <%= label :drive_type, '4x4' %>
+    <%= form.radio_button :drive_type, 'front_wheel' %>
+    <%= label :drive_type, 'Front Wheel Drive' %>
+    <%= form.radio_button :drive_type, 'rear_wheel' %>
+    <%= label :drive_type, 'Rear Wheel Drive' %>
+  </div>
+
+  
+    <%= form.label :description %> 
+    <%= form.text_area :description  %>
+  </div>
+  
+  
+    <%= form.label :car_features %> 
+    <%= form.collection_check_boxes(:car_feature_ids, CarFeature.all, :id, :name) %>
+  </div>
+  
+  
+    <%= form.label :liecense_plate_number %> 
+    <%= form.text_field :liecense_plate_number  %>
+  </div>
+
+  
+    <%= form.label :state %> 
+    <%= form.text_field :state  %>
+  </div>
+
+  
+    <%= form.label :insurance_provider %> 
+    <%= form.text_field :insurance_provider  %>
+  </div>
+  </div>  
+  <hr>
+  
+  <div class="section2">
+  <h2>Car Pictures </h2>
+  
+  
+    <%= form.label :images %> 
+    <%= form.file_field :images,multiple: true  %>
+  </div>
+  <ul>
+    <% @car.images.each do |file| %>
+      <li>
+        <%= image_tag file.variant(resize: "100x100") %>
+      </li>
+    <% end %>
+  </ul>
+  </div>  
+  <hr>
+  
+  <div class="section3">
+  <h2>Availibility and Pickup</h2>
+
+  <h3>What is your car pickup location?</h3>
+  
+    <%= form.label :pickup_suburb %> 
+    <%= form.text_field :pickup_suburb  %>
+  </div>
+  
+  
+    <%= form.label :pickup_postcode %> 
+    <%= form.text_field :pickup_postcode  %>
+  </div>
+  
+  
+    <%= form.label :pickup_state %> 
+    <%= form.text_field :pickup_state  %>
+  </div>
+  
+  <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each do |day| %>
+		<%= form.label day %>
+    <%= check_box_tag "car[availibility_days][]", day,@car.availibility_days.include?(day) %>
+	<% end %>	  
+  </div>
+  <hr>
+  
+  <div class="section4">
+  <h2>Drivers Liecense</h2>
+
+    
+    <%= form.label :driving_liecense_country %> 
+    <%= form.text_field :driving_liecense_country  %>
+  </div>
+  
+  
+    <%= form.label :driving_liecense_state %> 
+    <%= form.text_field :driving_liecense_state  %>
+  </div>
+  
+  
+    <%= form.label :driving_liecense_number %> 
+    <%= form.number_field :driving_liecense_number  %>
+  </div>
+  
+  
+    <%= form.label :driving_liecense_firstname %> 
+    <%= form.text_field :driving_liecense_firstname  %>
+  </div>
+  
+  
+    <%= form.label :driving_liecense_middlename %> 
+    <%= form.text_field :driving_liecense_middlename  %>
+  </div>
+  
+  
+    <%= form.label :driving_liecense_lastname %> 
+    <%= form.text_field :driving_liecense_lastname  %>
+  </div>
+  </div>
+  <hr>
+  
+  <div class="section5">
+  <h2>Personal Details</h2>
+
+  
+    <%= form.label :personal_house_number %> 
+    <%= form.number_field :personal_house_number  %>
+  </div>
+  
+  
+    <%= form.label :personal_street_name %> 
+    <%= form.text_field :personal_street_name  %>
+  </div>
+  
+  
+    <%= form.label "Suburb" %> 
+    <%= form.text_field :personal_suburb  %>
+  </div>
+  
+  
+    <%= form.label "State" %> 
+    <%= form.text_field :personal_state  %>
+  </div>
+  
+  
+    <%= form.label "Postcode" %> 
+    <%= form.text_field :personal_postcode  %>
+  </div>
+  
+  
+    <%= form.label "Date of Birth" %> 
+    <%= form.date_field :personal_dob  %>
+  </div>
+  
+  
+    <%= form.label "Mobile Number" %> 
+    <%= form.text_field :personal_mobile  %>
+  </div>
+  </div>
+  <hr>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

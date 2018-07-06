@@ -49,9 +49,17 @@ form.children("#wizard").steps({
         form.validate().settings.ignore = ":disabled";
         return form.valid();
     },
-    onFinished: function (event, currentIndex)
-    {
-        alert("Submitted!");
-    }
+    // onFinished: function (event, currentIndex)
+    // {
+    //     alert("Submitted!");
+    // }
 });
+});
+$(document).ready(function(){
+    if(
+   $('a[href="#finish"]').show()
+    ){
+        $('a[href="#finish"]').hide();
+       $('a[href="#finish"]').closest('li').children('.submit-finish').show();
+    }
 });
