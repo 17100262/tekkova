@@ -1,38 +1,45 @@
-<h2>Listing criteria</h2>
-<%= form_for(@car) do |f| %>
-  <% if @car.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
-
-      <ul>
-      <% @car.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="container-fluid" >
+  <div class="row">
+  	 <div class="loginmodal-container">
+  			<div class="loginmodal-container-2">
+  			<h3 class="mt-3">Listing Criteria</h3>
+          <%= form_for(@car) do |f| %>
+            <% if @car.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+          
+                <ul>
+                <% @car.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+            
+              Please ensure that your vehicle meets the following criteria <br>
+              <%= f.check_box :model_year_check %>
+              <%= f.label "2013-2019 model year" %> <br>
+              
+              <%= f.check_box :usage_limit_check %>
+              <%= f.label "Less than 200,000 in kms" %> <br>
+              
+              <%= f.check_box :register_check %>
+              <%= f.label "Registered" %> <br>
+              
+              <%= f.check_box :road_worthy_check %>
+              <%= f.label "Road Worthy" %> <br>
+              
+              <%= f.check_box :write_off_check %>
+              <%= f.label "No write off" %> <br>
+              
+              
+              <%= f.check_box :maintained_check %>
+              <%= f.label "Well maintained and serviced as scheduled and recommended by the manafacturer" %> <br>
+              <%= f.hidden_field :step, value: 0 %>
+              <%= f.hidden_field :status, value: "draft" %>
+              <%= f.submit "Submit", class:"btn btn-primary"%>
+          <% end %> 
+          </div>
+  		</div> 
     </div>
-  <% end %>
-  
-    Please ensure that your vehicle meets the following criteria <br>
-    <%= f.check_box :model_year_check %>
-    <%= f.label "2013-2019 model year" %> <br>
-    
-    <%= f.check_box :usage_limit_check %>
-    <%= f.label "Less than 200,000 in kms" %> <br>
-    
-    <%= f.check_box :register_check %>
-    <%= f.label "Registered" %> <br>
-    
-    <%= f.check_box :road_worthy_check %>
-    <%= f.label "Road Worthy" %> <br>
-    
-    <%= f.check_box :write_off_check %>
-    <%= f.label "No write off" %> <br>
-    
-    
-    <%= f.check_box :maintained_check %>
-    <%= f.label "Well maintained and serviced as scheduled and recommended by the manafacturer" %> <br>
-    <%= f.hidden_field :step, value: 0 %>
-    <%= f.hidden_field :status, value: "draft" %>
-    <%= f.submit "Submit"%>
-    
-<% end %>
+</div>

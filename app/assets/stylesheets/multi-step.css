@@ -379,7 +379,7 @@
 {
     display: list-item;
 }
-.checkbox-form input[type="checkbox"] {
+.checkbox-form input[type="checkbox"], .checkbox-form input[type="radio"] {
     margin: 0 10px;
 }
 

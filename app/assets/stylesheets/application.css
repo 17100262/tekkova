@@ -17,3 +17,154 @@
 .submit-finish{
     display: none;
 }
+#wizard{
+    margin-top: 20px;
+}
+h2.heading{
+    text-align: center;
+    font-size:25px;
+    margin-bottom:15px;
+    color: #21a5De;
+
+}
+#wizard input{
+    margin-bottom:10px;
+
+}
+
+/** The Magic **/
+.btn-breadcrumb .btn:not(:last-child):after {
+  content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 33px solid transparent;
+    border-bottom: 33px solid transparent;
+    border-left: 28px solid transparent;
+    position: absolute;
+    top: 25%;
+    margin-top: -17px;
+    left: 100%;
+    z-index: 3;
+}
+.btn-breadcrumb .btn:not(:last-child):before {
+  content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 33px solid transparent;
+    border-bottom: 33px solid transparent;
+    border-left: 28px solid transparent;
+    position: absolute;
+    top: 25%;
+    margin-top: -17px;
+    margin-left: 1px;
+    left: 100%;
+    z-index: 3;
+}
+
+/** The Spacing **/
+@media(min-width:1200px){
+.btn-breadcrumb .btn {
+  font-size:18px;
+  padding:20px 20px 20px 40px;
+}
+.btn-breadcrumb .btn:first-child {
+  padding:20px 20px 20px 20px;
+}
+.btn-breadcrumb .btn:last-child {
+  padding:20px 20px 20px 35px;
+}}
+@media(max-width:1200px){
+.btn-breadcrumb .btn {
+  padding:20px 10px 20px 30px;
+}
+.btn-breadcrumb .btn:first-child {
+  padding:20px 20px 20px 20px;
+}
+.btn-breadcrumb .btn:last-child {
+  padding:20px 20px 20px 30px;
+}}
+
+/** Default button **/
+.btn-breadcrumb .btn.btn-default:not(:last-child):after {
+  border-left: 20px solid #f5f5f5;
+}
+.btn-breadcrumb .btn.btn-default:not(:last-child):before {
+  border-left: 20px solid #ccc;
+}
+.btn-breadcrumb .btn.btn-default:hover:not(:last-child):after {
+  border-left: 20px solid #ebebeb;
+}
+.btn-breadcrumb .btn.btn-default:hover:not(:last-child):before {
+  border-left: 20px solid #adadad;
+}
+
+/** Primary button **/
+.btn-breadcrumb .btn.btn-primary:not(:last-child):after {
+  border-left: 20px solid #21a5De;
+}
+.btn-breadcrumb .btn.btn-primary:not(:last-child):before {
+  border-left: 20px solid #fff;
+}
+.btn-breadcrumb .btn.btn-primary:hover:not(:last-child):after {
+  border-left: 20px solid #0088cc;
+}
+.btn-breadcrumb .btn.btn-primary:hover:not(:last-child):before {
+  border-left: 20px solid #285e8e;
+}
+.btn-breadcrumb a.btn.btn-default {
+    cursor: no-drop !important;
+    pointer-events: none !important;
+}
+html .btn-default:hover, html .btn-default.hover {
+    background-color: #ebebeb;
+}    
+#banner{
+  background:url('/banner.jpg') center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.ui-slider-handle{
+  top: -15px !important;
+    width: 33px !important;
+    background: url(/shield.png) center center !important;
+    height: 35px !important;
+    border: 0px !important;
+}
+.ui-slider-handle:focus{
+    outline: none !important;
+}
+.ui-widget-content {
+    border: 0 !important;
+    background: #21a5D6 !important;
+}
+.ui-slider-horizontal {
+    height: 6px !important;
+}
+
+.range-text{
+  border:0;
+  font-size:30px;
+  color:#21a5D6;
+}
+.background-img{
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  height:400px !important;
+}
+.details.background-img{
+ background: url('/car_details.jpg'); 
+}
+.pictures.background-img{
+ background: url('/car_pictures.jpg'); 
+}
+.preference.background-img{
+ background: url('/car_preference.jpg'); 
+}
+.availibility.background-img{
+ background: url('/availability.jpg'); 
+}
+.liecense.background-img{
+ background: url('/drivers_license.jpg'); 
+}

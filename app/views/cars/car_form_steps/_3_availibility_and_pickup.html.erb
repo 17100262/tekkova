@@ -1,3 +1,21 @@
+<div class="container">
+<div class="row mt-2">
+<div class="col-md-12 btn-group btn-breadcrumb">
+    <a href="<%= car_steps_path(step: 1,id: @car.id) %>" class="btn btn-primary car_details">Car Details</a>
+    <a href="<%= car_steps_path(step: 2,id: @car.id) %>" class="btn btn-primary car_pictures">Car Pictures</a>
+    <a href="<%= car_steps_path(step: 3,id: @car.id) %>" class="btn btn-primary car_availibility">Availibility and Pickup</a>
+    <a href="#" class="btn btn-default car_preference">Car Preference</a>
+    <a href="#" class="btn btn-default car_liecense">Driver Liecense</a>
+    <a href="#" class="btn btn-default car_personal">Personal Details</a>
+</div>  
+</div>
+</div>
+<h2 class="heading mt-4">Availibility and Pickup</h2>
+<div class="availibility background-img">
+  
+</div>
+<div class="container py-4">
+<div id="multi-form" class="car-availibility">
 <%= form_for(@car) do |form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
@@ -10,25 +28,24 @@
       </ul>
     </div>
   <% end %>
-  
-    <h2>Availibility and Pickup</h2>
+  <div id="wizard">
     <section>
       <h5>What is your car's pickup location?</h5>
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
           <label>Suburb</label>
           <%= form.text_field :pickup_suburb, id:"required"  %>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
           <label>Postcode</label>
         <%= form.text_field :pickup_postcode, id:"required"  %>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
           <label>State</label>
         <%= form.text_field :pickup_state, id:"required"  %>
         </div>
       </div>  
-      <h5 class="mt-4">What day of the week is your car available?</h5>
+      <h5 class="mt-3">What day of the week is your car available?</h5>
       <div class="checkbox-form">
       <% ["Anyday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each do |day| %>
     		
@@ -37,7 +54,7 @@
     	<% end %>	
     	</div>
     	
-    	<h5 class="mt-4">Do you prefer short term or long term rentals?</h5>
+    	<h5 class="mt-3">Do you prefer short term or long term rentals?</h5>
       <div class="checkbox-form">
         <%= radio_button_tag "car[rental]","short_term",@car.rental=="short_term"  %>
         <%= form.label "Short Term, 1 to 3 days per week" %>
@@ -46,7 +63,7 @@
       
     	</div>
     	
-    	<h5 class="mt-4">How much advance notice do you need?</h5>
+    	<h5 class="mt-3">How much advance notice do you need?</h5>
       <div class="checkbox-form">
         <%= radio_button_tag "car[advance_notice]","Anytime",@car.advance_notice=="Anytime"  %>
         <%= form.label "Pickup Availible at any time" %>
@@ -68,13 +85,15 @@
       
     	</div>
     </section>
+    </div>
   <%= form.hidden_field :step, value: 3 %>
-  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 2) ,class: "btn btn-primary",role: "button" %>  
-  <%= form.submit "Next", class: "btn btn-primary" %>
+  <div class="mt-2">
+  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 2) ,class: "btn btn-primary btn-sm",role: "button" %>  
+  <span class="float-right">
+  <%= form.submit "Next", class: "btn btn-primary btn-sm" %>
+  </span>
+  </div>
 <% end %>
   
-  
-  
-
-  
-  
+</div>
+</div>

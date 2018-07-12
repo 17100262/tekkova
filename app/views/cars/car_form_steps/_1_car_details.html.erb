@@ -1,3 +1,21 @@
+<div class="container">
+<div class="row mt-2">
+<div class="col-md-12 btn-group btn-breadcrumb">
+    <a href="<%= car_steps_path(step: 1,id: @car.id)  %>" class="btn btn-primary car_details">Car Details</a>
+    <a href="#" class="btn btn-default car_pictures">Car Pictures</a>
+    <a href="#" class="btn btn-default car_availibility">Availibility and Pickup</a>
+    <a href="#" class="btn btn-default car_preference">Car Preference</a>
+    <a href="#" class="btn btn-default car_liecense">Driver Liecense</a>
+    <a href="#" class="btn btn-default car_personal">Personal Details</a>
+</div>
+</div> 
+</div>
+<h2 class="heading mt-4">Car Details</h2>
+<div class="details background-img">
+  
+</div>
+<div class="container pt-4">
+<div id="multi-form" class="car-details">
 <%= form_for(@car) do |form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
@@ -12,53 +30,53 @@
   <% end %>
   
   <div id="wizard">
-    <h2>Car Details</h2>
+
     <section>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6">
         <%= form.label :year %>
         <%#= form.text_field :year, id:"required" %>
         <%= form.select :year, (2013..2019).to_a, prompt: "Select Year"%>
       </div>
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6">
         <%= form.label :make %> 
         <%= form.text_field :make, id:"required"  %>
       </div>
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6">
         <%= form.label :model %> 
         <%=  form.text_field :model, id:"required"  %>
       </div>
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6">
         <%= form.label :series %> 
         <%=  form.text_field :series, id:"required"  %>
       </div>
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6">
         <%= form.label :odometer %> 
         <%=  form.text_field :odometer, id:"required"  %>
       </div>
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6">
         <label>Transmission </label>
         <%=  form.text_field :trans_mission, id:"required"  %>
       </div>
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6">
         <%= form.label :body_type %> 
         <%#= form.text_field :body_type, id:"required"  %>
         <%= form.select :body_type, [" Convertible",  "Coupe",  "Sedan",  "SUV",  "Wagon"], prompt: "Select Body Type" %>
       </div>
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6">
         <%= form.label :color %> 
         <%= form.text_field :color, id:"required"  %>
       </div>
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6">
         <%= form.label :fuel_type %> 
         <%#= form.text_field :fuel_type, id:"required"  %>
         <%= form.select :fuel_type, ["Unleaded 91",  "Unleaded 95",  "Unleaded 98",  "LPG",  "Electrical"], prompt: "Select Fuel Type" %>
       </div>
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6">
         <%= form.label :power %> 
         <%= form.text_field :power, id:"required"  %>
       </div>
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6">
         <%= form.label :number_of_seats %> 
         <%= form.number_field :number_of_seats, id:"required"  %>
       </div>
@@ -122,15 +140,14 @@
     </div>
     </section>
     
+  </div>
     <%= form.hidden_field :step, value: 1 %>
 
+  <div class="mt-2">
+  <span class="float-right mb-3">
+  <%= form.submit "Next", class: "btn btn-primary btn-sm" %>
+  </span>
   </div>
-  <br>
-  <%= form.submit "Next", class:"btn btn-primary" %>
 <% end %>
-  
-  
-  
-
-  
-  
+</div>
+</div>

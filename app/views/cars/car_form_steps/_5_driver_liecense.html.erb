@@ -1,3 +1,21 @@
+<div class="container">
+<div class="row mt-2">
+<div class="col-md-12 btn-group btn-breadcrumb">
+    <a href="<%= car_steps_path(step: 1,id: @car.id) %>" class="btn btn-primary car_details">Car Details</a>
+    <a href="<%= car_steps_path(step: 2,id: @car.id) %>" class="btn btn-primary car_pictures">Car Pictures</a>
+    <a href="<%= car_steps_path(step: 3,id: @car.id) %>" class="btn btn-primary car_availibility">Availibility and Pickup</a>
+    <a href="<%= car_steps_path(step: 4,id: @car.id) %>" class="btn btn-primary car_preference">Car Preference</a>
+    <a href="<%= car_steps_path(step: 5,id: @car.id) %>" class="btn btn-primary car_liecense">Driver Liecense</a>
+    <a href="#" class="btn btn-default car_personal">Personal Details</a>
+</div>
+</div>
+</div>
+<h2 class="heading mt-4">Drivers License</h2>
+<div class="liecense background-img">
+  
+</div>
+<div class="container py-4">
+<div id="multi-form" class="car-liecense">
 <%= form_for(@car) do |form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
@@ -13,30 +31,29 @@
   
   <div id="wizard">
     
-    <h2>Drivers License</h2>
     <section>
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
           <label>Isssuing Country</label>
           <%= form.text_field :driving_liecense_country, id:"required"  %>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
           <label>State</label>
           <%= form.text_field :driving_liecense_state, id:"required"  %>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
           <label>Driver's Licence Number</label>
           <%= form.number_field :driving_liecense_number, id:"required"  %>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
           <label>First Name</label>
           <%= form.text_field :driving_liecense_firstname, id:"required"  %>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
           <label>Middle Name</label>
           <%= form.text_field :driving_liecense_middlename  %>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
           <label>Last Name</label>
           <%= form.text_field :driving_liecense_lastname, id:"required"  %>
         </div>
@@ -48,12 +65,14 @@
   <%= form.hidden_field :step, value: 5 %>  
     
   </div>
-  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 4) ,class: "btn btn-primary",role: "button" %>
-  <%= form.submit "Next", class: "btn btn-primary" %>
+  <div class="mt-2">
+  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 4) ,class: "btn btn-primary btn-sm",role: "button" %>
+  
+  <span class="float-right">
+  <%= form.submit "Next", class: "btn btn-primary btn-sm" %>
+  </span>
+  </div>
 <% end %>
   
-  
-  
-
-  
-  
+</div>
+</div>

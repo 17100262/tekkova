@@ -1,3 +1,21 @@
+<div class="container">
+<div class="row mt-2">
+<div class="col-md-12 btn-group btn-breadcrumb">
+    <a href="<%= car_steps_path(step: 1,id: @car.id) %>" class="btn btn-primary car_details">Car Details</a>
+    <a href="<%= car_steps_path(step: 2,id: @car.id) %>" class="btn btn-primary car_pictures">Car Pictures</a>
+    <a href="<%= car_steps_path(step: 3,id: @car.id) %>" class="btn btn-primary car_availibility">Availibility and Pickup</a>
+    <a href="<%= car_steps_path(step: 4,id: @car.id) %>" class="btn btn-primary car_preference">Car Preference</a>
+    <a href="#" class="btn btn-default car_liecense">Driver Liecense</a>
+    <a href="#" class="btn btn-default car_personal">Personal Details</a>
+</div> 
+</div>
+</div>
+<h2 class="heading mt-4">Car Preference</h2>
+<div class="preference background-img">
+  
+</div>
+<div class="container py-4">
+<div id="multi-form" class="car-preference">
 <%= form_for(@car) do |form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
@@ -10,8 +28,7 @@
       </ul>
     </div>
   <% end %>
-  
-    <h2>Car Preference</h2>
+  <div id="wizard">
     <section>
       <h5 class="mt-4">Select your preffered daily drive kilometer limit?</h5>
         
@@ -42,13 +59,12 @@
     	</div>
     </section>
   <%= form.hidden_field :step, value: 4 %>
-  
-  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 3) ,class: "btn btn-primary",role: "button" %>  
-  <%= form.submit "Next", class: "btn btn-primary" %>
+  <div class="mt-2">
+  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 3) ,class: "btn btn-primary btn-sm",role: "button" %>  
+  <span class="float-right">
+  <%= form.submit "Next", class: "btn btn-primary btn-sm" %>
+  </span>
+  </div>
 <% end %>
-  
-  
-  
-
-  
-  
+</div>
+</div>

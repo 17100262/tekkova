@@ -12,8 +12,7 @@
 //
 //= require rails-ujs
 //= require jquery3
-//= require turbolinks
-//= require jquery.steps
+//= require fileinput
 //= require_tree .
 
 $(document).ready(function() {
@@ -25,36 +24,7 @@ $(document).ready(function() {
    $('#multi-form textarea').addClass('form-control');
 });
 
-$(function (){
-    var form = $("#multi-form");
-form.validate({
-    errorPlacement: function errorPlacement(error, element) { element.before(error); },
-    rules: {
-        confirm: {
-            equalTo: "#password"
-        }
-    }
-});
-form.children("#wizard").steps({
-    headerTag: "h2",
-    bodyTag: "section",
-    transitionEffect: "slideLeft",
-    onStepChanging: function (event, currentIndex, newIndex)
-    {
-        form.validate().settings.ignore = ":disabled,:hidden";
-        return form.valid();
-    },
-    onFinishing: function (event, currentIndex)
-    {
-        form.validate().settings.ignore = ":disabled";
-        return form.valid();
-    },
-    // onFinished: function (event, currentIndex)
-    // {
-    //     alert("Submitted!");
-    // }
-});
-});
+
 $(document).ready(function(){
     if(
    $('a[href="#finish"]').show()
@@ -62,4 +32,52 @@ $(document).ready(function(){
         $('a[href="#finish"]').hide();
        $('a[href="#finish"]').closest('li').children('.submit-finish').show();
     }
+$("#file-3").fileinput({
+        theme: 'fa',
+        showUpload: false,
+        showCaption: false,
+        browseClass: "btn btn-primary",
+        fileType: "any",
+        previewFileIcon: "<i class='fas fa-king'></i>",
+        overwriteInitial: false,
+        initialPreviewAsData: true,
+        initialPreview: [
+            
+        ],
+        initialPreviewConfig: [
+            ]
+    });
 });
+   $( function() {
+    $( "#slider" ).slider({
+      value:20000,
+      min: 20000,
+      max: 150000,
+      step: 1000,
+      slide: function( event, ui ) {
+        $( "#amount" ).val( "$" + ui.value );
+      }
+    });
+    $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
+ 
+    $( "#slider2" ).slider({
+      value:3,
+      min: 1,
+      max: 7,
+      step: 1,
+                    
+      slide: function( event, ui ) {
+          
+        $( "#amount2" ).val( ui.value );
+      }
+    });
+    $( "#amount2" ).val( $( "#slider2" ).slider( "value" ) );
+        var value1 = $( "#slider" ).slider( "value" );
+        var value2 = $( "#slider2" ).slider( "value" );
+        
+        var value3 = value1 / 400;
+        var value4 = value3 * value2;
+        var valuef = value4 * 52;
+        
+        $( "#amountf" ).val( "$" + valuef );
+  });

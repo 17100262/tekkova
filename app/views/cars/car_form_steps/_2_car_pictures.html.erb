@@ -1,3 +1,21 @@
+<div class="container">
+<div class="row mt-2">
+<div class="col-md-12 btn-group btn-breadcrumb">
+    <a href="<%= car_steps_path(step: 1,id: @car.id)  %>" class="btn btn-primary car_details">Car Details</a>
+    <a href="<%= car_steps_path(step: 2,id: @car.id)  %>" class="btn btn-primary car_pictures">Car Pictures</a>
+    <a href="#" class="btn btn-default car_availibility">Availibility and Pickup</a>
+    <a href="#" class="btn btn-default car_preference">Car Preference</a>
+    <a href="#" class="btn btn-default car_liecense">Driver Liecense</a>
+    <a href="#" class="btn btn-default car_personal">Personal Details</a>
+</div> 
+</div>
+</div>
+<h2 class="heading mt-4">Car Pictures</h2>
+<div class="pictures background-img">
+  
+</div>
+<div class="container py-4">
+<div id="multi-form" class="car-pictures">
 <%= form_for(@car) do |form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
@@ -12,33 +30,27 @@
   <% end %>
   
   <div id="wizard">
-    
 
-    <h2>Car Pictures</h2>
     <section>
       
-        <%= form.label :images %> 
-        <%= form.file_field :images,multiple: true  %>
-      <ul>
-        <% @car.images.each do |file| %>
-          <li>
-            <%= image_tag file.variant(resize: "100x100") %>
-          </li>
-        <% end %>
-      </ul>
+       <div class="form-group">
+            <div class="file-loading">
+                <label>Preview File Icon</label>
+                <%= form.file_field :images,multiple: true, id:"file-3"  %>
+            </div>
+        </div>
     </section>
 
     
     
-  <%= form.hidden_field :step, value: 2 %>
-    
   </div>
-  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 1) ,class: "btn btn-primary",role: "button" %>
-  <%= form.submit "Next", class: "btn btn-primary" %>
+  <%= form.hidden_field :step, value: 2 %>
+    <div class="mt-2">
+  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 1) ,class: "btn btn-primary btn-sm",role: "button" %>
+  <span class="float-right">
+  <%= form.submit "Next", class: "btn btn-primary btn-sm" %>
+  </span>
+  </div>
 <% end %>
-  
-  
-  
-
-  
-  
+</div>
+</div>

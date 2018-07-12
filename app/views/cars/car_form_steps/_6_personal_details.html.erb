@@ -1,3 +1,15 @@
+<div class="container">
+<div class="row mt-2">
+<div class="col-md-12 btn-group btn-breadcrumb">
+    <a href="<%= car_steps_path(step: 1,id: @car.id) %>" class="btn btn-primary car_details">Car Details</a>
+    <a href="<%= car_steps_path(step: 2,id: @car.id) %>" class="btn btn-primary car_pictures">Car Pictures</a>
+    <a href="<%= car_steps_path(step: 3,id: @car.id) %>" class="btn btn-primary car_availibility">Availibility and Pickup</a>
+    <a href="<%= car_steps_path(step: 4,id: @car.id) %>" class="btn btn-primary car_preference">Car Preference</a>
+    <a href="<%= car_steps_path(step: 5,id: @car.id) %>" class="btn btn-primary car_liecense">Driver Liecense</a>
+    <a href="<%= car_steps_path(step: 6,id: @car.id) %>" class="btn btn-primary car_personal">Personal Details</a>
+</div>
+</div>
+<div id="multi-form" class="car-personal">
 <%= form_for(@car) do |form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
@@ -28,15 +40,15 @@
         </div>
       </div>  
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
           <%= form.label "Suburb" %> 
           <%= form.text_field :personal_suburb, id:"required"  %>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
           <%= form.label "State" %> 
           <%= form.text_field :personal_state, id:"required"  %>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
           <%= form.label "Postcode" %> 
           <%= form.text_field :personal_postcode, id:"required"  %>
         </div>
@@ -55,12 +67,13 @@
   <%= form.hidden_field :step, value: 6 %>
   <%= form.hidden_field :status, value: "completed" %>
   </div>
-  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 5) ,class: "btn btn-primary",role: "button" %>
-  <%= form.submit "Submit" %>
+  <div class="mt-2">
+  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 5) ,class: "btn btn-primary btn-sm",role: "button" %>
+  
+  <span class="float-right">
+  <%= form.submit "Submit", class:"btn btn-primary btn-sm" %>
+  </span>
+  </div>
 <% end %>
-  
-  
-  
-
-  
-  
+</div>
+</div>
