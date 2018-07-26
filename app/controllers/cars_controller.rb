@@ -1,8 +1,9 @@
 class CarsController < ApplicationController
   # before_action :listing_criteria,only: [:new]
+  before_action :authenticate_user!
   load_and_authorize_resource
   before_action :set_car, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+
   
   
 
