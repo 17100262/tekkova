@@ -1,7 +1,16 @@
 class HomeController < ApplicationController
     before_action :authenticate_user!
+    authorize_resource :class => false
+
     def home
     end
+    
+    def car_management
+        @cars = Car.all
+    end
+    
+    # def user_management
+    # end
 
     def how_it_works
     end

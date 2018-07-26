@@ -5,7 +5,7 @@
     <a href="#" class="btn btn-default car_pictures">Car Pictures</a>
     <a href="#" class="btn btn-default car_availibility">Availibility and Pickup</a>
     <a href="#" class="btn btn-default car_preference">Car Preference</a>
-    <a href="#" class="btn btn-default car_liecense">Driver Liecense</a>
+    <a href="#" class="btn btn-default car_liecense">Driver License</a>
     <a href="#" class="btn btn-default car_personal">Personal Details</a>
 </div>
 </div> 
@@ -73,7 +73,7 @@
         <%= form.select :fuel_type, ["Unleaded 91",  "Unleaded 95",  "Unleaded 98",  "LPG",  "Electrical"], prompt: "Select Fuel Type" %>
       </div>
       <div class="col-lg-3 col-md-6">
-        <%= form.label :power %> 
+        <label>Power (kW)</label>
         <%= form.text_field :power, id:"required"  %>
       </div>
       <div class="col-lg-3 col-md-6">
@@ -102,12 +102,12 @@
     </div>
     <div class="row mt-3">
       <div class="col-md-12">
-        <h5>Please provide a description of your car to reuters</h5>
+        <h5>Please provide a description of your car to renters</h5>
       </div>
     </div> 
     <div class="row">
       <div class="col-md-12">
-        <%= form.text_area :description, id:"required", placeholder:"Please provide modifications that you might have done to the car"  %>
+        <%= form.text_area :description, id:"required", rows:"4", placeholder:"Please provide a description as it will appear on your car advertised profile to renters to see before booking, these may include vehicle modifications or any particular notes that you may have regrading your vehicle"  %>
       </div>
     </div> 
     <div class="row mt-3">
@@ -120,7 +120,7 @@
     </div>
     <div class="row mt-3">
       <div class="col-md-4">
-        <%= form.label :liecense_plate_number %> 
+        <label>License Plate Number</label> 
         <%= form.text_field :liecense_plate_number, id:"required"  %>
       </div>
       <div class="col-md-4">

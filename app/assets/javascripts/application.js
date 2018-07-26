@@ -26,52 +26,86 @@ $(document).ready(function() {
 
 
 $(document).ready(function(){
+   $('.custom-file-container__image-clear').hide();
     if(
    $('a[href="#finish"]').show()
     ){
         $('a[href="#finish"]').hide();
        $('a[href="#finish"]').closest('li').children('.submit-finish').show();
     }
-$("#file-3").fileinput({
-        theme: 'fa',
-        showUpload: false,
-        showCaption: false,
-        browseClass: "btn btn-primary",
-        fileType: "any",
-        previewFileIcon: "<i class='fas fa-king'></i>",
-        overwriteInitial: false,
-        initialPreviewAsData: true,
-        initialPreview: [
-            
-        ],
-        initialPreviewConfig: [
-            ]
-    });
+
 });
    $( function() {
-    $( "#slider" ).slider({
-      value:20000,
-      min: 20000,
-      max: 150000,
-      step: 1000,
-      slide: function( event, ui ) {
-        $( "#amount" ).val( "$" + ui.value );
-      }
-    });
-    $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
+        $('.datepicker').datepicker({
+            
+        });
+    //     var value1 = $( "#slider" ).slider( "value" );
+    //     var value2 = $( "#slider2" ).slider( "value" );
+    // function amountf(){
+        
+    //     var value3 = value1 / 400;
+    //     var value4 = value3 * value2;
+    //     var valuef = value4 * 52;
+        
+    //     $( "#amountf" ).val( "$" + valuef );
+    // }
+    // function amountf2(){
+    //     var value1 = $( "#slider" ).slider( "value" );
+    //     var value2 = $( "#slider2" ).slider( "value" );
+        
+    //     var value3 = value1 / 400;
+    //     var value4 = value3 * value2;
+    //     var valuef = value4 * 52;
+        
+    //     $( "#amountf" ).val( "$" + valuef );
+    // }
+    // $( "#slider" ).slider({
+    //   value:20000,
+    //   min: 20000,
+    //   max: 150000,
+    //   step: 1000,
+    //   slide: function( event, ui ) {
+    //     amountf();
+    //     $( "#amount" ).val( "$" + ui.value );
+    //   }
+    // });
+    // $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
  
-    $( "#slider2" ).slider({
-      value:3,
-      min: 1,
-      max: 7,
-      step: 1,
+    // $( "#slider2" ).slider({
+    //   value:3,
+    //   min: 1,
+    //   max: 7,
+    //   step: 1,
                     
-      slide: function( event, ui ) {
-          
-        $( "#amount2" ).val( ui.value );
-      }
-    });
-    $( "#amount2" ).val( $( "#slider2" ).slider( "value" ) );
+    //   slide: function( event, ui ) {
+    //     amountf();
+    //     $( "#amount2" ).val( ui.value );
+    //   }
+    // });
+    // $( "#amount2" ).val( $( "#slider2" ).slider( "value" ) );
+    // amountf2();
+    
+  });
+  
+  
+  
+  
+  $(function() {
+ 
+    var value1 = 0;
+    var value2 = 0;
+     
+    function amountf(){
+        
+       
+        var value3 = value1 / 400;
+        var value4 = value3 * value2;
+        var valuef = value4 * 52;
+        
+        $( "#amountf" ).val( "$" + valuef );
+        
+    }
+    function amountf2(){
         var value1 = $( "#slider" ).slider( "value" );
         var value2 = $( "#slider2" ).slider( "value" );
         
@@ -80,4 +114,35 @@ $("#file-3").fileinput({
         var valuef = value4 * 52;
         
         $( "#amountf" ).val( "$" + valuef );
+    }
+    $( "#slider" ).slider({
+    orientation: "horizontal",
+     range: "min",
+      value:20000,
+      min: 20000,
+      max: 150000,
+      step: 1000,
+      slide: function( event, ui ) {
+          value1 = ui.value;
+          amountf();
+      $( "#amount" ).val( "$" + ui.value );
+      }
+    });
+    $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
+
+    $( "#slider2" ).slider({
+    orientation: "horizontal",
+     range: "min",
+      value:0,
+      min: 0,
+      max: 7,
+      step: 1,
+      slide: function( event, ui ) {         
+          value2 = ui.value;
+          amountf();
+     $( "#amount2" ).val( ui.value );
+      }
+    });
+    $( "#amount2" ).val( $( "#slider2" ).slider( "value" ) );
+    amountf2();
   });

@@ -61,7 +61,7 @@
                 <% current_user.cars.each do |car| %>
                <div class="col-md-4">
                   <div class="thumbnail">
-                      <%= image_tag car.images.first.variant(resize: "300x100") if car.images.present? %>
+                      <%= image_tag car.car_pictures.order(:id).first.avatar.url(:thumb) if car.car_pictures.present? %>
                      <!--<img alt="300x200" src="http://www.rlsandbox.com/img/profile.jpg">-->
                      <div class="caption">
                         <h3>

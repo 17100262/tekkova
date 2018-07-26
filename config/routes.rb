@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#home'
   get 'admin', to: 'home#admin', as: :admin
+  get 'car_management',to: 'home#car_management'
   get 'how_it_works', to: 'home#how_it_works'
   get 'policies', to: 'home#policies'
   get 'contact_us', to: 'home#contact_us'

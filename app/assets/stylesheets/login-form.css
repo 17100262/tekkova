@@ -32,7 +32,9 @@ button:hover {
 #join-modal .modal-dialog, #join-modal-mentor .modal-dialog{
   top:1% !important;
 }
-
+.loginmodal-container-new{
+  max-width: 800px !important;
+}
 
 .loginmodal-container {
   max-width: 400px;

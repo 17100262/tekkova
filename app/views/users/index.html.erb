@@ -1,0 +1,75 @@
+<div class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+   
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
+        <a class="nav-link" href="/">
+          <img alt="Tekkova" width="135" height="65" src="/logo-t.png">
+        </a>
+      </li>  
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+        <a class="nav-link" href="/admin">
+          <i class="fas fa-tachometer-alt"></i>
+          <span class="nav-link-text">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Users Management">
+        <a class="nav-link" href="<%= users_path %>">
+          <i class="fas fa-users"></i>
+          <span class="nav-link-text">User Management</span>
+        </a>
+      </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Cars Management">
+        <a class="nav-link" href="/car_management">
+          <i class="fas fa-car"></i>
+          <span class="nav-link-text">Cars Management</span>
+        </a>
+      </li>
+     
+    </ul>
+    
+    
+    <ul class="navbar-nav ml-auto">
+     
+      <li class="nav-item">
+        <a class="nav-link" href="<%= destroy_user_session_path %>" data-method="delete">
+          <i class="fas fa-sign-out-alt"></i>Logout</a>
+      </li>
+    </ul>
+    </div>
+  </nav>  
+  <div class="content-wrapper mt-5">
+  <div class="container-fluid">
+    <div class="container py-4">
+    <h3>User Management</h3>
+    <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th colspan=2>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>    
+      <tr>
+        <td><%= user.name %></td>
+        <td> <%= user.email %></td>
+        
+        <td><%= link_to 'Show', user_path(user), class:"btn btn-primary btn-sm" %></td>
+        <td><%= link_to '<i class="fas fa-trash icon-chat" style="font-size: 19px" title="Delete"></i>'.html_safe, user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      
+      </tr>
+      <% end %>
+      
+    </tbody>
+  </table>
+</div>
+</div>  
+</div>
+  

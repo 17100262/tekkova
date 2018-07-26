@@ -1,5 +1,6 @@
 class CarsController < ApplicationController
   # before_action :listing_criteria,only: [:new]
+  load_and_authorize_resource
   before_action :set_car, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   
@@ -20,6 +21,8 @@ class CarsController < ApplicationController
   # GET /cars/new
   def new
     @car = current_user.cars.new
+    
+    
   end
 
   # GET /cars/1/edit
@@ -45,6 +48,7 @@ class CarsController < ApplicationController
     when "1"
       render 'cars/car_form_steps/_1_car_details'
     when "2"
+      
       render 'cars/car_form_steps/_2_car_pictures'
     when "3"
       render 'cars/car_form_steps/_3_availibility_and_pickup'
@@ -65,6 +69,7 @@ class CarsController < ApplicationController
   # POST /cars.json
   def create
     @car = current_user.cars.new(car_params)
+    8.times{ @car.car_pictures.build} if @car.car_pictures.blank?
     
       respond_to do |format|
         if @car.save
@@ -126,6 +131,6 @@ class CarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
-      params.require(:car).permit(:status,:model_year_check, :usage_limit_check, :register_check, :road_worthy_check, :write_off_check, :maintained_check,:step,:year, :make, :model, :series, :odometer, :trans_mission, :body_type, :color, :fuel_type, :power,:number_of_seats, :drive_type,:description, :liecense_plate_number, :state, :insurance_provider,:agreed_insurance_value, :pickup_suburb, :pickup_postcode, :pickup_state, :rental,:advance_notice,:allow_personal_commercial_use,:daily_drive_limit,:driving_liecense_country,:driving_liecense_state,:driving_liecense_number, :driving_liecense_firstname, :driving_liecense_middlename, :driving_liecense_lastname,:personal_house_number, :personal_street_name, :personal_suburb, :personal_state, :personal_postcode,:personal_dob, :personal_mobile,car_feature_ids:[],images: [],availibility_days: [])
+      params.require(:car).permit(:status,:model_year_check, :usage_limit_check, :register_check, :road_worthy_check, :write_off_check, :maintained_check,:step,:year, :make, :model, :series, :odometer, :trans_mission, :body_type, :color, :fuel_type, :power,:number_of_seats, :drive_type,:description, :liecense_plate_number, :state, :insurance_provider,:agreed_insurance_value, :pickup_suburb, :pickup_postcode, :pickup_state, :rental,:advance_notice,:allow_personal_commercial_use,:daily_drive_limit,:driving_liecense_country,:driving_liecense_state,:driving_liecense_number, :driving_liecense_firstname, :driving_liecense_middlename, :driving_liecense_lastname,:personal_house_number, :personal_street_name, :personal_suburb, :personal_state, :personal_postcode,:personal_dob, :personal_mobile,car_feature_ids:[],availibility_days: [],car_pictures_attributes: [:avatar,:_destroy,:id])
     end
 end

@@ -1,9 +1,13 @@
 class Car < ApplicationRecord
     has_and_belongs_to_many :car_features
-    has_many_attached :images
+    # has_many_attached :images
     serialize :availibility_days,Array
     belongs_to :user
     attr_accessor :step
+    has_many :car_pictures, dependent: :destroy
+    
+    
+    accepts_nested_attributes_for :car_pictures, reject_if: :all_blank, allow_destroy: true
     
     enum status: [:draft,:completed]
     

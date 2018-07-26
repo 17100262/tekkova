@@ -102,16 +102,16 @@ h2.heading{
 
 /** Primary button **/
 .btn-breadcrumb .btn.btn-primary:not(:last-child):after {
-  border-left: 20px solid #21a5De;
+  border-left: 20px solid #21a5D6;
 }
 .btn-breadcrumb .btn.btn-primary:not(:last-child):before {
   border-left: 20px solid #fff;
 }
 .btn-breadcrumb .btn.btn-primary:hover:not(:last-child):after {
-  border-left: 20px solid #0088cc;
+  border-left: 20px solid #21a5D6;
 }
 .btn-breadcrumb .btn.btn-primary:hover:not(:last-child):before {
-  border-left: 20px solid #285e8e;
+  border-left: 20px solid #fff;
 }
 .btn-breadcrumb a.btn.btn-default {
     cursor: no-drop !important;
@@ -126,21 +126,23 @@ html .btn-default:hover, html .btn-default.hover {
   background-repeat: no-repeat;
 }
 .ui-slider-handle{
-  top: -15px !important;
-    width: 33px !important;
-    background: url(/shield.png) center center !important;
-    height: 35px !important;
+  margin-left: -9px !important;
+  top: -6px !important;
+    width: 18px !important;
+    background: url(/ball.png) center center !important;
+    background-repeat: no-repeat;
+    height: 18px !important;
     border: 0px !important;
 }
 .ui-slider-handle:focus{
     outline: none !important;
 }
 .ui-widget-content {
-    border: 0 !important;
+    border: 1px solid #21a5D6 !important;
     background: #21a5D6 !important;
 }
 .ui-slider-horizontal {
-    height: 6px !important;
+    height: 8px !important;
 }
 
 .range-text{
@@ -148,10 +150,15 @@ html .btn-default:hover, html .btn-default.hover {
   font-size:30px;
   color:#21a5D6;
 }
+.range-text-earn{
+  border:0;
+  font-size:80px;
+  color:#21a5D6;
+}
 .background-img{
   background-size: cover !important;
   background-repeat: no-repeat !important;
-  height:400px !important;
+  height:180px !important;
 }
 .details.background-img{
  background: url('/car_details.jpg'); 
@@ -167,4 +174,29 @@ html .btn-default:hover, html .btn-default.hover {
 }
 .liecense.background-img{
  background: url('/drivers_license.jpg'); 
+}
+.section-banner{
+  background:rgba(0,0,0,0.5);
+}
+.ui-datepicker thead {
+   background: #21A5D6;
+   color: #fff;
+ }
+ .ui-datepicker {
+   border-color: #21A5D6 !important;
+ }
+ .btn-breadcrumb a, .btn-breadcrumb a:hover{
+   transition: none !important;
+ }
+.btn-breadcrumb .btn-primary:hover{
+  background: #21a5D6 !important;
+}
+
+.ui-slider-range { 
+	background: linear-gradient(to right, #bac2ff, #4e91fd, #2c2cff, #0229bf) !important; 
+}
+
+.no-color{
+  color: inherit !important;
+    text-decoration: none !important;
 }

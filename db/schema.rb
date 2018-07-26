@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_03_170430) do
+ActiveRecord::Schema.define(version: 2018_07_23_080649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 2018_06_03_170430) do
     t.bigint "car_id", null: false
     t.bigint "car_feature_id", null: false
     t.index ["car_id", "car_feature_id"], name: "index_car_features_cars_on_car_id_and_car_feature_id"
+  end
+
+  create_table "car_pictures", force: :cascade do |t|
+    t.bigint "car_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.index ["car_id"], name: "index_car_pictures_on_car_id"
   end
 
   create_table "cars", force: :cascade do |t|
@@ -117,4 +128,5 @@ ActiveRecord::Schema.define(version: 2018_06_03_170430) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "car_pictures", "cars"
 end

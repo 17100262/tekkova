@@ -3521,8 +3521,8 @@ html #header .header-top.header-top-quaternary .dropdown-menu a:focus {
 }
 
 html #header .header-top.header-top-dark {
-	background: #2e353e;
-	border-top-color: #23282f;
+	background: #231f20;
+	border-top-color: #231f20;
 }
 
 html #header .header-top.header-top-dark .header-nav-top ul > li.open > a {

@@ -61,3 +61,5 @@ gem 'omniauth-twitter'
 gem 'wicked'
 gem "mini_magick"
 gem 'image_processing', '~> 1.2'
+gem 'cancancan'
+gem 'paperclip'

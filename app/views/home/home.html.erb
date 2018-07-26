@@ -9,38 +9,113 @@
     </script>
 <% end %>
 
-<div id="banner" class="py-5">
-    <div class="row my-5 py-5">
-        <div class="col-md-12 py-5 my-5">
-            <div class="py-5 my-5"></div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-md-6 text-center">
-            <p class="text-center">Market value of your car</p>
-            <div id="slider"></div>
-            <p class="mt-5">
-            <input type="text" id="amount" class="text-center range-text" readonly>
-            <label for="amount"></label>
-            </p>
-        </div>
-        <div class="col-md-6 text-center">
-            <p class="text-center mb-4">Days per week your car is rented</p>
-            <div id="slider2"></div>
-            <p class="mt-5">
-            <input type="text" id="amount2" class="text-center range-text" readonly>
-           <label for="amount2"></label>
-            </p>
-             
-        </div>
-    </div>
-</div>
-    <p class="mt-5">
-        <p class="text-center mb-4">You could earn</p>
-        <input type="text" id="amountf" class="text-center range-text w-100" readonly>
-        <label for="amountf"></label>
-    </p>
+<section id="banner" class="page-header custom-product">
+	<div class="container-fluid section-banner">
+		<div class="row">
+			<div class="col-sm-12 py-4 text-center">
+				<h1>Provide a car for every occasion</h3>
+				<!--<h3 class="text-light">Have your car pay for itself </h3>-->
+				<h3 class="text-light mb-4">Have your car pay for itself</h2>
+				<a href="/cars/new" class="btn btn-primary btn-lg mb-4 mr-2">List your car</a>
+				<a href="/how_it_works" class="btn btn-primary btn-lg mb-4">How TEKKOVA works</a>
+				<p class="lead">Become one of out first 5000 hosts and have your fist 3 bookings free.</p>
+				<p class="text-light lead mb-5 font-weight-bold">List your car & start earning soon</p>
+			</div>
+		
+		</div>
+	</div>
+</section>
 
+
+<section class="estimate text-center">
     
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="heading-primary">
+                    Is it worth it?
+                </h1>
+                <h3>
+                    How much can I earn renting out my car?
+                </h3>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <h5 class="mb-4">Agreed value of your car</h5>
+                <div id="slider"></div>
+                <p class="mt-5">
+                <input type="text" id="amount" class="text-center range-text" readonly>
+                <label for="amount"></label>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h5 class="mb-4">Days per week your car is hired</h5>
+                <div id="slider2"></div>
+                <p class="mt-5">
+                <input type="text" id="amount2" class="text-center lead range-text" readonly>
+               <label for="amount2"></label>
+                </p>
+                 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="mt-5">
+            <h4 class="text-center mb-4">You could potentially earn*</h4>
+            <input type="text" id="amountf" class="text-center range-text-earn w-100" readonly>
+            <label for="amountf"></label>
+            <h5>Annually</h5>
+            <p>*Potential earning is subject to change depending on certain models & customer demand.</p>
+        </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-default mb-0 pb-0">
+	<div class="container">
+	    
+		<div class="row">
+			<div class="col-lg-4">
+			    <h2 class="heading-primary mb-4">My Earnings</h2>
+				<div class="feature-box feature-box-style-2 reverse mb-5 appear-animation" data-appear-animation="fadeInLeft" data-appear-animation-delay="300">
+					<div class="feature-box-info">
+						<h4 class="mb-2">Renting Price</h4>
+						<p class="mb-4">TEKKOVA takes into consideration your insurance agreed value due to certain cars having more extras in terms of features than others. Demand of certain models will either increase or decrease potential earnings.</p>
+					</div>
+				</div>
+					<div class="feature-box feature-box-style-2 mb-5 appear-animation" data-appear-animation="fadeInRight" data-appear-animation-delay="300">
+					<div class="feature-box-info">
+						<h4 class="mb-2">My Payment</h4>
+						<p class="mb-4">TEKKOVA pays you weekly through direct deposit. TEKKOVA charges you 20% of the trip price. However please keep in mind that all consideration will be taken & reflected through the final booking price to have all parties covered.</p>
+					</div>
+				</div>
+				
+			</div>
+			<div class="col-lg-4 mt-md-5 pt-md-5 pb-5">
+				<img src="logo-t.png" class="img-fluid mockup-landing-page appear-animation" alt="Porto" data-appear-animation="zoomIn" data-appear-animation-delay="300">
+			</div>
+			<div class="col-lg-4">
+			    <h2 class="heading-primary mb-4">How am I covered?</h2>
+			    <div class="feature-box feature-box-style-2 reverse mb-5 appear-animation" data-appear-animation="fadeInLeft" data-appear-animation-delay="300">
+					<div class="feature-box-info">
+						<h4 class="mb-2">Your car is protected</h4>
+						<p class="mb-4">We are currently working with our insurance partners to have you covered against the ft, exterior or interior damage. We will not operate our services & enable bookings unless you are covered before hand.</p>
+					</div>
+				</div>
+				
+				<div class="feature-box feature-box-style-2 mb-5 appear-animation" data-appear-animation="fadeInRight" data-appear-animation-delay="300">
+					<div class="feature-box-info">
+						<h4 class="mb-2">You're in control</h4>
+						<p class="mb-4">Once you have accepted a booking request you will then be able to visit hires profile & see relevant information such as their driver's license if you wish to do so.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+
