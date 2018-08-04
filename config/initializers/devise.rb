@@ -14,7 +14,7 @@ config.secret_key = '77c78c2181dfe988740b5030d2de29e925eaf7fd836f8571f2bd19ad0a8
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'support@freelance.com'
+  config.mailer_sender = 'support@tekkova.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

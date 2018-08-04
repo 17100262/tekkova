@@ -101,7 +101,8 @@ class CarsController < ApplicationController
       if @car.update(car_params)
         step = params[:car][:step].to_i + 1
         if step >= 7
-          format.html { redirect_to @car, notice: 'Car Deatils were successfully saved.' }
+          (BasicMailer.first_car(@car.user).deliver_later if @car.user.cars.count < 2)
+          format.html { redirect_to @car, notice: 'Car Details were successfully saved.' }
         else
           format.html { redirect_to car_steps_path(step: step, id: @car.id) }
         end

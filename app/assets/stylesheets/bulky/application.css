@@ -1,0 +1,48 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ 
+ */
+.check_box, .radio_button{
+    text-align:center;
+}
+.check_box input[type="checkbox"], .radio_button input[type="radio"]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px !important;
+  margin-left: 5px !important;
+    position: absolute !important;
+    margin-top: 8px !important;
+    opacity:0 !important;
+}
+
+.check_box input[type="checkbox"] ~ i.fa.fa-square-o, .radio_button input[type="radio"] ~ i.fa.fa-circle-o{
+    color: #c8c8c8;    display: inline !important;
+}
+.check_box input[type="checkbox"] ~ i.fa.fa-check-square-o, .radio_button input[type="radio"] ~ i.fa.fa-dot-circle-o{
+    display: none !important;
+}
+.check_box input[type="checkbox"]:checked ~ i.fa.fa-square-o, .radio_button input[type="radio"]:checked ~ i.fa.fa-circle-o{
+    display: none !important;
+}
+.check_box input[type="checkbox"]:checked ~ i.fa.fa-check-square-o, .radio_button input[type="radio"]:checked ~ i.fa.fa-dot-circle-o{
+    color: #21a5D6;    display: inline !important;
+}
+.check_box:hover input[type="checkbox"] ~ i.fa , .radio_button input[type="radio"] ~ i.fa {
+color: #21a5D6;
+}

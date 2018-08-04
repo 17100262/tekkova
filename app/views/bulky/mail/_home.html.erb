@@ -1,0 +1,64 @@
+  <div class="row mt-lg">
+    <div class="col-md-12">
+      <%= link_to 'Templates', bulky.mail_templates_path, class:"btn btn-primary" %>
+    </div>
+  </div>
+  
+  <%= form_tag(bulky.send_path) do %>
+  
+    <h3 class="mt-3">Select template</h3>
+    <div class="table-responsive table-one">
+      
+    <table class="table table-bordered table-violation">
+      <thead>
+        <tr>
+          <th width="5%">Select</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= collection_radio_buttons(:mail, :mail_Template_id, Bulky::MailTemplate.all, :id, :name) do |b| %>
+        <tr>
+          <td class="radio_button"><%= b.radio_button %><i class="far fa-circle fa-2x"></i><i class="far fa-dot-circle fa-2x"></i></td>
+          <td><%= b.text %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+     
+    <h4>Enter Subject of Mail</h4>
+    
+    <%= text_field_tag :subject, nil,{required: true,class:'form-control',rows: 5,columns: 10,style:'width:50%;'} %>
+    
+    <h3 class="mt-4">Select Users</h3>
+    <!--<br>-->
+    <div class="table-responsive table-one">
+      <table class="table table-bordered table-violation">
+      <thead>
+        <tr>
+          <th class="check_box"><input type="checkbox" class="all_checkbox"><i class="far fa-square fa-2x"></i><i class="far fa-check-square fa-2x"></i></th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Cars Posted</th>
+          <th>Cars Hired</th>
+          <th>New User</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= collection_check_boxes(:mail, :user_ids, User.all, :id, :email) do |b| %>
+        <tr>
+          <td class="check_box"><%= b.check_box %><i class="far fa-square fa-2x"></i><i class="far fa-check-square fa-2x"></i></td>
+          <td><%= b.object.name %></td>
+          <td><%= b.text %></td>
+          <td><%= b.object.cars.count %></td>
+          <td></td>
+          <td></td>
+          
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+    <center><%= submit_tag "Send", class:"btn btn-primary btn-lg text-center" %></center>
+  <% end %>  

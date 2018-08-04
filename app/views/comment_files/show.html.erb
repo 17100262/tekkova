@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @comment_file.user %>
+</p>
+
+<p>
+  <strong>File:</strong>
+  <%= @comment_file.file %>
+</p>
+
+<%= link_to 'Edit', edit_comment_file_path(@comment_file) %> |
+<%= link_to 'Back', comment_files_path %>

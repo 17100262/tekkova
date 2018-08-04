@@ -1,6 +1,9 @@
 <div class="container py-4">
 <table class="table table-bordered">
     <tbody>
+      <tr class="text-center h4">
+        <th colspan="2">Car Details</th>
+      </tr>
         <tr>
           <th>Year</th>
             <td> <%= @car.year %></td>
@@ -63,7 +66,7 @@
         </tr>
         
         <tr>
-          <th>Liecense Plate Number</th>
+          <th>License Plate Number</th>
             <td><%= @car.liecense_plate_number %></td>
         </tr>
         
@@ -81,7 +84,9 @@
           <th>Agreed Insurance Value</th>
             <td><%= @car.agreed_insurance_value %></td>
         </tr>
-        
+        <tr class="text-center h4">
+        <th colspan="2">Availability and Pickup</th>
+      </tr>
         <tr>
           <th>Availibility Days</th>
             <td>
@@ -124,7 +129,9 @@
           <th>Advance Notice Time</th>
             <td><%= @car.advance_notice %></td>
         </tr>
-        
+        <tr class="text-center h4">
+        <th colspan="2">Car Preference</th>
+      </tr>
         <tr>
           <th>Daily Drive Limit</th>
             <td><%= @car.daily_drive_limit %></td>
@@ -134,33 +141,38 @@
           <th>Allow Personal/Commercial Use</th>
             <td><%= @car.allow_personal_commercial_use %></td>
         </tr>
-        
+        <tr class="text-center h4">
+        <th colspan="2">Driver License</th>
+      </tr>
         <tr>
-          <th>Driving Liecense Country</th>
+          <th>Driving License Country</th>
             <td><%= @car.driving_liecense_country %></td>
         </tr>
         
         <tr>
-          <th>Driving Liecense State</th>
+          <th>Driving License State</th>
             <td><%= @car.driving_liecense_state %></td>
         </tr>
         
         <tr>
-          <th>Driving Liecense Number</th>
+          <th>Driving License Number</th>
             <td><%= @car.driving_liecense_number %></td>
         </tr>
         <tr>
-          <th>Driving Liecense Firstname</th>
+          <th>Driving License Firstname</th>
             <td><%= @car.driving_liecense_firstname %></td>
         </tr>
         <tr>
-          <th>Driving Liecense Middlename</th>
+          <th>Driving License Middlename</th>
             <td><%= @car.driving_liecense_middlename %></td>
         </tr>
         <tr>
-          <th>Driving Liecense Lastname</th>
+          <th>Driving License Lastname</th>
             <td><%= @car.driving_liecense_lastname %></td>
         </tr>
+        <tr class="text-center h4">
+        <th colspan="2">Personal Details</th>
+      </tr>
         <tr>
           <th>Personal House Number</th>
             <td><%= @car.personal_house_number %></td>

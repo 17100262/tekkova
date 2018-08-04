@@ -6,11 +6,12 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Freelance
+module Carproject
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
     config.active_storage.variant_processor = :vips
+    config.active_job.queue_adapter = :async
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

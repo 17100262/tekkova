@@ -15,9 +15,9 @@
   </head>
 
   <body>
-    <% unless (params[:controller]=='home' && params[:action]=='admin') or (params[:controller]=='users' && params[:action]=='index') or (params[:action]=="car_management") %>
+    
       <%= render 'layouts/header' %>
-    <% end %>
+    
       <% if notice || alert %>
         <div class="alert alert-info" role="alert">
           <strong>Info!</strong> <%= notice || alert %>

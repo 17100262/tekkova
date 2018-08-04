@@ -1,0 +1,61 @@
+
+<%= form_for violation do |form| %>
+  <div class="row my-2">
+    <div class="col-md-12">
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Select User</button>
+    
+    <% if (not violation.user.nil?) %>
+      <%= text_field_tag :user, violation.user.name, :required => true, :readonly => true, id: "user_field" %>
+    <% else %>
+      <%= text_field_tag :user, nil, :readonly => true, :required => true, id: "user_field" %>
+    <% end %>
+    </div>
+  </div>
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Listing all Users</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered table-violate">
+            <% User.all.each do |u| %>
+                <tr>
+                    <td><%= u.name %></td>
+                    <td><button type="button" class="btn btn-primary" data-dismiss="modal" id="user<%= u.id %>">Select</button></td>
+                </tr>
+            <% end %>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-2">
+        <label>Reason:</label>
+      </div>
+      <div class="col-md-10">
+     <%= form.text_area :reason, :required => true, class:"form-control form-control-md" %>
+      </div>
+    </div>
+    <br>
+    <%= form.submit "Create", class:"btn btn-primary btn-sm float-right" %>
+<% end %>
+
+<script>
+$(document).ready(function(){
+<% User.all.each do |u| %>
+     $('#user<%= u.id %>').click(function () {
+       $("#user_field").val("<%= u.name %>") ;
+    });
+<% end %>
+    });
+</script>
+
+
+  

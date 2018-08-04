@@ -10,9 +10,10 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
 //= require rails-ujs
-//= require jquery3
 //= require fileinput
+//= require cocoon
 //= require_tree .
 
 $(document).ready(function() {
@@ -23,8 +24,27 @@ $(document).ready(function() {
    $('#multi-form select').addClass('form-control');
    $('#multi-form textarea').addClass('form-control');
 });
+$(document).ready(function() {
+$("html").addClass('js');
 
 
+$( ".input-file-trigger" ).keydown(function(event) {  
+    if ( event.keyCode == 13 || event.keyCode == 32 ) {  
+        $( this ).closest(".input-file-container").children("input-file").focus();  
+    }  
+});
+$( ".input-file-trigger" ).click(function() {
+   $( this ).closest(".input-file-container").children("input-file").focus();
+}); 
+  
+});
+$(document).click(function() {
+$(".input-file").change(function() {  
+var values = $(this).val();
+var filename = values.replace(/^.*\\/, "");
+    $( this ).closest(".input-file-container").children(".file-return").html(filename); 
+});
+}); 
 $(document).ready(function(){
    $('.custom-file-container__image-clear').hide();
     if(
@@ -145,4 +165,62 @@ $(document).ready(function(){
     });
     $( "#amount2" ).val( $( "#slider2" ).slider( "value" ) );
     amountf2();
-  });
+  }); 
+$('#myModal').on('shown.bs.modal', function (e) {
+ $('.table-violate').DataTable({
+        
+        "aaSorting": [],
+        pageLength: 10,
+        responsive: true
+    });
+});
+ $(document).ready(function(){
+    
+    $('.table-violation').DataTable({
+        
+        "aaSorting": [],
+        pageLength: 25,
+        responsive: true
+    });
+        $('.table-data').DataTable({
+        
+        "aaSorting": [],
+        pageLength: 25,
+        responsive: true,
+        dom: '<"html5buttons"B>lTfgitp',
+        buttons: [{
+                extend: 'copy'
+            }, {
+                extend: 'csv'
+            }, {
+                extend: 'excel',
+                title: 'ExampleFile'
+            }, {
+                extend: 'pdf',
+                title: 'ExampleFile'
+            },
+
+            {
+                extend: 'print',
+                customize: function(win) {
+                    $(win.document.body).addClass('white-bg');
+                    $(win.document.body).css('font-size', '10px');
+
+                    $(win.document.body).find('table')
+                        .addClass('compact')
+                        .css('font-size', 'inherit');
+                }
+            }
+        ]
+        
+    });
+$('.all_checkbox').change(function(){
+if($('.all_checkbox').is(':checked')){
+$('.check_box input[type="checkbox"]').prop('checked', true);
+}
+else{
+    $('.check_box input[type="checkbox"]').prop('checked', false);
+}
+});
+ });
+

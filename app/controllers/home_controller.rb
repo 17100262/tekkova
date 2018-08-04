@@ -25,4 +25,7 @@ class HomeController < ApplicationController
         # render :layout => false
         # byebug
     end
+    def mass_email
+    end
+    
 end

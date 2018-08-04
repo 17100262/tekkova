@@ -1,6 +1,6 @@
 <header id="header" class="header-narrow">
     <div class="header-body header-top header-top-colored header-top-dark">
-        <div class="header-container container">
+        <div class="header-container container-fluid">
             <div class="header-row">
                 <div class="header-column">
                     <div class="header-row">
@@ -26,23 +26,11 @@
                                 </li>
 
                                 <% if user_signed_in? %>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<%= edit_user_registration_path %>">Settings</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<%= user_path(current_user) %>">Profile</a>
-                                </li>
-
                                 <% if current_user.admin %>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<%= admin_path %>">Admin Dashboard</a>
                                 </li>
                                 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<%= users_path %>">User Management</a>
-                                </li>
                                 <% end %>
 
                                     <% end %>
@@ -55,13 +43,26 @@
                                             </ul>
                                         </li>
 
-                                    <li class="nav-item">
                                     <% if user_signed_in? %>
-                                        <a class="nav-link" href="<%= destroy_user_session_path %>" data-method="delete">Log Out</a>
+                                   
+                                    
+                                     <li class="dropdown">
+                                            
+                                        
+                                        <%= image_tag(current_user.profile_image.url, size: "50x50", class:"header_img dropdown-toggle") %>
+                                        
+                                    
+                                            <ul class="dropdown-menu" style="right: 0;">
+                                                <li><a class="dropdown-item" href="<%= edit_user_registration_path %>">Settings</a></li>
+                                                <li><a class="dropdown-item" href="<%= user_path(current_user) %>">Profile</a></li>
+                                                <li><a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete">Log Out</a></li>
+                                            </ul>
+                                        </li>
                                     <% else %>
+                                    <li class="nav-item">
                                         <a class="nav-link" href="<%= new_user_registration_path %>">Sign Up</a>
-                                        <% end %>
                                     </li>
+                                        <% end %>
                                         <!--<li class="nav-item">-->
                                         <!--  <a class="nav-link disabled" href="#">Disabled</a>-->
                                         <!--</li>-->

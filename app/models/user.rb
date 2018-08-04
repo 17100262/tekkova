@@ -7,7 +7,14 @@ class User < ApplicationRecord
   attr_accessor :terms_of_service
   validates :terms_of_service, acceptance: true
   has_many :cars
-
+  
+  has_many :comment_files, dependent: :destroy
+  accepts_nested_attributes_for :comment_files, reject_if: :all_blank, allow_destroy: true
+  
+  has_many :violations, dependent: :destroy
+  
+  has_attached_file :profile_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/missing.png"
+  validates_attachment_content_type :profile_image, content_type: /\Aimage\/.*\z/
   
   def make_admin
     self.update!(admin: true)
