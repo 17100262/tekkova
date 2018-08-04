@@ -18,11 +18,11 @@
     
       <%= render 'layouts/header' %>
     
-      <% if notice || alert %>
-        <div class="alert alert-info" role="alert">
-          <strong>Info!</strong> <%= notice || alert %>
-        </div>
-      <% end %>
+      <!--< if notice || alert %>-->
+      <!--  <div class="alert alert-info" role="alert">-->
+      <!--    <strong>Info!</strong> <= notice || alert %>-->
+      <!--  </div>-->
+      <!--<end %>-->
       <% unless params[:controller]=='home' && params[:action]=='admin' %>
       <div class="container-fluid p-0" style="min-height: 80vh;">
       <% end %>  
@@ -34,3 +34,11 @@
     
   </body>
 </html>
+
+<script>
+  <% if notice %>
+    toastr.success('<%=notice%>');
+  <% elsif alert %>
+    toastr.error('<%=alert%>');
+  <% end %>
+</script>

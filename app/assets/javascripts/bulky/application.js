@@ -14,4 +14,5 @@
 //= require jquery
 //= require rails-ujs
 //= require tinymce
+//= require toastr
 //= require_tree .

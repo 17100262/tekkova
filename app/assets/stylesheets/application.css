@@ -20,6 +20,7 @@
  *= require login-form
  *= require fileinput
  *= require jquery.dataTables
+ *= require toastr
  *= require_self
  */
  

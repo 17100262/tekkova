@@ -13,6 +13,7 @@
 //= require jquery
 //= require rails-ujs
 //= require fileinput
+//= require toastr
 //= require cocoon
 //= require_tree .
 
