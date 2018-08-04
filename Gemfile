@@ -63,6 +63,7 @@ gem "mini_magick"
 gem 'image_processing', '~> 1.2'
 gem 'cancancan'
 gem 'paperclip'
+gem 'aws-sdk-s3', '~> 1.17'
 gem 'cocoon'
 gem 'figaro'
 gem 'bulky', git: "https://github.com/17100262/rails-bulky.git"
