@@ -7,11 +7,10 @@ Rails.application.routes.draw do
     end
   end
   get 'car_steps', to: 'cars#car_steps',as: :car_steps
+  get 'my_cars', to: 'users#my_cars',as: :my_cars
   post 'listing_criteria', to: 'cars#submit_listing_criteria',as: :listing_criteria
   
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-  }
+  devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#home'
   get 'admin', to: 'home#admin', as: :admin

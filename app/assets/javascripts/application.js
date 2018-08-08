@@ -108,20 +108,16 @@ $(document).ready(function(){
     
   });
   
-  
-  
-  
   $(function() {
  
     var value1 = 0;
     var value2 = 0;
      
     function amountf(){
-        
        
-        var value3 = value1 / 400;
-        var value4 = value3 * value2;
-        var valuef = value4 * 52;
+        var value3 = value1 * 5;
+        var value4 = value3 + 25;
+        var valuef = value4 * value2;
         
         $( "#amountf" ).val( "$" + valuef );
         
@@ -130,31 +126,32 @@ $(document).ready(function(){
         var value1 = $( "#slider" ).slider( "value" );
         var value2 = $( "#slider2" ).slider( "value" );
         
-        var value3 = value1 / 400;
-        var value4 = value3 * value2;
-        var valuef = value4 * 52;
+        var value3 = value1 * 5;
+        var value4 = value3 + 25;
+        var valuef = value4 * value2;
         
         $( "#amountf" ).val( "$" + valuef );
     }
     $( "#slider" ).slider({
     orientation: "horizontal",
      range: "min",
-      value:20000,
-      min: 20000,
-      max: 150000,
-      step: 1000,
+      value:0,
+      min: 0,
+      max: 135,
+      step: 0.5,
       slide: function( event, ui ) {
           value1 = ui.value;
           amountf();
-      $( "#amount" ).val( "$" + ui.value );
+      $( "#amount" ).val( "$" + (ui.value * 1000 + 15000)  );
       }
     });
-    $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
+    values1 = $( "#slider" ).slider( "value" );
+    $( "#amount" ).val( "$" + (values1 * 1000 + 15000)    );
 
     $( "#slider2" ).slider({
     orientation: "horizontal",
      range: "min",
-      value:0,
+      value: 0,
       min: 0,
       max: 7,
       step: 1,
@@ -225,3 +222,25 @@ else{
 });
  });
 
+function avatarchange() {
+    $("#profileImage").mouseover(function() {
+        $("#icon-span").show();
+        $("#profileImage").css('opacity', '0.5');
+        $("#profileImage").css('background', 'rgba(0,0,0,0.5)');
+    });
+
+    $("#icon-span").mouseover(function() {
+        $("#icon-span").show();
+        $("#profileImage").css('opacity', '0.5');
+        $("#profileImage").css('background', 'rgba(0,0,0,0.5)');
+    });
+
+    $("#profileImage").mouseout(function() {
+        $("#icon-span").hide();
+        $("#profileImage").css('opacity', '1');
+        $("#profileImage").css('background', 'rgba(0,0,0,0)');
+    });
+}
+$(document).ready(function() {
+    avatarchange();
+});

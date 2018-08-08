@@ -16,6 +16,14 @@ class User < ApplicationRecord
   has_attached_file :profile_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/missing.png"
   validates_attachment_content_type :profile_image, content_type: /\Aimage\/.*\z/
   
+  has_attached_file :licensefront, styles: { medium: "300x300>", thumb: "100x100>" }
+  validates_attachment_content_type :licensefront, content_type: /\Aimage\/.*\z/
+  
+  has_attached_file :licenseback, styles: { medium: "300x300>", thumb: "100x100>" }
+  validates_attachment_content_type :licenseback, content_type: /\Aimage\/.*\z/
+  
+  
+  after_create_commit {BasicMailer.welcome_email(self).deliver_later}
   def make_admin
     self.update!(admin: true)
   end

@@ -1,12 +1,6 @@
-<% if current_user.sign_in_count <= 1 %>
+<% if user_signed_in? and current_user.sign_in_count <= 1 %>
     <%= render 'cars/congrats' %>
-    <script>
-        $(document).ready(function() {
     
-            $('#myModal').modal('show')
-        
-        });
-    </script>
 <% end %>
 
 <section id="banner" class="page-header custom-product">

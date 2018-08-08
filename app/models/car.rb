@@ -5,9 +5,18 @@ class Car < ApplicationRecord
     belongs_to :user
     attr_accessor :step
     has_many :car_pictures, dependent: :destroy
+    attr_accessor :licenseback_remove
+    attr_accessor :licensefront_remove
     
     
     accepts_nested_attributes_for :car_pictures, reject_if: :all_blank, allow_destroy: true
+    
+    
+    has_attached_file :licensefront, styles: { medium: "300x300>", thumb: "100x100>" }
+    validates_attachment_content_type :licensefront, content_type: /\Aimage\/.*\z/
+  
+    has_attached_file :licenseback, styles: { medium: "300x300>", thumb: "100x100>" }
+    validates_attachment_content_type :licenseback, content_type: /\Aimage\/.*\z/
     
     enum status: [:draft,:completed]
     
@@ -28,6 +37,23 @@ class Car < ApplicationRecord
     
     validates :driving_liecense_number, length: { is: 7 },:if => Proc.new{|f| f.step == "5" }
     validates :personal_mobile, length: { is: 10 },:if => Proc.new{|f| f.step == "6" }, numericality: { only_integer: true }
+    
+    
+    before_save :check_photo,:check_license_photo
+    
+    def check_photo
+      car_pictures.each(&:delete_photo)
+    end
+    
+    def check_license_photo
+      if self.licensefront_remove == "1"
+        licensefront.clear
+      end
+      if self.licenseback_remove == "1"
+        licenseback.clear
+      end
+        
+    end
     
     # private
     

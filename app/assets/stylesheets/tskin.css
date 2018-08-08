@@ -299,11 +299,11 @@ html .nav-pills-dark a {
 }
 
 html .nav-pills-dark a:hover {
-	color: #39424d;
+	color: #231f20;
 }
 
 html .nav-pills-dark a:focus {
-	color: #39424d;
+	color: #231f20;
 }
 
 html .nav-pills-dark a:active {
@@ -2851,7 +2851,7 @@ html[dir="rtl"] #header .tip-light:before {
 		color: #21a5D6;
 	}
 
-	#header .header-nav-main nav > ul > li > a.dropdown-toggle:after {
+	#header .header-nav-main nav > ul > li > a.dropdown-toggle:after, .p-image::after{
 		border-color: #21a5D6 transparent transparent transparent;
 	}
 
@@ -3255,11 +3255,11 @@ html[dir="rtl"] #header .tip-light:before {
 
 	html #header .header-nav-main nav > ul > li.dropdown-full-color.dropdown-dark .dropdown-menu li a {
 		color: #ffffff;
-		border-bottom-color: #39424d;
+		border-bottom-color: #231f20;
 	}
 
 	html #header .header-nav-main nav > ul > li.dropdown-full-color.dropdown-dark .dropdown-menu li:hover > a {
-		background: #39424d;
+		background: #231f20;
 	}
 
 	html #header .header-nav-main nav > ul > li.dropdown-full-color.dropdown-dark .dropdown-menu li.dropdown-submenu > a:after {
@@ -3526,19 +3526,19 @@ html #header .header-top.header-top-dark {
 }
 
 html #header .header-top.header-top-dark .header-nav-top ul > li.open > a {
-	background: #39424d;
+	background: #231f20;
 }
 
 html #header .header-top.header-top-dark .header-nav-top ul > li > a:hover,
 html #header .header-top.header-top-dark .header-nav-top ul > li.open > a:hover,
 html #header .header-top.header-top-dark .header-nav-top ul > li > a:focus,
 html #header .header-top.header-top-dark .header-nav-top ul > li.open > a:focus {
-	background: #39424d;
+	background: #231f20;
 }
 
 html #header .header-top.header-top-dark .dropdown-menu {
-	background: #39424d;
-	border-color: #39424d;
+	background: #231f20;
+	border-color: #231f20;
 }
 
 html #header .header-top.header-top-dark .dropdown-menu a:hover,
@@ -3691,11 +3691,11 @@ html .testimonial-quaternary .testimonial-arrow-down {
 }
 
 html .testimonial-dark blockquote {
-	background: #39424d;
+	background: #231f20;
 }
 
 html .testimonial-dark .testimonial-arrow-down {
-	border-top-color: #39424d;
+	border-top-color: #231f20;
 }
 
 html .testimonial-light blockquote {

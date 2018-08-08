@@ -15,7 +15,7 @@ class Ability
         end
         can :create, Car
         can :show, User,:id => user.id
-        
+        can :my_cars, User,:id => user.id
         can :home, :home
         can :how_it_works,:home
         can :policies,:home

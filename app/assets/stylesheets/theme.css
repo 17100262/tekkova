@@ -502,7 +502,7 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive.heade
 		display: none;
 	}
 
-	#header .header-nav-main nav > ul > li > a.dropdown-toggle:after {
+	#header .header-nav-main nav > ul > li > a.dropdown-toggle:after, .p-image::after {
 		border-color: #CCC transparent transparent transparent;
 		border-width: .24rem;
 		margin-left: .255em;
@@ -1043,7 +1043,7 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive.heade
 	#header .header-nav-main-effect-1 nav > ul > li.dropdown .dropdown-menu li a, #header .header-nav-main-effect-1 nav > ul > li.dropdown .dropdown-mega-sub-nav li a {
 		-webkit-transition: -webkit-transform 0.2s ease-out;
 		-moz-transition: -moz-transform 0.2s ease-out;
-		transition: transform 0.2s ease-out;
+		transition: none;
 		transform: translate3d(0, -5px, 0);
 	}
 
@@ -1058,7 +1058,7 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive.heade
 	#header .header-nav-main-effect-1 nav > ul > li.dropdown .dropdown-menu {
 		-webkit-transition: -webkit-transform 0.2s ease-out;
 		-moz-transition: -moz-transform 0.2s ease-out;
-		transition: transform 0.2s ease-out;
+		transition: none;
 		transform: translate3d(0, -5px, 0);
 	}
 
@@ -1293,7 +1293,7 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive.heade
 		border-radius: 0;
 		border: 0;
 		clear: both;
-		display: none;
+		display: block;
 		float: none;
 		position: static;
 	}

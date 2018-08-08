@@ -1,135 +1,166 @@
-
-<div class="container-fluid py-3">
-  <div class="row">
-  	 <div class="loginmodal-container loginmodal-container-new">
-  		<div class="loginmodal-container-2">
-  		  <h1>Profile</h1>
-        <center>
-           <span id="icon-span" data-toggle="modal" data-target="#updateavatar"></span>
-            <%= image_tag @user.profile_image.url, size:"100x100", id:"profileImage", data: {toggle: "modal", target: "#updateavatar"} %>
-            <%= render "layouts/updateavatar", resource_name: current_user,resource: User %>
-           <h2 class="mb-0"><%= @user.name %></h2>
-           <p><%= @user.email %></p>
-        </center>
-        <div class="table-responsive">
-          <table class="table table-bordered bg-white">
-            <tbody>
-              <tr>
-                <th>Phone Number</th>
-                <td><%= @user.phone_number %></td>
-              </tr>
-              <tr>
-                <th>Cars Posted</th>
-                <td><%= @user.cars.count %></td>
-              </tr>
-            </tbody>
-          
-          </table>
-         
-        </div>
-      </div>
-    </div>
-  </div>
-</div>  
- <hr>
-         <% if current_user.admin %>
-<div class="container-fluid py-3">
-  <div class="row">
-  	 <div class="loginmodal-container loginmodal-container-new">
-  		<div class="loginmodal-container-2">
-         <h1 class="text-center">Admin Area</h1>
-         <div class="comments mb-4">
-         <strong>Comment:</strong>
-            <%= form_for @user do |form| %>
-               <%= form.text_area :comment, class:"form-control mb-2" %>
-               <%= form.submit "Save", class:"btn btn-primary btn-sm" %>
-            <% end %>
-         </div>
-         <div class="files mb-4">
-
-             <strong>List of Already Attached Files: </strong>
-            <% attachments = @user.comment_files %>
-            <% if attachments.present? %>
-              <table class="table table-bordered">
-                  <thead>
-                      <th>File Name</th>
-                      <th colspan="2">View</th>
-                  </thead>
-                  <tbody>
-                <% attachments.each do |attachment| %>
-                  <% if attachment.persisted?%>
-                  <tr>
-                  <td>
-                    <%= attachment.file_file_name %> 
-                  </td>
-                  <td>
-                    <%= link_to "View File", "#{attachment.file.url}",target: "_blank", class:"btn btn-primary btn-sm"  %>
-                  </td>
-                  
-                    <td><%= link_to '<i class="fas fa-trash icon-chat" style="font-size: 19px" title="Delete"></i>'.html_safe, attachment,method: :delete %>
-                  </td>
-                  </tr>
-                  <% end %>
-                <% end %>
-                  </tbody>
-              </table>
-                  
-              
-            <% else %>
-              <p>No Files Attached Yet.</p>
-            <% end %>
-            
-            
-            <!--<div id=comment_files>-->
-            <!--    <= form.fields_for :comment_files do |comment_file| %>-->
-            <!--        <= render 'comment_file_fields', f: comment_file %>-->
-            <!--    < end %>-->
-            <!--    <div class="links">-->
-            <!--     <= link_to_add_association 'add FILE', form, :comment_files %>-->
-            <!--    </div>-->
-            <!--</div>-->
-            
-            <strong>Attach New Files: </strong>
-            <%= form_for(CommentFile.new) do |f| %>
-                <div class="input-file-container">  
-                    <%= f.file_field :file, required: true, class:"input-file", :data => { :buttonText => 'bar' } %>
-                    <label tabindex="0" for="input-file" class="input-file-trigger bg-primary">Choose File</label>
-                    <span class="file-return">No File Choosen</span>
+<link rel="stylesheet" href="/profile.css">
+<section id="about-me" class="section section-no-border section-parallax custom-position-1 custom-xs-bg-size-cover parallax-no-overflow m-0 p-0">
+    <div style="background:rgba(0,0,0,0.5); padding: 150px 0 20px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 custom-sm-margin-bottom-1">
+                    <span id="icon-span" data-toggle="modal" data-target="#updateavatar"></span>
+                    <img id="profileImage" src="<%= @user.profile_image.url %>" data-toggle="modal" data-target="#updateavatar" } class="img-fluid img-profile custom-border custom-image-position-2" alt />
+                    <%= render "layouts/updateavatar", resource_name: current_user,resource: User %>
                 </div>
-                <%#= f.file_field :file,required: true %>
-                <%= f.hidden_field :user_id, value: @user.id %>
-                <br/>
-                <%= f.submit "Save", class:"btn btn-primary btn-sm" %>
-            <% end %>
-            
-            
-         <!--   <div id="comment_files">-->
-         <!--      <h3>Files</h3>-->
-         <!--      <%#= form.fields_for :comment_files do |comment_file| %>-->
-         <!--         <%#= render 'comment_file_fields', f: comment_file %>-->
-         <!--      <%# end %>-->
-               
-         <!--      <div class="links">-->
-         <!--         <%#= link_to_add_association '<i class="fas fa-plus mr-2"></i>Add Another File'.html_safe, form, :comment_files, class:"btn btn-primary btn-sm float-right" %>-->
-         <!--      </div>-->
-         <!--   </div>-->
-         <!--   <= form.submit "Save", class:"btn btn-primary mt-3" %>-->
-         <!--< end %>-->
-         </div>
+                <div class="col-lg-6 col-xl-5">
+                    <h1 class="text-white custom-font-size-1"><%= @user.name %></h1>
+                    <p class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">
+                        <%= @user.email %>
+                    </p>
+                    <p class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">Cars Posted:
+                        <%= @user.cars.count %>
+                    </p>
+                    <p class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">Total Earnings: $12345 </p>
+                    <p class="text-color-light font-weight-normal custom-font-size-2 m-0">Rating: 5 </p>
 
-      </div>
-   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="custom-about-me-links background-color-light">
+    <div class="container-fluid">
+        <div class="row">
+            <a href="/my_cars" class="text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0">
+                
+                    <span class="custom-nav-button text-color-dark">
+						<i class="fas fa-car text-color-primary"></i>
+						My Cars
+					</span>
+                </a>
+            <a href="#" class="text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0">
+                
+                    <span class="custom-nav-button text-color-dark">
+						<i class="fas fa-calendar text-color-primary"></i>
+						Booking History
+					</span>
+                </a>
+            <a href="#" class="text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0">
+                
+                    <span class="custom-nav-button text-color-dark">
+						<i class="fas fa-file text-color-primary"></i>
+						My Documents
+					</span>
+                </a>
+            <a href="#" class="text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0">
+                
+                    <span class="custom-nav-button text-color-dark">
+						<i class="fas fa-envelope text-color-primary"></i>
+						My Inbox
+					</span>
+                </a>
+            <a href="#" class="text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0">
+                
+                    <span class="custom-nav-button text-color-dark">
+						<i class="far fa-calendar-check text-color-primary"></i>
+						My Bookings
+					</span>
+                </a>
+            <a href="#" class="text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0">
+                
+                    <span class="custom-nav-button text-color-dark">
+						<i class="fas fa-money-bill text-color-primary"></i>
+						My Payments
+					</span>
+                </a>
+        </div>
+    </div>
 </div>
-</div>
-        <% end %>
 
+<section class="section-no-border background-color-light m-0">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="custom-box-details background-color-light col-lg-12 ml-5 float-right clearfix">
+                    <h4>Personal Details</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="custom-list-style-1 p-0 mb-0">
+                                <li>
+                                    <span class="text-color-dark">Email:</span>
+                                    <span class="custom-text-color-2"><a class="custom-text-color-2" href="mailto:<%= @user.email %>"><%= @user.email %></a></span>
+                                </li>
+                                <li>
+                                    <span class="text-color-dark">Phone No.:</span>
+                                    <span class="custom-text-color-2"><a class="custom-text-color-2" href="mailto:me@domain.com">  <%= @user.phone_number %> </a></span>
+                                </li>
+                                <li>
+                                    <span class="text-color-dark">Birthday:</span>
+                                    <span class="custom-text-color-2">23 October 1990</span>
+                                </li>
 
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="custom-list-style-1 p-0 mb-0">
+                                <li>
+                                    <span class="text-color-dark">Address:</span>
+                                    <span class="custom-text-color-2">House Number , Street Name & Suburb</span>
+                                </li>
 
-
-
-
-
-
-
-
-
+                                <li>
+                                    <span class="text-color-dark">State:</span>
+                                    <span class="custom-text-color-2"><a class="custom-text-color-2" href="skype:yourskype?chat">State Name</a></span>
+                                </li>
+                                <li>
+                                    <span class="text-color-dark">Postcode:</span>
+                                    <span class="custom-text-color-2"><a class="custom-text-color-2" href="tel:123456789">12345</a></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-no-border background-color-light m-0">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="custom-box-details background-color-light col-lg-12 ml-5 float-right clearfix">
+                    <h4>Driver's License Details</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="custom-list-style-1 p-0 mb-0">
+                                <li class="my-4">
+                                    <span class="text-color-dark">Country:</span>
+                                    <span class="custom-text-color-2">America</span>
+                                </li>
+                                <li class="mb-4">
+                                    <span class="text-color-dark">State:</span>
+                                    <span class="custom-text-color-2">Newyork</span>
+                                </li>
+                                <li>
+                                    <span class="text-color-dark">License Number:</span>
+                                    <span class="custom-text-color-2">1234566</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6 my-4 my-md-0">
+                                    <p class="lead text-color-dark">License Front Image</p>
+                                    <img src="<%= (@user.licensefront.url if @user.licensefront.present?) || " /missing.jpg " %>" class="img-fluid">
+                                    </img>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="lead text-color-dark">License Back Image</p>
+                                    <img src="<%= (@user.licenseback.url if @user.licenseback.present?) || " /missing.jpg " %>" class="img-fluid">
+                                    </img>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

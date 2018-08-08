@@ -74,7 +74,7 @@ h2.heading{
 }
 
 /** The Spacing **/
-@media(min-width:1200px){
+@media(min-width:768px){
 .btn-breadcrumb .btn {
   font-size:18px;
   padding:20px 20px 20px 40px;
@@ -84,19 +84,8 @@ h2.heading{
 }
 .btn-breadcrumb .btn:last-child {
   padding:20px 20px 20px 35px;
-}}
-@media(max-width:1200px){
-.btn-breadcrumb .btn {
-  padding:20px 10px 20px 30px;
 }
-.btn-breadcrumb .btn:first-child {
-  padding:20px 20px 20px 20px;
-}
-.btn-breadcrumb .btn:last-child {
-  padding:20px 20px 20px 30px;
-}}
-
-/** Default button **/
+  /** Default button **/
 .btn-breadcrumb .btn.btn-default:not(:last-child):after {
   border-left: 20px solid #f5f5f5;
 }
@@ -123,6 +112,87 @@ h2.heading{
 .btn-breadcrumb .btn.btn-primary:hover:not(:last-child):before {
   border-left: 20px solid #fff;
 }
+}
+@media(max-width:768px){
+.btn-breadcrumb .btn {
+  padding: 5px 5px 5px 20px;
+}
+.btn-breadcrumb .btn:first-child {
+  padding:5px;
+}
+.btn-breadcrumb .btn:last-child {
+  padding:5px 5px 5px 20px;
+}
+  /** Primary button **/
+.btn-breadcrumb .btn.btn-default:not(:last-child):after {
+      border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 15px solid #f5f5f5;
+    position: absolute;
+    top: -1px;
+    margin-top: 0;
+}
+.btn-breadcrumb .btn.btn-default:not(:last-child):before {
+      border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 15px solid #ccc;
+    position: absolute;
+    top: -1px;
+    margin-top: 0;
+}
+.btn-breadcrumb .btn.btn-default:hover:not(:last-child):after {
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 15px solid #ebebeb;
+    position: absolute;
+    top: -1px;
+    margin-top: 0;
+}
+.btn-breadcrumb .btn.btn-default:hover:not(:last-child):before {
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 15px solid #adadad;
+    position: absolute;
+    top: -1px;
+    margin-top: 0;
+}
+/** Primary button **/
+.btn-breadcrumb .btn.btn-primary:not(:last-child):after {
+      border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 15px solid transparent;
+    position: absolute;
+    top: -1px;
+    margin-top: 0;
+}
+.btn-breadcrumb .btn.btn-primary:not(:last-child):before {
+      border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 15px solid #21a5D6;
+    position: absolute;
+    top: -1px;
+    margin-top: 0;
+}
+.btn-breadcrumb .btn.btn-primary:hover:not(:last-child):after {
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 15px solid #21a5D6;
+    position: absolute;
+    top: -1px;
+    margin-top: 0;
+}
+.btn-breadcrumb .btn.btn-primary:hover:not(:last-child):before {
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 15px solid #21a5D6;
+    position: absolute;
+    top: -1px;
+    margin-top: 0;
+}
+
+}
+
+
 .btn-breadcrumb a.btn.btn-default {
     cursor: no-drop !important;
     pointer-events: none !important;
@@ -338,12 +408,28 @@ div.dt-button-info {
     float: none;
   }
 }
+@media(max-width: 992px){
+  .header_img{
+    display: none !important;
+  }
+  .header-user{
+    display: inline-flex !important;
+  }
+  .p-image::after{
+    display: none !important;
+  }
+}
+@media(min-width: 991px){
+  .header-user{
+    display: none !important;
+  }
 
 .header_img{
-  margin-top: -10px !important;
+    display: inline-flex !important;
+  margin-top: -5px !important;
     border-radius: 50% !important;
     box-shadow: 0px 0px 0px 1px !important;
-}
+}}
 #user_field{
   border: 0 !important;
 }
@@ -385,3 +471,21 @@ div.dt-button-info {
 color: #21a5D6;
 }
 
+#icon-span::before {
+    z-index: 999;
+    content: "\f030";
+    font-family: Font Awesome\ 5 Free;
+    font-style: normal;
+    font-weight: 900;
+    text-decoration: inherit;
+    color: #fff;
+    font-size: 22px;
+    position: absolute;
+    top: 80px;
+    left: 180px;
+}
+
+#icon-span {
+    display: none;
+    cursor: pointer;
+}

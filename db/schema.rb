@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_01_102503) do
+ActiveRecord::Schema.define(version: 2018_08_06_115003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,14 @@ ActiveRecord::Schema.define(version: 2018_08_01_102503) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "licensefront_file_name"
+    t.string "licensefront_content_type"
+    t.integer "licensefront_file_size"
+    t.datetime "licensefront_updated_at"
+    t.string "licenseback_file_name"
+    t.string "licenseback_content_type"
+    t.integer "licenseback_file_size"
+    t.datetime "licenseback_updated_at"
     t.index ["user_id"], name: "index_cars_on_user_id"
   end
 
@@ -147,6 +155,14 @@ ActiveRecord::Schema.define(version: 2018_08_01_102503) do
     t.integer "profile_image_file_size"
     t.datetime "profile_image_updated_at"
     t.text "comment"
+    t.string "licensefront_file_name"
+    t.string "licensefront_content_type"
+    t.integer "licensefront_file_size"
+    t.datetime "licensefront_updated_at"
+    t.string "licenseback_file_name"
+    t.string "licenseback_content_type"
+    t.integer "licenseback_file_size"
+    t.datetime "licenseback_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

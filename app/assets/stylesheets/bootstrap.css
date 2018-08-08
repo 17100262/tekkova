@@ -2866,7 +2866,7 @@ tbody.collapse.show {
 	position: relative;
 }
 
-.dropdown-toggle::after {
+.dropdown-toggle::after, .p-image::after {
 	display: inline-block;
 	width: 0;
 	height: 0;

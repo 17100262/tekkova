@@ -34,6 +34,10 @@ class UsersController < ApplicationController
         end
         redirect_back(fallback_location: users_path)
     end
+    
+    def my_cars
+       @cars = current_user.cars 
+    end
     private
     def user_params
         params.require(:user).permit(:name, :username, :profile_image, :comment, :phone_number,:identifier,:company_name,:linkedin_link,:githhub_link,:website_link,:portfolio,:other_link1,:other_link2,:other_link3,:experience, comment_files_attributes: [:id, :file, :user_id, :_destroy])
