@@ -40,6 +40,6 @@ class UsersController < ApplicationController
     end
     private
     def user_params
-        params.require(:user).permit(:name, :username, :profile_image, :comment, :phone_number,:identifier,:company_name,:linkedin_link,:githhub_link,:website_link,:portfolio,:other_link1,:other_link2,:other_link3,:experience, comment_files_attributes: [:id, :file, :user_id, :_destroy])
+        params.require(:user).permit(:firstname, :lastname, :profile_image, :comment, :phone_number,:birthday,:address,:state,:postal_code,:license_country,:license_number,:license_state, comment_files_attributes: [:id, :file, :user_id, :_destroy])
     end
 end

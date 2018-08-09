@@ -89,11 +89,11 @@
                                 </li>
                                 <li>
                                     <span class="text-color-dark">Phone No.:</span>
-                                    <span class="custom-text-color-2"><a class="custom-text-color-2" href="mailto:me@domain.com">  <%= @user.phone_number %> </a></span>
+                                    <span class="custom-text-color-2">  <%= @user.phone_number %></span>
                                 </li>
                                 <li>
                                     <span class="text-color-dark">Birthday:</span>
-                                    <span class="custom-text-color-2">23 October 1990</span>
+                                    <span class="custom-text-color-2"><%= @user.birthday %></span>
                                 </li>
 
                             </ul>
@@ -102,16 +102,16 @@
                             <ul class="custom-list-style-1 p-0 mb-0">
                                 <li>
                                     <span class="text-color-dark">Address:</span>
-                                    <span class="custom-text-color-2">House Number , Street Name & Suburb</span>
+                                    <span class="custom-text-color-2"><%= @user.address %></span>
                                 </li>
 
                                 <li>
                                     <span class="text-color-dark">State:</span>
-                                    <span class="custom-text-color-2"><a class="custom-text-color-2" href="skype:yourskype?chat">State Name</a></span>
+                                    <span class="custom-text-color-2"><%= @user.state %></span>
                                 </li>
                                 <li>
                                     <span class="text-color-dark">Postcode:</span>
-                                    <span class="custom-text-color-2"><a class="custom-text-color-2" href="tel:123456789">12345</a></span>
+                                    <span class="custom-text-color-2"><%= @user.postal_code %></span>
                                 </li>
                             </ul>
                         </div>
@@ -132,15 +132,15 @@
                             <ul class="custom-list-style-1 p-0 mb-0">
                                 <li class="my-4">
                                     <span class="text-color-dark">Country:</span>
-                                    <span class="custom-text-color-2">America</span>
+                                    <span class="custom-text-color-2"><%= @user.license_country %></span>
                                 </li>
                                 <li class="mb-4">
                                     <span class="text-color-dark">State:</span>
-                                    <span class="custom-text-color-2">Newyork</span>
+                                    <span class="custom-text-color-2"><%= @user.license_state %></span>
                                 </li>
                                 <li>
                                     <span class="text-color-dark">License Number:</span>
-                                    <span class="custom-text-color-2">1234566</span>
+                                    <span class="custom-text-color-2"><%= @user.license_number %></span>
                                 </li>
                             </ul>
                         </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_06_115003) do
+ActiveRecord::Schema.define(version: 2018_08_09_121647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,13 @@ ActiveRecord::Schema.define(version: 2018_08_06_115003) do
     t.string "licenseback_content_type"
     t.integer "licenseback_file_size"
     t.datetime "licenseback_updated_at"
+    t.date "birthday"
+    t.text "address"
+    t.string "state"
+    t.string "postal_code"
+    t.string "license_country"
+    t.string "license_state"
+    t.string "license_number"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
