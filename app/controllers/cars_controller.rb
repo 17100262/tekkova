@@ -11,6 +11,7 @@ class CarsController < ApplicationController
   # GET /cars
   # GET /cars.json
   def index
+    redirect_to root_url
     @cars = Car.all
   end
 
