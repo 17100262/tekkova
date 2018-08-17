@@ -69,7 +69,10 @@ button:hover {
 margin-bottom:15px !important;
 border-radius: 3px;
 }
-
+.loginmodal-container input[type="file"]{
+margin-bottom:10px !important;
+border-radius: 3px;
+}
 
 .hr-or{
   margin-bottom: 15px !important;

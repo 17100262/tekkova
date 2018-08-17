@@ -1,78 +1,5 @@
-<link rel="stylesheet" href="/profile.css">
-<section id="about-me" class="section section-no-border section-parallax custom-position-1 custom-xs-bg-size-cover parallax-no-overflow m-0 p-0">
-    <div style="background:rgba(0,0,0,0.5); padding: 150px 0 20px 0;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 custom-sm-margin-bottom-1">
-                    <span id="icon-span" data-toggle="modal" data-target="#updateavatar"></span>
-                    <img id="profileImage" src="<%= @user.profile_image.url %>" data-toggle="modal" data-target="#updateavatar" } class="img-fluid img-profile custom-border custom-image-position-2" alt />
-                    <%= render "layouts/updateavatar", resource_name: current_user,resource: User %>
-                </div>
-                <div class="col-lg-6 col-xl-5">
-                    <h1 class="text-white custom-font-size-1"><%= @user.name %></h1>
-                    <p class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">
-                        <%= @user.email %>
-                    </p>
-                    <p class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">Cars Posted:
-                        <%= @user.cars.count %>
-                    </p>
-                    <p class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">Total Earnings: $12345 </p>
-                    <p class="text-color-light font-weight-normal custom-font-size-2 m-0">Rating: 5 </p>
+<%= render "layouts/profileheader",user: @user %>
 
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div class="custom-about-me-links background-color-light">
-    <div class="container-fluid">
-        <div class="row">
-            <a href="/my_cars" class="text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0">
-                
-                    <span class="custom-nav-button text-color-dark">
-						<i class="fas fa-car text-color-primary"></i>
-						My Cars
-					</span>
-                </a>
-            <a href="#" class="text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0">
-                
-                    <span class="custom-nav-button text-color-dark">
-						<i class="fas fa-calendar text-color-primary"></i>
-						Booking History
-					</span>
-                </a>
-            <a href="#" class="text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0">
-                
-                    <span class="custom-nav-button text-color-dark">
-						<i class="fas fa-file text-color-primary"></i>
-						My Documents
-					</span>
-                </a>
-            <a href="#" class="text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0">
-                
-                    <span class="custom-nav-button text-color-dark">
-						<i class="fas fa-envelope text-color-primary"></i>
-						My Inbox
-					</span>
-                </a>
-            <a href="#" class="text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0">
-                
-                    <span class="custom-nav-button text-color-dark">
-						<i class="far fa-calendar-check text-color-primary"></i>
-						My Bookings
-					</span>
-                </a>
-            <a href="#" class="text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0">
-                
-                    <span class="custom-nav-button text-color-dark">
-						<i class="fas fa-money-bill text-color-primary"></i>
-						My Payments
-					</span>
-                </a>
-        </div>
-    </div>
-</div>
 
 <section class="section-no-border background-color-light m-0">
     <div class="container">
@@ -80,6 +7,7 @@
             <div class="col">
                 <div class="custom-box-details background-color-light col-lg-12 ml-5 float-right clearfix">
                     <h4>Personal Details</h4>
+                    <%= link_to 'Update details', edit_user_registration_path, class:"btn btn-sm btn-primary pull-right" %>
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="custom-list-style-1 p-0 mb-0">
@@ -89,11 +17,11 @@
                                 </li>
                                 <li>
                                     <span class="text-color-dark">Phone No.:</span>
-                                    <span class="custom-text-color-2">  <%= @user.phone_number %></span>
+                                    <span class="custom-text-color-2">  <%= @user.personal_mobile %></span>
                                 </li>
                                 <li>
                                     <span class="text-color-dark">Birthday:</span>
-                                    <span class="custom-text-color-2"><%= @user.birthday %></span>
+                                    <span class="custom-text-color-2"><%= @user.personal_dob %></span>
                                 </li>
 
                             </ul>
@@ -101,17 +29,25 @@
                         <div class="col-md-6">
                             <ul class="custom-list-style-1 p-0 mb-0">
                                 <li>
-                                    <span class="text-color-dark">Address:</span>
-                                    <span class="custom-text-color-2"><%= @user.address %></span>
+                                    <span class="text-color-dark">House No:</span>
+                                    <span class="custom-text-color-2"><%= @user.personal_house_number %></span>
                                 </li>
 
                                 <li>
-                                    <span class="text-color-dark">State:</span>
-                                    <span class="custom-text-color-2"><%= @user.state %></span>
+                                    <span class="text-color-dark">Street Name:</span>
+                                    <span class="custom-text-color-2"><%= @user.personal_street_name %></span>
                                 </li>
                                 <li>
-                                    <span class="text-color-dark">Postcode:</span>
-                                    <span class="custom-text-color-2"><%= @user.postal_code %></span>
+                                    <span class="text-color-dark">Suburb:</span>
+                                    <span class="custom-text-color-2"><%= @user.personal_suburb %></span>
+                                </li>
+                                <li>
+                                    <span class="text-color-dark">State:</span>
+                                    <span class="custom-text-color-2"><%= @user.personal_state %></span>
+                                </li>
+                                <li>
+                                    <span class="text-color-dark">Postal Code:</span>
+                                    <span class="custom-text-color-2"><%= @user.personal_postcode %></span>
                                 </li>
                             </ul>
                         </div>
@@ -131,16 +67,28 @@
                         <div class="col-md-6">
                             <ul class="custom-list-style-1 p-0 mb-0">
                                 <li class="my-4">
-                                    <span class="text-color-dark">Country:</span>
-                                    <span class="custom-text-color-2"><%= @user.license_country %></span>
+                                    <span class="text-color-dark">First Name:</span>
+                                    <span class="custom-text-color-2"><%= @user.driving_liecense_firstname %></span>
                                 </li>
-                                <li class="mb-4">
-                                    <span class="text-color-dark">State:</span>
-                                    <span class="custom-text-color-2"><%= @user.license_state %></span>
+                                <li class="my-4">
+                                    <span class="text-color-dark">Middle Name:</span>
+                                    <span class="custom-text-color-2"><%= @user.driving_liecense_middlename %></span>
+                                </li>
+                                <li class="my-4">
+                                    <span class="text-color-dark">Last Name:</span>
+                                    <span class="custom-text-color-2"><%= @user.driving_liecense_lastname %></span>
                                 </li>
                                 <li>
                                     <span class="text-color-dark">License Number:</span>
-                                    <span class="custom-text-color-2"><%= @user.license_number %></span>
+                                    <span class="custom-text-color-2"><%= @user.driving_liecense_number %></span>
+                                </li>
+                                <li class="mb-4">
+                                    <span class="text-color-dark">State:</span>
+                                    <span class="custom-text-color-2"><%= @user.driving_liecense_state %></span>
+                                </li>
+                                <li class="my-4">
+                                    <span class="text-color-dark">Country:</span>
+                                    <span class="custom-text-color-2"><%= @user.driving_liecense_country %></span>
                                 </li>
                             </ul>
                         </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_09_121647) do
+ActiveRecord::Schema.define(version: 2018_08_01_102503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,41 +84,12 @@ ActiveRecord::Schema.define(version: 2018_08_09_121647) do
     t.string "state"
     t.string "insurance_provider"
     t.string "agreed_insurance_value"
-    t.string "availibility_days"
-    t.string "pickup_suburb"
-    t.string "pickup_postcode"
-    t.string "pickup_state"
-    t.string "rental"
-    t.string "pickup_time"
-    t.string "dropoff_time"
-    t.string "advance_notice"
     t.integer "daily_drive_limit"
     t.boolean "allow_personal_commercial_use"
-    t.string "driving_liecense_country"
-    t.string "driving_liecense_state"
-    t.integer "driving_liecense_number"
-    t.string "driving_liecense_firstname"
-    t.string "driving_liecense_middlename"
-    t.string "driving_liecense_lastname"
-    t.integer "personal_house_number"
-    t.string "personal_street_name"
-    t.string "personal_suburb"
-    t.string "personal_state"
-    t.string "personal_postcode"
-    t.date "personal_dob"
-    t.string "personal_mobile"
     t.integer "status"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "licensefront_file_name"
-    t.string "licensefront_content_type"
-    t.integer "licensefront_file_size"
-    t.datetime "licensefront_updated_at"
-    t.string "licenseback_file_name"
-    t.string "licenseback_content_type"
-    t.integer "licenseback_file_size"
-    t.datetime "licenseback_updated_at"
     t.index ["user_id"], name: "index_cars_on_user_id"
   end
 
@@ -147,14 +118,27 @@ ActiveRecord::Schema.define(version: 2018_08_09_121647) do
     t.string "lastname"
     t.boolean "send_updates"
     t.boolean "admin", default: false
+    t.string "availibility_days"
+    t.string "pickup_suburb"
+    t.string "pickup_postcode"
+    t.string "pickup_state"
+    t.string "rental"
+    t.string "advance_notice"
+    t.string "driving_liecense_country"
+    t.string "driving_liecense_state"
+    t.integer "driving_liecense_number"
+    t.string "driving_liecense_firstname"
+    t.string "driving_liecense_middlename"
+    t.string "driving_liecense_lastname"
+    t.integer "personal_house_number"
+    t.string "personal_street_name"
+    t.string "personal_suburb"
+    t.string "personal_state"
+    t.string "personal_postcode"
+    t.date "personal_dob"
+    t.string "personal_mobile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "phone_number"
-    t.string "profile_image_file_name"
-    t.string "profile_image_content_type"
-    t.integer "profile_image_file_size"
-    t.datetime "profile_image_updated_at"
-    t.text "comment"
     t.string "licensefront_file_name"
     t.string "licensefront_content_type"
     t.integer "licensefront_file_size"
@@ -163,13 +147,10 @@ ActiveRecord::Schema.define(version: 2018_08_09_121647) do
     t.string "licenseback_content_type"
     t.integer "licenseback_file_size"
     t.datetime "licenseback_updated_at"
-    t.date "birthday"
-    t.text "address"
-    t.string "state"
-    t.string "postal_code"
-    t.string "license_country"
-    t.string "license_state"
-    t.string "license_number"
+    t.string "profile_image_file_name"
+    t.string "profile_image_content_type"
+    t.integer "profile_image_file_size"
+    t.datetime "profile_image_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

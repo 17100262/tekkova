@@ -1,0 +1,78 @@
+<div class="container">
+<div class="row mt-2">
+<% if current_user.cars.count < 2 %>
+<div class="col-md-12 btn-group btn-breadcrumb">
+<% else %>
+<div class="col-lg-6 offset-lg-3 btn-group btn-breadcrumb">
+<% end %>
+
+    <a href="<%= car_steps_path(step: 1,id: @car.id) %>" class="btn btn-primary car_details">Car Details</a>
+    <a href="<%= car_steps_path(step: 2,id: @car.id) %>" class="btn btn-primary car_pictures">Car Pictures</a>
+    <a href="<%= car_steps_path(step: 3,id: @car.id) %>" class="btn btn-primary car_preference">Car Preference</a>
+    <% if current_user.cars.count < 2 %>
+      <a href="#" class="btn btn-default car_preference">Personal Details</a>
+      <a href="#" class="btn btn-default car_preference">Driver License</a>
+      <a href="#" class="btn btn-default car_preference">Availibility & Pickup</a>
+    <% end %>
+</div> 
+</div>
+</div>
+<h2 class="heading mt-4">Car Preference</h2>
+<div class="preference background-img">
+  
+</div>
+<div class="container py-4">
+<div id="multi-form" class="car-preference">
+<%= form_for(@car) do |form| %>
+  <% if @car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+      <% @car.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div id="wizard">
+    <section>
+      <h5 class="mt-4">Select your preffered daily drive kilometer limit?</h5>
+        
+      <div class="checkbox-form">
+        <%= radio_button_tag "car[daily_drive_limit]",150,@car.daily_drive_limit == 150  %>
+        <%= form.label "150 kms" %>
+        
+        <%= radio_button_tag "car[daily_drive_limit]",200,@car.daily_drive_limit == 200  %>
+        <%= form.label "200 kms" %>
+        
+        <%= radio_button_tag "car[daily_drive_limit]",250,@car.daily_drive_limit == 250  %>
+        <%= form.label "250 kms" %>
+        
+        <%= radio_button_tag "car[daily_drive_limit]",300,@car.daily_drive_limit == 300  %>
+        <%= form.label "300 kms" %>
+        
+      
+      </div>
+    	
+    	<h5 class="mt-4">Do you allow travellers to use your car for personal and commercial purposes such as Uber trips or courier deliveries? Please note that we ask this question, as a part of our listing process regardless of make and models of all our hosts</h5>
+      <div class="checkbox-form">
+        <%= radio_button_tag "car[allow_personal_commercial_use]",true,@car.allow_personal_commercial_use == true  %>
+        <%= form.label "Yes" %>
+        
+        <%= radio_button_tag "car[allow_personal_commercial_use]", false, @car.allow_personal_commercial_use == false  %>
+        <%= form.label "No, only private use" %>
+        
+    	</div>
+    </section>
+  <%= (form.hidden_field :status, value: "completed") if current_user.cars.count > 1 %>
+  <%= form.hidden_field :step, value: 3 %>
+  <div class="mt-2">
+  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 3) ,class: "btn btn-primary btn-sm",role: "button" %>  
+  <span class="float-right">
+  <%= form.submit (("Next" if current_user.cars.count < 2) || "Submit"), class: "btn btn-primary btn-sm" %>
+  </span>
+  </div>
+<% end %>
+</div>
+</div>

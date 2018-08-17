@@ -1,12 +1,18 @@
 <div class="container">
 <div class="row mt-2">
+<% if current_user.cars.count < 2 %>
 <div class="col-md-12 btn-group btn-breadcrumb">
+<% else %>
+<div class="col-lg-6 offset-lg-3 btn-group btn-breadcrumb">
+<% end %>
     <a href="<%= car_steps_path(step: 1,id: @car.id)  %>" class="btn btn-primary car_details">Car Details</a>
     <a href="#" class="btn btn-default car_pictures">Car Pictures</a>
-    <a href="#" class="btn btn-default car_availibility">Availibility and Pickup</a>
     <a href="#" class="btn btn-default car_preference">Car Preference</a>
-    <a href="#" class="btn btn-default car_liecense">Driver License</a>
-    <a href="#" class="btn btn-default car_personal">Personal Details</a>
+    <% if current_user.cars.count < 2 %>
+      <a href="#" class="btn btn-default car_preference">Personal Details</a>
+      <a href="#" class="btn btn-default car_preference">License Details</a>
+      <a href="#" class="btn btn-default car_preference">Availibility & Pickup</a>
+    <% end %>
 </div>
 </div> 
 </div>
@@ -35,50 +41,50 @@
     <div class="row">
       <div class="col-lg-3 col-md-6">
         <%= form.label :year %>
-        <%#= form.text_field :year, id:"required" %>
+        <%#= form.text_field :year %>
         <%= form.select :year, (2013..2019).to_a, prompt: "Select Year"%>
       </div>
       <div class="col-lg-3 col-md-6">
         <%= form.label :make %> 
-        <%= form.text_field :make, id:"required"  %>
+        <%= form.text_field :make  %>
       </div>
       <div class="col-lg-3 col-md-6">
         <%= form.label :model %> 
-        <%=  form.text_field :model, id:"required"  %>
+        <%=  form.text_field :model  %>
       </div>
       <div class="col-lg-3 col-md-6">
         <%= form.label :series %> 
-        <%=  form.text_field :series, id:"required"  %>
+        <%=  form.text_field :series  %>
       </div>
       <div class="col-lg-3 col-md-6">
         <%= form.label :odometer %> 
-        <%=  form.text_field :odometer, id:"required"  %>
+        <%=  form.text_field :odometer  %>
       </div>
       <div class="col-lg-3 col-md-6">
         <label>Transmission </label>
-        <%=  form.text_field :trans_mission, id:"required"  %>
+        <%=  form.text_field :trans_mission  %>
       </div>
       <div class="col-lg-3 col-md-6">
         <%= form.label :body_type %> 
-        <%#= form.text_field :body_type, id:"required"  %>
+        <%#= form.text_field :body_type  %>
         <%= form.select :body_type, [" Convertible",  "Coupe",  "Sedan",  "SUV",  "Wagon"], prompt: "Select Body Type" %>
       </div>
       <div class="col-lg-3 col-md-6">
         <%= form.label :color %> 
-        <%= form.text_field :color, id:"required"  %>
+        <%= form.text_field :color  %>
       </div>
       <div class="col-lg-3 col-md-6">
         <%= form.label :fuel_type %> 
-        <%#= form.text_field :fuel_type, id:"required"  %>
+        <%#= form.text_field :fuel_type  %>
         <%= form.select :fuel_type, ["Unleaded 91",  "Unleaded 95",  "Unleaded 98",  "LPG",  "Electrical"], prompt: "Select Fuel Type" %>
       </div>
       <div class="col-lg-3 col-md-6">
         <label>Power (kW)</label>
-        <%= form.text_field :power, id:"required"  %>
+        <%= form.text_field :power  %>
       </div>
       <div class="col-lg-3 col-md-6">
         <%= form.label :number_of_seats %> 
-        <%= form.number_field :number_of_seats, id:"required"  %>
+        <%= form.number_field :number_of_seats  %>
       </div>
     </div>
     <div class="row mt-3">
@@ -107,7 +113,7 @@
     </div> 
     <div class="row">
       <div class="col-md-12">
-        <%= form.text_area :description, id:"required", rows:"4", placeholder:"Please provide a description as it will appear on your car advertised profile to renters to see before booking, these may include vehicle modifications or any particular notes that you may have regrading your vehicle"  %>
+        <%= form.text_area :description,  rows:"4", placeholder:"Please provide a description as it will appear on your car advertised profile to renters to see before booking, these may include vehicle modifications or any particular notes that you may have regrading your vehicle"  %>
       </div>
     </div> 
     <div class="row mt-3">
@@ -121,21 +127,21 @@
     <div class="row mt-3">
       <div class="col-md-4">
         <label>License Plate Number</label> 
-        <%= form.text_field :liecense_plate_number, id:"required"  %>
+        <%= form.text_field :liecense_plate_number  %>
       </div>
       <div class="col-md-4">
         <%= form.label :state %> 
-        <%#= form.text_field :state, id:"required"  %>
+        <%#= form.text_field :state  %>
         <%= form.select :state, ["New South Wales","Northern Territory","Queensland","South Australia","Tasmania","Victoria","Western Australia"], prompt: "Select State" %>
       </div>
       <div class="col-md-4">
         <%= form.label :insurance_provider %> 
-        <%= form.text_field :insurance_provider, id:"required"  %>
+        <%= form.text_field :insurance_provider  %>
       </div>
       
       <div class="col-md-4">
         <%= form.label :agreed_insurance_value %> 
-        <%= form.text_field :agreed_insurance_value, id:"required"  %>
+        <%= form.text_field :agreed_insurance_value  %>
       </div>
     </div>
     </section>

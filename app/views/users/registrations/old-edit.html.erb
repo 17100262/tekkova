@@ -1,0 +1,225 @@
+<div class="container-fluid pt-5 pb-5" >
+  <div class="row">
+  	  <div class="loginmodal-container loginmodal-user-edit">
+  			<div class="loginmodal-container-2">
+  				<h1>Edit <%= resource_name.to_s.humanize %></h1>
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+              <%= devise_error_messages! %>
+          		
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label :email %>
+                    </div>
+                    <div class="row">
+                      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                  <% end %>
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "First Name" %>
+                    </div>
+                    <div class="row">
+                      <%= f.text_field :firstname, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "Last Name" %>
+                    </div>
+                    <div class="row">
+                      <%= f.text_field :lastname, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "Phone Number" %>
+                    </div>
+                    <div class="row">
+                      <%= f.number_field :personal_mobile, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "House Number" %>
+                    </div>
+                    <div class="row">
+                      <%= f.number_field :personal_house_number,min: 0, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "Street Name" %>
+                    </div>
+                    <div class="row">
+                      <%= f.text_field :personal_street_name, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "Suburb" %>
+                    </div>
+                    <div class="row">
+                      <%= f.text_field :personal_suburb, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "State" %>
+                    </div>
+                    <div class="row">
+                      <%= f.text_field :personal_state, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "Post Code" %>
+                    </div>
+                    <div class="row">
+                      <%= f.text_field :personal_postcode, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "Post Code" %>
+                    </div>
+                    <div class="row">
+                      <%= f.date_field :personal_dob, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "Phone Number" %>
+                    </div>
+                    <div class="row">
+                      <%= f.number_field :personal_mobile, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                
+                <h4>Driving License Details</h4>
+                
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "Country" %>
+                    </div>
+                    <div class="row">
+                      <%= f.text_field :driving_liecense_country, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "State" %>
+                    </div>
+                    <div class="row">
+                      <%= f.text_field :driving_liecense_state, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "License Number" %>
+                    </div>
+                    <div class="row">
+                      <%= f.number_field :driving_liecense_number, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "First Name" %>
+                    </div>
+                    <div class="row">
+                      <%= f.text_field :driving_liecense_firstname, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "Middle Name" %>
+                    </div>
+                    <div class="row">
+                      <%= f.text_field :driving_liecense_middlename, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "Last Name" %>
+                    </div>
+                    <div class="row">
+                      <%= f.text_field :driving_liecense_lastname, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "Driver License Front " %>
+                      <%= (link_to "view current file",@user.licensefront.url) if @user.licensefront.present? %>
+                      
+                    </div>
+                    <div class="row">
+                      <%= f.file_field :licensefront, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                      <%= f.label "Driver License Back" %>
+                      <%= (link_to "view current file",@user.licenseback.url) if @user.licenseback.present? %>
+                    </div>
+                    <div class="row">
+                      <%= f.file_field :licenseback, class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                       <%= f.label :password %> &nbsp; (Leave blank if you don't want to change it)
+                    </div>
+                    <div class="row">
+                       <%= f.password_field :password, autocomplete: "off", class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                       <%= f.label :password_confirmation %>
+                    </div>
+                    <div class="row">
+                       <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                       <%= f.label :current_password %> &nbsp; (We need your Current Password to confirm your changes)
+                    </div>
+                    <div class="row">
+                       <%= f.password_field :current_password,required: true, autocomplete: "off", class: "form-control form-control-md" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                       <%= f.submit "Update", class: "login loginmodal-button loginmodal-submit" %>
+                    </div>
+                </div>
+      			<% end %>
+  				
+  				<hr class="hr-or">
+  				<div class="row">
+  				    <center class="w-100">
+  				      <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-link" %>
+  				    </center>
+  				</div>
+  				
+  				<div class="row">
+  				  <center class="w-100">
+  				    <a href="/" class="btn btn-link">Back to Home</a>
+  				  <center>  
+  				</div>
+  			</div>
+  		</div> 
+  </div>
+</div>

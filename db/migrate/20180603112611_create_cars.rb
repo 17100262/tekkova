@@ -20,32 +20,12 @@ class CreateCars < ActiveRecord::Migration[5.1]
       t.string :agreed_insurance_value
       
       
-      t.string :availibility_days
-      t.string :pickup_suburb
-      t.string :pickup_postcode
-      t.string :pickup_state
-      t.string :rental
-      t.string :pickup_time
-      t.string :dropoff_time
-      t.string :advance_notice
+      
       
       t.integer :daily_drive_limit
       t.boolean :allow_personal_commercial_use
       
-      t.string :driving_liecense_country
-      t.string :driving_liecense_state
-      t.integer :driving_liecense_number
-      t.string :driving_liecense_firstname
-      t.string :driving_liecense_middlename
-      t.string :driving_liecense_lastname
       
-      t.integer :personal_house_number
-      t.string :personal_street_name
-      t.string :personal_suburb
-      t.string :personal_state
-      t.string :personal_postcode
-      t.date :personal_dob
-      t.string :personal_mobile
       
       t.integer :status
       

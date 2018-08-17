@@ -193,7 +193,7 @@ h2.heading{
 }
 
 
-.btn-breadcrumb a.btn.btn-default {
+.btn-breadcrumb a.btn.btn-default, .no-link {
     cursor: no-drop !important;
     pointer-events: none !important;
 }
@@ -481,11 +481,62 @@ color: #21a5D6;
     color: #fff;
     font-size: 22px;
     position: absolute;
-    top: 80px;
-    left: 180px;
+    
+}
+@media(min-width: 768px){
+  #icon-span::before {
+  top: 35px;
+  left: 110px;}
+}
+@media(min-width: 992px){
+  #icon-span::before {
+  top: 35px;
+  left: 130px;}
+}
+@media(min-width: 575px){
+  #icon-span::before {
+  top: 35px;
+  left: 125px;}
+}
+@media(max-width: 575px){
+  #icon-span::before {
+  top: 140px;
+  left: 165px;}
 }
 
 #icon-span {
     display: none;
     cursor: pointer;
 }
+@media only screen and (min-width: 992px) {
+.garage-modal {
+  width: 80% !important;
+}
+}
+@media only screen and (min-width: 768px) {
+.double-form-btn {
+  width: 40% !important;
+}
+}
+.profile-links:hover {
+ background: #21a5d6;
+}
+.profile-links:hover .inner-text {
+  color: #fff !important;
+}
+.profile-links.active {
+  background: #21a5d6;
+}
+.profile-links.active .inner-text {
+  color: #fff !important;
+}
+.inner-check-box {
+  display: inline-table !important;
+}
+.criteria-check {
+  display: inline;
+}
+.criteria-icon {
+  margin-bottom: 10px;
+}
+

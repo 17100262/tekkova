@@ -88,56 +88,7 @@
                       <td><%= @car.agreed_insurance_value %></td>
                   </tr>
                 </tbody>
-              </table>  
-              <table class="table table-bordered mt-3">
-              <tbody>
-                  <tr class="text-center h4">
-                  <th colspan="2">Availability and Pickup</th>
-                </tr>
-                  <tr>
-                    <th>Availibility Days</th>
-                     <td width="50%">
-                          <ul>
-                              <% @car.availibility_days.each do |day| %>
-                                  <li> <%= day %></li>
-                              <% end %>
-                          
-                          </ul>
-                      
-                      </td>
-                  </tr>
-                  
-                  <tr>
-                    <th>Pickup Suburb</th>
-                      <td><%= @car.pickup_suburb %></td>
-                  </tr>
-                  
-                  <tr>
-                    <th>Pickup Postcode</th>
-                      <td><%= @car.pickup_postcode %></td>
-                  </tr>
-                  
-                  <tr>
-                    <th>Pickup State</th>
-                      <td><%= @car.pickup_state %></td>
-                  </tr>
-                  
-                  <tr>
-                    <th>Rental</th>
-                      <td><%= @car.rental %></td>
-                  </tr>
-                  
-                  <tr>
-                    <th>Pickup Time</th>
-                      <td><%= @car.pickup_time %></td>
-                  </tr>
-                  
-                  <tr>
-                    <th>Advance Notice Time</th>
-                      <td><%= @car.advance_notice %></td>
-                  </tr>
-                  </tbody>
-              </table>  
+              </table>
               <table class="table table-bordered mt-3">
               <tbody>
                   <tr class="text-center h4">
@@ -153,98 +104,7 @@
                       <td><%= @car.allow_personal_commercial_use %></td>
                   </tr>
                   </tbody>
-              </table>  
-              <table class="table table-bordered mt-3">
-              <tbody>
-                  <tr class="text-center h4">
-                  <th colspan="2">Driver License</th>
-                </tr>
-                  <tr>
-                    <th>Driving License Country</th>
-                      <td width="50%"><%= @car.driving_liecense_country %></td>
-                  </tr>
-                  
-                  <tr>
-                    <th>Driving License State</th>
-                      <td><%= @car.driving_liecense_state %></td>
-                  </tr>
-                  
-                  <tr>
-                    <th>Driving License Number</th>
-                      <td><%= @car.driving_liecense_number %></td>
-                  </tr>
-                  <tr>
-                    <th>Driving License Firstname</th>
-                      <td><%= @car.driving_liecense_firstname %></td>
-                  </tr>
-                  <tr>
-                    <th>Driving License Middlename</th>
-                      <td><%= @car.driving_liecense_middlename %></td>
-                  </tr>
-                  <tr>
-                    <th>Driving License Lastname</th>
-                      <td><%= @car.driving_liecense_lastname %></td>
-                  </tr>
-                  <tr>
-                    <th>Driving License Front</th>
-                      <td><%= link_to "View File",@car.licensefront.url, class:"btn btn-primary btn-sm" %></td>
-                  </tr>
-                  <tr>
-                    <th>Driving License Back</th>
-                      <td><%= link_to "View File",@car.licenseback.url, class:"btn btn-primary btn-sm" %></td>
-                  </tr>
-                  </tbody>
-              </table>  
-              <table class="table table-bordered mt-3">
-              <tbody>
-                  <tr class="text-center h4">
-                  <th colspan="2">Personal Details</th>
-                </tr>
-                  <tr>
-                    <th>Personal House Number</th>
-                      <td width="50%"><%= @car.personal_house_number %></td>
-                  </tr>
-                  <tr>
-                    <th>Personal Street Name</th>
-                      <td><%= @car.personal_street_name %></td>
-                  </tr>
-                  <tr>
-                    <th>Personal Suburb</th>
-                      <td><%= @car.personal_suburb %></td>
-                  </tr>
-                  
-                  <tr>
-                    <th>Personal State</th>
-                      <td><%= @car.personal_state %></td>
-                  </tr>
-                  
-                  <tr>
-                    <th>Personal Postcode</th>
-                      <td><%= @car.personal_postcode %></td>
-                  </tr>
-                  
-                  <tr>
-                    <th>Personal Date of Birth</th>
-                      <td><%= @car.personal_dob %></td>
-                  </tr>
-                  
-                  <tr>
-                    <th>Personal Mobile Number</th>
-                      <td><%= @car.personal_mobile %></td>
-                  </tr>
-                  
-                  <tr>
-                    <th>Status</th>
-                      <td><%= @car.status.humanize %></td>
-                  </tr>
-                  
-                  
-                  
-                  
-                  
-              </tbody>
-          </table>
-          
+              </table>
           
           <center>
           <%= link_to 'Edit', edit_car_path(@car), class:"btn btn-primary btn-sm" %> |

@@ -21,7 +21,17 @@ class UsersController < ApplicationController
     def update
         @user = User.find(params[:id])
         if @user.update(user_params)
-            redirect_to user_path, notice: "User profile updated successfully"
+            if params[:user][:step] == "1"
+                redirect_to driverdetails_path
+            elsif params[:user][:step] == "2"
+                redirect_to pickupdetails_path
+            elsif params[:user][:step] == "3"
+                car = current_user.cars.last
+                car.update(status: "completed")
+                redirect_to car_path(car), notice: "Car Posted Successfully"
+            else
+                redirect_to user_path, notice: "Profile updated successfully"
+            end
         else
             redirect_to edit_user_path, notice: @user.errors.full_messages.join
         end
@@ -35,11 +45,29 @@ class UsersController < ApplicationController
         redirect_back(fallback_location: users_path)
     end
     
-    def my_cars
-       @cars = current_user.cars 
+    def my_garage
+        @user = current_user
+        @cars = current_user.cars 
     end
+    
+    def my_documents
+        @user = current_user
+    end
+    
+    def inbox
+        @user = current_user
+    end
+    
+    def my_bookings
+        @user = current_user
+    end
+    
+    def my_payments
+        @user = current_user
+    end
+    
     private
     def user_params
-        params.require(:user).permit(:firstname, :lastname, :profile_image, :comment, :phone_number,:birthday,:address,:state,:postal_code,:license_country,:license_number,:license_state, comment_files_attributes: [:id, :file, :user_id, :_destroy])
+        params.require(:user).permit(:firstname, :lastname, :profile_image,:licensefront,:licenseback, :pickup_suburb, :pickup_postcode, :pickup_state, :rental,:advance_notice,:driving_liecense_country,:driving_liecense_state,:driving_liecense_number, :driving_liecense_firstname, :driving_liecense_middlename, :driving_liecense_lastname,:personal_house_number, :personal_street_name, :personal_suburb, :personal_state, :personal_postcode,:personal_dob, :personal_mobile,:step,availibility_days: [], comment_files_attributes: [:id, :file, :user_id, :_destroy])
     end
 end

@@ -17,47 +17,47 @@
     <div class="row">
       <div class="col-md-3">
         <%= form.label :year %>
-        <%= form.text_field :year, id:"required" %>
+        <%= form.text_field :year %>
       </div>
       <div class="col-md-3">
         <%= form.label :make %> 
-        <%= form.text_field :make, id:"required"  %>
+        <%= form.text_field :make  %>
       </div>
       <div class="col-md-3">
         <%= form.label :model %> 
-        <%=  form.text_field :model, id:"required"  %>
+        <%=  form.text_field :model  %>
       </div>
       <div class="col-md-3">
         <%= form.label :series %> 
-        <%=  form.text_field :series, id:"required"  %>
+        <%=  form.text_field :series  %>
       </div>
       <div class="col-md-3">
         <%= form.label :odometer %> 
-        <%=  form.text_field :odometer, id:"required"  %>
+        <%=  form.text_field :odometer  %>
       </div>
       <div class="col-md-3">
         <label>Transmission </label>
-        <%=  form.text_field :trans_mission, id:"required"  %>
+        <%=  form.text_field :trans_mission  %>
       </div>
       <div class="col-md-3">
         <%= form.label :body_type %> 
-        <%= form.text_field :body_type, id:"required"  %>
+        <%= form.text_field :body_type  %>
       </div>
       <div class="col-md-3">
         <%= form.label :color %> 
-        <%= form.text_field :color, id:"required"  %>
+        <%= form.text_field :color  %>
       </div>
       <div class="col-md-3">
         <%= form.label :fuel_type %> 
-        <%= form.text_field :fuel_type, id:"required"  %>
+        <%= form.text_field :fuel_type  %>
       </div>
       <div class="col-md-3">
         <%= form.label :power %> 
-        <%= form.text_field :power, id:"required"  %>
+        <%= form.text_field :power  %>
       </div>
       <div class="col-md-3">
         <%= form.label :number_of_seats %> 
-        <%= form.number_field :number_of_seats, id:"required"  %>
+        <%= form.number_field :number_of_seats  %>
       </div>
     </div>
     <div class="row mt-3">
@@ -86,7 +86,7 @@
     </div> 
     <div class="row">
       <div class="col-md-12">
-        <%= form.text_area :description, id:"required", placeholder:"Please provide modifications that you might have done to the car"  %>
+        <%= form.text_area :description,  placeholder:"Please provide modifications that you might have done to the car"  %>
       </div>
     </div> 
     <div class="row mt-3">
@@ -100,15 +100,15 @@
     <div class="row mt-3">
       <div class="col-md-4">
         <%= form.label :license_plate_number %> 
-        <%= form.text_field :liecense_plate_number, id:"required"  %>
+        <%= form.text_field :liecense_plate_number  %>
       </div>
       <div class="col-md-4">
         <%= form.label :state %> 
-        <%= form.text_field :state, id:"required"  %>
+        <%= form.text_field :state  %>
       </div>
       <div class="col-md-4">
         <%= form.label :insurance_provider %> 
-        <%= form.text_field :insurance_provider, id:"required"  %>
+        <%= form.text_field :insurance_provider  %>
       </div>
     </div>
     </section>
@@ -133,15 +133,15 @@
       <div class="row">
         <div class="col-md-4">
           <label>Suburb</label>
-          <%= form.text_field :pickup_suburb, id:"required"  %>
+          <%= form.text_field :pickup_suburb  %>
         </div>
         <div class="col-md-4">
           <label>Postcode</label>
-        <%= form.text_field :pickup_postcode, id:"required"  %>
+        <%= form.text_field :pickup_postcode  %>
         </div>
         <div class="col-md-4">
           <label>State</label>
-        <%= form.text_field :pickup_state, id:"required"  %>
+        <%= form.text_field :pickup_state  %>
         </div>
       </div>  
       <h5 class="mt-4">What day of the week is your car available?</h5>
@@ -159,19 +159,19 @@
       <div class="row">
         <div class="col-md-4">
           <label>Isssuing Country</label>
-          <%= form.text_field :driving_liecense_country, id:"required"  %>
+          <%= form.text_field :driving_liecense_country  %>
         </div>
         <div class="col-md-4">
           <label>State</label>
-          <%= form.text_field :driving_liecense_state, id:"required"  %>
+          <%= form.text_field :driving_liecense_state  %>
         </div>
         <div class="col-md-4">
           <label>Driver's Licence Number</label>
-          <%= form.number_field :driving_liecense_number, id:"required"  %>
+          <%= form.number_field :driving_liecense_number  %>
         </div>
         <div class="col-md-4">
           <label>First Name</label>
-          <%= form.text_field :driving_liecense_firstname, id:"required"  %>
+          <%= form.text_field :driving_liecense_firstname  %>
         </div>
         <div class="col-md-4">
           <label>Middle Name</label>
@@ -179,7 +179,7 @@
         </div>
         <div class="col-md-4">
           <label>Last Name</label>
-          <%= form.text_field :driving_liecense_lastname, id:"required"  %>
+          <%= form.text_field :driving_liecense_lastname  %>
         </div>
       </div>
       <p class="font-weight-bold mt-3">Please enter your name as it appears on your Driver's license</p>
@@ -191,35 +191,35 @@
       <div class="row">
         <div class="col-md-6">
           <%= form.label "House / Unit / Street Number" %> 
-          <%= form.number_field :personal_house_number, id:"required"  %>
+          <%= form.number_field :personal_house_number  %>
         </div>
         <div class="col-md-6">
           <%= form.label "Steet Name & Type" %> 
-          <%= form.text_field :personal_street_name, id:"required"  %>
+          <%= form.text_field :personal_street_name  %>
         </div>
       </div>  
       <div class="row">
         <div class="col-md-4">
           <%= form.label "Suburb" %> 
-          <%= form.text_field :personal_suburb, id:"required"  %>
+          <%= form.text_field :personal_suburb  %>
         </div>
         <div class="col-md-4">
           <%= form.label "State" %> 
-          <%= form.text_field :personal_state, id:"required"  %>
+          <%= form.text_field :personal_state  %>
         </div>
         <div class="col-md-4">
           <%= form.label "Postcode" %> 
-          <%= form.text_field :personal_postcode, id:"required"  %>
+          <%= form.text_field :personal_postcode  %>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6">
           <%= form.label "Date of Birth" %> 
-          <%= form.date_field :personal_dob, id:"required"  %>
+          <%= form.date_field :personal_dob  %>
         </div>
         <div class="col-md-6">
           <%= form.label "Mobile Number" %> 
-          <%= form.text_field :personal_mobile, id:"required"  %>
+          <%= form.text_field :personal_mobile  %>
       </div>  
       </div>
     </section>

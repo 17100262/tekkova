@@ -14,6 +14,16 @@ h2 {
 section.section {
 	padding: 60px 0px;
 }
+@media (min-width: 767px) {
+	section.section.section-parallax {
+    background-size: cover !important;
+    background-color: transparent;
+    background-position: 50% 50% !important;
+    background-repeat: repeat;
+    background-attachment: fixed !important;
+    border: 0;
+}
+}
 
 @media (max-width: 767px) {
 	section.section {
@@ -27,13 +37,7 @@ section.section {
 	position: relative;
 }
 
-.custom-font-size-1 {
-	font-size: 60px;
-	font-weight: 600;
-	line-height: 1;
-	margin: -15px 0 10px;
-	letter-spacing: -2px;
-}
+
 
 .custom-font-size-2 {
 	font-size: 21px;
@@ -66,13 +70,20 @@ section.section {
 	border: 5px solid #FFF;
 }
 
-@media (min-width: 991px) {
+@media (min-width: 575px) {
+	
+	.back-overlay{
+	padding: 110px 0 120px 0;
+}
+}
+@media (min-width: 575px) {
 	.custom-image-position-2 {
 		position: absolute;
 		max-width: 90%;
 		top: -102px;
 		z-index: 1;
 	}
+	
 }
 .custom-margin-bottom-1 {
 	margin-bottom: 30px !important;
@@ -83,6 +94,13 @@ section.section {
 		padding-top: 150px !important;
 		padding-bottom: 70px !important;
 	}
+	.custom-font-size-1 {
+	font-size: 60px;
+	font-weight: 600;
+	line-height: 1;
+	margin: -15px 0 10px;
+	letter-spacing: -2px;
+}
 
 	.custom-md-margin-top-1 {
 		margin-top: 58px;
@@ -103,6 +121,9 @@ section.section {
 	.custom-xs-margin-1 {
 		margin-left: 0 !important;
 		margin-top: 10px;
+	}
+	.custom-xs-margin-bottom-1 {
+		margin-bottom: 45px;
 	}
 }
 .custom-btn-style-1 {
@@ -232,14 +253,7 @@ section.section {
 		padding: 0;
 		border: none;
 	}
-	section.section.section-parallax {
-    background-size: cover !important;
-    background-color: transparent;
-    background-position: 50% 50% !important;
-    background-repeat: repeat;
-    background-attachment: fixed !important;
-    border: 0;
-}
+	
 	#header.header-floating .header-nav {
 		padding: 0 !important;
 	}
@@ -329,6 +343,8 @@ section.section {
 		top: 60px;
 		right: 0px;
 	}
+	
+
 	#header.header-floating .header-body {
 		background: transparent;
 		border: none;
@@ -519,5 +535,8 @@ section.section {
 	}
 }
 .img-profile{
-    height: 350px;
+    height: 275px;
+}
+.back-overlay{
+	background:rgba(0,0,0,0.5); 
 }

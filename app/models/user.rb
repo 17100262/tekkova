@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  attr_accessor :terms_of_service
+  attr_accessor :terms_of_service,:step
   validates :terms_of_service, acceptance: true
   has_many :cars
   

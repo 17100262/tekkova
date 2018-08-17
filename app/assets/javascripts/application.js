@@ -60,52 +60,6 @@ $(document).ready(function(){
         $('.datepicker').datepicker({
             
         });
-    //     var value1 = $( "#slider" ).slider( "value" );
-    //     var value2 = $( "#slider2" ).slider( "value" );
-    // function amountf(){
-        
-    //     var value3 = value1 / 400;
-    //     var value4 = value3 * value2;
-    //     var valuef = value4 * 52;
-        
-    //     $( "#amountf" ).val( "$" + valuef );
-    // }
-    // function amountf2(){
-    //     var value1 = $( "#slider" ).slider( "value" );
-    //     var value2 = $( "#slider2" ).slider( "value" );
-        
-    //     var value3 = value1 / 400;
-    //     var value4 = value3 * value2;
-    //     var valuef = value4 * 52;
-        
-    //     $( "#amountf" ).val( "$" + valuef );
-    // }
-    // $( "#slider" ).slider({
-    //   value:20000,
-    //   min: 20000,
-    //   max: 150000,
-    //   step: 1000,
-    //   slide: function( event, ui ) {
-    //     amountf();
-    //     $( "#amount" ).val( "$" + ui.value );
-    //   }
-    // });
-    // $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
- 
-    // $( "#slider2" ).slider({
-    //   value:3,
-    //   min: 1,
-    //   max: 7,
-    //   step: 1,
-                    
-    //   slide: function( event, ui ) {
-    //     amountf();
-    //     $( "#amount2" ).val( ui.value );
-    //   }
-    // });
-    // $( "#amount2" ).val( $( "#slider2" ).slider( "value" ) );
-    // amountf2();
-    
   });
   
   $(function() {
@@ -117,7 +71,8 @@ $(document).ready(function(){
        
         var value3 = value1 * 5;
         var value4 = value3 + 25;
-        var valuef = value4 * value2;
+        var valuet = value4 * value2;
+        var valuef = valuet * 52;
         
         $( "#amountf" ).val( "$" + valuef );
         
@@ -128,7 +83,8 @@ $(document).ready(function(){
         
         var value3 = value1 * 5;
         var value4 = value3 + 25;
-        var valuef = value4 * value2;
+        var valuet = value4 * value2;
+        var valuef = valuet * 52;
         
         $( "#amountf" ).val( "$" + valuef );
     }
@@ -227,6 +183,7 @@ function avatarchange() {
         $("#icon-span").show();
         $("#profileImage").css('opacity', '0.5');
         $("#profileImage").css('background', 'rgba(0,0,0,0.5)');
+        $("#profileImage").css('cursor', 'pointer');
     });
 
     $("#icon-span").mouseover(function() {
@@ -243,4 +200,14 @@ function avatarchange() {
 }
 $(document).ready(function() {
     avatarchange();
+   
+$('#wizard input[type=text]').keyup(function() {
+	var caps = $(this).val(); 
+	caps = caps.charAt(0).toUpperCase() + caps.slice(1);
+    $(this).val(caps);
+});
+ $('#wizard input[type=text]').val (function () {
+     var caps = $(this).val();
+    return caps.charAt(0).toUpperCase() + caps.slice(1);
+});
 });

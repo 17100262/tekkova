@@ -50,18 +50,9 @@ class CarsController < ApplicationController
     when "1"
       render 'cars/car_form_steps/_1_car_details'
     when "2"
-      
       render 'cars/car_form_steps/_2_car_pictures'
     when "3"
-      render 'cars/car_form_steps/_3_availibility_and_pickup'
-    when "4"
-      render 'cars/car_form_steps/_4_car_preference'
-    when "5"
-      render 'cars/car_form_steps/_5_driver_liecense'
-    when "6"
-      render 'cars/car_form_steps/_6_personal_details'
-    # else
-      # render 'cars/car_form_steps/_2_car_pictures.html.erb'
+      render 'cars/car_form_steps/_3_car_preference'
     end
     
     # render 'cars/car_form_steps/_2_car_pictures.html.erb'
@@ -77,8 +68,8 @@ class CarsController < ApplicationController
         if @car.save
           # @car.steps
           step = params[:car][:step].to_i + 1
-          if step >= 7
-            format.html { redirect_to @car, notice: 'Car Deatils were successfully saved.' }
+          if step >= 4
+            format.html { redirect_to @car, notice: 'Car Details were successfully saved.' }
           else
             format.html { redirect_to car_steps_path(step: step, id: @car.id) }
           end
@@ -94,16 +85,28 @@ class CarsController < ApplicationController
 
     
   end
-
+  def personaldetails
+    @user = current_user
+  end
+  def driverdetails
+    @user = current_user
+  end
+  def pickupdetails
+    @user = current_user
+  end
   # PATCH/PUT /cars/1
   # PATCH/PUT /cars/1.json
   def update
     respond_to do |format|
       if @car.update(car_params)
         step = params[:car][:step].to_i + 1
-        if step >= 7
-          (BasicMailer.first_car(@car.user).deliver_later if @car.user.cars.count < 2)
-          format.html { redirect_to @car, notice: 'Car Details were successfully saved.' }
+        if step >= 4
+          if current_user.cars.count < 2
+            BasicMailer.first_car(@car.user).deliver_later
+            format.html { redirect_to personaldetails_path }
+          else
+            format.html { redirect_to @car, notice: 'Car Details were successfully saved.' }
+          end
         else
           format.html { redirect_to car_steps_path(step: step, id: @car.id) }
         end
@@ -121,7 +124,7 @@ class CarsController < ApplicationController
   def destroy
     @car.destroy
     respond_to do |format|
-      format.html { redirect_to cars_url, notice: 'Car was successfully destroyed.' }
+      format.html { redirect_to my_garage_path, notice: 'Car was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -134,6 +137,6 @@ class CarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
-      params.require(:car).permit(:status,:model_year_check, :usage_limit_check, :register_check, :road_worthy_check, :write_off_check, :maintained_check,:step,:year, :make, :model, :series, :odometer, :trans_mission, :body_type, :color, :fuel_type, :power,:number_of_seats, :drive_type,:description, :liecense_plate_number, :state, :insurance_provider,:agreed_insurance_value, :pickup_suburb, :pickup_postcode, :pickup_state, :rental,:advance_notice,:allow_personal_commercial_use,:daily_drive_limit,:driving_liecense_country,:driving_liecense_state,:driving_liecense_number, :driving_liecense_firstname, :driving_liecense_middlename, :driving_liecense_lastname,:personal_house_number, :personal_street_name, :personal_suburb, :personal_state, :personal_postcode,:personal_dob, :personal_mobile,:licensefront,:licenseback,:licenseback_remove,:licensefront_remove,car_feature_ids:[],availibility_days: [],car_pictures_attributes: [:avatar,:_destroy,:id,:delete_picture])
+      params.require(:car).permit(:status,:model_year_check, :usage_limit_check, :register_check, :road_worthy_check, :write_off_check, :maintained_check,:step,:year, :make, :model, :series, :odometer, :trans_mission, :body_type, :color, :fuel_type, :power,:number_of_seats, :drive_type,:description, :liecense_plate_number, :state, :insurance_provider,:agreed_insurance_value,:allow_personal_commercial_use,:daily_drive_limit,car_feature_ids:[],car_pictures_attributes: [:avatar,:_destroy,:id,:delete_picture])
     end
 end

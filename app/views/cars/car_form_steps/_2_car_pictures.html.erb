@@ -2,14 +2,20 @@
 <div class="container">
 
 <div class="row mt-2">
+<% if current_user.cars.count < 2 %>
 <div class="col-md-12 btn-group btn-breadcrumb">
+<% else %>
+<div class="col-lg-6 offset-lg-3 btn-group btn-breadcrumb">
+<% end %>
   
     <a href="<%= car_steps_path(step: 1,id: @car.id)  %>" class="btn btn-primary car_details">Car Details</a>
     <a href="<%= car_steps_path(step: 2,id: @car.id)  %>" class="btn btn-primary car_pictures">Car Pictures</a>
-    <a href="#" class="btn btn-default car_availibility">Availibility and Pickup</a>
     <a href="#" class="btn btn-default car_preference">Car Preference</a>
-    <a href="#" class="btn btn-default car_liecense">Driver License</a>
-    <a href="#" class="btn btn-default car_personal">Personal Details</a>
+    <% if current_user.cars.count < 2 %>
+      <a href="#" class="btn btn-default car_preference">Personal Details</a>
+      <a href="#" class="btn btn-default car_preference">Driver License</a>
+      <a href="#" class="btn btn-default car_preference">Availibility & Pickup</a>
+    <% end %>
 </div> 
 </div>
 </div>

@@ -8,10 +8,8 @@
         				<%= link_to 'Continue with Facebook',  "#{root_url}users/auth/facebook" ,:class => "login loginmodal-button loginmodal-social loginmodal-fb" %>
     						<%= link_to 'Continue with Google',  "#{root_url}users/auth/google_oauth2" ,:class => "login loginmodal-button loginmodal-google" %>
                 <%= f.text_field :firstname , autofocus: true,required: true,class: "form-control form-control-md", placeholder: "Enter Your First Name" %>
-                <%= f.text_field :lastname , autofocus: true,required: true,class: "form-control form-control-md", placeholder: "Enter Your Last Name" %>
-                <%= f.number_field :phone_number , autofocus: true,required: true,class: "form-control form-control-md", placeholder: "Enter Your Phone Number" %>
-                
-                
+                <%= f.text_field :lastname , required: true,class: "form-control form-control-md", placeholder: "Enter Your Last Name" %>
+                <%= f.text_field :personal_mobile ,required: true,class: "form-control form-control-md", placeholder: "Enter Your Phone Number" %>
                 
                 <%= f.email_field :email, autocomplete: "email",required: true, class: "form-control form-control-md", placeholder: "Enter Your Email" , id: "join_email" %>
                 <%= f.password_field :password, autocomplete: "off",required: true, class: "form-control form-control-md", placeholder: "Enter Your Password"  , id: "join_pword" %>
@@ -22,7 +20,7 @@
                     <span class="file-return">No File Choosen</span>
                 </div>
                 <br>
-                <%= f.check_box :terms_of_service %> I agree to <a href="/policies">terms of service and privacy policy</a> <br>
+                <%= f.check_box :terms_of_service,required: true %> I agree to <a href="/policies">terms of service and privacy policy</a> <br>
                 <%= f.check_box :send_updates %> Yes,send me special offers,discounts and updates
     					
     					  <%= f.submit "Sign Up", class: "login loginmodal-button loginmodal-submit" %>

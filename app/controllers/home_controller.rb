@@ -19,6 +19,8 @@ class HomeController < ApplicationController
     
     def contact_us
     end 
+    def listing_criteria
+    end
     
     def admin
         # render :layout => false
