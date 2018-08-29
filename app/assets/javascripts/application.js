@@ -24,6 +24,18 @@ $(document).ready(function() {
    $('#multi-form input[type="date"]').addClass('form-control');
    $('#multi-form select').addClass('form-control');
    $('#multi-form textarea').addClass('form-control');
+   $('#multi-form-d input[type="text"]').addClass('form-control');
+   $('#multi-form-d input[type="number"]').addClass('form-control');
+   $('#multi-form-d input[type="date"]').addClass('form-control');
+   $('#multi-form-d select').addClass('form-control');
+   $('#multi-form-d textarea').addClass('form-control');
+   $('#multi-form input[type="text"]').attr("required", true);
+   $('#multi-form input[type="number"]').attr("required", true);
+   $('#multi-form input[type="checkbox"]').attr("required", true);
+   $('#multi-form input[type="radio"]').attr("required", true);
+   $('#multi-form input[type="date"]').attr("required", true);
+   $('#multi-form select').attr("required", true);
+   $('#multi-form textarea').attr("required", true);
 });
 $(document).ready(function() {
 $("html").addClass('js');

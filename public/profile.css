@@ -18,9 +18,9 @@ section.section {
 	section.section.section-parallax {
     background-size: cover !important;
     background-color: transparent;
-    background-position: 50% 50% !important;
-    background-repeat: repeat;
-    background-attachment: fixed !important;
+    /*background-position: 0% 0% !important;*/
+    /*background-repeat: repeat;*/
+    /*background-attachment: fixed !important;*/
     border: 0;
 }
 }
@@ -58,7 +58,7 @@ section.section {
 }
 
 .parallax-no-overflow {
-     background: url('/banner.jpg') !important;
+     background: url('/banner-b.jpg') !important;
 	overflow: visible !important;
 }
 .parallax-no-overflow .parallax-background {

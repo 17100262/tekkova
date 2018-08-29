@@ -26,8 +26,8 @@
         </div>
     </div>
 </section>
-
-<div class="custom-about-me-links background-color-light">
+<% if !current_user.admin %>
+    <div class="custom-about-me-links background-color-light">
     <div class="container-fluid">
         <div class="row">
             <a href="<%= user_path(user) %>" class="<%= "active" if action_name == "show"%> text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0 profile-links">
@@ -67,6 +67,13 @@
 					My Payments
 				</span>
             </a>
+            <a href="/my_ratings" class="<%= "active" if action_name == "my_ratings"%> text-decoration-none col-lg-2 col-md-4 col-6 text-center border p-0 profile-links">
+                <span class="custom-nav-button text-color-dark inner-text">
+					<i class="fas fa-money-bill text-color-primary inner-text"></i>
+					My Ratings
+				</span>
+            </a>
         </div>
     </div>
 </div>
+<% end %>

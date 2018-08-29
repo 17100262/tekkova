@@ -243,6 +243,9 @@ html .btn-default:hover, html .btn-default.hover {
 .details.background-img{
  background: url('/car_details.jpg'); 
 }
+.p-details.background-img{
+ background: url('/personal_details.jpg'); 
+}
 .pictures.background-img{
  background: url('/car_pictures.jpg'); 
 }

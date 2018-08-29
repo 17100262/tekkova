@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'inbox', to: 'users#inbox',as: :inbox
   get 'my_bookings', to: 'users#my_bookings',as: :my_bookings
   get 'my_payments', to: 'users#my_payments',as: :my_payments
+  get 'my_ratings', to: 'users#my_ratings',as: :my_ratings
   
   
   post 'listing_criteria', to: 'cars#submit_listing_criteria',as: :listing_criteria
