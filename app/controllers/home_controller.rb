@@ -21,6 +21,14 @@ class HomeController < ApplicationController
     end 
     def listing_criteria
     end
+    def terms_and_conditions
+    end
+    def fee_and_charges
+    end
+    def privacy_policy
+    end
+    def nd_policy
+    end
     
     def admin
         # render :layout => false

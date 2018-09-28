@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   get 'my_bookings', to: 'users#my_bookings',as: :my_bookings
   get 'my_payments', to: 'users#my_payments',as: :my_payments
   get 'my_ratings', to: 'users#my_ratings',as: :my_ratings
+  get 'fee_and_charges', to:'home#fee_and_charges',as: :fee_and_charges
+  get 'nd_policy', to: 'home#nd_policy', as: :nd_policy
+  get 'privacy_policy', to: 'home#privacy_policy', as: :privacy_policy
+  get 'terms_and_conditions', to: 'home#terms_and_conditions', as: :terms_and_conditions
   
   
   post 'listing_criteria', to: 'cars#submit_listing_criteria',as: :listing_criteria
