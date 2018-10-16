@@ -17,7 +17,7 @@ config.secret_key = '77c78c2181dfe988740b5030d2de29e925eaf7fd836f8571f2bd19ad0a8
   config.mailer_sender = 'support@tekkova.com'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'Devise::Mailer'
 
   # Configure the parent class responsible to send e-mails.
   config.parent_mailer = 'ActionMailer::Base'

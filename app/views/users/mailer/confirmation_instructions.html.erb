@@ -1,5 +1,72 @@
-<p>Welcome <%= @email %>!</p>
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+@media only screen and (min-width: 768px) {
+.mail-box {
+    width: 50% !important;
+}
+}
+a .btn-account{
+    color: #fff !important;
+}
+hr{
+	margin: 0;
+}
+    .mail-box {
+        width: 80%;
+        -moz-box-shadow: 0 0 5px #888;
+       -webkit-box-shadow: 0 0 5px#888;
+        box-shadow: 0 0 5px #888;
+        padding: 20px;
+        display: block;
+        margin: 0 auto;
+        background: #fff;
+    }
+    .btn-account {
+    	
+    background-color: #21a5D6;
+    border-color: #21a5D6 #21a5D6 #0088cc;
+    color: #ffffff !important;
+    padding: 13px 10px 13px 10px;
+    border: none;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+        font-size: 16px;
+    font-weight: bold;
 
-<p>You can confirm your account email through the link below:</p>
+}
+.whole-body {
+    background: #f1f1f1;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.background-b{
+    background: #000;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+</style>
+</head>
+<body class="whole-body">
+<div class="mail-box">
+    
+    <div class="background-b">
+         <center><img src="http://carproject-a17100262.c9users.io/logo-t.png" width="200" height="100"></center>
+    </div>
+    
+    <p><strong>Dear <%= @resource.name %>,</strong></p>
+    <p>Welcome to Tekkova. We thank you for choosing our services. For security reasons, please activate your account in order to list your car.</p><br/>
+    <center><%= link_to 'Activate', confirmation_url(@resource, confirmation_token: @token), class:"btn-account" %></center><br/>
+    <hr>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>
+    This email was sent by Tekkova. Tekkova is an online marketplace that facilitates car share of all makes &amp; models between peers.
+</p>
+
+</div>
+
+
+</body>
+</html>

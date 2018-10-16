@@ -223,3 +223,5 @@ $('#wizard input[type=text]').keyup(function() {
     return caps.charAt(0).toUpperCase() + caps.slice(1);
 });
 });
+
+
