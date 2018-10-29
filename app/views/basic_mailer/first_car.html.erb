@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
+	<style>
 @media only screen and (min-width: 768px) {
-	.mail-box {
-        width: 38% !important;
+.mail-box {
+    width: 50% !important;
 }
 }
 a .btn-account{
     color: #fff !important;
+}
+hr{
+	margin: 0;
 }
     .mail-box {
         width: 80%;
@@ -24,7 +27,7 @@ a .btn-account{
     	
     background-color: #21a5D6;
     border-color: #21a5D6 #21a5D6 #0088cc;
-    color: #ffffff;
+    color: #ffffff !important;
     padding: 13px 10px 13px 10px;
     border: none;
     border-radius: 3px;
@@ -39,25 +42,28 @@ a .btn-account{
     padding-top: 30px;
     padding-bottom: 30px;
 }
+.background-b{
+    background: #000;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
 </style>
 </head>
 <body class="whole-body">
 <div class="mail-box">
-    <center><img src="https://carproject-a17100262.c9users.io/logo-t.png" width="200" height="100"></center>
+    
+    <div class="background-b">
+         <center><img src="logo-t.png" width="200" height="100"></center>
+    </div>
     <h3 style="text-align: center">Congratulations! your first car is live</h3>
+    <p><strong>Dear <%= @recepient.name %>,</strong></p>
+    <p>We are glad to inform that your first car is live. Now let's get some renters rolling in!</p>
+    <center><a class="btn-account" href = "http://tekkova.herokuapp.com/">Go to your account</a></center><br/>
+
     <hr>
-    <p>
-    Dear <%= @recepient.name %>,
-</p>
-<p>
-	We are glad to inform that your first car is live. Now let's get some renters rolling in!
-	</p><br/>
-	<center><a class="btn-account" href = "http://tekkova.herokuapp.com/">Go to your account</a></center><br/>
-
 
 <p>
-    Best wishes <br/>
-    Team Tekkova
+    This email was sent by Tekkova. Tekkova is an online marketplace that facilitates car share of all makes &amp; models between peers.
 </p>
 
 </div>
@@ -65,7 +71,3 @@ a .btn-account{
 
 </body>
 </html>
-   
-
-
-
