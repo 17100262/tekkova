@@ -64,10 +64,10 @@ Rails.application.configure do
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address => 'smtp.mailgun.org',
-    :domain  => '',
+    :domain  => 'sandboxcc6ae59d606a41b98f597bcf4ea8dbfc.mailgun.org',
     :port      => 587,
-    :user_name => "",
-    :password => "",
+    :user_name => "postmaster@sandboxcc6ae59d606a41b98f597bcf4ea8dbfc.mailgun.org",
+    :password => "000f0e4514af51c927dfb72ead972a02-c1fe131e-06dfafca",
     :authentication => :plain
     }
 end

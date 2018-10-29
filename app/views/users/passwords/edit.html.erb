@@ -2,13 +2,15 @@
   <div class="row">
   	  <div class="loginmodal-container">
   			<div class="loginmodal-container-2">
-  				<h1>Join Tekkova</h1>
+  				<h2 class="text-center" style="margin-top:20px;">Welcome Back</h2>
+  				<p>Please enter your new password below</p>
             <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
               <%= devise_error_messages! %>
                 <%= f.hidden_field :reset_password_token %>
                 <%= f.password_field :password , autofocus: true,required: true,class: "form-control form-control-md", placeholder: "Enter Your New Password" %>
                 <%= f.password_field :password_confirmation , autofocus: true,required: true,class: "form-control form-control-md", placeholder: "Re-Type Your New Password" %>
-    					  <%= f.submit "Change my password", class: "login loginmodal-button loginmodal-submit" %>
+                <p>You can use numbers & symbols to make your account more secure</p>
+    					  <%= f.submit "Reset Password", class: "login loginmodal-button loginmodal-submit" %>
       			<% end %>
   				
   			</div>
