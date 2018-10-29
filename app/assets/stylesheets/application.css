@@ -542,4 +542,21 @@ color: #21a5D6;
 .criteria-icon {
   margin-bottom: 10px;
 }
-
+.ftr-widget {
+  background: #000;
+  padding: 20px 10px;
+}
+.ftr-widget-txt {
+  color: #fff;
+}
+a.ftr-widget-txt {
+    color: #fff !important;
+}
+a.ftr-widget-txt:hover {
+    color: #21a5D6 !important;
+}
+.ftr-icon {
+  color: #fff;
+    font-size: 30px;
+     padding-right: 10px;
+}
