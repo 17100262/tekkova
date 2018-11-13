@@ -23,6 +23,7 @@ class Ability
         can :my_bookings,User
         can :my_documents,User
         can :my_payments,User
+        can :my_ratings,User
         can :inbox,User
         can :home, :home
         can :how_it_works,:home

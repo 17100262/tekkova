@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bulky</title>
-  <%= stylesheet_link_tag    "bulky/application", media: "all" %>
-  <%= javascript_include_tag "bulky/application" %>
-  <%= tinymce_assets %>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Tekkova</title>
+      <%= csrf_meta_tags %>
+
+    <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet">
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <%= javascript_include_tag 'application' %>
+    <meta name= viewport content= width=device-width initial-scale=1>
+
     <!-- Include Editor style. -->
   <!--<link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.1/css/froala_editor.min.css' rel='stylesheet' type='text/css' />-->
   <!--<link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.1/css/froala_style.min.css' rel='stylesheet' type='text/css' />-->
@@ -16,8 +22,22 @@
 </head>
 <body>
   <%= alert || notice %>
-
-<%= yield %>
-
+  <%= render 'layouts/header' %>
+    
+      <!--< if notice || alert %>-->
+      <!--  <div class="alert alert-info" role="alert">-->
+      <!--    <strong>Info!</strong> <= notice || alert %>-->
+      <!--  </div>-->
+      <!--<end %>-->
+      <% unless params[:controller]=='home' && params[:action]=='admin' %>
+      <div class="container-fluid p-0" style="min-height: 70vh;">
+      <% end %>  
+        <%= yield %>
+    <% unless params[:controller]=='home' && params[:action]=='admin' %>
+      </div>
+    <% end %>
+    <% if !(request.path == "/admin" or request.path == "/users" or request.path == "/car_management" or request.path == "/violations" or request.path == "/mass_email" )  %>
+      <%= render 'layouts/footer' %>
+    <% end %>
 </body>
 </html>

@@ -16,8 +16,23 @@
 //= require toastr
 //= require cocoon
 //= require_tree .
-
+toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "progressBar": true,
+  "positionClass": "toast-top-right",
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
 $(document).ready(function() {
+  toastr.options.closeHtml = '<button><i class="icon-on"></i></button>';
+  toastr.options.closeHtml = true;
    $('.alert').delay(2000).fadeOut();
    $('#multi-form input[type="text"]').addClass('form-control');
    $('#multi-form input[type="number"]').addClass('form-control');
@@ -31,7 +46,7 @@ $(document).ready(function() {
    $('#multi-form-d textarea').addClass('form-control');
    $('#multi-form input[type="text"]').attr("required", true);
    $('#multi-form input[type="number"]').attr("required", true);
-   $('#multi-form input[type="checkbox"]').attr("required", true);
+  $('#multi-form input[type="checkbox"]').attr("required", true);
    $('#multi-form input[type="radio"]').attr("required", true);
    $('#multi-form input[type="date"]').attr("required", true);
    $('#multi-form select').attr("required", true);

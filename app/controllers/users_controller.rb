@@ -3,10 +3,10 @@ class UsersController < ApplicationController
     load_and_authorize_resource
     
     def index
-        @users = User.all
+        @users = User.where.not(email: current_user.email)
     
-        respond_to do |wants|
-            wants.html # index.html.erb
+        respond_to do |format|
+            format.html # index.html.erb
         end
     end
     
@@ -19,6 +19,10 @@ class UsersController < ApplicationController
     end
     
     def update
+        if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+            params[:user].delete(:password)
+            params[:user].delete(:password_confirmation)
+        end
         @user = User.find(params[:id])
         if @user.update(user_params)
             if params[:user][:step] == "1"
@@ -72,6 +76,6 @@ class UsersController < ApplicationController
     
     private
     def user_params
-        params.require(:user).permit(:firstname, :lastname, :profile_image,:licensefront,:licenseback, :pickup_suburb, :pickup_postcode, :pickup_state, :rental,:advance_notice,:driving_liecense_country,:driving_liecense_state,:driving_liecense_number, :driving_liecense_firstname, :driving_liecense_middlename, :driving_liecense_lastname,:personal_house_number, :personal_street_name, :personal_suburb, :personal_state, :personal_postcode,:personal_dob, :personal_mobile,:comment,:step,availibility_days: [], comment_files_attributes: [:id, :file, :user_id, :_destroy])
+        params.require(:user).permit(:email,:firstname, :lastname, :profile_image,:licensefront,:licenseback, :pickup_suburb, :pickup_postcode, :pickup_state, :rental,:advance_notice,:driving_liecense_country,:driving_liecense_state,:driving_liecense_number, :driving_liecense_firstname, :driving_liecense_middlename, :driving_liecense_lastname,:personal_house_number, :personal_street_name, :personal_suburb, :personal_state, :personal_postcode,:personal_dob, :personal_mobile,:comment,:step,:offers,availibility_days: [], comment_files_attributes: [:id, :file, :user_id, :_destroy])
     end
 end

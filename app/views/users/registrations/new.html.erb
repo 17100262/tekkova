@@ -11,7 +11,9 @@
                 <%= f.text_field :lastname , required: true,class: "form-control form-control-md", placeholder: "Enter Your Last Name" %>
                 <%= f.text_field :personal_mobile ,required: true,class: "form-control form-control-md", placeholder: "Enter Your Phone Number" %>
                 
+                    
                 <%= f.email_field :email, autocomplete: "email",required: true, class: "form-control form-control-md", placeholder: "Enter Your Email" , id: "join_email" %>
+                
                 <%= f.password_field :password, autocomplete: "off",required: true, class: "form-control form-control-md", placeholder: "Enter Your Password"  , id: "join_pword" %>
                 <%= f.password_field :password_confirmation, autocomplete: "off",required: true, class: "form-control form-control-md", placeholder: "Confirm Your Password", id: "join_cpword" %>
                 <div class="input-file-container">  
@@ -21,7 +23,7 @@
                 </div>
                 <br>
                 <%= f.check_box :terms_of_service,required: true %> I agree to <a href="/policies">terms of service and privacy policy</a> <br>
-                <%= f.check_box :send_updates %> Yes,send me special offers,discounts and updates
+                <%= f.check_box :offers %> Yes,send me special offers,discounts and updates
     					
     					  <%= f.submit "Sign Up", class: "login loginmodal-button loginmodal-submit" %>
       			<% end %>
@@ -35,10 +37,19 @@
 
 <%= render 'cars/policies_popup' %>
     <script>
-        $(document).ready(function() {
+        // $(document).ready(function() {
     
-            $('#policyModal').modal('show')
+        //     $('#policyModal').modal('show')
         
-        });
+        // });
+        
+        $(document).ready(function() {
+    if(localStorage.getItem('#policyModal') != 'true'){
+        $("#policyModal").modal('show');
+        localStorage.setItem('#policyModal','true');
+    }
+});
+        
+
     </script>
 

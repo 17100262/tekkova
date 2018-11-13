@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_29_075206) do
+ActiveRecord::Schema.define(version: 2018_11_13_091627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,7 +119,6 @@ ActiveRecord::Schema.define(version: 2018_08_29_075206) do
     t.datetime "confirmation_sent_at"
     t.string "firstname"
     t.string "lastname"
-    t.boolean "send_updates"
     t.boolean "admin", default: false
     t.string "availibility_days"
     t.string "pickup_suburb"
@@ -155,6 +154,7 @@ ActiveRecord::Schema.define(version: 2018_08_29_075206) do
     t.integer "profile_image_file_size"
     t.datetime "profile_image_updated_at"
     t.text "comment"
+    t.boolean "offers", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -30,14 +30,18 @@
     <% unless params[:controller]=='home' && params[:action]=='admin' %>
       </div>
     <% end %>
+    <% if !(request.path == "/admin" or request.path == "/users" or request.path == "/car_management" or request.path == "/violations" or request.path == "/mass_email" )  %>
       <%= render 'layouts/footer' %>
+    <% end %>
     
   </body>
 </html>
 
 <script>
   <% if notice %>
-    toastr.success('<%=notice%>');
+    toastr.success('<%=notice%>', {closeButton: true,closeHtml: '<button><i class="icon-on"></i></button>'});
+    // toastr.options.closeButton = true;
+    
   <% elsif alert %>
     toastr.error('<%=alert%>');
   <% end %>

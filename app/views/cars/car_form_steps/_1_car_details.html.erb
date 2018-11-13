@@ -62,7 +62,12 @@
       </div>
       <div class="col-lg-3 col-md-6">
         <label>Transmission </label>
-        <%=  form.text_field :trans_mission  %>
+         <%= form.select :trans_mission, ["Automatic",  "Manual"] %>
+        <!--<select>-->
+        <!--  <option>Automatic</option>-->
+        <!--  <option>Manual</option>-->
+        <!--</select>-->
+        <%#=  form.text_field :trans_mission  %>
       </div>
       <div class="col-lg-3 col-md-6">
         <%= form.label :body_type %> 
@@ -70,7 +75,7 @@
         <%= form.select :body_type, [" Convertible",  "Coupe",  "Sedan",  "SUV",  "Wagon"], prompt: "Select Body Type" %>
       </div>
       <div class="col-lg-3 col-md-6">
-        <%= form.label :color %> 
+        <%= form.label :colour %> 
         <%= form.text_field :color  %>
       </div>
       <div class="col-lg-3 col-md-6">
@@ -84,7 +89,7 @@
       </div>
       <div class="col-lg-3 col-md-6">
         <%= form.label :number_of_seats %> 
-        <%= form.number_field :number_of_seats  %>
+        <%= form.text_field :number_of_seats  %>
       </div>
     </div>
     <div class="row mt-3">
@@ -121,7 +126,7 @@
         <h5><%= form.label :car_features %></h5>
       </div>
     </div>  
-    <div class="checkbox-form">
+    <div class="checkbox-form f-car">
     <%= form.collection_check_boxes(:car_feature_ids, CarFeature.all, :id, :name) %> 
     </div>
     <div class="row mt-3">
@@ -149,7 +154,7 @@
   </div>
     <%= form.hidden_field :step, value: 1 %>
 
-  <div class="mt-2">
+  <div class="mt-2 mb-5">
   <span class="float-right mb-3">
   <%= form.submit "Next", class: "btn btn-primary btn-sm" %>
   </span>

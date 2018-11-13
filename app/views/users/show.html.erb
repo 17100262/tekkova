@@ -6,10 +6,17 @@
         <div class="row">
             <div class="col">
                 <div class="custom-box-details background-color-light col-lg-12 ml-5 float-right clearfix">
+                    <div class="row pt-4">
+                        <div class="col-md-8">
                     <h4>Personal Details</h4>
+                    </div>
+                    <div class="col-md-4 mb-3">
                     <% if current_user == @user %>
-                        <%= link_to 'Update details', edit_user_registration_path, class:"btn btn-sm btn-primary pull-right" %>
+                        <%= link_to 'Update details', edit_user_path, class:"btn btn-sm btn-primary pf-btn" %>
+                        <%= link_to 'Update password', edit_user_registration_path, class:"btn btn-sm btn-primary pf-btn" %>
                     <% end %>
+                    </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="custom-list-style-1 p-0 mb-0">

@@ -1,28 +1,169 @@
-<h2> Edit Profile</h2>
-<br>
-<%= form_for @user do |f| %>
-    <div class="form-group row">
-        <%= f.label :name, :class => "col-2 col-form-label" %> <br />
-        <div class="col-10">
-            <%= f.text_field :name, :class => 'form-control' %><br />
+<div class="container pt-5 pb-5" >
+  	  <div class="loginmodal-container loginmodal-container-edit pt-4">
+  			<div class="loginmodal-container-2">
+        <%= form_for(current_user, html: { method: :put }) do |f| %>
+        <% if current_user.errors.any? %>
+            <div id="error_explanation">
+              <h2>Please fix these errors, before you can continue:</h2>
+        
+              <ul>
+              <% current_user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+  			  <div class="row">
+  			    <div class="col-md-6">
+  				    <h3 class="text-center mb-3">Update Profile</h3>
+                <div class="form-group">
+                      <%= f.label :email %>
+                      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-md", required: true %>
+                </div>
+                <div class="form-group">
+                      <%= f.label "First Name" %>
+                      <%= f.text_field :firstname, class: "form-control form-control-md", required: true %>
+                </div>
+                <div class="form-group">
+                    
+                      <%= f.label "Last Name" %>
+                    
+                      <%= f.text_field :lastname, class: "form-control form-control-md", required: true %>
+                </div>
+                <div class="form-group">
+                    
+                      <%= f.label "Phone Number" %>
+                    
+                      <%= f.number_field :personal_mobile, class: "form-control form-control-md", required: true %>
+                </div>
+                <div class="form-group">
+                    
+                      <%= f.label "House Number" %>
+                    
+                      <%= f.number_field :personal_house_number,min: 0, class: "form-control form-control-md", required: true %>
+                </div>
+                <div class="form-group">
+                    
+                      <%= f.label "Street Name" %>
+                    
+                      <%= f.text_field :personal_street_name, class: "form-control form-control-md", required: true %>
+                </div>
+                <div class="form-group">
+                    
+                      <%= f.label "Suburb" %>
+                    
+                      <%= f.text_field :personal_suburb, class: "form-control form-control-md", required: true %>
+                </div>
+                <div class="form-group">
+                    
+                      <%= f.label "State" %>
+                    
+                      <%= f.text_field :personal_state, class: "form-control form-control-md", required: true %>
+                </div>
+                <div class="form-group">
+                    
+                      <%= f.label "Post Code" %>
+                    
+                      <%= f.text_field :personal_postcode, class: "form-control form-control-md", required: true %>
+                </div>
+                <div class="form-group">
+                    
+                      <%= f.label "Date of Birth" %>
+                    
+                      <%= f.date_field :personal_dob, class: "form-control form-control-md", required: true %>
+                </div>
+                <div class="form-group">
+                    
+                      <%= f.label "Phone Number" %>
+                    
+                      <%= f.number_field :personal_mobile, class: "form-control form-control-md", required: true %>
+                </div>
+  			    </div>
+            <div class="col-md-6">
+                    
+                 <h3 class="text-center mb-3">Driving License Details</h3>
+                
+                <div class="form-group">
+                    
+                      <%= f.label "Country" %>
+                      
+                      <%= f.text_field :driving_liecense_country, class: "form-control form-control-md", required: true %>
+                    </div>
+                
+                <div class="form-group">
+                    
+                      <%= f.label "State" %>
+                    
+                      <%= f.text_field :driving_liecense_state, class: "form-control form-control-md", required: true %>
+                    </div>
+                
+                <div class="form-group">
+                    
+                      <%= f.label "License Number" %>
+                    
+                      <%= f.number_field :driving_liecense_number, class: "form-control form-control-md", required: true %>
+                    </div>
+                
+                <div class="form-group">
+                    
+                      <%= f.label "First Name" %>
+                    
+                      <%= f.text_field :driving_liecense_firstname, class: "form-control form-control-md", required: true %>
+                    </div>
+                
+                <div class="form-group">
+                    
+                      <%= f.label "Middle Name" %>
+                    
+                      <%= f.text_field :driving_liecense_middlename, class: "form-control form-control-md", required: true %>
+                    </div>
+                
+                <div class="form-group">
+                    
+                      <%= f.label "Last Name" %>
+                    
+                      <%= f.text_field :driving_liecense_lastname, class: "form-control form-control-md", required: true %>
+                    </div>
+                
+                <div class="form-group">
+                    
+                      <%= f.label "Driver License Front " %>
+                      <% if @user.licensefront.present? %>
+                        &nbsp;  &nbsp; <%= (link_to "View Current File",@user.licensefront.url,target: "_blank")  %>
+                        <div class="">
+                          <%= f.file_field :licensefront, class: "" %>
+                        </div>
+                      <% else%>
+                        <div class="">
+                          <%= f.file_field :licensefront, class: "", required: true %>
+                        </div>
+                      <% end%>
+                    </div>
+                <div class="form-group">
+                    
+                      <%= f.label "Driver License Back" %>
+                      <% if @user.licenseback.present?  %>
+                      &nbsp; &nbsp; <%= (link_to "View Current File",@user.licenseback.url,target: "_blank") %>
+                        <div class="">
+                          <%= f.file_field :licenseback, class: "" %>
+                        </div>
+                      <%else%>
+                        <div class="">
+                          <%= f.file_field :licenseback, class: "", required: true %>
+                        </div>
+                      <%end%>
+                    </div>
+  			      </div>
+          </div>
+        <div class="row">
+          <div class="col-md-4 offset-md-4">
+            <div class="form-group">
+              <%= f.submit "Update", class: "login loginmodal-submit loginmodal-button" %>
+              <%= link_to "Back to My Profile",user_path(@user), class: "text-center login loginmodal-submit loginmodal-button" %>
+            </div>
+          </div>
         </div>
+			  <% end %>
+			</div>
     </div>
-    
-    
-    
-    <!--<div class="form-group row">-->
-    <!--    <%#= f.label :identifier, :class => "col-2 col-form-label" %> <br />-->
-    <!--    <div class="col-10">-->
-    <!--        <%#= f.text_field :identifier, :class => 'form-control' %><br />-->
-    <!--    </div>-->
-    <!--</div>-->
-    
-    <div class="form-group row">
-        <%= f.label :phone_number, :class => "col-2 col-form-label" %> <br />
-        <div class="col-10">
-            <%= f.text_field :phone_number, :class => 'form-control' %><br />
-        </div>
-    </div>
-    
-    <%= f.submit "Update" %>
-<% end %>
+</div>

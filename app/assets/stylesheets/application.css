@@ -546,6 +546,10 @@ color: #21a5D6;
   background: #000;
   padding: 20px 10px;
 }
+.ftr-widget_1 {
+  background: #000;
+  padding: 10px 10px 0px 10px;
+}
 .ftr-widget-txt {
   color: #fff;
 }
@@ -556,7 +560,35 @@ a.ftr-widget-txt:hover {
     color: #21a5D6 !important;
 }
 .ftr-icon {
-  color: #fff;
+  color: #22a6da;
     font-size: 30px;
      padding-right: 10px;
+}
+.icon-star::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f005";
+  /*-webkit-font-smoothing: antialiased;*/
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    /*text-rendering: auto;*/
+    line-height: 1;
+}
+.g{
+  padding-left:10px;
+  padding-right:10px;
+}
+@media only screen and (min-width: 1360px) {
+.pf-hd {
+  max-width: 197px;
+}
+}
+@media only screen and (min-width: 768px) {
+.pf-btn {
+     float: right;
+      margin-right: 12px;
+}
+}
+.f-car {
+  margin: 0 8px;
 }
