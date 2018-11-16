@@ -14,7 +14,7 @@
                     
                 <%= f.email_field :email, autocomplete: "email",required: true, class: "form-control form-control-md", placeholder: "Enter Your Email" , id: "join_email" %>
                 
-                <%= f.password_field :password, autocomplete: "off",required: true, class: "form-control form-control-md", placeholder: "Enter Your Password"  , id: "join_pword" %>
+                <%= f.password_field :password, autocomplete: "off",required: true, class: "form-control form-control-md pss_next", placeholder: "Enter Your Password"  , id: "join_pword", minlength: 6 %>
                 <%= f.password_field :password_confirmation, autocomplete: "off",required: true, class: "form-control form-control-md", placeholder: "Confirm Your Password", id: "join_cpword" %>
                 <div class="input-file-container">  
                     <%= f.file_field :profile_image, accept:"image/*", required: true, class:"input-file", :data => { :buttonText => 'bar' } %>
@@ -26,7 +26,7 @@
                 <!--I agree to <a href="/policies">terms of service and privacy policy</a> -->
                 <%= f.check_box :offers %> <span class="mb-0">Yes,send me special offers,discounts and updates</span><br><br>
     					
-    					  <%= f.submit "Sign Up", class: "login loginmodal-button loginmodal-submit" %>
+    					  <%= f.submit "Sign Up", class: "login loginmodal-button loginmodal-submit", id: "tick", onclick:"myFunction()" %>
       			<% end %>
   				
   			</div>
@@ -51,6 +51,18 @@
     }
 });
         
+// email pattern
+function ValidateEmail(email) {
+        var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        return expr.test(email);
+    };
+    $("#tick").live("click", function () {
+        if (!ValidateEmail($("#join_email").val())) {
+            alert("Invalid email address.");
+        }
+    }  
+      
+
 
     </script>
 
