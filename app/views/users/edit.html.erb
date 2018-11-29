@@ -125,34 +125,34 @@
                       <%= f.text_field :driving_liecense_lastname, class: "form-control form-control-md", required: true %>
                     </div>
                 
-                <div class="form-group">
+                <!--<div class="form-group">-->
                     
-                      <%= f.label "Driver License Front " %>
-                      <% if @user.licensefront.present? %>
-                        &nbsp;  &nbsp; <%= (link_to "View Current File",@user.licensefront.url,target: "_blank")  %>
-                        <div class="">
-                          <%= f.file_field :licensefront, class: "" %>
-                        </div>
-                      <% else%>
-                        <div class="">
-                          <%= f.file_field :licensefront, class: "", required: true %>
-                        </div>
-                      <% end%>
-                    </div>
-                <div class="form-group">
+                <!--      <%#= f.label "Driver License Front " %>-->
+                <!--      <%# if @user.licensefront.present? %>-->
+                <!--        &nbsp;  &nbsp; <%#= (link_to "View Current File",@user.licensefront.url,target: "_blank")  %>-->
+                <!--        <div class="">-->
+                <!--          <%#= f.file_field :licensefront, class: "" %>-->
+                <!--        </div>-->
+                <!--      <%# else%>-->
+                <!--        <div class="">-->
+                <!--          <%#= f.file_field :licensefront, class: "", required: true %>-->
+                <!--        </div>-->
+                <!--      <%# end%>-->
+                <!--    </div>-->
+                <!--<div class="form-group">-->
                     
-                      <%= f.label "Driver License Back" %>
-                      <% if @user.licenseback.present?  %>
-                      &nbsp; &nbsp; <%= (link_to "View Current File",@user.licenseback.url,target: "_blank") %>
-                        <div class="">
-                          <%= f.file_field :licenseback, class: "" %>
-                        </div>
-                      <%else%>
-                        <div class="">
-                          <%= f.file_field :licenseback, class: "", required: true %>
-                        </div>
-                      <%end%>
-                    </div>
+                <!--      <%#= f.label "Driver License Back" %>-->
+                <!--      <%# if @user.licenseback.present?  %>-->
+                <!--      &nbsp; &nbsp; <%#= (link_to "View Current File",@user.licenseback.url,target: "_blank") %>-->
+                <!--        <div class="">-->
+                <!--          <%#= f.file_field :licenseback, class: "" %>-->
+                <!--        </div>-->
+                <!--      <%#else%>-->
+                <!--        <div class="">-->
+                <!--          <%#= f.file_field :licenseback, class: "", required: true %>-->
+                <!--        </div>-->
+                <!--      <%#end%>-->
+                <!--    </div>-->
   			      </div>
           </div>
         <div class="row">

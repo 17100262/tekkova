@@ -592,3 +592,9 @@ a.ftr-widget-txt:hover {
 .f-car {
   margin: 0 8px;
 }
+.ftr-widget-txt a {
+    color: #fff !important;
+}
+.ftr-widget-txt a:hover {
+   color: #21a5D6 !important;
+}

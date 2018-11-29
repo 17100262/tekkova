@@ -24,7 +24,7 @@
     max-width: 100%;
     height: calc(2.25rem + 2px);
     margin: 0;
-    opacity: 0
+    opacity: 0;
 }
 
 .custom-file-container__custom-file__custom-file-control {

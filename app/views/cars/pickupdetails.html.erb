@@ -20,6 +20,7 @@
 
 
 <%= form_for(@user) do |form| %>
+        <%  address = Geocoder.search(request.remote_ip).first %>
             <% if @user.errors.any? %>
               <div id="error_explanation">
                 <h2><%= pluralize(@user.errors.count, "error") %> prohibited this @user from being saved:</h2>
@@ -37,15 +38,15 @@
                 <div class="row">
                   <div class="col-lg-4 col-md-6">
                     <label>Suburb</label>
-                    <%= form.text_field :pickup_suburb,  class:"form-control"  %>
+                    <%= form.text_field :pickup_suburb,  class:"form-control",value: (address.city if address)  %>
                   </div>
                   <div class="col-lg-4 col-md-6">
                     <label>Postcode</label>
-                  <%= form.text_field :pickup_postcode,  class:"form-control"  %>
+                  <%= form.text_field :pickup_postcode,  class:"form-control" ,value: (address.postal if address) %>
                   </div>
                   <div class="col-lg-4 col-md-6">
                     <label>State</label>
-                  <%= form.text_field :pickup_state,  class:"form-control"  %>
+                  <%= form.text_field :pickup_state,  class:"form-control",value: (address.state if address)  %>
                   </div>
                 </div>  
                 <hr>
@@ -99,103 +100,3 @@
           
 </div>
 </div><div class="container">
-<div class="row mt-2">
-<div class="col-md-12 btn-group btn-breadcrumb">
-    <a href="#" class="btn btn-primary no-link car_details">Car Details</a>
-    <a href="#" class="btn btn-primary no-link car_pictures">Car Pictures</a>
-    <a href="#" class="btn btn-primary no-link car_preference">Car Preference</a>
-    <a href="#" class="btn btn-primary no-link car_preference">Personal Details</a>
-    <a href="#" class="btn btn-primary no-link no-link car_preference">Driver License</a>
-    <a href="#" class="btn btn-primary no-link car_preference">Availibility & Pickup</a>
-</div>
-</div>
-</div>
-<h2 class="heading mt-4">Availibility & Pickup</h2>
-<div class="liecense background-img">
-  
-</div>
-<div class="container py-4">
-<div id="" class="car_availibility">
-
-
-
-<%= form_for(@user) do |form| %>
-            <% if @user.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(@user.errors.count, "error") %> prohibited this @user from being saved:</h2>
-          
-                <ul>
-                <% @user.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-                </ul>
-              </div>
-            <% end %>
-            <div id="wizard">
-              <section>
-                <h5>What is your car's pickup location?</h5>
-                <div class="row">
-                  <div class="col-lg-4 col-md-6">
-                    <label>Suburb</label>
-                    <%= form.text_field :pickup_suburb,  class:"form-control"  %>
-                  </div>
-                  <div class="col-lg-4 col-md-6">
-                    <label>Postcode</label>
-                  <%= form.text_field :pickup_postcode,  class:"form-control"  %>
-                  </div>
-                  <div class="col-lg-4 col-md-6">
-                    <label>State</label>
-                  <%= form.text_field :pickup_state,  class:"form-control"  %>
-                  </div>
-                </div>  
-                <hr>
-                <h5 class="mt-3">What day of the week is your car available?</h5>
-                <div class="checkbox-form inner-check-box">
-                <% ["Anyday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each do |day| %>
-              		
-                  <%= check_box_tag "user[availibility_days][]", day,(@user.availibility_days.include?(day) if @user.availibility_days.present?) %>
-                  <%= form.label day %>
-              	<% end %>	
-              	</div>
-              	
-              	<hr>
-              	
-              	<h5 class="mt-3">Do you prefer short term or long term rentals?</h5>
-                <div class="checkbox-form inner-check-box">
-                  <%= radio_button_tag "user[rental]","short_term",@user.rental=="short_term"  %>
-                  <%= form.label "Short Term, 1 to 3 days per week" %>
-                  <%= radio_button_tag "user[rental]","long_term",@user.rental=="long_term"  %>
-                  <%= form.label "Long Term, 4 to 7 days per week" %>
-                
-              	</div>
-              	<hr>
-              	
-              	<h5 class="mt-3">How much advance notice do you need?</h5>
-                <div class="checkbox-form inner-check-box">
-                  <%= radio_button_tag "user[advance_notice]","Anytime",@user.advance_notice=="Anytime"  %>
-                  <%= form.label "Pickup Availible at any time" %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","6 to 12 hours",@user.advance_notice=="6 to 12 hours"  %>
-                  <%= form.label "6 to 12 hours" %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","Two days",@user.advance_notice=="Two days"  %>
-                  <%= form.label "Two days" %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","1 to 6 hours",@user.advance_notice=="1 to 6 hours"  %>
-                  <%= form.label "1 to 6 hours" %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","12 to 24 hours",@user.advance_notice=="12 to 24 hours"  %>
-                  <%= form.label "12 to 24 hours" %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","3 days",@user.advance_notice=="3 days"  %>
-                  <%= form.label "3 days" %>
-                    <%= form.hidden_field :step, value: 3 %>
-              	</div>
-              	<hr>
-              </section>
-              </div>
-                <center>  <%= form.submit "Submit", class:"btn btn-sm btn-primary" %></center>
-          <% end %>
-          
-</div>
-</div>
