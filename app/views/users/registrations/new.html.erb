@@ -22,10 +22,11 @@
                     <span class="file-return">No File Choosen</span>
                 </div>
                 <br>
+                <br>
                 <%#= f.check_box :terms_of_service,required: true %>
                 <!--I agree to <a href="/policies">terms of service and privacy policy</a> -->
-                <%= f.check_box :offers %> <span class="mb-0">Yes,send me special offers,discounts and updates</span><br><br>
-    					
+                <%= f.check_box :offers %> <span class="mb-0">Yes,send me special offers,discounts and updates</span><br>
+    					<input type="checkbox"> I Agree to <a href="/terms_and_conditions">Marketplace Terms and Conditions</a>, &nbsp;&nbsp;&nbsp;&nbsp;<a href="/privacy_policy">Privacy Policy</a> and <a href="/nd_policy">Non-Discrimination Policy</a><br><br>
     					  <%= f.submit "Sign Up", class: "login loginmodal-button loginmodal-submit", id: "tick", onclick:"myFunction()" %>
       			<% end %>
   				

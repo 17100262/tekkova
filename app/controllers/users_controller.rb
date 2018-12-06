@@ -73,7 +73,24 @@ class UsersController < ApplicationController
     def my_ratings
         @user = current_user
     end
-    
+    def my_handover
+        @user = current_user
+    end
+    def cleaning_policy
+        @user = current_user
+    end
+    def engine_policy
+        @user = current_user
+    end
+    def feul_policy
+        @user = current_user
+    end
+     def infringements_policy
+        @user = current_user
+    end
+    def late_return_policy
+        @user = current_user
+    end
     private
     def user_params
         params.require(:user).permit(:email,:firstname, :lastname, :profile_image,:licensefront,:licenseback, :pickup_suburb, :pickup_postcode, :pickup_state, :rental,:advance_notice,:driving_liecense_country,:driving_liecense_state,:driving_liecense_number, :driving_liecense_firstname, :driving_liecense_middlename, :driving_liecense_lastname,:personal_house_number, :personal_street_name, :personal_suburb, :personal_state, :personal_postcode,:personal_dob, :personal_mobile,:comment,:step,:offers,availibility_days: [], comment_files_attributes: [:id, :file, :user_id, :_destroy])

@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-    authorize_resource :class => false,only: [:admin]
+    authorize_resource :class => false,only: [:admin, :mass_email]
 
     def home
     end
@@ -29,12 +29,14 @@ class HomeController < ApplicationController
     end
     def nd_policy
     end
-    
+    def about_us
+    end
     def admin
         # render :layout => false
         # byebug
     end
     def mass_email
     end
+
     
 end

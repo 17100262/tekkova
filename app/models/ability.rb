@@ -8,6 +8,7 @@ class Ability
       if user.admin
         can :manage, :all
         can :home, :admin
+        can :home, :mass_email
       else
         can [:update,:destroy,:read,:car_steps], Car do |car|
           p "abilities #{car.user_id} #{user.id} #{car.user_id == user.id}"
@@ -23,13 +24,20 @@ class Ability
         can :my_bookings,User
         can :my_documents,User
         can :my_payments,User
+        can :my_handover,User
         can :my_ratings,User
+        can :cleaning_policy,User
+        can :engine_policy,User
+        can :feul_policy,User
+        can :infringements_policy,User
+        can :late_return_policy,User
         can :inbox,User
         can :home, :home
         can :how_it_works,:home
         can :policies,:home
         can :contact_us,:home
         cannot :home, :admin
+        cannot :home, :mass_email
         # can :index,Car
         # can [:create,:update,:destroy],Car,:user_id => user.id
         # can :show, Car, :user_id => user.id

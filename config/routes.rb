@@ -20,8 +20,7 @@ Rails.application.routes.draw do
   get 'nd_policy', to: 'home#nd_policy', as: :nd_policy
   get 'privacy_policy', to: 'home#privacy_policy', as: :privacy_policy
   get 'terms_and_conditions', to: 'home#terms_and_conditions', as: :terms_and_conditions
-  
-  
+  get 'about_us', to: 'home#about_us', as: :about_us
   post 'listing_criteria', to: 'cars#submit_listing_criteria',as: :listing_criteria
   
   
@@ -35,6 +34,13 @@ Rails.application.routes.draw do
   get 'contact_us', to: 'home#contact_us'
   get 'listing_criteria', to: 'home#listing_criteria'
   get 'mass_email', to: 'home#mass_email',as: :mass_email
+  get 'my_handover', to: 'users#my_handover',as: :my_handover
+  get 'cleaning_policy', to: 'users#cleaning_policy',as: :cleaning_policy
+  get 'engine_policy', to: 'users#engine_policy',as: :engine_policy
+  get 'feul_policy', to: 'users#feul_policy',as: :feul_policy
+  get 'infringements_policy', to: 'users#infringements_policy',as: :infringements_policy
+  get 'late_return_policy', to: 'users#late_return_policy',as: :late_return_policy
+   
   # delete 'delete_commentfile/:comment_file_id(.:format)',to: 'users#delete_commentfile',as: :comment_file
   # get 'users/profile/edit', to: 'users#edit_profile', as: :edit_profile
   resources :users
