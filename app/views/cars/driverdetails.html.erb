@@ -17,6 +17,7 @@
 <div class="container py-4">
 <div id="multi-form" class="car-liecense">
 <%= form_for(@user) do |form| %>
+<%  address = Geocoder.search(request.remote_ip).first %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this car from being saved:</h2>
@@ -35,15 +36,15 @@
       <div class="row">
         <div class="col-lg-4 col-md-6">
           <label>Isssuing Country</label>
-          <%= form.text_field :driving_liecense_country  %>
+          <%= form.text_field :driving_liecense_country,value: address.country  %>
         </div>
         <div class="col-lg-4 col-md-6">
           <label>State</label>
-          <%= form.text_field :driving_liecense_state  %>
+          <%= form.text_field :driving_liecense_state,value: address.state  %>
         </div>
         <div class="col-lg-4 col-md-6">
           <label>Driver's License Number</label>
-          <%= form.text_field :driving_liecense_number, required: true, pattern:"[0-9]{7}", title:"Driving license number should be 7 characters"  %>
+          <%= form.text_field :driving_liecense_number, required: true, title:"Driving license number should be 7 characters"  %>
         </div>
         <div class="col-lg-4 col-md-6">
           <label>First Name</label>
@@ -98,10 +99,11 @@
     
   </div>
   <div class="mt-2">
-  <%= link_to "Back to Previous Step", personaldetails_path ,class: "btn btn-primary btn-sm",role: "button" %>
-  
+  <%#= link_to "Back", personaldetails_path ,class: "btn btn-primary btn-sm",role: "button"%>
+  <a href="<%=personaldetails_path%>" class="btn btn-primary btn-sm"><i class="fas fa-caret-left"></i> Back</a>
   <span class="float-right">
-  <%= form.submit "Next", class: "btn btn-primary btn-sm" %>
+  <%#= form.submit "Next", class: "btn btn-primary btn-sm" %>
+  <button type="submit" class="btn btn-primary btn-sm pl-3 pr-3">Next <i class="fas fa-caret-right"></i></button>
   </span>
   </div>
 <% end %>

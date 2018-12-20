@@ -6,6 +6,17 @@ class User < ApplicationRecord
          
   attr_accessor :terms_of_service,:step
   validates :terms_of_service, acceptance: true
+  # before_create_commit :email_uniqueness
+  
+
+  before_validation(on: :create) do
+    if User.where(:email => self.email).exists?
+      self.errors.add(:base, 'User deleted this account.')
+      render :new
+    else
+      self.errors.add(:base, 'User with same email already exists. Please try with another email address.') if User.where(:email => self.email).exists?
+    end
+  end
   has_many :cars
   
   has_many :comment_files, dependent: :destroy
@@ -30,6 +41,9 @@ class User < ApplicationRecord
   
   def name
     [self.firstname,self.lastname].join(" ")
+  end
+  def deleted_account
+    
   end
   
   # def self.from_omniauth(auth)

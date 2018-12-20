@@ -22,59 +22,59 @@
                                     <a class="nav-link" href="/cars/new">List your Car <span class="sr-only">(current)</span></a>
                                 </li>
                                 <% if user_signed_in? %>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/my_garage">My Garage <span class="sr-only">(current)</span></a>
-                                </li>
-
+                                    <% if current_user.cars.count > 0%>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/my_garage">My Garage <span class="sr-only">(current)</span></a>
+                                        </li>
+                                    <% end %>
                                     <% if current_user.admin %>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="<%= main_app.admin_path %>">Admin Dashboard</a>
-                                    </li>
-                                    
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="<%= main_app.admin_path %>">Admin Dashboard</a>
+                                        </li>
                                     <% end %>
-
                                 <% end %>
-                                        <li class="dropdown">
-                                            <a class="dropdown-item dropdown-toggle" href="#">Learn More</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="/listing_criteria">Listing Criteria</a></li>
-                                                <li><a class="dropdown-item" href="/how_it_works">How it works</a></li>
-                                                <li><a class="dropdown-item" href="/policies">Policies</a></li>
-                                                <li><a class="dropdown-item" href="/contact_us">Contact</a></li>
-                                            </ul>
-                                        </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-item dropdown-toggle" href="#">Learn More</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="/listing_criteria">Listing Criteria</a></li>
+                                        <li><a class="dropdown-item" href="/how_it_works">How it works</a></li>
+                                        <li><a class="dropdown-item" href="/policies">Policies</a></li>
+                                        <li><a class="dropdown-item" href="/contact_us">Contact</a></li>
+                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/about_us">About Tekkova</a>
+                                            <a class="nav-link" href="/about_us">About Us</a>
                                         </li>
-
-                                    <% if user_signed_in? %>
-                                   
-                                    
-                                     <li class="dropdown p-image">
-                                            
-                                        <a class="dropdown-item dropdown-toggle header-user" href="#"><%= current_user.name %></a>
-                                        <%= image_tag(current_user.profile_image.url, size: "50x50", class:"header_img dropdown-toggle") %>
-                                        
-                                    
-                                            <ul class="dropdown-menu" style="right: 0;">
-                                                <li><a class="dropdown-item" href="<%= main_app.user_path(current_user) %>">Profile</a></li>
-                                                <li><a class="dropdown-item" href="<%= main_app.edit_user_path(current_user) %>">Edit Profile</a></li>
-                                                <li><a class="dropdown-item" href="<%= main_app.destroy_user_session_path %>" data-method="delete">Log Out</a></li>
-                                                
-                                            </ul>
-                                        </li>
-                                    <% else %>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="<%= main_app.new_user_registration_path %>">Sign Up</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="<%= main_app.new_user_session_path %>">Log In</a>
-                                        </li>
-                                    <% end %>
-                                        <!--<li class="nav-item">-->
-                                        <!--  <a class="nav-link disabled" href="#">Disabled</a>-->
-                                        <!--</li>-->
                                     </ul>
+                               
+
+                            <% if user_signed_in? %>
+                           
+                            
+                             <li class="dropdown p-image">
+                                    
+                                <a class="dropdown-item dropdown-toggle header-user" href="#"><%= current_user.name %></a>
+                                <%= image_tag(current_user.profile_image.url, size: "50x50", class:"header_img dropdown-toggle") %>
+                                
+                            
+                                    <ul class="dropdown-menu" style="right: 0;">
+                                        <li><a class="dropdown-item" href="<%= main_app.user_path(current_user) %>">Profile</a></li>
+                                        <li><a class="dropdown-item" href="<%= main_app.edit_user_path(current_user) %>">Edit Profile</a></li>
+                                        <li><a class="dropdown-item" href="<%= main_app.destroy_user_session_path %>" data-method="delete">Log Out</a></li>
+                                        
+                                    </ul>
+                                </li>
+                            <% else %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<%= main_app.new_user_registration_path %>">Sign Up</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<%= main_app.new_user_session_path %>">Log In</a>
+                                </li>
+                            <% end %>
+                                <!--<li class="nav-item">-->
+                                <!--  <a class="nav-link disabled" href="#">Disabled</a>-->
+                                <!--</li>-->
+                            </ul>
                                 </nav>
                             </div>
                             <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main nav">

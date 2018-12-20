@@ -1,13 +1,14 @@
 <div class="container pt-5 pb-5" >
   	  <div class="loginmodal-container loginmodal-container-edit pt-4">
   			<div class="loginmodal-container-2">
-        <%= form_for(current_user, html: { method: :put }) do |f| %>
-        <% if current_user.errors.any? %>
+        <%= form_for(@user, html: { method: :put }) do |f| %>
+        <%  address = Geocoder.search(request.remote_ip).first %>
+        <% if @user.errors.any? %>
             <div id="error_explanation">
               <h2>Please fix these errors, before you can continue:</h2>
         
               <ul>
-              <% current_user.errors.full_messages.each do |message| %>
+              <% @user.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
               <% end %>
               </ul>
@@ -78,6 +79,13 @@
                     
                       <%= f.number_field :personal_mobile, class: "form-control form-control-md", required: true %>
                 </div>
+                
+                <div class="form-group">
+                    
+                    
+                      <%= f.check_box :offers %> <span class="mb-0">Yes,send me special offers,discounts and updates</span><br>
+                </div>
+                
   			    </div>
             <div class="col-md-6">
                     
@@ -87,21 +95,21 @@
                     
                       <%= f.label "Country" %>
                       
-                      <%= f.text_field :driving_liecense_country, class: "form-control form-control-md", required: true %>
+                      <%= f.text_field :driving_liecense_country,value: address.country, class: "form-control form-control-md", required: true %>
                     </div>
                 
                 <div class="form-group">
                     
                       <%= f.label "State" %>
                     
-                      <%= f.text_field :driving_liecense_state, class: "form-control form-control-md", required: true %>
+                      <%= f.text_field :driving_liecense_state,value: address.state, class: "form-control form-control-md", required: true %>
                     </div>
                 
                 <div class="form-group">
                     
                       <%= f.label "License Number" %>
                     
-                      <%= f.number_field :driving_liecense_number, class: "form-control form-control-md", required: true %>
+                      <%= f.text_field :driving_liecense_number, class: "form-control form-control-md", required: true %>
                     </div>
                 
                 <div class="form-group">
@@ -115,7 +123,7 @@
                     
                       <%= f.label "Middle Name" %>
                     
-                      <%= f.text_field :driving_liecense_middlename, class: "form-control form-control-md", required: true %>
+                      <%= f.text_field :driving_liecense_middlename, class: "form-control form-control-md" %>
                     </div>
                 
                 <div class="form-group">

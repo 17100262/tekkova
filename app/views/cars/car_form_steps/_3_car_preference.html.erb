@@ -18,9 +18,7 @@
 </div>
 </div>
 <h2 class="heading mt-4">Car Preference</h2>
-<div class="preference background-img">
-  
-</div>
+<img src="/pref-1.jpg" class="img-fluid">
 <div class="container py-4">
 <div id="multi-form" class="car-preference">
 <%= form_for(@car) do |form| %>
@@ -68,9 +66,12 @@
   <%= (form.hidden_field :status, value: "completed") if current_user.cars.count > 1 %>
   <%= form.hidden_field :step, value: 3 %>
   <div class="mt-2">
-  <%= link_to "Back to Previous Step", car_steps_path(id: @car.id,step: 3) ,class: "btn btn-primary btn-sm",role: "button" %>  
+<%= link_to car_steps_path(id: @car.id,step: 3) ,class: "btn btn-primary btn-sm pl-3 pr-3",role: "button" do %> 
+   <i class="fas fa-caret-left"></i> Back
+  <% end %>
   <span class="float-right">
-  <%= form.submit (("Next" if current_user.cars.count < 2) || "Submit"), class: "btn btn-primary btn-sm" %>
+  <%#= form.submit (("Next" if current_user.cars.count < 2) || "Submit"), class: "btn btn-primary btn-sm pl-3 pr-3" %>
+  <button type="submit" class="btn btn-primary btn-sm pl-3 pr-3">Next <i class="fas fa-caret-right"></i></button>
   </span>
   </div>
 <% end %>

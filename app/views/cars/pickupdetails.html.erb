@@ -10,10 +10,11 @@
 </div>
 </div>
 </div>
-<h2 class="heading mt-4">Drivers License</h2>
-<div class="liecense background-img">
+<h2 class="heading mt-4">Availibility & Pickup</h2>
+<!--<div class="avial-pick-up">-->
   
-</div>
+<!--</div>-->
+<img src="/pick-1.jpg" class="img-fluid">
 <div class="container py-4">
 <div id="" class="car_availibility">
 
@@ -76,17 +77,17 @@
                   <%= radio_button_tag "user[advance_notice]","Anytime",@user.advance_notice=="Anytime"  %>
                   <%= form.label "Pickup Availible at any time" %>
                   
-                  <%= radio_button_tag "user[advance_notice]","6 to 12 hours",@user.advance_notice=="6 to 12 hours"  %>
-                  <%= form.label "6 to 12 hours" %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","Two days",@user.advance_notice=="Two days"  %>
-                  <%= form.label "Two days" %>
-                  
                   <%= radio_button_tag "user[advance_notice]","1 to 6 hours",@user.advance_notice=="1 to 6 hours"  %>
                   <%= form.label "1 to 6 hours" %>
                   
+                  <%= radio_button_tag "user[advance_notice]","6 to 12 hours",@user.advance_notice=="6 to 12 hours"  %>
+                  <%= form.label "6 to 12 hours" %>
+                  
                   <%= radio_button_tag "user[advance_notice]","12 to 24 hours",@user.advance_notice=="12 to 24 hours"  %>
                   <%= form.label "12 to 24 hours" %>
+                  
+                  <%= radio_button_tag "user[advance_notice]","Two days",@user.advance_notice=="Two days"  %>
+                  <%= form.label "Two days" %>
                   
                   <%= radio_button_tag "user[advance_notice]","3 days",@user.advance_notice=="3 days"  %>
                   <%= form.label "3 days" %>
@@ -95,7 +96,7 @@
               	<hr>
               </section>
               </div>
-                <center>  <%= form.submit "Submit", class:"btn btn-sm btn-primary" %></center>
+                <center>  <%= form.submit "Submit", class:"btn btn-sm btn-primary pl-3 pr-3" %></center>
           <% end %>
           
 </div>

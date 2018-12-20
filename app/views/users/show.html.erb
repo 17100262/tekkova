@@ -14,8 +14,9 @@
                             <% if current_user == @user %>
                                 <%= link_to 'Update details', edit_user_path, class:"btn btn-sm btn-primary pf-btn" %>
                                 <%= link_to 'Update password', edit_user_registration_path, class:"btn btn-sm btn-primary pf-btn" %>
-                                <%= link_to "Delete my account", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-sm btn-primary pf-btn" %>
+                                <button type="button" class="btn btn-sm btn-primary pf-btn" data-toggle="modal" data-target="#deletemodal">Deactivate my Account</button>
                                 <!--<= button_to "Cancel my account", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete %>-->
+                               
                             <% end %>
                         </div>
                     </div>
@@ -27,12 +28,16 @@
                                     <span class="custom-text-color-2"><a class="custom-text-color-2" href="mailto:<%= @user.email %>"><%= @user.email %></a></span>
                                 </li>
                                 <li>
-                                    <span class="text-color-dark">Phone No.:</span>
+                                    <span class="text-color-dark">Mobile Number: </span>
                                     <span class="custom-text-color-2">  <%= @user.personal_mobile %></span>
                                 </li>
                                 <li>
-                                    <span class="text-color-dark">Birthday:</span>
-                                    <span class="custom-text-color-2"><%= @user.personal_dob %></span>
+                                    <span class="text-color-dark"> Home Mobile Number: </span>
+                                    <span class="custom-text-color-2">  <%= @user.home_phone_number %></span>
+                                </li>
+                                <li>
+                                    <span class="text-color-dark">Date of Birth:</span>
+                                    <span class="custom-text-color-2"><%= @user.personal_dob.strftime("%e-%m-%y") if @user.personal_dob.present? %></span>
                                 </li>
 
                             </ul>
@@ -109,6 +114,7 @@
                         <div class="row">
                             
                         <div class="col-md-6">
+                            <p class="font-weight-bold mb-0">Front of drivers license</p>
                             <div class="custom-file-container" data-upload-id="imagefront">
                                 <a href="javascript:void(0)" class="custom-file-container__image-clear custom-file-container__image-clearfront float-right btn btn-sm" title="Clear Image">x</a>
                                 <div class="custom-file-container__image-preview custom-file-container__image-previewfront mb-1">
@@ -123,6 +129,7 @@
                         </div>
                         
                         <div class="col-md-6">
+                            <p class="font-weight-bold mb-0">Back of drivers license</p>
                             <div class="custom-file-container" data-upload-id="imageback">
                                 <a href="javascript:void(0)" class="custom-file-container__image-clear custom-file-container__image-clearback float-right btn btn-sm" title="Clear Image">x</a>
                                 <div class="custom-file-container__image-preview custom-file-container__image-previewback mb-1">
@@ -230,6 +237,26 @@
 <% end %>
 
 
+<!--delete account modal start-->
+<div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content dlt-mdl">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="float-right" style="color: #fff; margin-right: 5px;">&times;</span>
+        </button>
+      
+      <div class="modal-body">
+        Are you sure that you would like to deactivate your account?
+      </div>
+      <div class="btn-set">
+          <%= link_to "Yes", registration_path(current_user), method: :delete, class:"btn btn-danger" %>
+         <button type="button" class="btn btn-primary float-right" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<!--delete account modal end-->
 
 
 <script>

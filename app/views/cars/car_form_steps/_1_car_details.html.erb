@@ -17,9 +17,10 @@
 </div> 
 </div>
 <h2 class="heading mt-4">Car Details</h2>
-<div class="details background-img">
+<!--<div class="details background-img">-->
   
-</div>
+<!--</div>-->
+<img src="/cr-dtl-1.jpg" class="img-fluid">
 <div class="container pt-4">
 <div id="multi-form-d" class="car-details">
 <%= form_for(@car) do |form| %>
@@ -156,7 +157,8 @@
 
   <div class="mt-2 mb-5">
   <span class="float-right mb-3">
-  <%= form.submit "Next", class: "btn btn-primary btn-sm" %>
+  <%#= form.submit "Next", class: "btn btn-primary btn-sm pl-3 pr-3" %>
+  <button type="submit" class="btn btn-primary btn-sm pl-3 pr-3">Next <i class="fas fa-caret-right"></i></button>
   </span>
   </div>
 <% end %>

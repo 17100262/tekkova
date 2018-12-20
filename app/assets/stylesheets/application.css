@@ -598,3 +598,16 @@ a.ftr-widget-txt:hover {
 .ftr-widget-txt a:hover {
    color: #21a5D6 !important;
 }
+.rght-icon:after {
+  content: "\f0da";
+  font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+}
+.dlt-mdl {
+  background-color: #000;
+  color: #fff;
+}
+.btn-set {
+  padding: 15px;
+}

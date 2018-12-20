@@ -38,11 +38,11 @@
 </html>
 
 <script>
-  <% if notice %>
-    toastr.success('<%=notice%>', {closeButton: true,closeHtml: '<button><i class="icon-on"></i></button>'});
-    // toastr.options.closeButton = true;
-    
-  <% elsif alert %>
-    toastr.error('<%=alert%>');
+  <% if controller_name  != "registrations"%>
+    <% if notice %>
+      toastr.success('<%=notice%>', {closeButton: true,closeHtml: '<button><i class="icon-on"></i></button>'});
+    <% elsif alert %>
+      toastr.error('<%=alert%>');
+    <% end %>
   <% end %>
 </script>
