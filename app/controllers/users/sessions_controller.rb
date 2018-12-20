@@ -2,7 +2,7 @@ class Users::SessionsController < Devise::SessionsController
   
   def create
     user = User.find_by(email: params[:user][:email].downcase)
-    if user.deleted_at != nil
+    if user.present? && user.deleted_at != nil
       user.update(deleted_at: nil)
       flash[:notice]= "Welcome Back! You have reactivated your account."
       sign_in(User, user)
