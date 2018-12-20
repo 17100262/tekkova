@@ -18,7 +18,7 @@
                 <%= f.password_field :password, autocomplete: "off",required: true, class: "form-control form-control-md pss_next", placeholder: "Enter Your Password"  , id: "join_pword", minlength: 6 %>
                 <%= f.password_field :password_confirmation, autocomplete: "off",required: true, class: "form-control form-control-md", placeholder: "Confirm Your Password", id: "join_cpword" %>
                 <div class="input-file-container">  
-                    <%= f.file_field :profile_image, accept:"image/*", class:"input-file", :data => { :buttonText => 'bar' } %>
+                    <%= f.file_field :profile_image, accept:"image/*", required: true, class:"input-file", :data => { :buttonText => 'bar' } %>
                     <label tabindex="0" for="input-file" class="input-file-trigger bg-primary">Upload Profile Picture</label>
                     <span class="file-return">No File Choosen</span>
                 </div>
@@ -27,7 +27,7 @@
                 <%#= f.check_box :terms_of_service,required: true %>
                 <!--I agree to <a href="/policies">terms of service and privacy policy</a> -->
                 <%= f.check_box :offers %> <span class="mb-0">Yes,send me speci al offers,discounts and updates</span><br>
-    					<input type="checkbox" > I Agree to <a href="/terms_and_conditions">Marketplace Terms and Conditions</a>, &nbsp;&nbsp;&nbsp;&nbsp;<a href="/privacy_policy">Privacy Policy</a> and <a href="/nd_policy">Non-Discrimination Policy</a><br><br>
+    					<input type="checkbox" required="true"> I Agree to <a href="/terms_and_conditions">Marketplace Terms and Conditions</a>, &nbsp;&nbsp;&nbsp;&nbsp;<a href="/privacy_policy">Privacy Policy</a> and <a href="/nd_policy">Non-Discrimination Policy</a><br><br>
     					  <%= f.submit "Sign Up", class: "login loginmodal-button loginmodal-submit", id: "tick", onclick:"myFunction()" %>
       			<% end %>
   				
