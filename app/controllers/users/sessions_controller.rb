@@ -6,7 +6,6 @@ class Users::SessionsController < Devise::SessionsController
       user.update(deleted_at: nil)
       flash[:notice]= "Welcome Back! You have reactivated your account."
       sign_in(User, user)
-      @deleted = true
       redirect_to user_path(user)
     else
       self.resource = warden.authenticate!(auth_options)
