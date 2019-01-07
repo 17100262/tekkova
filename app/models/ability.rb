@@ -10,7 +10,7 @@ class Ability
         can :home, :admin
         can :home, :mass_email
       else
-        can [:update,:destroy,:read,:car_steps], Car do |car|
+        can [:update,:destroy,:read,:car_steps,:carshow], Car do |car|
           p "abilities #{car.user_id} #{user.id} #{car.user_id == user.id}"
           car.user_id == user.id
         end

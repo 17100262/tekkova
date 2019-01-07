@@ -59,6 +59,16 @@
                   </tr>
                   
                   <tr>
+                    <th>Number of Cylinders</th>
+                      <td><%= @car.cylinders %></td>
+                  </tr>
+                  
+                  <tr>
+                    <th>Engine Size</th>
+                      <td><%= @car.engine_size %></td>
+                  </tr>
+                  
+                  <tr>
                     <th>Drive Type</th>
                       <td><%= @car.drive_type %></td>
                   </tr>
@@ -69,7 +79,7 @@
                   </tr>
                   
                   <tr>
-                    <th>License Plate Number</th>
+                    <th>Licence Plate Number</th>
                       <td><%= @car.liecense_plate_number %></td>
                   </tr>
                   
@@ -85,7 +95,7 @@
                   
                   <tr>
                     <th>Agreed Insurance Value</th>
-                      <td><%= @car.agreed_insurance_value %></td>
+                      <td>$<%= @car.agreed_insurance_value %></td>
                   </tr>
                 </tbody>
               </table>
@@ -96,19 +106,24 @@
                 </tr>
                   <tr>
                     <th>Daily Drive Limit</th>
-                      <td width="50%"><%= @car.daily_drive_limit %></td>
+                      <td width="50%"><%= @car.daily_drive_limit %> Kilometers per day</td>
                   </tr>
                   
                   <tr>
                     <th>Allow Personal/Commercial Use</th>
-                      <td><%= @car.allow_personal_commercial_use %></td>
+                      <td>
+                        <% if @car.allow_personal_commercial_use == true %>Private use only
+                        <% else %>Commercial use permitted
+                       <%end %>
+                      </td>
+                      
                   </tr>
                   </tbody>
               </table>
           
           <center>
-          <%= link_to 'Go to home page', "/", class:"btn btn-primary btn-sm" %>
-          <%= link_to 'Show my profile', user_path(current_user), class:"btn btn-primary btn-sm" %>
+          <%= link_to 'Back', "/my_garage", class:"btn btn-primary" %>
+          <%= link_to 'Car as Advertised', user_path(current_user), class:"btn btn-primary" %>
           </center>
           </div>
       </div>    

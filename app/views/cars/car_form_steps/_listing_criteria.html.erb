@@ -33,7 +33,7 @@
               <%= f.check_box :maintained_check, required: true %>
               <span>Well maintained and serviced as scheduled and recommended by the manafacturer </span><br><br>
               <%= f.hidden_field :step, value: 0 %>
-              <%= f.hidden_field :status, value: "draft" %>
+              <%= f.hidden_field :status, value: "not_completed" %>
               <div class="row">
                 <div class="col-12">
                   <%= link_to 'Cancel', my_garage_path, class:"btn btn-primary btn-sm pr-3 pl-3" %>

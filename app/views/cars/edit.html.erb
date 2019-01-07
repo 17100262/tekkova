@@ -1,6 +1,2 @@
-
-  			      
-  			      <center><h2 class="my-3">Editing Car</h2></center>
-                
-                <!--<= render 'form', car: @car %>-->
-                <%= render 'cars/car_form_steps/1_car_details', car: @car %>
+  <center><h2 class="my-3">Editing Car</h2></center>
+  <%= render 'cars/car_form_steps/1_car_details', car: @car,scenario: "edit" %>

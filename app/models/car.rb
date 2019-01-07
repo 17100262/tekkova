@@ -10,7 +10,7 @@ class Car < ApplicationRecord
     accepts_nested_attributes_for :car_pictures, reject_if: :all_blank, allow_destroy: true
     
     
-    enum status: [:draft,:completed]
+    enum status: [:not_completed, :completed]
     
     attr_accessor :model_year_check
     attr_accessor :usage_limit_check

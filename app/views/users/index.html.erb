@@ -13,7 +13,7 @@
         <th>Cars Posted</th>
         <th>Cars Hired</th>
         <th>Optional Offers</th>
-        <th>View</th>
+        <th width="18.8%">View</th>
         <!--<th></th>-->
       </tr>
     </thead>
@@ -29,7 +29,7 @@
         <td>
           <%= link_to 'Edit', edit_user_path(user), class:"btn btn-primary btn-sm mb-1" %>
           <%= link_to 'Show', user_path(user), class:"btn btn-primary btn-sm mb-1" %>
-          <%= link_to "Delete account", admin_destroy_user_path(user), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-sm btn-primary pf-btn" %>
+          <%= link_to "Delete", admin_destroy_user_path(user), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-sm btn-primary pf-btn" %>
           </td>
         <!--<td><%#= link_to '<i class="fas fa-trash icon-chat" style="font-size: 19px" title="Delete"></i>'.html_safe, user, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       

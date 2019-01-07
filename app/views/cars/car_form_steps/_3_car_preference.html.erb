@@ -53,7 +53,7 @@
       
       </div>
     	
-    	<h5 class="mt-4">Do you allow travellers to use your car for personal and commercial purposes such as Uber?</h5> <span><h6 style="color:#808080"> Please note that we ask this question, as a part of our listing process regardless of make and models of all our hosts</h6></span>
+    	<h5 class="mt-4">Do you allow travellers to use your car for personal and commercial purposes such as Uber?</h5> <span><h6 style="color:#808080"> Please note we ask this question as part of our car listing process regardless of your vehicle’s make, model or value</h6></span>
       <div class="checkbox-form">
         <%= radio_button_tag "car[allow_personal_commercial_use]",true,@car.allow_personal_commercial_use == true  %>
         <%= form.label "Yes" %>
@@ -66,7 +66,7 @@
   <%= (form.hidden_field :status, value: "completed") if current_user.cars.count > 1 %>
   <%= form.hidden_field :step, value: 3 %>
   <div class="mt-2">
-<%= link_to car_steps_path(id: @car.id,step: 3) ,class: "btn btn-primary btn-sm pl-3 pr-3",role: "button" do %> 
+<%= link_to car_steps_path(id: @car.id,step: 2) ,class: "btn btn-primary btn-sm pl-3 pr-3",role: "button" do %> 
    <i class="fas fa-caret-left"></i> Back
   <% end %>
   <span class="float-right">

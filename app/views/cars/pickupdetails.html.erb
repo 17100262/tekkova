@@ -10,7 +10,7 @@
 </div>
 </div>
 </div>
-<h2 class="heading mt-4">Availibility & Pickup</h2>
+<h2 class="heading mt-4">Availability & Pickup</h2>
 <!--<div class="avial-pick-up">-->
   
 <!--</div>-->
@@ -55,18 +55,18 @@
                 <div class="checkbox-form inner-check-box">
                 <% ["Anyday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each do |day| %>
               		
-                  <%= check_box_tag "user[availibility_days][]", day,(@user.availibility_days.include?(day) if @user.availibility_days.present?) %>
+                  <%= check_box_tag "user[availibility_days][]", day,(@user.availibility_days.include?(day) if @user.availibility_days.present?),id: day,class: "ablebox" %>
                   <%= form.label day %>
               	<% end %>	
               	</div>
               	
               	<hr>
               	
-              	<h5 class="mt-3">Do you prefer short term or long term rentals?</h5>
+              	<h5 class="mt-3">On average on a monthly basis, Do you prefer short or long term rentals?</h5>
                 <div class="checkbox-form inner-check-box">
-                  <%= radio_button_tag "user[rental]","short_term",@user.rental=="short_term"  %>
+                  <%= radio_button_tag "user[rental]","Short term",@user.rental=="Short term"  %>
                   <%= form.label "Short Term, 1 to 3 days per week" %>
-                  <%= radio_button_tag "user[rental]","long_term",@user.rental=="long_term"  %>
+                  <%= radio_button_tag "user[rental]","Long term",@user.rental=="Long term"  %>
                   <%= form.label "Long Term, 4 to 7 days per week" %>
                 
               	</div>
@@ -101,3 +101,56 @@
           
 </div>
 </div><div class="container">
+
+<script>
+  $(document).ready(function () {
+        var checkedval = false;
+        if ($("#Anyday").prop("checked")) {
+             <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each do |day| %>
+                $('#<%=day%>').attr('disabled', true);
+             <%end%>
+          // $('#Anyday').attr('disabled', false);
+            // checkedval = true
+        } else {
+             <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each do |day| %>
+                $('#<%=day%>').attr('disabled', false);
+             <%end%>
+        }
+       <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each do |day| %>
+           if ($("#<%=day%>").prop("checked")) {
+             checkedval = true
+           }
+       <%end%>
+       if(checkedval == true){
+            $('#Anyday').attr('disabled', true);
+       }else{
+            $('#Anyday').attr('disabled', false);
+       }
+        
+    });
+  $('.ablebox').change(function () {
+        var checkedval = false;
+        if ($("#Anyday").prop("checked")) {
+             <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each do |day| %>
+                $('#<%=day%>').attr('disabled', true);
+             <%end%>
+          // $('#Anyday').attr('disabled', false);
+            // checkedval = true
+        } else {
+             <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each do |day| %>
+                $('#<%=day%>').attr('disabled', false);
+             <%end%>
+        }
+       <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each do |day| %>
+           if ($("#<%=day%>").prop("checked")) {
+             checkedval = true
+           }
+       <%end%>
+       if(checkedval == true){
+            $('#Anyday').attr('disabled', true);
+       }else{
+            $('#Anyday').attr('disabled', false);
+       }
+        
+    });
+</script>

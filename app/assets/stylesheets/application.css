@@ -611,3 +611,163 @@ a.ftr-widget-txt:hover {
 .btn-set {
   padding: 15px;
 }
+.mygrge-prf {
+      font-weight: 600;
+    font-size: 0.9em;
+}
+.car-shw-btn {
+  background-color: #800080;
+    border-color: #800080 #800080 #800080;
+    color: #fff;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/*carousal css*/
+.article-slide .carousel-indicators {
+    bottom: 0;
+    left: 0;
+    margin-left: 5px;
+    width: 100%;
+    display: grid;
+}
+/* Indicators list style */
+.article-slide .carousel-indicators li {
+    border: medium none;
+    border-radius: 0;
+    float: left;
+    height: 54px;
+    margin-bottom: 5px;
+    margin-left: 0;
+    margin-right: 5px !important;
+    margin-top: 0;
+    width: 100px;
+}
+/* Indicators images style */
+.article-slide .carousel-indicators img {
+    border: 2px solid #FFFFFF;
+    float: left;
+    height: 54px;
+    left: 0;
+    width: 100%;
+}
+@media(max-width: 500px) {
+  .article-slide .carousel-indicators img {
+    width: 50px;
+}
+}
+/* Indicators active image style */
+.article-slide .carousel-indicators .active img {
+    border: 2px solid #428BCA;
+    opacity: 0.7;
+}
+.carousel-indicators {
+  position: relative !important;
+  justify-content: left !important;
+}
+.car-details-tabs .btn-primary:active, .btn-primary:focus,  html .btn-primary.active{
+  box-shadow: none !important;
+      background-color: #21a5d6 !important;
+      margin-left: 0px !important
+}
+.btn-group .btn-breadcrumb .car-details-tabs:hover {
+      background: #21a5D6 !important;
+}
+.car-details-tabs .btn:focus {
+  z-index: 40;
+}
+ .tabs-border {
+       border-bottom: 0px !important;
+ }
+ .car-details-tabs .btn-primary {
+   background-color: #f5f5f5;
+   color: #21a5D6;
+   border-color: transparent !important;
+ }
+ .car-details-tabs .btn-primary:focus {
+   color: #fff;
+ }
+/*.car-details-tabs .btn.btn-primary:not(:last-child):before {*/
+/*      border-left: 1px solid #000 !important;*/
+/*}*/
+.car-details-tabs .btn.btn-primary.active:not(:last-child):focus {
+      z-index: 0 !important;
+}
+.car-details-tabs .btn.btn-primary.active:focus:not(:last-child) {
+      z-index: 3 !important;
+}
+
+/*.car-details-tabs .btn.btn-primary:not(:last-child):focus:after {*/
+/*      z-index: 0 !important;*/
+/*}*/
+.car-details-tabs .btn.btn-primary {
+      margin-left: 0 !important;
+}
+/*.car-details-tabs .btn.btn-primary:not(:last-child):hover {*/
+/*      z-index: 3 !important;*/
+/*}*/
+/*.car-details-tabs .btn.btn-primary:not(:last-child)::after:focus {*/
+/*      z-index: 3 !important;*/
+/*}*/
+@media (min-width: 768px){
+.car-details-tabs .btn.btn-primary.active:not(:last-child):after {
+    border-left: 20px solid #21a5D6 !important;
+}}
+@media (min-width: 768px){
+.car-details-tabs .btn.btn-primary:not(:last-child):after {
+    border-left: 20px solid #f5f5f5 !important;
+}}
+@media (min-width: 768px){
+  .car-details-tabs .btn.btn-primary:hover:not(:last-child):after{
+    z-index: 0 !important;
+    border-left: 20px solid #21a5D6 !important;
+  }
+  .car-details-tabs .btn.btn-primary.active:focus:not(:last-child):after{
+    z-index: 0 !important;
+    border-left: 20px solid #21a5D6 !important;
+  }
+  /*.car-details-tabs .btn.btn-primary:focus:not(:last-child):after{*/
+  /*  z-index: 0 !important;*/
+    
+  /*}*/
+  .car-details-tabs .btn.btn-primary:hover:not(:last-child):before{
+    z-index: 0 !important;
+  }
+   .car-details-tabs .btn.btn-primary:focus:not(:last-child):before{
+    z-index: 0 !important;
+    border-left: 20px solid #21a5D6 !important;
+  }
+.car-details-tabs .btn.btn-primary:not(:last-child):before, .car-details-tabs .btn.btn-primary:focus:not(:last-child):before {
+    border-left: 20px solid #fff !important;
+}
+
+}
+.car-adver-tb {
+  border-bottom: 0px !important;
+}
+@media (min-width: 768px) {
+img.car_slider_pic {
+    width: 100%;
+    height: 400px;
+}
+.indicator-fix-height {
+  overflow-y: scroll;
+  height: 400px;
+}
+}
+@media (max-width: 768px) {
+img.car_slider_pic {
+    width: 100%;
+    height: 200px;
+}
+.indicator-fix-height {
+  overflow-y: scroll;
+  height: 200px;
+}
+}
