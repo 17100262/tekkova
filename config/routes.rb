@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   resources :violations
   resources :car_features
   resources :cars do
-    collection do
-      
-    end
+      get 'details',to:'cars#carshow',as: :details
+    # member do
+    # end
   end
   get 'car_steps', to: 'cars#car_steps',as: :car_steps
   get 'personaldetails', to: 'cars#personaldetails',as: :personaldetails
