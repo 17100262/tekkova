@@ -34,7 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
 
       t.string :firstname
       t.string :lastname
-      # t.boolean :send_updates
+      t.boolean :offers
       t.boolean :admin, default: false
       
       t.string :availibility_days
