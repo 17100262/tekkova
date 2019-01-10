@@ -429,7 +429,7 @@ html .btn-primary.active,
 	background-color: #0088cc !important;
 	background-image: none !important;
 	border-color: #0088cc #0088cc #0088cc !important;
-	box-shadow: 0 0 0 0.2rem #21a5D6 !important;
+	/*box-shadow: 0 0 0 0.2rem #21a5D6 !important;*/
 }
 
 html .-scale-2 {
