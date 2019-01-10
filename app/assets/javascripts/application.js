@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require rails-ujs
+//= require rails_ujs
 //= require fileinput
 //= require toastr
 //= require cocoon
