@@ -15,6 +15,7 @@
 //= require fileinput
 //= require toastr
 //= require cocoon
+//= require_tree .
 toastr.options = {
   "closeButton": true,
   "debug": false,
