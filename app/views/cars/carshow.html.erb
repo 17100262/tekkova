@@ -39,8 +39,8 @@
   </div>
 </div>
 
-<div class="container mt-3">
-   <div class="col-md-7 mx-auto">
+<div class="container py-2">
+ 
       <p class="mb-0"><strong>
                     <%= @car.year %>
                     <%= @car.make %>
@@ -48,17 +48,16 @@
                     <%= @car.series %>
                     <%= @car.trans_mission %>
             </strong> </p>
-           </div>
+     
           </div>
 <hr>
 
-<div class="container">
- <div class="col-md-10 mx-auto">
-   <div class="row">
-     <div class="col-md-4 pl-0">
+<div class="container py-1">
+  <div class="row">
+     <div class="col-md-3">
        <h3 class="mb-0">Pickup Location</h3>
      </div>
-     <div class="col-md-8">
+     <div class="col-md-9">
       <p class="mt-2 mb-0"> 
          <strong>
            <%= @car.user.pickup_state %>
@@ -68,7 +67,7 @@
        </p>
      </div>
    </div>
- </div>
+
  </div>
 <hr>
 
