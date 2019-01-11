@@ -11,10 +11,10 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery_ujs
 //= require fileinput
 //= require toastr
 //= require cocoon
-//= require_tree .
 toastr.options = {
   "closeButton": true,
   "debug": false,
