@@ -14,24 +14,24 @@
             <% end %>
             
               <p>Please ensure that your vehicle meets the following criteria</p>
-              <%= f.check_box :model_year_check, required: true %>
-              <span>2013-2019 model year</span> <br>
+              <%= f.check_box :model_year_check, required: true, id:"1" %>
+              <label for="1">2013-2019 model year</label> <br>
               
-              <%= f.check_box :usage_limit_check, required: true %>
-              <span>Less than 150,000 in kms</span> <br>
+              <%= f.check_box :usage_limit_check, required: true, id:"2" %>
+              <label for="2">Less than 150,000 in kms</label> <br>
               
-              <%= f.check_box :register_check, required: true %>
-              <span>Registered</span> <br>
+              <%= f.check_box :register_check, required: true, id:"3" %>
+             <label for="3">Registered</label> <br>
               
-              <%= f.check_box :road_worthy_check, required: true %>
-              <span>Road Worthy</span> <br>
+              <%= f.check_box :road_worthy_check, required: true, id:"4" %>
+              <label for="4">Road Worthy</label> <br>
               
-              <%= f.check_box :write_off_check, required: true %>
-              <span>No write off</span> <br>
+              <%= f.check_box :write_off_check, required: true, id:"5" %>
+              <label for="5">No write off</label> <br>
               
-              
-              <%= f.check_box :maintained_check, required: true %>
-              <span>Well maintained and serviced as scheduled and recommended by the manafacturer </span><br><br>
+              <%= f.check_box :maintained_check, required: true, id:"6" %>
+             <label for="6">Well maintained and serviced as scheduled and recommended by the manafacturer </label><br><br>
+             
               <%= f.hidden_field :step, value: 0 %>
               <%= f.hidden_field :status, value: "not_completed" %>
               <div class="row">

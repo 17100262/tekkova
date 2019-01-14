@@ -31,6 +31,21 @@ toastr.options = {
   "hideMethod": "fadeOut"
 }
 $(document).ready(function() {
+$('.carousel-indicators li').addClass('carousel-li');
+$('.carousel-li:eq(0)').addClass("active");
+function image(){
+  var now = $('.carousel-li.active').index() + 1;
+var total = $('.carousel-li').length;
+$('.image-quantity').text(now+" / "+total);
+}  
+image();
+$(document).click(function() {
+ image();
+})
+
+
+  
+  
   toastr.options.closeHtml = '<button><i class="icon-on"></i></button>';
   toastr.options.closeHtml = true;
    $('.alert').delay(2000).fadeOut();
@@ -238,5 +253,3 @@ $('#wizard input[type=text]').keyup(function() {
     return caps.charAt(0).toUpperCase() + caps.slice(1);
 });
 });
-
-

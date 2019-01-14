@@ -38,28 +38,28 @@
       <h5 class="mt-4">Select your preffered daily drive kilometer limit?</h5>
         
       <div class="checkbox-form">
-        <%= radio_button_tag "car[daily_drive_limit]",150,@car.daily_drive_limit == 150  %>
-        <%= form.label "150 kms" %>
+        <%= radio_button_tag "car[daily_drive_limit]",150,@car.daily_drive_limit == 150, id:"150"  %>
+        <%= form.label "150 kms", for:"150" %>
         
-        <%= radio_button_tag "car[daily_drive_limit]",200,@car.daily_drive_limit == 200  %>
-        <%= form.label "200 kms" %>
+        <%= radio_button_tag "car[daily_drive_limit]",200,@car.daily_drive_limit == 200, id:"200"  %>
+        <%= form.label "200 kms", for:"200" %>
         
-        <%= radio_button_tag "car[daily_drive_limit]",250,@car.daily_drive_limit == 250  %>
-        <%= form.label "250 kms" %>
+        <%= radio_button_tag "car[daily_drive_limit]",250,@car.daily_drive_limit == 250, id:"250"  %>
+        <%= form.label "250 kms", for:"250" %>
         
-        <%= radio_button_tag "car[daily_drive_limit]",300,@car.daily_drive_limit == 300  %>
-        <%= form.label "300 kms" %>
+        <%= radio_button_tag "car[daily_drive_limit]",300,@car.daily_drive_limit == 300, id:"300"  %>
+        <%= form.label "300 kms", for:"300" %>
         
       
       </div>
     	
     	<h5 class="mt-4">Do you allow travellers to use your car for personal and commercial purposes such as Uber?</h5> <span><h6 style="color:#808080"> Please note we ask this question as part of our car listing process regardless of your vehicle’s make, model or value</h6></span>
       <div class="checkbox-form">
-        <%= radio_button_tag "car[allow_personal_commercial_use]",true,@car.allow_personal_commercial_use == true  %>
-        <%= form.label "Yes" %>
+        <%= radio_button_tag "car[allow_personal_commercial_use]",true,@car.allow_personal_commercial_use == true, id:"true"  %>
+        <%= form.label "Yes", for:"true" %>
         
-        <%= radio_button_tag "car[allow_personal_commercial_use]", false, @car.allow_personal_commercial_use == false  %>
-        <%= form.label "No, only private use" %>
+        <%= radio_button_tag "car[allow_personal_commercial_use]", false, @car.allow_personal_commercial_use == false, id:"false"  %>
+        <%= form.label "No, only private use", for:"false" %>
         
     	</div>
     </section>

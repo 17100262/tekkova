@@ -110,16 +110,16 @@
     </div>  
     <div class="row">
       <div class="col-md-4">
-        <%= form.radio_button :drive_type, 'All wheel drive'%> 
-        <%= label :drive_type, 'All wheel drive' %>
+        <%= form.radio_button :drive_type, 'All wheel drive', id:"all-wheel-drive" %> 
+        <%= label :drive_type, 'All wheel drive', for:"all-wheel-drive" %>
         </div>
         <div class="col-md-4">
-        <%= form.radio_button :drive_type, 'Front wheel drive' %>
-        <%= label :drive_type, 'Front Wheel Drive' %>
+        <%= form.radio_button :drive_type, 'Front wheel drive', id:"front-wheel-drive" %>
+        <%= label :drive_type, 'Front Wheel Drive', for:"front-wheel-drive" %>
         </div>
         <div class="col-md-4">
-        <%= form.radio_button :drive_type, 'Rear wheel drive' %>
-        <%= label :drive_type, 'Rear Wheel Drive' %>
+        <%= form.radio_button :drive_type, 'Rear wheel drive', id:"rear-wheel-drive" %>
+        <%= label :drive_type, 'Rear Wheel Drive', for:"rear-wheel-drive" %>
       </div>
     </div>
     <div class="row mt-3">

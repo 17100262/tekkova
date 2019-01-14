@@ -4,7 +4,7 @@ class Users::SessionsController < Devise::SessionsController
     user = User.find_by(email: params[:user][:email].downcase)
     if user.present? && user.deleted_at != nil
       user.update(deleted_at: nil)
-      flash[:notice]= "Welcome Back! You have reactivated your account."
+      flash[:notice]= " welcome back, You have successfully reactivated your account."
       sign_in(User, user)
       redirect_to user_path(user)
     else
