@@ -80,7 +80,7 @@
 				<nav>
 					<!--<div class="tabs-border">-->
 					  <div class="nav nav-tabs nav-fill btn-group btn-breadcrumb car-details-tabs car-adver-tb" id="nav-tab" role="tablist">
-					    <a class="btn btn-primary   active" id="nav-owner-tab" data-toggle="tab" href="#nav-owner" role="tab" aria-controls="nav-owner" aria-selected="true">Owner's Comments </a>
+					    <a class="btn btn-primary active" id="nav-owner-tab" data-toggle="tab" href="#nav-owner" role="tab" aria-controls="nav-owner" aria-selected="true">Owner's Comments </a>
               <a id="nav-specs-tab" class="btn btn-primary  "  data-toggle="tab" href="#nav-specs" role="tab" aria-controls="nav-specs" aria-selected="false">Specs</a>
               <a id="nav-features-tab" class="btn btn-primary  "  data-toggle="tab" href="#nav-features" role="tab" aria-controls="nav-specs" aria-selected="false">Features</a>
               <a id="nav-features-tab" class="btn btn-primary  "  data-toggle="tab" href="#nav-usetype" role="tab" aria-controls="nav-specs" aria-selected="false">Use Type</a>
@@ -92,9 +92,11 @@
 					  <hr>
 					      <strong>Owner's Comments</strong>
 					  <hr>
-					  <center><%= link_to 'Edit'.html_safe, edit_car_path(@car), class:"btn btn-primary" %></center>
-					  <%= @car.description%>
-					
+					   <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal">Edit</button>
+					  <%#= link_to 'Edit'.html_safe, edit_car_path(@car), class:"btn btn-primary float-right" %>
+					  <div style="margin-top: 4rem !important">
+					  <p class="mt-5"><%= simple_format(@car.description)%></p>
+					 </div>
 					</div>
 					<div class="tab-pane fade" id="nav-specs" role="tabpanel" aria-labelledby="nav-specs-tab">
 					   <hr>
@@ -149,23 +151,11 @@
 					      <strong>Features</strong>
 					  <hr>
 						  <div class="row">
+						      <% @car.car_features.each do |feature|%>
 						    <div class="col-md-4">
-						      <p>Bike Rack</p>
-						      <p>Heated Seats</p>
-						      <p>Sunroof</p>
-						      <p>Booster Seat</p>
+						        <p><%= feature.name%></p>
 						    </div>
-						    <div class="col-md-4">
-						      <p>Bluetooth</p>
-						      <p>GPS</p>
-						      <p>Alarm</p>
-						      <p>AUX</p>
-						      </div>
-						    <div class="col-md-4">
-						      <p>Pet Friendly</p>
-						      <p>USB Input</p>
-						      <p>Window Tint</p>
-						    </div>
+						      <% end %>
 						  </div>
 					</div>
 					<div class="tab-pane fade" id="nav-usetype" role="tabpanel" aria-labelledby="nav-features-tab">
@@ -226,4 +216,48 @@
 					<i class="fas fa-star rating-color"></i>
 					<i class="fas fa-star rating-color"></i>
 </div>
+<!--modal content-->
+<!-- Large modal -->
+
+
+
+
+
+<div class="container">
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg w-75">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <%= form_for(@car,remote: true) do |form| %>
+      <%= form.hidden_field :step,value: 4 %>
+      <%= form.text_area :description, rows:"5", class:'form-control', placeholder:"Please provide a description as it will appear on your car advertised profile to renters to see before booking, these may include vehicle modifications or any particular notes that you may have regrading your vehicle"  %>
+      
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <%= form.submit "Save", class:'refresh-page btn btn-primary'%>
+          <%end %>
+          <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+        </div>
+       
+      </div>
+    </div>
+  </div>
   
+</div>
+
+
+<script>
+  $('.refresh-page').click(function() {
+    setTimeout(location.reload.bind(location), 2000);
+});
+</script>

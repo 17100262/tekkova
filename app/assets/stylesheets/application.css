@@ -268,9 +268,7 @@ html .btn-default:hover, html .btn-default.hover {
  .ui-datepicker {
    border-color: #21A5D6 !important;
  }
- .btn-breadcrumb a, .btn-breadcrumb a:hover{
-   transition: none !important;
- }
+ 
 .btn-breadcrumb .btn-primary:hover{
   background: #21a5D6 !important;
 }
@@ -796,3 +794,12 @@ img.car_slider_pic {
     border-radius: 5px;
     font-weight: 800 !important;
 }
+.license-bottom-text {
+  color: #98a4ab;
+}
+.btn-breadcrumb a, .btn-breadcrumb a:hover, .btn-breadcrumb a:after, .btn-breadcrumb a:hover:after, .btn-breadcrumb a:before, .btn-breadcrumb a:hover:before{
+   transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+ }
+ .btn-breadcrumb .btn-primary:focus{
+ z-index: 2 !important;
+ }

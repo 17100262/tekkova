@@ -64,6 +64,7 @@ $(document).click(function() {
   $('#multi-form input[type="checkbox"]').attr("required", true);
    $('#multi-form input[type="radio"]').attr("required", true);
    $('#multi-form input[type="date"]').attr("required", true);
+   $('#user_driving_liecense_middlename').removeAttr("required");
    $('#multi-form select').attr("required", true);
    $('#multi-form textarea').attr("required", true);
 });
