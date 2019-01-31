@@ -61,7 +61,7 @@
       <div class="row">
         <div class="col-md-6">
           <%= form.label "Date of Birth" %> 
-          <%= form.text_field :personal_dob,  class:"datepicker" %>
+          <%= form.text_field :personal_dob,  id:"date-auto-slash", placeholder:' yy/mm/dd' %>
         </div>
         <div class="col-md-6">
           <%= form.label "Home Phone Number" %> 
@@ -84,3 +84,17 @@
 </div>
 
 
+<script>
+  $( document ).ready(function() {
+	$('#date-auto-slash').bind('keyup','keydown', function(event) {
+  	var inputLength = event.target.value.length;
+    if (event.keyCode != 8){
+      if(inputLength === 7 || inputLength === 4){
+        var thisVal = event.target.value;
+        thisVal += '/';
+        $(event.target).val(thisVal);
+    	}
+    }
+  })
+});
+</script>
