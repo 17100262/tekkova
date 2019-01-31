@@ -241,6 +241,7 @@ function avatarchange() {
         $("#profileImage").css('background', 'rgba(0,0,0,0)');
     });
 }
+
 $(document).ready(function() {
     avatarchange();
    
@@ -253,4 +254,7 @@ $('#wizard input[type=text]').keyup(function() {
      var caps = $(this).val();
     return caps.charAt(0).toUpperCase() + caps.slice(1);
 });
+});
+
+$(document).on('mouseover',function() {
 });
