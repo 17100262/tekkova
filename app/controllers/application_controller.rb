@@ -14,6 +14,9 @@ class ApplicationController < ActionController::Base
         user_path(resource)
       end
   end
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    redirect_to root_url, :alert => "This Record was not found in system. This link has expired or has been moved to another url."
+  end
   
   protected
   
