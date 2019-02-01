@@ -319,4 +319,7 @@ $('.custom-file-container__image-previewback').click(function(){
   }
 });
   
+  <%  if !(@user.licensefront.present? and @user.licenseback.present?)  %>
+      toastr.success('Please add clear photos of the front and back of your driver’s licence and click update', {closeButton: true,closeHtml: '<button><i class="icon-on"></i></button>'});
+  <% end %>
 </script>
