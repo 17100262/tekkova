@@ -828,18 +828,29 @@ img.car_slider_pic {
 .custom-list-style-2 li span:nth-child(1) {
   min-width: 142px;
   display: inline-block;
+  
+ 
 }
  .custom-list-style-2 span {
     font-weight: 600;
     font-size: 0.9em;
+     
  }
  .custom-list-style-3 li span:nth-child(1) {
   min-width: 110px;
   display: inline-block;
+  
+}
+.custom-list-style-3 li {
+  list-style: none;
+}
+.custom-list-style-2 li {
+  list-style: none;
 }
  .custom-list-style-3 span {
     font-weight: 600;
     font-size: 0.9em;
+    
  }
  
  .background-bg-arow {
