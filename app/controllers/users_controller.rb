@@ -44,7 +44,7 @@ class UsersController < ApplicationController
                     car.update(status: "completed")
                     redirect_to car_path(car), notice: "Car Posted Successfully"
                 else
-                    redirect_to user_path, notice: "You have successfully updated your availability and pickup details"
+                    redirect_to user_path, notice: "You have successfully added photos of your licence"
                 end
             end
         else
