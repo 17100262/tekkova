@@ -93,26 +93,15 @@ h2.heading{
 .btn-breadcrumb .btn.btn-default:before {
   border-left: 20px solid #ccc;
 }
-.btn-breadcrumb .btn.btn-default:hover:after {
-  border-left: 20px solid #ebebeb;
-}
-.btn-breadcrumb .btn.btn-default:hover:before {
-  border-left: 20px solid #adadad;
-}
 
 /** Primary button **/
 .btn-breadcrumb .btn.btn-primary:after {
-  border-left: 20px solid #21a5D6;
+  border-left: 20px solid #f5f5f5;
 }
 .btn-breadcrumb .btn.btn-primary:before {
   border-left: 20px solid #000;
 }
-.btn-breadcrumb .btn.btn-primary:hover:after {
-  border-left: 20px solid #21a5D6;
-}
-.btn-breadcrumb .btn.btn-primary:hover:before {
-  border-left: 20px solid #000;
-}
+
 }
 @media(max-width:768px){
 .btn-breadcrumb .btn {
@@ -141,22 +130,7 @@ h2.heading{
     top: -1px;
     margin-top: 0;
 }
-.btn-breadcrumb .btn.btn-default:hover:after {
-    border-top: 18px solid transparent;
-    border-bottom: 18px solid transparent;
-    border-left: 15px solid #ebebeb;
-    position: absolute;
-    top: -1px;
-    margin-top: 0;
-}
-.btn-breadcrumb .btn.btn-default:hover:before {
-    border-top: 18px solid transparent;
-    border-bottom: 18px solid transparent;
-    border-left: 15px solid #adadad;
-    position: absolute;
-    top: -1px;
-    margin-top: 0;
-}
+
 /** Primary button **/
 .btn-breadcrumb .btn.btn-primary:after {
       border-top: 18px solid transparent;
@@ -174,22 +148,7 @@ h2.heading{
     top: -1px;
     margin-top: 0;
 }
-.btn-breadcrumb .btn.btn-primary:hover:after {
-    border-top: 18px solid transparent;
-    border-bottom: 18px solid transparent;
-    border-left: 15px solid #21a5D6;
-    position: absolute;
-    top: -1px;
-    margin-top: 0;
-}
-.btn-breadcrumb .btn.btn-primary:hover:before {
-    border-top: 18px solid transparent;
-    border-bottom: 18px solid transparent;
-    border-left: 15px solid #21a5D6;
-    position: absolute;
-    top: -1px;
-    margin-top: 0;
-}
+
 
 }
 
@@ -270,10 +229,6 @@ html .btn-default:hover, html .btn-default.hover {
    border-color: #21A5D6 !important;
  }
  
-.btn-breadcrumb .btn-primary:hover{
-  background: #21a5D6 !important;
-}
-
 .ui-slider-range { 
 	background: linear-gradient(to right, #bac2ff, #4e91fd, #2c2cff, #0229bf) !important; 
 }
@@ -676,17 +631,13 @@ input[type="number"] {
   position: relative !important;
   justify-content: left !important;
 }
-.car-details-tabs .btn-primary:active, .btn-primary:focus,  html .btn-primary.active{
+.car-details-tabs .btn-primary:active, .car-details-tabs .btn-primary:hover,  html .btn-primary.active{
   box-shadow: none !important;
       background-color: #21a5d6 !important;
       margin-left: 0px !important
 }
-.btn-group .btn-breadcrumb .car-details-tabs:hover {
-      background: #21a5D6 !important;
-}
-.car-details-tabs .btn:focus {
-  z-index: 40;
-}
+
+
  .tabs-border {
        border-bottom: 0px !important;
  }
@@ -695,68 +646,39 @@ input[type="number"] {
    color: #21a5D6;
    border-color: transparent !important;
  }
- .car-details-tabs .btn-primary:focus {
-   color: #fff;
- }
-/*.car-details-tabs .btn.btn-primary:before {*/
-/*      border-left: 1px solid #000 !important;*/
-/*}*/
 
-.car-details-tabs .btn.btn-primary.active:focus {
-      z-index: 2 !important;
-}
 
-.zindex{
-  z-index: 9999 !important;
-}
-/*.car-details-tabs .btn.btn-primary:focus:after {*/
-/*      z-index: 0 !important;*/
-/*}*/
+
 .car-details-tabs .btn.btn-primary {
       margin-left: 0 !important;
 }
-/*.car-details-tabs .btn.btn-primary:hover {*/
-/*      z-index: 3 !important;*/
+/*.car-details-tabs .btn.btn-primary:hover{*/
+/*  z-index: 1 !important;*/
 /*}*/
-/*.car-details-tabs .btn.btn-primary::after:focus {*/
-/*      z-index: 3 !important;*/
-/*}*/
-@media (min-width: 768px){
 .car-details-tabs .btn.btn-primary.active:after {
     border-left: 20px solid #21a5D6 !important;
-}}
-@media (min-width: 768px){
+}
+  car-details-tabs .btn.btn-primary:hover:after {
+    border-left: 20px solid #21a5D6 !important;
+}
 .car-details-tabs .btn.btn-primary:after {
     border-left: 20px solid #f5f5f5 !important;
-}}
-@media (min-width: 768px){
-  .car-details-tabs .btn.btn-primary:hover:after{
-    z-index: 9999 !important;
+}
+  
+  .car-details-tabs .btn.btn-primary.active:focus:after, .car-details-tabs .btn.btn-primary.active:hover:after, .car-details-tabs .btn.btn-primary:hover:after{
     border-left: 20px solid #21a5D6 !important;
   }
-  .car-details-tabs .btn.btn-primary.active:focus:after{
-    z-index: 0 !important;
-    border-left: 20px solid #21a5D6 !important;
-  }
-  /*.car-details-tabs .btn.btn-primary:focus:after{*/
-  html .car-details-tabs .btn-primary.active{
+  html .car-details-tabs .btn-primary.active, html .car-details-tabs .btn-primary:hover{
     border: 1px solid #000 !important;
   }
-  .car-details-tabs .btn.btn-primary:hover{
-    z-index: 1 !important;
-  }
-  .car-details-tabs .btn.btn-primary:hover:before{
-    z-index: 9999 !important;
-  }
-   .car-details-tabs .btn.btn-primary:focus:before{
-    z-index: 0 !important;
+  
+   .car-details-tabs .btn.btn-primary:focus:before, .car-details-tabs .btn.btn-primary:hover:before{
     border-left: 20px solid #21a5D6 !important;
   }
-.car-details-tabs .btn.btn-primary:before, .car-details-tabs .btn.btn-primary:focus:before {
+.car-details-tabs .btn.btn-primary:before, .car-details-tabs .btn.btn-primary:focus:before, .car-details-tabs .btn.btn-primary:hover:before {
     border-left: 20px solid #000 !important;
 }
 
-}
 .car-adver-tb {
   border-bottom: 0px !important;
 }
@@ -810,12 +732,10 @@ img.car_slider_pic {
 .license-bottom-text {
   color: #98a4ab;
 }
-.btn-breadcrumb a, .btn-breadcrumb a:hover, .btn-breadcrumb a:after, .btn-breadcrumb a:hover:after, .btn-breadcrumb a:before, .btn-breadcrumb a:hover:before{
+.btn-breadcrumb a, .btn-breadcrumb a:hover, .btn-breadcrumb a:after, .btn-breadcrumb a:hover:after, .btn-breadcrumb .btn-primary:focus, .btn-breadcrumb a:before, .btn-breadcrumb a:hover:before{
    transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
  }
- .btn-breadcrumb .btn-primary:focus{
- z-index: 2 !important;
- }
+ 
  .top-arrow::before {
   position: absolute;
   right: 12px;
@@ -899,6 +819,26 @@ img.car_slider_pic {
    display: inline-block;
    border-radius: 5px;
  }
- .btn-breadcrumb .btn-primary, .btn-breadcrumb .btn-primary:focus{
+ .btn-breadcrumb .btn-primary, .btn-breadcrumb .btn-primary:focus, .btn-breadcrumb .btn-primary:hover{
    border: 1px solid #000 !important;
  }
+ .btn-breadcrumb .btn-primary:focus{
+   background-color: #21a5d6 !important;
+   color: #fff !important;
+ }
+ .zindex0{
+   z-index: 0 !important;
+ }
+ .zindex1{
+   z-index: 1 !important;
+ }
+ .zindex-1{
+   z-index: -1 !important;
+ }
+ .main-tabs .btn.active{
+   margin-left: -5px !important;
+ }
+ .main-tabs .btn{
+   margin-left: -5px !important;
+ }
+ 

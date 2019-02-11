@@ -256,5 +256,19 @@ $('#wizard input[type=text]').keyup(function() {
 });
 });
 
-$(document).on('mouseover',function() {
+$(document).on("mouseover",".btn-breadcrumb .btn-primary",function() {
+if($(this).next().hasClass('active')){
+$(this).next().addClass('zindex1');
+}
+if($(this).prev().hasClass('active')){
+$(this).addClass("zindex1");
+}
+});
+$(document).on("mouseup mouseout",".btn-breadcrumb .btn-primary",function() {
+if($(this).next().hasClass('active')){
+$(this).next().removeClass('zindex1');
+}
+if($(this).prev().hasClass('active')){
+$(this).removeClass("zindex1");
+}
 });
