@@ -12,42 +12,57 @@
                 <%= f.text_field :lastname , required: true,class: "form-control form-control-md", placeholder: "Enter Your Last Name" %>
                 <%= f.text_field :personal_mobile ,required: true,class: "form-control form-control-md", placeholder: "Enter Your Phone Number" %>
                 <%= f.email_field :email, autocomplete: "email",required: true, class: "form-control form-control-md", placeholder: "Enter Your Email" , id: "join_email" %>
-                <%= f.password_field :password, autocomplete: "off",required: true, class: "form-control form-control-md pss_next", placeholder: "Enter Your Password"  , id: "join_pword", minlength: 6 %>
+                <%= f.password_field :password, autocomplete: "off",required: true, class: "form-control form-control-md pss_next", placeholder: "Enter Your Password"  , id: "join_pword" %>
                 <%= f.password_field :password_confirmation, autocomplete: "off",required: true, class: "form-control form-control-md", placeholder: "Confirm Your Password", id: "join_cpword" %>
                 <div class="input-file-container">  
                     <%= f.file_field :profile_image, accept:"image/*", required: true, class:"input-file", :data => { :buttonText => 'bar' } %>
-                    <label tabindex="0" for="input-file" class="input-file-trigger bg-primary">Upload Profile Picture</label>
+                    <label tabindex="0" for="user_profile_image" class="input-file-trigger bg-primary">Upload Profile Picture</label>
                     <span class="file-return">No File Choosen</span>
                 </div>
                 <br>
                 <br>
-                <%#= f.check_box :terms_of_service,required: true %>
-                <!--I agree to <a href="/policies">terms of service and privacy policy</a> -->
                 <%= f.check_box :offers %> <span class="mb-0">Yes,send me special offers,discounts and updates</span><br>
     					<input type="checkbox" required="true"> I Agree to <a href="/terms_and_conditions">Marketplace Terms and Conditions</a>, &nbsp;&nbsp;&nbsp;&nbsp;<a href="/privacy_policy">Privacy Policy</a> and <a href="/nd_policy">Non-Discrimination Policy</a><br><br>
-    					  <%= f.submit "Sign Up", class: "login loginmodal-button loginmodal-submit", id: "tick", onclick:"myFunction()" %>
+                            <div class="container">
+  <!-- Button to Open the Modal -->
+  
+<a href="javascript:void(0)" class="login loginmodal-button loginmodal-submit text-center open-modal">
+    Sign Up
+  </a>
+  <a href="javascript:void(0)" class="btn btn-primary open-modal-abc d-none" data-toggle="modal" data-target="#myModal">
+    Sign Up
+  </a>
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <!-- Modal body -->
+        <div class="modal-body">
+         <p>Please read and review the below policies in order to sign up or for more information access all our policies under "Learn More" at the top right hand side of the page. By clicking agree you acknowledge you have read and understood & accept the below policies.</p>
+          <ul>
+            <li><a href="/terms_and_conditions" target="_blank">MarketPlace Terms & Conditions</a></li>
+            <li><a href="/privacy_policy" target="_blank">Privacy Policy</a></li>
+            <li><a href="/nd_policy" target="_blank">Non-discrimination Policy</a></li>
+          </ul>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        <input type="submit" name="commit" value="Sign Up" class="btn btn-primary" id="tick" data-disable-with="Sign Up">
+          <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
       			<% end %>
+
   			</div>
   				<hr class="hr-or">
   				<p style="text-align: center;">Already a Member? <a href="/users/sign_in"> Login </a></p>
   		</div> 
   </div>
 </div>
-
-<%= render 'cars/policies_popup' %>
-    <script>
-        // $(document).ready(function() {
-    
-        //     $('#policyModal').modal('show')
-        
-        // });
-        
-        $(document).ready(function() {
-    if(localStorage.getItem('#policyModal') != 'true'){
-        $("#policyModal").modal('show');
-        localStorage.setItem('#policyModal','true');
-    }
-});
-
-    </script>
-

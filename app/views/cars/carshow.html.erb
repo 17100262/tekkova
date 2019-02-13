@@ -5,12 +5,12 @@
         <div class="row">
           <div class="col-10 pr-1">
               <div class="carousel-inner">
-                <% @car.car_pictures.each_with_index  do |image, index| %>
+                <% @car.car_pictures.order("position ASC").each_with_index  do |image, index| %>
                   <div class="carousel-item <%= "active" if index == 0 %>">
                     <%= image_tag(image.avatar.url, class:'car_slider_pic') %>
                   </div>
                 <% end %>
-                <div class="image-quantity">hhhhh</div>
+                <div class="image-quantity"></div>
               </div>
               <a class="carousel-control-prev" href="#car_carousal_slider<%= @car.id %>" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -20,6 +20,7 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
               </a>
+              
           </div>
         <div class="col-2 pl-0">
           <div class="top-arrow"></div>

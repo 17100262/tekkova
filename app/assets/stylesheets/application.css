@@ -841,4 +841,12 @@ img.car_slider_pic {
  .main-tabs .btn{
    margin-left: -5px !important;
  }
- 
+ .warning{
+   border-color: red !important;
+ }
+ .warning-red{
+  color: red !important;
+ }
+ .btn-close{
+   margin-bottom: 15px !important;
+ }
