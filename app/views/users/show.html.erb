@@ -86,10 +86,12 @@
                                     <span class="text-color-dark">First Name:</span>
                                     <span class="custom-text-color-2"><%= @user.driving_liecense_firstname %></span>
                                 </li>
-                                <li class="my-2">
-                                    <span class="text-color-dark">Middle Name:</span>
-                                    <span class="custom-text-color-2"><%= @user.driving_liecense_middlename %></span>
-                                </li>
+                                <% if @user.driving_liecense_middlename.present? %>
+                                    <li class="my-2">
+                                        <span class="text-color-dark">Middle Name:</span>
+                                        <span class="custom-text-color-2"><%= @user.driving_liecense_middlename %></span>
+                                    </li>
+                                <% end %>
                                 <li class="my-2">
                                     <span class="text-color-dark">Last Name:</span>
                                     <span class="custom-text-color-2"><%= @user.driving_liecense_lastname %></span>

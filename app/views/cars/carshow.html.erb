@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-10">
-      <div id="car_carousal_slider<%= @car.id %>" class="carousel slide article-slide" data-ride="carousel">
+      <div id="car_carousal_slider<%= @car.id %>" class="carousel slide article-slide" data-ride="carousel" data-interval="3000">
         <div class="row">
           <div class="col-10 pr-1">
               <div class="carousel-inner">
@@ -266,4 +266,5 @@
   $('.refresh-page').click(function() {
     setTimeout(location.reload.bind(location), 2000);
 });
+ 
 </script>

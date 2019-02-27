@@ -31,7 +31,9 @@ class UsersController < ApplicationController
             params[:user].delete(:password_confirmation)
         end
         @user = User.find(params[:id])
-        if @user.update(user_params)
+        @user.assign_attributes(user_params)
+        changed_fields = @user.changed
+        if @user.save!
             if current_user.admin
                 redirect_to users_path,notice: "successfully updated"
             else
@@ -44,7 +46,7 @@ class UsersController < ApplicationController
                     car.update(status: "completed")
                     redirect_to car_path(car), notice: "Car Posted Successfully"
                 else
-                    redirect_to user_path, notice: "You have successfully added photos of your licence"
+                    redirect_to user_path, notice: ("You have successfully added photos of your licence" if changed_fields.include?("licenseback_updated_at")) || ("You have successfully updated your details")
                 end
             end
         else
