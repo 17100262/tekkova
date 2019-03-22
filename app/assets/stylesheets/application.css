@@ -758,10 +758,14 @@ img.car_slider_pic {
   font-size: 24px;
   bottom: 20px;
 }
+.article-slide .carousel-indicators {
+     scroll-behavior: smooth !important;
+}
  /*scroll css*/
  .article-slide .carousel-indicators::-webkit-scrollbar {
     width: 18px;
      padding: 20px !important;
+     scroll-behavior: smooth;
 }
 .article-slide .carousel-indicators::-webkit-scrollbar-button {
   background: transparent;
@@ -858,4 +862,36 @@ img.car_slider_pic {
    position: fixed;
    width: 100%;
  }
- 
+ .how-it-work-bg {
+   background: #f4f4f4;
+    border-top: 5px solid #f1f1f1;
+ }
+ .home-section-bg {
+   background: #f4f4f4;
+    border-top: 5px solid #f1f1f1;
+    padding: 30px 0px;
+ }
+ .video-bg-home {
+   background-image: url('/bmw3.jpg');
+  background-position: center center;
+  padding: 15px 0px;
+    background-repeat: no-repeat;
+ }
+ #cookies-banner{
+   position: fixed;
+    top: 0;
+    width: 30%;
+    z-index: 9999 !important;
+    right: 0;
+ }
+ #accept-cookie{
+   position: absolute !important;
+   top: 10px !important;
+   right: 10px !important;
+ }
+ .car-show-review-height {
+   height: 400px !important;
+ }
+ section#tabs {
+   min-height: 420px;
+ }

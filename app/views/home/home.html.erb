@@ -65,7 +65,46 @@
         </div>
     </div>
 </section>
+<div class="container py-4">
+	<h4 class="text-center mb-4">You could potentially earn</h4>
+	<h1 class="range-text-earn text-center">$1500</h1>
+	<h5 class="text-center">Annually</h5>
+<center>	<a href="#" class="btn btn-primary mt-2">Fees & Important Information</a></center>
+</div>
+ <div class="video-bg-home">
+    	 <div class="container">
+    	<div class="col-md-6 mx-auto">
+		<iframe src="https://player.vimeo.com/video/324935565?autoplay=1&loop=1&autopause=0" width="100%" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </div>
+    </div>
+    </div>
+    <div class="home-section-bg">
+    <div class="container">
+    	<h5 class="text-center text-primary mb-3 ">Will i be able to increase my rental price?</h5>
+    	<h4 class="text-center">Dynamic Pricing</h4>
+			<p class="text-center">		    		
+					Tekkova as of now endeavours to beat the price & 
+					pay car hosts more than any other marketplace
+					operating in Australia, whilst at the same time
+					ensuring car owners obtain bookings, by staying
+					competitive within the peer to peer car rental share
+					atmosphere. In spite of this, by the end of every
+					</p>
+					<p>
+        <center>  <button class="btn btn-primary mb-2 clickable"><span class="btn-text-less">More</span> <i class="fas fa-chevron-down"></i></button></center>
+        <div class="show-text">
+					        		calendar month or 4 consecutive weeks our top car
+					host performers in any location across Australia
+					whom receive and accept 3 bookings or manage to
+					rent out their vehicle for 3 or more days per week will
+					have the opportunity to increase &amp; set their own
+					rental price on the particular top performing vehicle
+					anywhere from 5 to $10, the exact figure will depend
+					on the agreed insured value of the vehicle.
+        </div>
 
+	</div>
+	</div>
 <section class="section section-default mb-0 pb-0">
 	<div class="container">
 	    
@@ -112,3 +151,24 @@
 
 
 <!--<= render 'cars/policies_popup2' %>-->
+<script>
+	
+$(document).ready(function(){
+	$(".show-text").hide();
+  $(".clickable").click(function(){
+  	if($('.show-text').is(':hidden')){
+  		$('.show-text').show();
+  		$(".clickable i").addClass('fa-chevron-up');
+  		$(".clickable i").removeClass('fa-chevron-down');
+  		$(".clickable span").text("Less");
+  	}
+  	else{
+  		$('.show-text').hide();
+  		$(".clickable i").removeClass('fa-chevron-up');
+  		$(".clickable i").addClass('fa-chevron-down');
+  	$(".clickable span").text("More");
+  	}
+    
+  });
+});
+</script>

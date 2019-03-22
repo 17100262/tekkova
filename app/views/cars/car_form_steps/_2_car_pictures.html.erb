@@ -8,13 +8,13 @@
 <div class="col-lg-6 offset-lg-3 btn-group btn-breadcrumb car-details-tabs main-tabs">
 <% end %>
   
-    <a href="<%= car_steps_path(step: 1,id: @car.id)  %>" class="btn btn-primary car_details">Car Details</a>
+    <a href="<%= car_steps_path(step: 1,id: @car.id)  %>" class="btn btn-primary car_details" style="margin-left: -5px !important;">Car Details</a>
     <a href="<%= car_steps_path(step: 2,id: @car.id)  %>" class="btn btn-primary active car_pictures">Car Pictures</a>
-    <a href="#" class="btn btn-default car_preference">Car Preference</a>
+    <a href="#" class="btn btn-default car_preference" style="margin-left: -5px !important;">Car Preference</a>
     <% if current_user.cars.count < 2 %>
-      <a href="#" class="btn btn-primary presonal_details">Personal Details</a>
-      <a href="#" class="btn btn-primary driver_license">Driver License</a>
-      <a href="#" class="btn btn-primary availibility_pickup">Availibility & Pickup</a>
+      <a href="#" class="btn btn-primary no-link presonal_details" style="margin-left: -5px !important;">Personal Details</a>
+      <a href="#" class="btn btn-primary no-link driver_license" style="margin-left: -5px !important;">Driver License</a>
+      <a href="#" class="btn btn-primary no-link availibility_pickup"; style="margin-left: -5px !important; z-index:0 !important;">Availibility & Pickup</a>
     <% end %>
 </div> 
 </div>

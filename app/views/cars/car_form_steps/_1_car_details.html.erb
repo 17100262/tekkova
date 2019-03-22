@@ -6,19 +6,19 @@
 <div class="col-lg-6 offset-lg-3 btn-group btn-breadcrumb car-details-tabs main-tabs">
 <% end %>
     <a href="<%= car_steps_path(step: 1,id: @car.id)  %>" class="btn btn-primary active car_details">Car Details</a>
-    <a href="#" class="btn btn-default car_pictures">Car Pictures</a>
-    <a href="#" class="btn btn-default car_preference">Car Preference</a>
+    <a href="#" class="btn btn-default car_pictures" style="margin-left: -5px !important;">Car Pictures</a>
+    <a href="#" class="btn btn-default car_preference" style="margin-left: -5px !important;">Car Preference</a>
     <% if current_user.cars.count < 2 && scenario == "new"  %>
-      <a href="#" class="btn btn-primary presonal_details">Personal Details</a>
-      <a href="#" class="btn btn-primary driver_license">Driver License</a>
-      <a href="#" class="btn btn-primary availibility_pickup">Availibility & Pickup</a>
+      <a href="#" class="btn btn-primary presonal_details" style="margin-left: -5px !important;">Personal Details</a>
+      <a href="#" class="btn btn-primary driver_license" style="margin-left: -5px !important;">Driver License</a>
+      <a href="#" class="btn btn-primary availibility_pickup" style="margin-left: -5px !important; z-index:0 !important">Availibility & Pickup</a>
     <% end %>
 </div>
 </div> 
 </div>
 <h2 class="heading mt-4">Car Details</h2>
 <div class="w-100">
-<img src="/car-detail_1.jpg" class="img-fluid background-bg-arow">
+<img src="/cr-d2.jpg" class="img-fluid background-bg-arow">
 </div>
 <div class="container pt-4">
 <div id="multi-form-d" class="car-details">
@@ -128,7 +128,8 @@
     </div> 
     <div class="row">
       <div class="col-md-12">
-        <%= form.text_area :description,  rows:"4", placeholder:"Please provide a description as it will appear on your car advertised profile to renters to see before booking, these may include vehicle modifications or any particular notes that you may have regrading your vehicle"  %>
+        <span id="count_text"></span>
+        <%= form.text_area :description, class:"words_count",  rows:"4", placeholder:"Please provide a description as it will appear on your car advertised profile to renters to see before booking, these may include vehicle modifications or any particular notes that you may have regrading your vehicle"  %>
       </div>
     </div> 
     <div class="row mt-3">
@@ -137,7 +138,11 @@
       </div>
     </div>  
     <div class="checkbox-form f-car">
-    <%= form.collection_check_boxes(:car_feature_ids, CarFeature.all, :id, :name) %> 
+    <%= form.collection_check_boxes(:car_feature_ids, CarFeature.all, :id, :name) do  |f| %>
+      <%= f.label class: "col-3" do %>
+        <%= f.check_box + f.text%>
+      <% end %>
+    <% end %>
     </div>
     <div class="row mt-3">
       <div class="col-md-4">

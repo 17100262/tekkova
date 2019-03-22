@@ -6,20 +6,20 @@
 <div class="col-lg-6 offset-lg-3 btn-group btn-breadcrumb car-details-tabs main-tabs">
 <% end %>
 
-    <a href="<%= car_steps_path(step: 1,id: @car.id) %>" class="btn btn-primary car_details">Car Details</a>
-    <a href="<%= car_steps_path(step: 2,id: @car.id) %>" class="btn btn-primary car_pictures">Car Pictures</a>
+    <a href="<%= car_steps_path(step: 1,id: @car.id) %>" class="btn btn-primary car_details" style="margin-left: -5px !important;">Car Details</a>
+    <a href="<%= car_steps_path(step: 2,id: @car.id) %>" class="btn btn-primary car_pictures" style="margin-left: -5px !important;">Car Pictures</a>
     <a href="<%= car_steps_path(step: 3,id: @car.id) %>" class="btn btn-primary car_preference active">Car Preference</a>
     <% if current_user.cars.count < 2 %>
       <a href="#" class="btn btn-primary presonal_details">Personal Details</a>
       <a href="#" class="btn btn-primary driver_license">Driver License</a>
-      <a href="#" class="btn btn-primary availibility_pickup">Availibility & Pickup</a>
+      <a href="#" class="btn btn-primary availibility_pickup" style=" z-index:0 !important;">Availibility & Pickup</a>
     <% end %>
 </div> 
 </div>
 </div>
 <h2 class="heading mt-4">Car Preference</h2>
 <div class="w-100">
-<img src="/car-preference-bg_1.jpg" class="img-fluid background-bg-arow">
+<img src="/car-prf4.png" class="img-fluid background-bg-arow">
 </div>
 <div class="container py-4">
 <div id="multi-form" class="car-preference">

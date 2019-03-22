@@ -1,7 +1,7 @@
-<div class="top-notification-header">
-    Please use a PC, laptop or a tablet instead of a mobile phone to signup, list your vehicle or if you are simply just browsing tekkova, in order to have a smoother experience, Thank you.
-    <span class="remove">&#10006</span>
-</div>
+<!--<div class="top-notification-header">-->
+<!--    Please use a PC, laptop or a tablet instead of a mobile phone to signup, list your vehicle or if you are simply just browsing tekkova, in order to have a smoother experience, Thank you.-->
+<!--    <span class="remove">&#10006</span>-->
+<!--</div>-->
 <header id="header" class="header-narrow">
     <div class="header-body header-top header-top-colored header-top-dark">
         <div class="header-container container-fluid">
@@ -69,7 +69,7 @@
                                 </li>
                             <% else %>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<%= main_app.new_user_registration_path %>">Sign Up</a>
+                                    <%#= main_app.new_user_registration_path %><a class="nav-link" href="#" data-toggle="modal" data-target="#signup">Sign Up</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<%= main_app.new_user_session_path %>">Log In</a>
@@ -91,10 +91,42 @@
         </div>
     </div>
 </header>
-<script>
-$(document).ready(function(){
-  $(".remove").click(function(){
-    $(".top-notification-header").remove();
-  });
-});
-</script>
+
+
+<!--modal start here-->
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">I would like to</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <button class="btn btn-primary btn-block btn-lg">Rent a Car, Coming Soon!</button>
+        <a href="/users/sign_up" class="btn btn-primary btn-lg btn-block">Become a host, Rent out my Car</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--modal end-->
+
+
+
+
+ <script>
+// $(document).ready(function(){
+//   $(".remove").click(function(){
+//     $(".top-notification-header").remove();
+//   });
+// });
+// </script>
