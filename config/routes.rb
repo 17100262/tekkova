@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   get 'feul_policy', to: 'users#feul_policy',as: :feul_policy
   get 'infringements_policy', to: 'users#infringements_policy',as: :infringements_policy
   get 'late_return_policy', to: 'users#late_return_policy',as: :late_return_policy
-   
+  get 'sign_up_page', to: 'users#sign_up_page', as: :sign_up_page
   # delete 'delete_commentfile/:comment_file_id(.:format)',to: 'users#delete_commentfile',as: :comment_file
   # get 'users/profile/edit', to: 'users#edit_profile', as: :edit_profile
   resources :users

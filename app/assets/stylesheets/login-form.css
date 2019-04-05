@@ -220,9 +220,10 @@ a.loginmodal-button:hover{
 @media (min-width: 768px){
 .modal-dialog {
     margin-bottom: 0 !important;}}
-@media (min-width: 430px){    
-.modal-dialog {
-    width: 400px;}}
+    
+/*@media (min-width: 430px){    */
+/*.modal-dialog {*/
+/*    width: 400px;}}*/
 
 .loginmodal-container h1{
   border:none !important;

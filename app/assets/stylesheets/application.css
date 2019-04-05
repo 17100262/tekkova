@@ -883,6 +883,8 @@ img.car_slider_pic {
     width: 30%;
     z-index: 9999 !important;
     right: 0;
+    background: #5cb85c !important;
+    color: #fff;
  }
  #accept-cookie{
    position: absolute !important;
@@ -895,3 +897,61 @@ img.car_slider_pic {
  section#tabs {
    min-height: 420px;
  }
+ .home-bg-footer {
+     background: #f4f4f4;
+    padding: 30px 0px;
+ }
+ 
+ 
+ 
+ /*test*/
+ .read-more-state {
+  display: none;
+}
+
+.read-more-target {
+  opacity: 0;
+  max-height: 0;
+  font-size: 0;
+  transition: .25s ease;
+}
+
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+}
+
+.read-more-state ~ .read-more-trigger:before {
+  content: 'Show more';
+}
+
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: 'Show less';
+}
+.read-more-trigger {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 .5em;
+  color: #666;
+  font-size: .9em;
+  line-height: 2;
+  border: 1px solid #ddd;
+  border-radius: .25em;
+}
+.show-less:hover {
+  cursor: pointer;
+}
+/*@media (min-width: 992px) {*/
+/*.modal-lg-fees {*/
+/*    max-width: 800px !important;*/
+/*}*/
+/*}*/
+
+.black-modal-bg {
+  background: #000 !important; 
+  color: #fff !important;
+}
+.modal-verticallly-centr {
+  top: 10% !important;
+}

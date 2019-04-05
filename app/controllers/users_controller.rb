@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-    before_action :authenticate_user!,except: [:engine_policy,:cleaning_policy,:feul_policy,:infringements_policy,:infringements_policy,:late_return_policy ]
-    load_and_authorize_resource
+    before_action :authenticate_user!,except: [:engine_policy,:cleaning_policy,:feul_policy,:infringements_policy,:infringements_policy,:late_return_policy, :sign_up_page ]
+    load_and_authorize_resource except: [:sign_up_page]
     
     def index
         @users = User.where.not(email: current_user.email).where(deleted_at: nil)
@@ -98,6 +98,9 @@ class UsersController < ApplicationController
      def infringements_policy
     end
     def late_return_policy
+    end
+    
+    def sign_up_page
     end
     
     private

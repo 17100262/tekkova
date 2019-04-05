@@ -6,10 +6,8 @@
   				<%= alert %>
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
               <%= devise_error_messages!   %>
-              <a href="#" class="login loginmodal-button loginmodal-social loginmodal-fb" data-toggle="modal" data-target="#fbModal">Continue with Facebook</a>
-              <a href="#" class="login loginmodal-button loginmodal-google" data-toggle="modal" data-target="#googleModal">Continue with Google</a>
-        				<%#= link_to 'Continue with Facebook',  "#{root_url}users/auth/facebook" ,:class => "login loginmodal-button loginmodal-social loginmodal-fb" %>
-    						<%#= link_to 'Continue with Google',  "#{root_url}users/auth/google_oauth2" ,:class => "login loginmodal-button loginmodal-google" %>
+        				<%= link_to 'Continue with Facebook',  "#{root_url}users/auth/facebook" ,:class => "login loginmodal-button loginmodal-social loginmodal-fb" %>
+    						<%= link_to 'Continue with Google',  "#{root_url}users/auth/google_oauth2" ,:class => "login loginmodal-button loginmodal-google" %>
                 <%= f.text_field :firstname , autofocus: true,required: true,class: "form-control form-control-md", placeholder: "Enter Your First Name" %>
                 <%= f.text_field :lastname , required: true,class: "form-control form-control-md", placeholder: "Enter Your Last Name" %>
                 <%= f.text_field :personal_mobile ,required: true,class: "form-control form-control-md", placeholder: "Enter Your Phone Number" %>
@@ -25,20 +23,19 @@
                 <br>
                 <%= f.check_box :offers %> <span class="mb-0">Yes,send me special offers,discounts and updates</span><br>
     					<input type="checkbox" required="true"> I Agree to <a href="/terms_and_conditions">Marketplace Terms and Conditions</a>, &nbsp;&nbsp;&nbsp;&nbsp;<a href="/privacy_policy">Privacy Policy</a> and <a href="/nd_policy">Non-Discrimination Policy</a><br><br>
-    					  <%= f.submit "Sign Up", class: "login loginmodal-button loginmodal-submit text-center" %>
                             <div class="container">
   <!-- Button to Open the Modal -->
   
-<!--<a href="javascript:void(0)" class="login loginmodal-button loginmodal-submit text-center open-modal">-->
-<!--    Sign Up-->
-<!--  </a>-->
-  <!--<a href="javascript:void(0)" class="btn btn-primary open-modal-abc d-none" data-toggle="modal" data-target="#myModal">-->
-  <!--  Sign Up-->
-  <!--</a>-->
-  <!-- facebook Modal -->
-  <div class="modal fade modal-verticallly-centr" id="fbModal">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content black-modal-bg">
+<a href="javascript:void(0)" class="login loginmodal-button loginmodal-submit text-center open-modal">
+    Sign Up
+  </a>
+  <a href="javascript:void(0)" class="btn btn-primary open-modal-abc d-none" data-toggle="modal" data-target="#myModal">
+    Sign Up
+  </a>
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
         <!-- Modal body -->
         <div class="modal-body">
          <p>Please read and review the below policies in order to sign up or for more information access all our policies under "Learn More" at the top right hand side of the page. By clicking agree you acknowledge you have read and understood & accept the below policies.</p>
@@ -51,41 +48,13 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <%= link_to 'Continue',  "#{root_url}users/auth/facebook" ,:class => "btn btn-primary" %>
-        <!--<input type="submit" name="commit" value="Sign Up" class="btn btn-primary" id="tick" data-disable-with="Sign Up">-->
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" name="commit" value="Sign Up" class="btn btn-primary" id="tick" data-disable-with="Sign Up">
+          <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
         </div>
         
       </div>
     </div>
   </div>
-  <!--facebook modal end-->
-  
-  
-  <!--google modal start-->
-  <div class="modal fade modal-verticallly-centr" id="googleModal">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content black-modal-bg">
-        <div class="modal-body">
-         <p>Please read and review the below policies in order to sign up or for more information access all our policies under "Learn More" at the top right hand side of the page. By clicking agree you acknowledge you have read and understood & accept the below policies.</p>
-          <ul>
-            <li><a href="/terms_and_conditions" target="_blank">MarketPlace Terms & Conditions</a></li>
-            <li><a href="/privacy_policy" target="_blank">Privacy Policy</a></li>
-            <li><a href="/nd_policy" target="_blank">Non-discrimination Policy</a></li>
-          </ul>
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-         <%= link_to 'Continue',  "#{root_url}users/auth/google_oauth2" ,:class => "btn btn-primary" %>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-  <!--google modal end-->
-  
   
 </div>
 
@@ -97,6 +66,3 @@
   		</div> 
   </div>
 </div>
-
-
-
