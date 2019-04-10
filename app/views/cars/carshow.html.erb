@@ -168,13 +168,19 @@
 					   <hr>
 					      <strong>Use Type</strong>
 					  <hr>
-					   <p>This vehicle as indicated by the car owner may only be used for private use purpose & not commercial.</p>
+					  
+					  <% if @car.allow_personal_commercial_use%>
+					   <p>This vehicle may be used on unsealed roads as indicated by the car owner</p>
+					   <%else%>
+					     <p>This vehicle as indicated by the car owner may only be used on sealed roads.</p>
+					   <% end%>
 					</div>
 					<div class="tab-pane fade" id="nav-allwance" role="tabpanel" aria-labelledby="nav-allwance-tab">
 					  <hr>
 					      <strong>Daily Drive Allowance</strong>
 					  <hr>
-						     <p>150 kilometers is the daily distance driven odometer allowance on this car. Odometer allowance starts at pick up & ends at the time of drop off.
+						     <p>150 kilometers is the daily distance driven odometer allowance on this car. <br>
+						     Odometer allowance starts at pick up & ends at the time of drop off.<br>
                 As a courtesy please notify car owner in advance if you plan on using the vehicle 50 km over the set allowance.</p>
 					</div>
 				</div>

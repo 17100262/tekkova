@@ -376,7 +376,7 @@ $( window ).load(function() {
             $.ga.load(g_analytics_id, function(pageTracker) {
     	    	pageTracker._setDomainName(host);
 			});
-        }, 5000); // 10 sec
+        }, 15000); // 10 sec
         
     }else if(cookie_avert == "set"){ // si le cookie existe avec la valeur 'set'
         // on charge google analytics
