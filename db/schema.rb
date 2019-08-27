@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 2019_02_11_123503) do
     t.datetime "confirmation_sent_at"
     t.string "firstname"
     t.string "lastname"
+    t.boolean "offers"
     t.boolean "admin", default: false
     t.string "availibility_days"
     t.string "pickup_suburb"
@@ -157,7 +158,6 @@ ActiveRecord::Schema.define(version: 2019_02_11_123503) do
     t.integer "profile_image_file_size"
     t.datetime "profile_image_updated_at"
     t.text "comment"
-    t.boolean "offers", default: false
     t.datetime "deleted_at"
     t.string "home_phone_number"
     t.index ["email"], name: "index_users_on_email", unique: true

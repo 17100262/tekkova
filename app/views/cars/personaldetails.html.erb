@@ -5,14 +5,14 @@
     <a href="#" class="btn btn-primary no-link car_pictures" style="margin-left: -5px !important;">Car Pictures</a>
     <a href="#" class="btn btn-primary no-link car_preference" style="margin-left: -5px !important;">Car Preference</a>
     <a href="#" class="btn btn-primary presonal_details active">Personal Details</a>
-    <a href="#" class="btn btn-primary driver_license no-link" style="margin-left: -5px !important;">Driver License</a>
-    <a href="#" class="btn btn-primary availibility_pickup no-link" style="margin-left: -5px !important; z-index:0 !important;">Availibility & Pickup</a>
+    <a href="#" class="btn btn-default driver_license no-link" style="margin-left: -5px !important;">Driver Licence</a>
+    <a href="#" class="btn btn-default availibility_pickup no-link" style="margin-left: -5px !important; z-index:0 !important;">Availibility & Pickup</a>
 </div>
 </div>
 </div>
 <h2 class="heading mt-4">Personal Details</h2>
 <div class="w-100">
-<img src="/car-personal_1.jpg" class="img-fluid background-bg-arow">
+<img src="/car_p3.png" class="img-fluid background-bg-arow" style="height: 275px !important">
 </div>
 <div class="container py-4">
 <div id="multi-form" class="car-personal">
@@ -60,10 +60,10 @@
       <div class="row">
         <div class="col-md-6">
           <%= form.label "Date of Birth" %> 
-          <%= form.text_field :personal_dob,  id:"date-auto-slash", placeholder:' yy/mm/dd' %>
+          <%= form.text_field :personal_dob,  id:"date-auto-slash", placeholder:' dd/mm/yy', onkeypress:"allowNumbersOnly(event)"%>
         </div>
         <div class="col-md-6">
-          <%= form.label "Home Phone Number" %> 
+          <%= form.label "Home Mobile Number" %> 
           <%= form.text_field :home_phone_number  %>
       </div>  
       </div>
@@ -71,7 +71,10 @@
     <%= form.hidden_field :step, value: 1 %>
   </div>
 
-  
+  <div class="float-left my-2">
+   <a class="btn btn-primary btn-sm pl-3 pr-3" role="button" href="#"> 
+   <i class="fas fa-caret-left"></i> Back</a>
+  </div>  
   <div class="float-right my-2">
   <%#= form.submit "Next", class:"btn btn-primary btn-sm pl-3 pr-3" %>
    <button type="submit" class="btn btn-primary btn-sm pl-3 pr-3 float-right">Next <i class="fas fa-caret-right"></i></button>
@@ -88,12 +91,18 @@
 	$('#date-auto-slash').bind('keyup','keydown', function(event) {
   	var inputLength = event.target.value.length;
     if (event.keyCode != 8){
-      if(inputLength === 7 || inputLength === 4){
+      if(inputLength === 2 || inputLength === 5){
         var thisVal = event.target.value;
         thisVal += '/';
         $(event.target).val(thisVal);
     	}
     }
   })
-});
+  });
+  function allowNumbersOnly(e) {
+    var code = (e.which) ? e.which : e.keyCode;
+    if (code > 31 && (code < 48 || code > 57)) {
+        e.preventDefault();
+    }
+};
 </script>

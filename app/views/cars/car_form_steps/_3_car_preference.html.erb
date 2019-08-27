@@ -10,9 +10,9 @@
     <a href="<%= car_steps_path(step: 2,id: @car.id) %>" class="btn btn-primary car_pictures" style="margin-left: -5px !important;">Car Pictures</a>
     <a href="<%= car_steps_path(step: 3,id: @car.id) %>" class="btn btn-primary car_preference active">Car Preference</a>
     <% if current_user.cars.count < 2 %>
-      <a href="#" class="btn btn-primary presonal_details">Personal Details</a>
-      <a href="#" class="btn btn-primary driver_license">Driver License</a>
-      <a href="#" class="btn btn-primary availibility_pickup" style=" z-index:0 !important;">Availibility & Pickup</a>
+      <a href="#" class="btn btn-default presonal_details">Personal Details</a>
+      <a href="#" class="btn btn-default driver_license">Driver Licence</a>
+      <a href="#" class="btn btn-default availibility_pickup" style=" z-index:0 !important;">Availibility & Pickup</a>
     <% end %>
 </div> 
 </div>
