@@ -58,7 +58,7 @@
       </div>
       <div class="col-lg-3 col-md-6">
         <%= form.label :odometer %> 
-        <%=  form.text_field :odometer  %>
+        <%=  form.text_field :odometer, id: 'add_km', onfocusout:"auto_km()"  %>
       </div>
       <div class="col-lg-3 col-md-6">
         <label>Transmission </label>
@@ -146,7 +146,7 @@
     </div>
     <div class="row mt-3">
       <div class="col-md-4">
-        <label>License Plate Number</label> 
+        <label>Licence Plate Number</label> 
         <%= form.text_field :liecense_plate_number  %>
       </div>
       <div class="col-md-4">
@@ -184,4 +184,14 @@
   $("input.currency_1").val(function(i, val) {
   return val.replace(/^\s*(\$)?/, "$");
 });
+
+// added "km" automatically
+function auto_km() {
+var myValue = $("#add_km").val();
+var text = 'km';
+if(myValue.indexOf() != 0) {
+  myValue = `${myValue} ${text}`;
+}
+document.getElementById("add_km").value = myValue;
+}
 </script>

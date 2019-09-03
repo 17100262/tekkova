@@ -955,3 +955,12 @@ img.car_slider_pic {
 .modal-verticallly-centr {
   top: 10% !important;
 }
+@media only screen and (max-width: 768px) {
+.plicy-btn-mob {
+      white-space: unset !important;
+}
+#cookies-banner {
+  width: 95%;
+}
+}
+

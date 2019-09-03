@@ -404,3 +404,11 @@ $(document).ready(function() {
         }
     });
 });
+
+$(document).ready(function(){
+  var chk1 = $("input:checkbox[name='offer1']");
+  var chk2 = $(("input:checkbox[name='offer2']"));
+  chk1.on('change', function(){
+  chk2.prop('checked',this.checked);
+});
+});

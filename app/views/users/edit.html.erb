@@ -83,7 +83,7 @@
                 <div class="form-group">
                     
                     
-                      <%= f.check_box :offers %> <span class="mb-0">Yes,send me special offers,discounts and updates</span><br>
+                      <%= f.check_box :offers,checked: f.object.offers%> <span class="mb-0" for="user_offers">Yes,send me special offers,discounts and updates</span><br>
                 </div>
                 
   			    </div>
