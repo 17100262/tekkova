@@ -15,7 +15,7 @@
             
               <p>Please ensure that your vehicle meets the following criteria</p>
               <%= f.check_box :model_year_check, required: true, id:"1" %>
-              <label for="1">2013-2019 model year</label> <br>
+              <label for="1">2013-2020 model year</label> <br>
               
               <%= f.check_box :usage_limit_check, required: true, id:"2" %>
               <label for="2">Less than 150,000 in kms</label> <br>
@@ -27,7 +27,7 @@
               <label for="4">Road Worthy</label> <br>
               
               <%= f.check_box :write_off_check, required: true, id:"5" %>
-              <label for="5">No write off</label> <br>
+              <label for="5">No write off history</label> <br>
               
               <%= f.check_box :maintained_check, required: true, id:"6" %>
              <label for="6">Well maintained and serviced as scheduled and recommended by the manafacturer </label><br><br>
@@ -40,7 +40,10 @@
                   <%#= f.submit "Next", class:"btn btn-primary btn-sm float-right pr-4 pl-4"%>
                   <button type="submit" class="btn btn-primary btn-sm pl-3 pr-3 float-right">Next <i class="fas fa-caret-right"></i></button>
                 </div>
-                
+              
               </div>
+                <center>
+               <img src="/Listing_criteria_photo.png" class="img-fluid mt-2">
+               </center>
           <% end %> 
           

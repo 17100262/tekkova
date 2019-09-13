@@ -41,7 +41,7 @@
              <% if @user.licensefront.present? or @user.licenseback.present? %>
                <strong>Driver License Details: </strong>
                <%= (link_to "View License Front", @user.licensefront.url) if @user.licensefront.present? %>
-               <%= (link_to "View License Back", @user.licensefront.url) if @user.licenseback.present? %>
+               <%= (link_to "View Licence Back", @user.licensefront.url) if @user.licenseback.present? %>
               <% end %>
              
              <div class="comments mb-4">
