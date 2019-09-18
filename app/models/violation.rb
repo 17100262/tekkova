@@ -1,4 +1,3 @@
-class Violation < ApplicationRecord
-    
+class Violation < ApplicationRecord    
     belongs_to :user
 end
