@@ -61,7 +61,7 @@ hr{
             <p>Team Tekkova welcomes you. Hire a car for every occassion or List your car and start earning today. </p>
             <br>
             <br>
-            <center><a class="btn-account" href = "http://tekkova.herokuapp.com/">Activate</a></center><br/>
+            <center><a class="btn-account" href = "<%= confirmation_url(@resource, confirmation_token: @token) %>">Activate</a></center><br/>
               <br>
               <br>
             <hr>

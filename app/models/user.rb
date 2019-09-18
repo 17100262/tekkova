@@ -7,7 +7,7 @@ class User < ApplicationRecord
   attr_accessor :terms_of_service,:step
   validates :terms_of_service, acceptance: true
 
-  has_many :cars
+  has_many :cars,dependent: :destroy
   
   has_many :comment_files, dependent: :destroy
   accepts_nested_attributes_for :comment_files, reject_if: :all_blank, allow_destroy: true
