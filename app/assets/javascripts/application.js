@@ -108,7 +108,8 @@ $(function() {
     var value3 = value1 * 5;
     var value4 = value3 + 25;
     var valuet = value4 * value2;
-    var valuef = valuet * 52;
+    var valuec = valuet * 52;
+    var valuef = valuec * 0.46 ;
     $("#amountf").val("$" + valuef);
   }
 
