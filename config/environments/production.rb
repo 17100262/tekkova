@@ -47,14 +47,24 @@ Rails.application.configure do
   #   :authentication => 'plain'
   #   }
   ActionMailer::Base.smtp_settings = {
-    :address => 'smtp.gmail.com',
-    # :domain  => 'www.guidistan.com',
+    :address => 'smtp.mailgun.org',
+    :domain  => ENV['mailer_domain'],
     :port      => 587,
     :user_name => ENV['mailer_username'],
     :password => ENV['mailer_password'],
     :authentication => :plain
     }
   
+
+  # ActionMailer::Base.smtp_settings = {
+  #   :address => "smtp.mailgun.org",
+  #   :domain  => ENV["MAIL_DOMAIN"],
+  #   :port      => 587,
+  #   :user_name => ENV["MAIL_USERNAME"],
+  #   :password => ENV["MAIL_PASSWORD"],
+  #   :authentication => 'plain'
+  #   }
+
   config.paperclip_defaults = {
     storage: :s3,
     s3_credentials: {
