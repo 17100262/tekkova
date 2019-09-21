@@ -14,7 +14,7 @@ en:
       last_attempt: "You have one more attempt before your account is locked."
       not_found_in_database: "Invalid %{authentication_keys} or password."
       timeout: "Your session expired. Please sign in again to continue."
-      unauthenticated: "You need to sign in or sign up before continuing."
+      unauthenticated: " You need to signup or login in order to list your car"
       unconfirmed: "You have to confirm your email address before continuing."
       deleted_account: "Your account will be reactivated if you login using the same account access details"
     mailer:

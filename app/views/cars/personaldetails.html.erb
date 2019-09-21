@@ -60,7 +60,7 @@
       <div class="row">
         <div class="col-md-6">
           <%= form.label "Date of Birth" %> 
-          <%= form.text_field :personal_dob,  id:"date-auto-slash", placeholder:' dd/mm/yy', onkeypress:"allowNumbersOnly(event)"%>
+          <%= form.text_field :personal_dob,  id:"date-auto-slash", placeholder:' dd/mm/yy', onkeypress:"allowNumbersOnly(event)", max: '99999999'%>
         </div>
         <div class="col-md-6">
           <%= form.label "Home Phone Number" %> 
@@ -98,7 +98,16 @@
         $(event.target).val(thisVal);
     	}
     }
-  })
+  });
+
+  $('#date-auto-slash').on('input', function(ev) {
+    var $this = $(this);
+    var maxlength = $this.attr('max').length;
+    var value = $this.val();
+    if (value && value.length >= maxlength) {
+      $this.val(value.substr(0, maxlength));
+    }
+  });
   });
   function allowNumbersOnly(e) {
     var code = (e.which) ? e.which : e.keyCode;
