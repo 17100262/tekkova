@@ -71,7 +71,7 @@
                     
                       <%= f.label "Date of Birth" %>
                     
-                      <%= f.date_field :personal_dob, class: "form-control form-control-md", required: true %>
+                      <%= f.text_field :personal_dob, id: 'date-auto-slash', class: "form-control form-control-md", required: true, placeholder: 'DD/MM/YY' %>
                 </div>
                 <div class="form-group">
                     
@@ -175,3 +175,32 @@
 			</div>
     </div>
 </div>
+<script>
+$( document ).ready(function() {
+  $('#date-auto-slash').bind('keyup','keydown', function(event) {
+    var inputLength = event.target.value.length;
+    if (event.keyCode != 8){
+      if(inputLength === 2 || inputLength === 5){
+        var thisVal = event.target.value;
+        thisVal += '/';
+        $(event.target).val(thisVal);
+      }
+    }
+  });
+
+  $('#date-auto-slash').on('input', function(ev) {
+    var $this = $(this);
+    var maxlength = $this.attr('max').length;
+    var value = $this.val();
+    if (value && value.length >= maxlength) {
+      $this.val(value.substr(0, maxlength));
+    }
+  });
+  $("#date-auto-slash").val( moment().format('DD/MM/YYYY') );
+     var today = moment().format('DD, MMM, YYYY');
+  });
+
+  
+</script>
+
+
