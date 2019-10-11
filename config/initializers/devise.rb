@@ -2,6 +2,7 @@ Devise.setup do |config|
 config.secret_key = '77c78c2181dfe988740b5030d2de29e925eaf7fd836f8571f2bd19ad0a8b7d2fc6f6f0a6a28d1dabcbe84f46aac3822229d5d68a0832c9914eae8aee7760817a'
   config.mailer_sender = 'support@tekkova.com'
   config.mailer = 'Devise::Mailer'
+  # config.mailer = 'UserMailer'
   config.parent_mailer = 'ActionMailer::Base'
   require 'devise/orm/active_record'
   config.case_insensitive_keys = [:email]
@@ -21,6 +22,7 @@ config.secret_key = '77c78c2181dfe988740b5030d2de29e925eaf7fd836f8571f2bd19ad0a8
   config.reset_password_within = 6.hours
   config.scoped_views = true
   config.sign_out_via = :delete
+  config.send_password_change_notification = true
   config.omniauth :facebook, Rails.application.secrets['fb_access_id'], Rails.application.secrets['fb_secret_id']
   config.omniauth :linkedin, Rails.application.secrets['linkedin_access_id'], Rails.application.secrets['linkedin_secret_id']
   config.omniauth :twitter , Rails.application.secrets['twitter_access_id'], Rails.application.secrets['twitter_secret_id']
