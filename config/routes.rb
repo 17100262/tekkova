@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get 'about_us', to: 'home#about_us', as: :about_us
   post 'listing_criteria', to: 'cars#submit_listing_criteria',as: :listing_criteria
   
-  devise_for :users, :controllers => { :registrations => 'users/registrations',:sessions => "users/sessions" }
+  devise_for :users, :controllers => { :registrations => 'users/registrations',:sessions => "users/sessions",:confirmations => "users/confirmations" }
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
   root 'home#home'
   get 'admin', to: 'home#admin', as: :admin

@@ -25,28 +25,38 @@ hr{
     }
     .btn-account {
     	
-    background-color: #21a5D6;
-    border-color: #21a5D6 #21a5D6 #0088cc;
-    color: #ffffff !important;
-    padding: 13px 10px 13px 10px;
-    border: none;
-    border-radius: 3px;
-    text-decoration: none;
-    cursor: pointer;
-        font-size: 16px;
-    font-weight: bold;
+        background-color: #21a5D6;
+        border-color: #21a5D6 #21a5D6 #0088cc;
+        color: #ffffff !important;
+        padding: 13px 10px 13px 10px;
+        border: none;
+        border-radius: 3px;
+        text-decoration: none;
+        cursor: pointer;
+            font-size: 16px;
+        font-weight: bold;
 
-}
-.whole-body {
-    background: #f1f1f1;
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-.background-b{
-    background: #000;
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
+    }
+    .whole-body {
+        background: #f1f1f1;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    .background-b{
+        background: #000;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    .address-bg {
+        background-color: #21a5D6;
+        padding: 10px 10px;
+        color: #fff;
+    }
+    .footer-bg {
+        background-color: #21a5D6;
+        padding: 10px 10px;
+        color: #fff;
+    }
 </style>
 </head>
     <body class="whole-body">
@@ -58,22 +68,28 @@ hr{
             <br>
             <p><strong>Hi <%= @resource.name %></strong></p>
             
-            <p>Team Tekkova welcomes you. Hire a car for every occassion or List your car and start earning today. </p>
+            <p>Please activate your account in order to list your car and slash your car maintenance expenses.</p>
             <br>
             <br>
             <center><a class="btn-account" href = "<%= confirmation_url(@resource, confirmation_token: @token) %>">Activate</a></center><br/>
               <br>
               <br>
             <hr>
-            <p style="text-align: center;"><strong>Our Mailing Address is</strong></p>
-            <p style="text-align: center;">67 howe street <br>
-          osborne park<br>
-            wa 6017</p>
+            <div class="address-bg">
+                <p style="text-align: center;"><strong>Our Mailing Address is</strong></p>
+                <p style="text-align: center;">
+                    67 Howe Street<br> 
+                   Osborne Park<br>
+                   Wa 6017
+                </p>
+            </div>
             <hr>
-        
-            <p>
-                This email was sent by Tekkova. Tekkova is an online marketplace that facilitates car share of all makes &amp; models between peers.
-            </p>
+            <div class="footer-bg">
+                <p>
+                    This email was sent by Tekkova.<br>
+                    <!-- Including subscription optional instructions. -->
+                </p>
+            </div>
         
         </div>
     

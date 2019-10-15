@@ -24,7 +24,8 @@ class User < ApplicationRecord
   validates_attachment_content_type :licenseback, content_type: /\Aimage\/.*\z/
   
   
-  # after_create_commit {BasicMailer.welcome_email(self).deliver_later}
+  after_create_commit {BasicMailer.welcome_email(self).deliver_later}
+  
   def make_admin
     self.update!(admin: true)
   end
