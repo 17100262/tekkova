@@ -21825,10 +21825,11 @@ img.car_slider_pic {
     padding: 30px 0px;
  }
  .video-bg-home {
-   background-image: url('/bmw3.jpg');
+   background-image: url('/bmw1.jpeg');
   background-position: center center;
   padding: 15px 0px;
     background-repeat: no-repeat;
+        background-size: cover;
  }
  #cookies-banner{
    position: fixed;
@@ -21917,3 +21918,84 @@ img.car_slider_pic {
 }
 }
 
+.sign_up-page-bg {
+  background-image: url(/A2.jpg);
+  padding-top: 130px;
+    padding-bottom: 130px;
+    background-position: center top;
+    background-size: cover;
+  
+
+}
+
+.signup-page-icon {
+  margin: 0 auto;
+  z-index: 9999 !important;
+}
+
+.signup-page-btn-box {
+  background-color: #fff;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  border: 2px dashed #0f0f0f;
+}
+.top-icon {
+ 
+   top: -12px;
+    position: absolute;
+    text-align: center !important;
+    display: inline-block;
+    left: 45%;
+
+}
+.top-icon-signup {
+  position: absolute;
+    top: -29px;
+    left: 43%;
+}
+.Signup-main {
+ background-color: #fff;
+  padding-top: 40px;
+  border: 2px dashed #0f0f0f;
+  z-index: 9999 !important;
+}
+.Signup-main h1 {
+  margin: 10px 0 5px 0;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+.signup-bg {
+  background-image: url(/B2.jpg);
+  padding-bottom: 30px;
+  padding-top: 30px;
+  background-size: cover;
+    background-position: center top;
+}
+#dragit {
+  z-index: 9999 !important;
+}
+.Signin-main {
+ background-color: #fff;
+  padding-top: 40px;
+  border: 2px dashed #0f0f0f;
+  z-index: 9999 !important;
+}
+.Signin-main h1 {
+  margin: 10px 0 5px 0;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+.signin-top-icon {
+  position: absolute;
+    top: -29px;
+    left: 43%; 
+}
+.sign-in-bg {
+  background-image: url(/c2.jpg);
+  padding-bottom: 30px;
+  padding-top: 30px;
+  background-size: cover;
+    background-position: center top;
+}
