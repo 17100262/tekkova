@@ -873,8 +873,8 @@ img.car_slider_pic {
  }
  .video-bg-home {
    background-image: url('/bmw1.jpeg');
-  background-position: center center;
-  padding: 15px 0px;
+ background-position: center bottom;;
+  padding: 120px 0px 70px;
     background-repeat: no-repeat;
         background-size: cover;
  }
@@ -963,6 +963,9 @@ img.car_slider_pic {
 #cookies-banner {
   width: 95%;
 }
+.top-icon {
+    left: 42% !important;
+    }
 }
 
 .sign_up-page-bg {
@@ -981,10 +984,11 @@ img.car_slider_pic {
 }
 
 .signup-page-btn-box {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.8);
   padding-top: 70px;
   padding-bottom: 70px;
-  border: 2px dashed #0f0f0f;
+  border: 2px dashed #fff;
+  backdrop-filter: blur(50px);
 }
 .top-icon {
  
@@ -993,18 +997,21 @@ img.car_slider_pic {
     text-align: center !important;
     display: inline-block;
     left: 45%;
+        z-index: 999;
 
 }
 .top-icon-signup {
   position: absolute;
     top: -29px;
     left: 43%;
+    z-index: 9999;
 }
 .Signup-main {
- background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.8);
   padding-top: 40px;
-  border: 2px dashed #0f0f0f;
+  border: 2px dashed #fff;
   z-index: 9999 !important;
+  backdrop-filter: blur(50px);
 }
 .Signup-main h1 {
   margin: 10px 0 5px 0;
@@ -1023,10 +1030,11 @@ img.car_slider_pic {
   z-index: 9999 !important;
 }
 .Signin-main {
- background-color: #fff;
+ background-color: rgba(255, 255, 255, 0.8);
   padding-top: 40px;
-  border: 2px dashed #0f0f0f;
+  border: 2px dashed #fff;
   z-index: 9999 !important;
+   backdrop-filter: blur(50px);
 }
 .Signin-main h1 {
   margin: 10px 0 5px 0;
@@ -1038,6 +1046,7 @@ img.car_slider_pic {
   position: absolute;
     top: -29px;
     left: 43%; 
+    z-index: 9999;
 }
 .sign-in-bg {
   background-image: url(/c2.jpg);
