@@ -4,7 +4,7 @@
     <div class="col-md-4 mx-auto">
       <div class="" id="dragit">
         <div class="top-icon-signup">
-          <img src="/arrow.png" width="60px">
+          <img src="/arrow.png" width="60px" class="darg-img-non">
         </div>
   	  <div class="Signup-main px-4">
   				<h1>Join Tekkova</h1>
@@ -99,8 +99,7 @@
 
 
 <script>
-  var draggable = $('#dragit'); //element 
-
+  var draggable = $('#dragit'); 
 draggable.on('mousedown', function(e){
   var dr = $(this).addClass("drag").css("cursor","move");
   height = dr.outerHeight();
@@ -117,5 +116,9 @@ draggable.on('mousedown', function(e){
       dr.removeClass("drag");
   });
 });
-$('#widget').draggable();
+
+
+
+
+
 </script>

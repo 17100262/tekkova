@@ -2,7 +2,7 @@
 	<div class="col-md-4 mx-auto">
   <div class="py-3 signup-page-icon" id="dragit">
   	<div class="top-icon">
-  		<img src="/arrow.png" width="60px">
+  		<img src="/arrow.png" width="60px" class="darg-img-non">
   	</div>
   	<div class="signup-page-btn-box px-3">
   		<h5 class="text-center mb-3">I would like to </h5>
@@ -20,8 +20,8 @@
 
 
 <script>
-	var draggable = $('#dragit'); //element 
 
+var draggable = $('#dragit'); 
 draggable.on('mousedown', function(e){
   var dr = $(this).addClass("drag").css("cursor","move");
   height = dr.outerHeight();
@@ -38,5 +38,5 @@ draggable.on('mousedown', function(e){
       dr.removeClass("drag");
   });
 });
-$('#widget').draggable();
 </script>
+

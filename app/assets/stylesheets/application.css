@@ -1055,3 +1055,10 @@ img.car_slider_pic {
   background-size: cover;
     background-position: center top;
 }
+.darg-img-non {
+   -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
