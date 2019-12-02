@@ -38,5 +38,6 @@ class HomeController < ApplicationController
     def mass_email
     end
 
+
     
 end

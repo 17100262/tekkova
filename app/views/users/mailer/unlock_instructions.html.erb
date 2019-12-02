@@ -54,10 +54,10 @@ hr{
 <div class="mail-box">
     
     <div class="background-b">
-         <center><img src="http://tekkova.herokuapp.com/logo-t.png" width="200" height="100"></center>
+         <center><img src="http://tekkova.herokuapp.com/logo-t2.png" width="200" height="100"></center>
     </div>
     
-    <p><strong>Hi <%= @resource.name %>,</strong></p>
+    <p style="text-transform: capitalize;"><strong>Hi <%= @resource.name %>,</strong></p>
     <p>Your account has been locked due to an excessive number of unsuccessful sign in attempts.</p>
     <p>Click the link below to unlock your account:</p>
     <center><%= link_to 'Unlock my account', unlock_url(@resource, unlock_token: @token) %></center><br/>

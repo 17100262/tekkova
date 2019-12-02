@@ -37,7 +37,7 @@ hr{
         font-weight: bold;
 
     }
-    .whole-body {
+    .whole-body {i
         background: #f1f1f1;
         padding-top: 30px;
         padding-bottom: 30px;
@@ -53,9 +53,9 @@ hr{
         color: #fff;
     }
     .footer-bg {
-        background-color: #21a5D6;
+        background-color: #fff;
         padding: 10px 10px;
-        color: #fff;
+        color: #000;
     }
 </style>
 </head>
@@ -63,15 +63,18 @@ hr{
         <div class="mail-box">
             
             <div class="background-b">
-                 <center><img src="http://tekkova.herokuapp.com/logo-t.png" width="200" height="100"></center>
+                 <center><img src="http://tekkova.herokuapp.com/logo-t2.png" width="200" height="100"></center>
             </div>
             <br>
-            <p><strong>Hi <%= @resource.name %></strong></p>
+            <p style="text-transform: capitalize;"><strong>Hi <%= @resource.name %></strong></p>
             
             <p>Please activate your account in order to list your car and slash your car maintenance expenses.</p>
             <br>
             <br>
             <center><a class="btn-account" href = "<%= confirmation_url(@resource, confirmation_token: @token) %>">Activate</a></center><br/>
+              <br>
+              <br>
+              <img src="http://tekkova.herokuapp.com/car-main.email.jpg" style="width: 100%">
               <br>
               <br>
             <hr>
@@ -80,14 +83,13 @@ hr{
                 <p style="text-align: center;">
                     67 Howe Street<br> 
                    Osborne Park<br>
-                   Wa 6017
+                   WA 6017
                 </p>
             </div>
             <hr>
             <div class="footer-bg">
                 <p>
-                    This email was sent by Tekkova.<br>
-                    <!-- Including subscription optional instructions. -->
+                    This email was sent by Tekkova. Tekkova is an online marketplace that facilitates peer to peer private car rented share
                 </p>
             </div>
         
