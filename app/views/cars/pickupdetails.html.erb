@@ -64,9 +64,9 @@
               	<h5 class="mt-3">On average on a monthly basis, Do you prefer short or long term rentals?</h5>
                 <div class="checkbox-form inner-check-box">
                   <%= radio_button_tag "user[rental]","Short term",@user.rental=="Short term"  %>
-                  <%= form.label "Short Term, 1 to 15 days per week" %>
+                  <%= form.label "Short Term, 1 to 15 days per month" %>
                   <%= radio_button_tag "user[rental]","Long term",@user.rental=="Long term"  %>
-                  <%= form.label "Long Term, 15 to 30 days per week" %>
+                  <%= form.label "Long Term, 15 to 30 days per month" %>
                 
               	</div>
               	<hr>

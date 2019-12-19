@@ -46,7 +46,7 @@
       <div class="col-md-4 col-sm-6 col-lg-3">
         <div class="custom-file-container" data-upload-id="image<%=ida%>">
           <label class="custom-file-container__custom-file d-none" > 
-          <input class="custom-file-container__custom-file__custom-file-input" type="file" name="car[car_pictures_attributes][<%=ida%>][avatar]" id="car_car_pictures_attributes_<%=ida%>_avatar" required="required">
+          <input class="custom-file-container__custom-file__custom-file-input" type="file" name="car[car_pictures_attributes][<%=ida%>][avatar]" id="car_car_pictures_attributes_<%=ida%>_avatar">
           <input type="hidden" name="car[car_pictures_attributes][<%=ida%>][delete_picture]" id="delete-picture<%=ida%>">
           <input type="hidden" name="car[car_pictures_attributes][<%=ida%>][position]" value="<%=ida%>" id="position<%=ida%>">
           <input type="hidden" value="<%=carpictures[ida] %>" name="car[car_pictures_attributes][<%=ida%>][id]" id="car_car_pictures_attributes_<%=ida%>_id">
@@ -83,19 +83,17 @@
 </div>
 </div>
 <script>
-$(document).ready(function () {
-  $('#pic_submit').on('click', function(event) {
-    var a = 0;
-    <% for id in 0..7 do %>
-      if ($('#car_car_pictures_attributes_<%=id%>_avatar').val()){
-        a = a + 1
-      }
-    <% end %>
-    if (a != 8){
-        toastr.error(" Please add 8 photos of the interior and exterior of your vehicle")
-
+  $(document).on('click','#pic_submit', function(event) {
+    var len = $('.aabb').length;
+    if (len > 0){
+      toastr.warning('Please add atleast 8 images');
+      event.preventDefault();
+    }
+    else{
+      return true;
     }
   });
+$(document).ready(function () {
 
   <% carpictures = @car.car_pictures.pluck(:id).sort %>
     <% for id in 0..7 do %>
@@ -105,20 +103,23 @@ $(document).ready(function () {
         var selectedFilesfront = this.files.length;
         if (selectedFilesfront != 0) {
             $('#delete-picture<%=id%>').removeAttr('value');
+            $('.custom-file-container__image-preview<%=id%>').removeClass('aabb');
         }
     }); 
 $('.custom-file-container__image-preview<%=id%>').click(function(){
   $('#car_car_pictures_attributes_<%=id%>_avatar').click();
   });
   $('.custom-file-container__image-clear<%=id%>').click(function(){;
-  $('.custom-file-container__image-clear<%=id%>').hide();
-  $('#delete-picture<%=id%>').val('1');
+    $('.custom-file-container__image-clear<%=id%>').hide();
+    $('.custom-file-container__image-preview<%=id%>').addClass('aabb');
+    $('#delete-picture<%=id%>').val('1');
 
   });
   $(".custom-file-container__image-preview<%=id%>").css('background-image','url("<%= CarPicture.find(carpictures[id]).avatar.url() %>")');
   var background = $('.custom-file-container__image-preview<%=id%>').css('background-image')
     if (background.indexOf("/missing.png") >= 0) {
       $('.custom-file-container__image-clear<%=id%>').hide();
+      $('.custom-file-container__image-preview<%=id%>').addClass('aabb');
       
     }
   else{

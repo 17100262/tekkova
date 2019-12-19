@@ -110,7 +110,8 @@ $(function() {
     var valuet = value4 * value2;
     var valuec = valuet * 52;
     var valuef = valuec * 0.46 ;
-    $("#amountf").val("$" + valuef);
+    $("#amountf").val("$" + Math.trunc(valuef));
+
   }
 
   function amountf2() {

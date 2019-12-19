@@ -160,8 +160,9 @@
       </div>
       
       <div class="col-md-4">
-        <%= form.label :agreed_insurance_value %> 
-        <%= form.text_field :agreed_insurance_value, class:"currency_1"  %>
+        <label>Agreed insurance value($)</label>
+        <%#= form.label :agreed_insurance_value %> 
+        <%= form.number_field :agreed_insurance_value, class:"currency_1", placeholder: "$"%>
       </div>
     </div>
     </section>
@@ -184,6 +185,7 @@
   $("input.currency_1").val(function(i, val) {
   return val.replace(/^\s*(\$)?/, "$");
 });
+
 
 // added "km" automatically
 function auto_km() {

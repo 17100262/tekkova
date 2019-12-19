@@ -75,6 +75,13 @@ h2.heading{
 
 /** The Spacing **/
 @media(min-width:768px){
+  .video-bg-home {
+   background-image: url('/bmw.jpg');
+  background-position: right;
+    padding: 30px 0px 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+ }
 .btn-breadcrumb .btn {
   font-size:18px;
   padding:20px 20px 20px 40px;
@@ -871,13 +878,7 @@ img.car_slider_pic {
     border-top: 5px solid #f1f1f1;
     padding: 30px 0px;
  }
- .video-bg-home {
-   background-image: url('/bmw.jpg');
-  background-position: right;
-    padding: 30px 0px 20px;
-    background-repeat: no-repeat;
-    background-size: contain;
- }
+ 
  #cookies-banner{
    position: fixed;
     top: 0;
@@ -1070,3 +1071,16 @@ img.car_slider_pic {
 .calculator-field-trans {
   background-color: transparent !important;
 }
+.fees-btn-home {
+  background-color: #fff !important;
+  border-color: #fff !important;
+  color: #21a5D6 !important;
+}
+ .video-bg-home {
+    padding: 0px 0px 0px;
+ }
+ @media only screen and (min-width: 360px) {
+ .list-checkox-width {
+      max-width: 4.5%;
+ }
+ 
