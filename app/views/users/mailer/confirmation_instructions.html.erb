@@ -48,9 +48,9 @@ hr{
         padding-bottom: 30px;
     }
     .address-bg {
-        background-color: #21a5D6;
+        background-color: #fff;
         padding: 10px 10px;
-        color: #fff;
+        color: #000;
     }
     .footer-bg {
         background-color: #fff;
@@ -66,7 +66,7 @@ hr{
                  <center><img src="http://tekkova.herokuapp.com/logo-t2.png" width="200" height="100"></center>
             </div>
             <br>
-            <p style="text-transform: capitalize;"><strong>Hi <%= @resource.name %></strong></p>
+            <p style="text-transform: capitalize;"><strong>Hi <%= @resource.name.titlecase %></strong></p>
             
             <p>Please activate your account in order to list your car and slash your car maintenance expenses.</p>
             <br>
@@ -80,7 +80,7 @@ hr{
             <hr>
             <div class="address-bg">
                 <p style="text-align: center;"><strong>Our Mailing Address is</strong></p>
-                <p style="text-align: center;">
+                <p style="text-align: center; color: #21a5D6 !important;">
                     67 Howe Street<br> 
                    Osborne Park<br>
                    WA 6017

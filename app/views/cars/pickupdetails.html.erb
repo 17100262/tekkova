@@ -38,15 +38,15 @@
                 <div class="row">
                   <div class="col-lg-4 col-md-6">
                     <label>Suburb</label>
-                    <%= form.text_field :pickup_suburb,  class:"form-control",value: (address.city if address)  %>
+                    <%= form.text_field :pickup_suburb,  class:"form-control", required: true, value: (address.city if address)  %>
                   </div>
                   <div class="col-lg-4 col-md-6">
                     <label>Postcode</label>
-                  <%= form.text_field :pickup_postcode,  class:"form-control" ,value: (address.postal if address) %>
+                  <%= form.text_field :pickup_postcode,  class:"form-control", required: true ,value: (address.postal if address) %>
                   </div>
                   <div class="col-lg-4 col-md-6">
                     <label>State</label>
-                  <%= form.text_field :pickup_state,  class:"form-control",value: (address.state if address)  %>
+                  <%= form.text_field :pickup_state,  class:"form-control", required: true ,value: (address.state if address)  %>
                   </div>
                 </div>  
                 <hr>
@@ -63,9 +63,9 @@
               	
               	<h5 class="mt-3">On average on a monthly basis, Do you prefer short or long term rentals?</h5>
                 <div class="checkbox-form inner-check-box">
-                  <%= radio_button_tag "user[rental]","Short term",@user.rental=="Short term"  %>
+                  <%= radio_button_tag "user[rental]","Short term",@user.rental=="Short term", name: 'preferterm', required: true %>
                   <%= form.label "Short Term, 1 to 15 days per month" %>
-                  <%= radio_button_tag "user[rental]","Long term",@user.rental=="Long term"  %>
+                  <%= radio_button_tag "user[rental]","Long term",@user.rental=="Long term", name: 'preferterm'  %>
                   <%= form.label "Long Term, 15 to 30 days per month" %>
                 
               	</div>
@@ -73,33 +73,35 @@
               	
               	<h5 class="mt-3">How much advance notice do you need?</h5>
                 <div class="checkbox-form inner-check-box">
-                  <%= radio_button_tag "user[advance_notice]","Anytime",@user.advance_notice=="Anytime"  %>
+                  <%= radio_button_tag "user[advance_notice]","Anytime",@user.advance_notice=="Anytime", name: 'advancenotice', required: true  %>
                   <%= form.label "Pickup Available at anytime before 6 Pm" %>
                   
-                  <%= radio_button_tag "user[advance_notice]","1 to 6 hours",@user.advance_notice=="1 to 6 hours"  %>
+                  <%= radio_button_tag "user[advance_notice]","1 to 6 hours",@user.advance_notice=="1 to 6 hours", name: 'advancenotice'  %>
                   <%= form.label "1 to 6 hours" %>
                   
-                  <%= radio_button_tag "user[advance_notice]","6 to 12 hours",@user.advance_notice=="6 to 12 hours"  %>
+                  <%= radio_button_tag "user[advance_notice]","6 to 12 hours",@user.advance_notice=="6 to 12 hours", name: 'advancenotice'  %>
                   <%= form.label "6 to 12 hours" %>
                   
-                  <%= radio_button_tag "user[advance_notice]","12 to 24 hours",@user.advance_notice=="12 to 24 hours"  %>
+                  <%= radio_button_tag "user[advance_notice]","12 to 24 hours",@user.advance_notice=="12 to 24 hours", name: 'advancenotice'  %>
                   <%= form.label "12 to 24 hours" %>
                   
-                  <%= radio_button_tag "user[advance_notice]","Two days",@user.advance_notice=="Two days"  %>
+                  <%= radio_button_tag "user[advance_notice]","Two days",@user.advance_notice=="Two days", name: 'advancenotice'  %>
                   <%= form.label "Two days" %>
                   
-                  <%= radio_button_tag "user[advance_notice]","3 days",@user.advance_notice=="3 days"  %>
+                  <%= radio_button_tag "user[advance_notice]","3 days",@user.advance_notice=="3 days" , name: 'advancenotice' %>
                   <%= form.label "3 days" %>
                     <%= form.hidden_field :step, value: 3 %>
               	</div>
               	<hr>
               </section>
               </div>
-                <center>  
+                
                   <a href="<%= driverdetails_path %>" class="btn btn-sm btn-primary pl-3 pr-3"><i class="fas fa-caret-left"></i> Back</a>
+                  <span class="float-right">
                   <%= form.submit "Submit",id: "pickup_submit", class:"btn btn-sm btn-primary pl-3 pr-3" %>
+                  </span>
                     
-                  </center>
+                 
           <% end %>
           
 </div>

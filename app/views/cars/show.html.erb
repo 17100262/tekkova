@@ -110,10 +110,12 @@
                   </tr>
                   
                   <tr>
-                    <th>Allow Personal/Commercial Use</th>
+                    <th>Use Type</th>
                       <td>
-                        <% if @car.allow_personal_commercial_use == true %>Private use only
-                        <% else %>Commercial use permitted
+                        <% if @car.allow_personal_commercial_use %>
+                          Unsealed road use permitted
+                        <% else %>
+                          Sealed roads only
                        <%end %>
                       </td>
                       

@@ -48,9 +48,9 @@ hr{
     padding-bottom: 30px;
 }
 .address-bg {
-    background-color: #21a5D6;
+    background-color: #fff;
     padding: 10px 10px;
-    color: #fff;
+    color: #000;
 }
 .footer-bg {
     background-color: #FFF;
@@ -66,7 +66,7 @@ hr{
          <center><img src="http://tekkova.herokuapp.com/logo-t2.png" width="200" height="100"></center>
     </div>
     <h3 style="text-align: center">Congratulations!</h3>
-    <p style="text-transform: capitalize;"><strong>Hi <%= @recepient.name %></strong></p>
+    <p style="text-transform: capitalize;"><strong>Hi <%= @recepient.name.titlecase %></strong></p>
     <p>You have successfully created an account with us.<br>
      Please remain patient with us until we have enough cars listed so we can obtain the best insurance deal of start operations once we are ready to enable  bookings.</p>
      
@@ -74,11 +74,10 @@ hr{
      <br>
      <br>
     <center><a class="btn-account" href = "http://tekkova.herokuapp.com/">Visit Your Account</a></center>
-    <br>
-    <br>
+    <hr>
     <div class="address-bg">
     <p style="text-align: center;"><strong>Our Mailing Address is</strong></p>
-    <p style="text-align: center;">
+    <p style="text-align: center; color: #21a5D6 !important;">
         67 Howe Street<br> 
        Osborne Park<br>
        WA 6017

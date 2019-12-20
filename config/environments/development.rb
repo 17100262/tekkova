@@ -45,13 +45,15 @@ Rails.application.configure do
   # config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    :address => 'smtp.mailgun.org',
-    :domain  => 'sandboxcfca101b82ad403ab6f1e97cc0d4bc0f.mailgun.org',
-    :port      => 587,
-    :user_name => "postmaster@sandboxcfca101b82ad403ab6f1e97cc0d4bc0f.mailgun.org",
-    :password => "45123saq",
-    :authentication => :plain
-    }
+  config.action_mailer.delivery_method = :letter_opener
+
+  # ActionMailer::Base.delivery_method = :smtp
+  # ActionMailer::Base.smtp_settings = {
+  #   :address => 'smtp.mailgun.org',
+  #   :domain  => 'sandboxcfca101b82ad403ab6f1e97cc0d4bc0f.mailgun.org',
+  #   :port      => 587,
+  #   :user_name => "postmaster@sandboxcfca101b82ad403ab6f1e97cc0d4bc0f.mailgun.org",
+  #   :password => "45123saq",
+  #   :authentication => :plain
+  #   }
 end
