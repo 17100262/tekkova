@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     # end
   end
   get 'car_steps', to: 'cars#car_steps',as: :car_steps
+  get 'research', to: 'cars#research', as: :research
   get 'personaldetails', to: 'cars#personaldetails',as: :personaldetails
   get 'driverlicensedetails', to: 'cars#driverdetails',as: :driverdetails
   get 'pickupdetails', to: 'cars#pickupdetails',as: :pickupdetails

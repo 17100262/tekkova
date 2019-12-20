@@ -85,6 +85,11 @@ class CarsController < ApplicationController
 
     
   end
+  
+  def research
+    @user = current_user
+  end
+
   def personaldetails
     @user = current_user
   end

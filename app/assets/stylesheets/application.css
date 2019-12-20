@@ -1084,5 +1084,25 @@ img {
       max-width: 4.5%;
  }
  }
- 
+ .file-document-design {
+  padding: 15px 40px;
+  background: #22a5d6;
+  border: dotted 2px #000 !important;
+  color: #fff;
+  font-size: 40px;
+ }
+ .file-document-design:hover {
+  cursor: pointer;
+ }
+ .document-succes-bg {
+  background-color: green;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  color: #fff;
+  text-align: center;
+ }
+ .shw-tick {
+  line-height: 50px;
+ }
  

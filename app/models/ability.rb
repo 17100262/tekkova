@@ -21,6 +21,7 @@ class Ability
         can :personaldetails,Car
         can :driverdetails,Car
         can :pickupdetails,Car
+        can :research, Car
         can :my_bookings,User
         can :my_documents,User
         can :my_payments,User
