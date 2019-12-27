@@ -2,27 +2,35 @@
 
 <div class="container py-4 pb-2">
   <div class="col-md-6 mx-auto">
-      <div class="row" id="documents-list">
+      <div class="" id="documents-list">
           <%= render @user.documents%>
-      </div>
-    <div class="row align-items-center">
-      <div class="col-sm-12">
+      </div>  
         <%= form_with url: upload_documents_url, :html => { method: :get, :multipart => true, :id => "fileupload" } do |f| %>
           <%= f.file_field :upload,multiple: false,id: 'documents',class: 'd-none' %>
           <label for="documents" class="file-document-design">+</label>
           <% submit_tag "Submit"%>
+          
         <% end %>
-      </div>
-    </div>
-    
+   
+
   </div>
 </div>
 <script id="template-upload" type="text/x-tmpl">
-  <div class="upload">
+  <div class="upload row align">
+    <div class="col-11">
     {%=o.name%}
     <div class="progress"><div class="bar" style="width: 0%"></div>
     </div>
+    </div>
+     <div class="col-1">
+    <div class="document-succes-bg d-non float-right">
+            <div class="shw-tick">
+              <i class="fas fa-check 2x"></i>
+            </div>
+          </div>
+      </div>
   </div>
+  
 </script>
 
 <script>
@@ -37,6 +45,12 @@
         if (types.test(file.type) || types.test(file.name)) {
           data.context = $(tmpl("template-upload", file));
           $('#fileupload').append(data.context);
+          $('.document-succes-bg')
+            .delay(5000)
+            .queue( function(next){ 
+              $(this).show(); 
+              next(); 
+            });
           return data.submit();
         } else {
           return alert(file.name + " is not a gif, jpeg, png, docx, xlsx or pdf file");
@@ -45,8 +59,9 @@
       progress: function(e, data) {
         var progress;
         if (data.context) {
-          progress = parseInt(data.loaded / data.total * 100, 10);
+          progress = parseInt(data.loaded / data.total * 100);
           return data.context.find('.bar').css('width', progress + '%');
+
         }
       }
     });
