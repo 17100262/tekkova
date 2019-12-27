@@ -64,33 +64,33 @@
               	
               	<h5 class="mt-3">On average on a monthly basis, Do you prefer short or long term rentals?</h5>
                 <div class="checkbox-form inner-check-box">
-                  <%= radio_button_tag "user[rental]","Short term",@user.rental=="Short term", name: 'preferterm', required: true %>
-                  <%= form.label "Short Term, 1 to 15 days per month" %>
-                  <%= radio_button_tag "user[rental]","Long term",@user.rental=="Long term", name: 'preferterm'  %>
-                  <%= form.label "Long Term, 15 to 30 days per month" %>
+                  <%= radio_button_tag "user[rental]","Short term",@user.rental=="Short term", name: 'preferterm', required: true,id: 'prefershort' %>
+                  <%= form.label "Short Term, 1 to 15 days per month",for: 'prefershort' %>
+                  <%= radio_button_tag "user[rental]","Long term",@user.rental=="Long term", name: 'preferterm',id: 'preferlong'  %>
+                  <%= form.label "Long Term, 15 to 30 days per month",for: 'preferlong' %>
                 
               	</div>
               	<hr>
               	
               	<h5 class="mt-3">How much advance notice do you need?</h5>
                 <div class="checkbox-form inner-check-box">
-                  <%= radio_button_tag "user[advance_notice]","Anytime",@user.advance_notice=="Anytime", name: 'advancenotice', required: true  %>
-                  <%= form.label "Pickup Available at anytime before 6 Pm" %>
+                  <%= radio_button_tag "user[advance_notice]","Anytime",@user.advance_notice=="Anytime", name: 'advancenotice', required: true, id: 'advance_notice_anytime' %>
+                  <%= form.label "Pickup Available at anytime before 6 Pm", for: 'advance_notice_anytime' %>
                   
-                  <%= radio_button_tag "user[advance_notice]","1 to 6 hours",@user.advance_notice=="1 to 6 hours", name: 'advancenotice'  %>
-                  <%= form.label "1 to 6 hours" %>
+                  <%= radio_button_tag "user[advance_notice]","1 to 6 hours",@user.advance_notice=="1 to 6 hours", name: 'advancenotice', id: 'advance_notice_6'  %>
+                  <%= form.label "1 to 6 hours", for: 'advance_notice_6' %>
                   
-                  <%= radio_button_tag "user[advance_notice]","6 to 12 hours",@user.advance_notice=="6 to 12 hours", name: 'advancenotice'  %>
-                  <%= form.label "6 to 12 hours" %>
+                  <%= radio_button_tag "user[advance_notice]","6 to 12 hours",@user.advance_notice=="6 to 12 hours", name: 'advancenotice', id: 'advance_notice_12'  %>
+                  <%= form.label "6 to 12 hours", for: 'advance_notice_12' %>
                   
-                  <%= radio_button_tag "user[advance_notice]","12 to 24 hours",@user.advance_notice=="12 to 24 hours", name: 'advancenotice'  %>
-                  <%= form.label "12 to 24 hours" %>
+                  <%= radio_button_tag "user[advance_notice]","12 to 24 hours",@user.advance_notice=="12 to 24 hours", name: 'advancenotice', id: 'advance_notice_24'  %>
+                  <%= form.label "12 to 24 hours", for: 'advance_notice_24' %>
                   
-                  <%= radio_button_tag "user[advance_notice]","Two days",@user.advance_notice=="Two days", name: 'advancenotice'  %>
-                  <%= form.label "Two days" %>
+                  <%= radio_button_tag "user[advance_notice]","Two days",@user.advance_notice=="Two days", name: 'advancenotice', id: 'advance_notice_2'  %>
+                  <%= form.label "Two days", for: 'advance_notice_2' %>
                   
-                  <%= radio_button_tag "user[advance_notice]","3 days",@user.advance_notice=="3 days" , name: 'advancenotice' %>
-                  <%= form.label "3 days" %>
+                  <%= radio_button_tag "user[advance_notice]","3 days",@user.advance_notice=="3 days" , name: 'advancenotice', id: 'advance_notice_3' %>
+                  <%= form.label "3 days", for: 'advance_notice_3' %>
                     <%= form.hidden_field :step, value: 3 %>
               	</div>
               	<hr>
@@ -99,7 +99,7 @@
                 
                   <a href="<%= driverdetails_path %>" class="btn btn-sm btn-primary pl-3 pr-3"><i class="fas fa-caret-left"></i> Back</a>
                   <span class="float-right">
-                  <%= form.submit "Submit",id: "pickup_submit", class:"btn btn-sm btn-primary pl-3 pr-3" %>
+                  <button type="submit" id="pickup_submit" class="btn btn-primary btn-sm pl-3 pr-3">Next <i class="fas fa-caret-right"></i></button>
                   </span>
                     
                  

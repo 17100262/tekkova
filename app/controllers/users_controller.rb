@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: %i[engine_policy cleaning_policy feul_policy infringements_policy infringements_policy late_return_policy sign_up_page]
+  before_action :authenticate_user!, except: %i[engine_policy cleaning_policy
+                                                feul_policy infringements_policy
+                                                infringements_policy
+                                                late_return_policy sign_up_page]
   load_and_authorize_resource except: [:sign_up_page]
 
   def index
@@ -46,6 +49,8 @@ class UsersController < ApplicationController
         elsif params[:user][:step] == '2'
           redirect_to pickupdetails_path
         elsif params[:user][:step] == '3'
+          redirect_to research_path
+        elsif params[:user][:step] == '4'
           car = current_user.cars.last
           car.update(status: 'completed')
           redirect_to car_path(car), notice: 'Car Posted Successfully'
@@ -116,10 +121,25 @@ class UsersController < ApplicationController
     @success = @document&.destroy
   end
 
-
   private
 
   def user_params
-    params.require(:user).permit(:email, :firstname, :lastname, :profile_image, :licensefront, :licenseback, :pickup_suburb, :pickup_postcode, :pickup_state, :rental, :advance_notice, :driving_liecense_country, :driving_liecense_state, :driving_liecense_number, :driving_liecense_firstname, :driving_liecense_middlename, :driving_liecense_lastname, :personal_house_number, :personal_street_name, :personal_suburb, :personal_state, :personal_postcode, :personal_dob, :personal_mobile, :comment, :step, :offers, :home_phone_number, availibility_days: [], comment_files_attributes: %i[id file user_id _destroy])
+    params.require(:user).permit(:email, :firstname, :lastname, :profile_image,
+                                 :licensefront, :licenseback, :pickup_suburb,
+                                 :pickup_postcode, :pickup_state, :rental,
+                                 :advance_notice, :driving_liecense_country,
+                                 :driving_liecense_state,
+                                 :driving_liecense_number,
+                                 :driving_liecense_firstname,
+                                 :driving_liecense_middlename,
+                                 :driving_liecense_lastname,
+                                 :personal_house_number, :personal_street_name,
+                                 :personal_suburb,
+                                 :personal_state, :personal_postcode,
+                                 :personal_dob, :personal_mobile,
+                                 :comment, :step, :offers, :home_phone_number,
+                                 :research,
+                                 availibility_days: [],
+                                 comment_files_attributes: %i[id file user_id _destroy])
   end
 end
