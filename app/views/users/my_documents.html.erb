@@ -51,6 +51,12 @@
               $(this).show(); 
               next(); 
             });
+            $('.upload')
+            .delay(7000)
+            .queue( function(next){ 
+              $(this).hide(); 
+              next(); 
+            });
           return data.submit();
         } else {
           return alert(file.name + " is not a gif, jpeg, png, docx, xlsx or pdf file");
@@ -68,4 +74,6 @@
   });
 
 }).call(this);
+
+
 </script>

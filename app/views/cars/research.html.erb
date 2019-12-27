@@ -24,12 +24,24 @@
 	<%= form_for(@user) do |form| %>
 	<div class="checkbox-form my-2">
 			<div class="checkbox-form inner-check-box">
-				<%= radio_button_tag "user[research]",true,@user.research == true,id: 'research_yes' %>
-				<%= form.label "Yes",for: 'research_yes' %>
-				<%= radio_button_tag "user[research]",false,@user.research == false,id: 'research_no'  %>
-				<%= form.label "No", for: 'research_no' %>
-				<%= radio_button_tag "user[research]",false,@user.research == nil,id: 'research_skip'  %>
-				<%= form.label "Skip", for: 'research_skip' %>
+				<%#= radio_button_tag "user[research]",true,@user.research == true,id: 'research_yes' %>
+				<%#= form.label "Yes",for: 'research_yes' %>
+				<%#= radio_button_tag "user[research]",false,@user.research == false,id: 'research_no'  %>
+				<%#= form.label "No", for: 'research_no' %>
+				
+				<%#= form.input :research, as: :radio, collection: User.researches %>
+				
+
+				<%= form.collection_radio_buttons :research, User.researches, :first,:first do |b|
+				  b.label { b.radio_button + b.text.capitalize }
+				end %>
+
+
+
+				<%#= radio_button_tag "user[research]",nil,@user.research == nil,id: 'research_skip'  %>
+				<%#= form.label "Skip", for: 'research_skip' %>
+
+
 				<%= form.hidden_field :step, value: 4 %>
 			</div>
 	</div>

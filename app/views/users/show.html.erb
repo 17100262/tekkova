@@ -41,9 +41,12 @@
                                 </li>
                                 <li>
                                   <span class="text-color-dark"> 
-                                    Car Host Company:
+                                    User of Other Company:
                                   </span>
-                                  <span class="custom-text-color-2">Yes No</span>
+                                  <span class="custom-text-color-2">
+                                    <%#= @user.research.present? ? (@user.research ? 'Yes': 'No'): 'Skipped' %>
+                                    <%= @user.skip? ? 'Skipped':@user.research.capitalize %>
+                                  </span>
                                 </li>
 
                             </ul>

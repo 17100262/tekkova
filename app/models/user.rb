@@ -33,6 +33,8 @@ class User < ApplicationRecord
 
   after_create_commit { BasicMailer.welcome_email(self).deliver_later }
 
+  enum research: [:yes,:no,:skip]
+
   def make_admin
     update!(admin: true)
   end
