@@ -24,6 +24,23 @@
  *= require_self
  */
  
+ .upload {
+  border-top: solid 1px #CCC;
+  width: 400px;
+  padding-top: 10px;
+  margin-top: 10px;
+ }
+  .progress {
+    margin-top: 8px;
+    border: solid 1px #555;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+  }
+    .bar {
+      height: 10px;
+      background: #3EC144;
+    }
+
 .submit-finish{
     display: none;
 }
@@ -1096,13 +1113,13 @@ img {
  }
  .document-succes-bg {
   background-color: green;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border-radius: 100%;
   color: #fff;
   text-align: center;
  }
  .shw-tick {
-  line-height: 50px;
+  line-height: 30px;
  }
  

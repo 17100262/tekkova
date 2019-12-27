@@ -1,0 +1,12 @@
+<div class="col-md-12 mb-3" id="document<%= user_document.id%>">
+    <%= link_to user_document.file_file_name, user_document.file.url %>
+
+  <div class="document-succes-bg">
+    <div class="shw-tick">
+      <i class="fas fa-check 2x"></i>
+    </div>
+  </div>
+    <%= link_to delete_user_document_path(user_document.id),remote: true do %>
+        <i class="fas fa-trash 2x text-danger float-right mt-2" style="font-size: 24px"></i>
+    <% end %>
+</div>

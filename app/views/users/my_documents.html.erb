@@ -1,63 +1,56 @@
 <%= render "layouts/profileheader",user: @user %>
 
 <div class="container py-4 pb-2">
-    <strong><p class="text-center">You will be able to upload documents required by Tekkova in this section</p></strong>
-<div class="col-md-6 mx-auto">
-	<span id="output">Document Selected...</span> 
-			<hr class="mt-1">
-
-
-	<div class="row align-items-center">
-
-		<div class="col-sm-3">
-			<input type="file" name="" id="documents" class="d-none my_file" multiple>
-			<label for="documents" class="file-document-design">+</label>
-		</div>
-		<div class="col-sm-7 col-10">
-			<div class="progress">
-			    <div class="progress-bar" id="bar">
-			    	 
-			    </div>
-			</div>
-		</div>
-		<div class="col-sm-2 col-2">
-			<div class="document-succes-bg">
-				<div class="shw-tick">
-					<i class="fas fa-check 2x"></i>
-				</div>
-			</div>
-		</div>
-	</div>
-	
+  <div class="col-md-6 mx-auto">
+      <div class="row" id="documents-list">
+          <%= render @user.documents%>
+      </div>
+    <div class="row align-items-center">
+      <div class="col-sm-12">
+        <%= form_with url: upload_documents_url, :html => { method: :get, :multipart => true, :id => "fileupload" } do |f| %>
+          <%= f.file_field :upload,multiple: false,id: 'documents',class: 'd-none' %>
+          <label for="documents" class="file-document-design">+</label>
+          <% submit_tag "Submit"%>
+        <% end %>
+      </div>
+    </div>
+    
+  </div>
 </div>
+<script id="template-upload" type="text/x-tmpl">
+  <div class="upload">
+    {%=o.name%}
+    <div class="progress"><div class="bar" style="width: 0%"></div>
+    </div>
+  </div>
+</script>
 
-<script type="text/javascript">
-	var i = 0;
-	var progressBar = $("#bar");
-	function countNumbers(){
-	    if(i < 80){
-	        i = i + 1;
-	        progressBar.css("width", i + "%");
-	    }
-	    setTimeout("countNumbers()", 40);
-	}
-	$("#documents").on('change',function(){
-		countNumbers();
-	});
-
-	// icon show script
-	$("#documents").on('change',function(){
-
-	});
-
-	// show file script
-
-	$(document).ready(function(){
-        $('input[type="file"]').change(function(e){
-            var fileName = e.target.files[0].name;
-            $("#output").html('<i class="far fa-file-alt text-primary mr-2 mt-2" style="font-size: 24px"></i> ' + fileName + ' <i class="fas fa-trash 2x text-danger float-right mt-2" style="font-size: 24px"></i>' );
-            // document.getElementById('output').innerHTML = fileName;
-        });
+<script>
+(function() {
+  jQuery(function() {
+    return $('#fileupload').fileupload({
+      dataType: "script",
+      add: function(e, data) {
+        var file, types;
+        types = /(\.|\/)(gif|jpe?g|png|pdf|doc?x|doc|xlsx)$/i;
+        file = data.files[0];
+        if (types.test(file.type) || types.test(file.name)) {
+          data.context = $(tmpl("template-upload", file));
+          $('#fileupload').append(data.context);
+          return data.submit();
+        } else {
+          return alert(file.name + " is not a gif, jpeg, png, docx, xlsx or pdf file");
+        }
+      },
+      progress: function(e, data) {
+        var progress;
+        if (data.context) {
+          progress = parseInt(data.loaded / data.total * 100, 10);
+          return data.context.find('.bar').css('width', progress + '%');
+        }
+      }
     });
+  });
 
+}).call(this);
 </script>

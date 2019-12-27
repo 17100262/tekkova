@@ -22,7 +22,7 @@
                 <%= f.password_field :password, autocomplete: "off",required: true, class: "form-control form-control-md pss_next mb-2", placeholder: "Enter Your Password"  , id: "join_pword" %>
                 <%= f.password_field :password_confirmation, autocomplete: "off",required: true, class: "form-control form-control-md mb-2", placeholder: "Confirm Your Password", id: "join_cpword" %>
                 <div class="input-file-container">  
-                    <%= f.file_field :profile_image, accept:"image/*", required: true, class:"input-file", :data => { :buttonText => 'bar' } %>
+                    <%= f.file_field :profile_image, accept:"image/*", required: false, class:"input-file", :data => { :buttonText => 'bar' } %>
                     <label tabindex="0" for="user_profile_image" class="input-file-trigger bg-primary mb-2">Upload Profile Picture</label>
                     <span class="file-return">No File Choosen</span>
                 </div>

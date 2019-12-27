@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get 'my_bookings', to: 'users#my_bookings',as: :my_bookings
   get 'my_payments', to: 'users#my_payments',as: :my_payments
   get 'my_ratings', to: 'users#my_ratings',as: :my_ratings
+  post 'upload_documents', to: 'users#upload_documents',as: :upload_documents
+  get 'delete_document/:document_id', to: 'users#delete_document',as: :delete_user_document
   get 'fee_and_charges', to:'home#fee_and_charges',as: :fee_and_charges
   get 'nd_policy', to: 'home#nd_policy', as: :nd_policy
   get 'privacy_policy', to: 'home#privacy_policy', as: :privacy_policy

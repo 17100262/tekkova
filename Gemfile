@@ -71,3 +71,4 @@ gem 'figaro'
 gem 'bulky', git: "https://github.com/17100262/rails-bulky.git"
 gem 'toastr-rails'
 gem 'geocoder'
+gem 'jquery-fileupload-rails'

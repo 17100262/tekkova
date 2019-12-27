@@ -1,0 +1,5 @@
+<% if @success %>
+    $('#document<%= @document.id%>').html('');
+<% else %>
+    alert('Something went wrong with deleting document, please try again.')
+<% end %>
