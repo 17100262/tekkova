@@ -1,6 +1,6 @@
 module Bulky
   class ApplicationMailer < ActionMailer::Base
-    default from: 'support@tekkova.com'
+    default from: 'Tekkova support <tekkova@customersupport.com>'
     layout 'mailer'
   end
 end
