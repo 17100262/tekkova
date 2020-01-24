@@ -1,6 +1,6 @@
 Devise.setup do |config|
 config.secret_key = '77c78c2181dfe988740b5030d2de29e925eaf7fd836f8571f2bd19ad0a8b7d2fc6f6f0a6a28d1dabcbe84f46aac3822229d5d68a0832c9914eae8aee7760817a'
-  config.mailer_sender = 'support@tekkova.com'
+  config.mailer_sender = 'Tekkova support <tekkova@customersupport.com>'
   config.mailer = 'Devise::Mailer'
   # config.mailer = 'UserMailer'
   config.parent_mailer = 'ActionMailer::Base'
