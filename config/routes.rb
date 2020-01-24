@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get 'terms_and_conditions', to: 'home#terms_and_conditions', as: :terms_and_conditions
   get 'about_us', to: 'home#about_us', as: :about_us
   post 'listing_criteria', to: 'cars#submit_listing_criteria',as: :listing_criteria
-  get 'send_contact_query', to: 'home#send_contact_query', as: :send_contact_query
+  post 'send_contact_query', to: 'home#send_contact_query', as: :send_contact_query
 
   devise_for :users, :controllers => { :registrations => 'users/registrations',:sessions => "users/sessions",:confirmations => "users/confirmations" }
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user

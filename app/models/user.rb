@@ -31,7 +31,7 @@ class User < ApplicationRecord
   validates_attachment_content_type :licenseback,
                                     content_type: %r{\Aimage/.*\z}
 
-  after_create_commit { BasicMailer.welcome_email(self).deliver_later }
+  # after_create_commit { BasicMailer.welcome_email(self).deliver_later }
 
   enum research: [:yes,:no,:skip]
 

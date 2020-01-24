@@ -10,9 +10,9 @@ development:
   database: car_development
   host: localhost
   port: 5432
-  username: rails_dev
-  password: password
-  
+  # username: rails_dev
+  # password: password
+
 production:
   <<: *default
   database: car_production

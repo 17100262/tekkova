@@ -35,7 +35,7 @@
       font-size: 16px;
       font-weight: bold;
     }
-    .whole-body {i
+    .whole-body {
       background: #f1f1f1;
       padding-top: 30px;
       padding-bottom: 30px;
@@ -50,40 +50,17 @@
       padding: 10px 10px;
       color: #fff;
     }
-    .footer-bg {
-      background-color: #fff;
-      padding: 10px 10px;
-      color: #000;
-    }
     </style>
   </head>
   <body class="whole-body">
     <div class="mail-box">
-
-      <div class="background-b">
-        <center><img src="http://tekkova.herokuapp.com/logo-t2.png" width="200" height="100"></center>
-      </div>
-      <br>
-      <p style="text-transform: capitalize;"><strong>Hi <%= @resource.name.titlecase %></strong></p>
-      <p>Please activate your account in order to list your car and slash your car maintenance expenses.</p>
-      <br>
-      <br>
-      <center><a class="btn-account" href = "<%= confirmation_url(@resource, confirmation_token: @token) %>">Activate</a></center><br/>
-      <br>
-      <br>
-      <div class="address-bg">
-        <p style="text-align: center;"><strong>Our Mailing Address is</strong></p>
-        <p style="text-align: center;">
-          67 Howe Street<br>
-          Osborne Park<br>
-          WA 6017
-        </p>
-      </div>
-      <div class="footer-bg">
-        <p>
-          This email was sent by Tekkova. Tekkova is an online marketplace that facilitates peer to peer private car rented share
-        </p>
-      </div>
+      <h3 style="text-align: center">Contact Us Query</h3>
+      <p>
+      <strong>Name: </strong> <%= @name%> <br>
+      <strong>Email: </strong> <%= @email%> <br>
+      <strong>Subject: </strong> <%= @subject%> <br>
+      <strong>Message: </strong> <%= @message%>
+      </p>
     </div>
   </body>
 </html>
