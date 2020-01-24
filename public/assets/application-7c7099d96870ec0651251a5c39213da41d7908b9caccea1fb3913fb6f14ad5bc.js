@@ -11007,561 +11007,2366 @@ if ( !noGlobal ) {
 
 return jQuery;
 }));
-(function($, undefined) {
+/*! jQuery UI - v1.11.4+CommonJS - 2015-08-28
+* http://jqueryui.com
+* Includes: widget.js
+* Copyright 2015 jQuery Foundation and other contributors; Licensed MIT */
 
-/**
- * Unobtrusive scripting adapter for jQuery
- * https://github.com/rails/jquery-ujs
+
+(function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define([ "jquery" ], factory );
+
+	} else if ( typeof exports === "object" ) {
+
+		// Node/CommonJS
+		factory( require( "jquery" ) );
+
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+}(function( $ ) {
+/*!
+ * jQuery UI Widget 1.11.4
+ * http://jqueryui.com
  *
- * Requires jQuery 1.8.0 or later.
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
  *
- * Released under the MIT license
- *
+ * http://api.jqueryui.com/jQuery.widget/
  */
 
-  // Cut down on the number of issues from people inadvertently including jquery_ujs twice
-  // by detecting and raising an error when it happens.
-  'use strict';
 
-  if ( $.rails !== undefined ) {
-    $.error('jquery-ujs has already been loaded!');
-  }
+var widget_uuid = 0,
+	widget_slice = Array.prototype.slice;
 
-  // Shorthand to make it a little easier to call public rails functions from within rails.js
-  var rails;
-  var $document = $(document);
+$.cleanData = (function( orig ) {
+	return function( elems ) {
+		var events, elem, i;
+		for ( i = 0; (elem = elems[i]) != null; i++ ) {
+			try {
 
-  $.rails = rails = {
-    // Link elements bound by jquery-ujs
-    linkClickSelector: 'a[data-confirm], a[data-method], a[data-remote]:not([disabled]), a[data-disable-with], a[data-disable]',
+				// Only trigger remove when necessary to save time
+				events = $._data( elem, "events" );
+				if ( events && events.remove ) {
+					$( elem ).triggerHandler( "remove" );
+				}
 
-    // Button elements bound by jquery-ujs
-    buttonClickSelector: 'button[data-remote]:not([form]):not(form button), button[data-confirm]:not([form]):not(form button)',
+			// http://bugs.jquery.com/ticket/8235
+			} catch ( e ) {}
+		}
+		orig( elems );
+	};
+})( $.cleanData );
 
-    // Select elements bound by jquery-ujs
-    inputChangeSelector: 'select[data-remote], input[data-remote], textarea[data-remote]',
+$.widget = function( name, base, prototype ) {
+	var fullName, existingConstructor, constructor, basePrototype,
+		// proxiedPrototype allows the provided prototype to remain unmodified
+		// so that it can be used as a mixin for multiple widgets (#8876)
+		proxiedPrototype = {},
+		namespace = name.split( "." )[ 0 ];
 
-    // Form elements bound by jquery-ujs
-    formSubmitSelector: 'form',
+	name = name.split( "." )[ 1 ];
+	fullName = namespace + "-" + name;
 
-    // Form input elements bound by jquery-ujs
-    formInputClickSelector: 'form input[type=submit], form input[type=image], form button[type=submit], form button:not([type]), input[type=submit][form], input[type=image][form], button[type=submit][form], button[form]:not([type])',
+	if ( !prototype ) {
+		prototype = base;
+		base = $.Widget;
+	}
 
-    // Form input elements disabled during form submission
-    disableSelector: 'input[data-disable-with]:enabled, button[data-disable-with]:enabled, textarea[data-disable-with]:enabled, input[data-disable]:enabled, button[data-disable]:enabled, textarea[data-disable]:enabled',
+	// create selector for plugin
+	$.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {
+		return !!$.data( elem, fullName );
+	};
 
-    // Form input elements re-enabled after form submission
-    enableSelector: 'input[data-disable-with]:disabled, button[data-disable-with]:disabled, textarea[data-disable-with]:disabled, input[data-disable]:disabled, button[data-disable]:disabled, textarea[data-disable]:disabled',
+	$[ namespace ] = $[ namespace ] || {};
+	existingConstructor = $[ namespace ][ name ];
+	constructor = $[ namespace ][ name ] = function( options, element ) {
+		// allow instantiation without "new" keyword
+		if ( !this._createWidget ) {
+			return new constructor( options, element );
+		}
 
-    // Form required input elements
-    requiredInputSelector: 'input[name][required]:not([disabled]), textarea[name][required]:not([disabled])',
+		// allow instantiation without initializing for simple inheritance
+		// must use "new" keyword (the code above always passes args)
+		if ( arguments.length ) {
+			this._createWidget( options, element );
+		}
+	};
+	// extend with the existing constructor to carry over any static properties
+	$.extend( constructor, existingConstructor, {
+		version: prototype.version,
+		// copy the object used to create the prototype in case we need to
+		// redefine the widget later
+		_proto: $.extend( {}, prototype ),
+		// track widgets that inherit from this widget in case this widget is
+		// redefined after a widget inherits from it
+		_childConstructors: []
+	});
 
-    // Form file input elements
-    fileInputSelector: 'input[name][type=file]:not([disabled])',
+	basePrototype = new base();
+	// we need to make the options hash a property directly on the new instance
+	// otherwise we'll modify the options hash on the prototype that we're
+	// inheriting from
+	basePrototype.options = $.widget.extend( {}, basePrototype.options );
+	$.each( prototype, function( prop, value ) {
+		if ( !$.isFunction( value ) ) {
+			proxiedPrototype[ prop ] = value;
+			return;
+		}
+		proxiedPrototype[ prop ] = (function() {
+			var _super = function() {
+					return base.prototype[ prop ].apply( this, arguments );
+				},
+				_superApply = function( args ) {
+					return base.prototype[ prop ].apply( this, args );
+				};
+			return function() {
+				var __super = this._super,
+					__superApply = this._superApply,
+					returnValue;
 
-    // Link onClick disable selector with possible reenable after remote submission
-    linkDisableSelector: 'a[data-disable-with], a[data-disable]',
+				this._super = _super;
+				this._superApply = _superApply;
 
-    // Button onClick disable selector with possible reenable after remote submission
-    buttonDisableSelector: 'button[data-remote][data-disable-with], button[data-remote][data-disable]',
+				returnValue = value.apply( this, arguments );
 
-    // Up-to-date Cross-Site Request Forgery token
-    csrfToken: function() {
-     return $('meta[name=csrf-token]').attr('content');
-    },
+				this._super = __super;
+				this._superApply = __superApply;
 
-    // URL param that must contain the CSRF token
-    csrfParam: function() {
-     return $('meta[name=csrf-param]').attr('content');
-    },
+				return returnValue;
+			};
+		})();
+	});
+	constructor.prototype = $.widget.extend( basePrototype, {
+		// TODO: remove support for widgetEventPrefix
+		// always use the name + a colon as the prefix, e.g., draggable:start
+		// don't prefix for widgets that aren't DOM-based
+		widgetEventPrefix: existingConstructor ? (basePrototype.widgetEventPrefix || name) : name
+	}, proxiedPrototype, {
+		constructor: constructor,
+		namespace: namespace,
+		widgetName: name,
+		widgetFullName: fullName
+	});
 
-    // Make sure that every Ajax request sends the CSRF token
-    CSRFProtection: function(xhr) {
-      var token = rails.csrfToken();
-      if (token) xhr.setRequestHeader('X-CSRF-Token', token);
-    },
+	// If this widget is being redefined then we need to find all widgets that
+	// are inheriting from it and redefine all of them so that they inherit from
+	// the new version of this widget. We're essentially trying to replace one
+	// level in the prototype chain.
+	if ( existingConstructor ) {
+		$.each( existingConstructor._childConstructors, function( i, child ) {
+			var childPrototype = child.prototype;
 
-    // Make sure that all forms have actual up-to-date tokens (cached forms contain old ones)
-    refreshCSRFTokens: function(){
-      $('form input[name="' + rails.csrfParam() + '"]').val(rails.csrfToken());
-    },
+			// redefine the child widget using the same prototype that was
+			// originally used, but inherit from the new version of the base
+			$.widget( childPrototype.namespace + "." + childPrototype.widgetName, constructor, child._proto );
+		});
+		// remove the list of existing child constructors from the old constructor
+		// so the old child constructors can be garbage collected
+		delete existingConstructor._childConstructors;
+	} else {
+		base._childConstructors.push( constructor );
+	}
 
-    // Triggers an event on an element and returns false if the event result is false
-    fire: function(obj, name, data) {
-      var event = $.Event(name);
-      obj.trigger(event, data);
-      return event.result !== false;
-    },
+	$.widget.bridge( name, constructor );
 
-    // Default confirm dialog, may be overridden with custom confirm dialog in $.rails.confirm
-    confirm: function(message) {
-      return confirm(message);
-    },
+	return constructor;
+};
 
-    // Default ajax function, may be overridden with custom function in $.rails.ajax
-    ajax: function(options) {
-      return $.ajax(options);
-    },
+$.widget.extend = function( target ) {
+	var input = widget_slice.call( arguments, 1 ),
+		inputIndex = 0,
+		inputLength = input.length,
+		key,
+		value;
+	for ( ; inputIndex < inputLength; inputIndex++ ) {
+		for ( key in input[ inputIndex ] ) {
+			value = input[ inputIndex ][ key ];
+			if ( input[ inputIndex ].hasOwnProperty( key ) && value !== undefined ) {
+				// Clone objects
+				if ( $.isPlainObject( value ) ) {
+					target[ key ] = $.isPlainObject( target[ key ] ) ?
+						$.widget.extend( {}, target[ key ], value ) :
+						// Don't extend strings, arrays, etc. with objects
+						$.widget.extend( {}, value );
+				// Copy everything else by reference
+				} else {
+					target[ key ] = value;
+				}
+			}
+		}
+	}
+	return target;
+};
 
-    // Default way to get an element's href. May be overridden at $.rails.href.
-    href: function(element) {
-      return element[0].href;
-    },
+$.widget.bridge = function( name, object ) {
+	var fullName = object.prototype.widgetFullName || name;
+	$.fn[ name ] = function( options ) {
+		var isMethodCall = typeof options === "string",
+			args = widget_slice.call( arguments, 1 ),
+			returnValue = this;
 
-    // Checks "data-remote" if true to handle the request through a XHR request.
-    isRemote: function(element) {
-      return element.data('remote') !== undefined && element.data('remote') !== false;
-    },
+		if ( isMethodCall ) {
+			this.each(function() {
+				var methodValue,
+					instance = $.data( this, fullName );
+				if ( options === "instance" ) {
+					returnValue = instance;
+					return false;
+				}
+				if ( !instance ) {
+					return $.error( "cannot call methods on " + name + " prior to initialization; " +
+						"attempted to call method '" + options + "'" );
+				}
+				if ( !$.isFunction( instance[options] ) || options.charAt( 0 ) === "_" ) {
+					return $.error( "no such method '" + options + "' for " + name + " widget instance" );
+				}
+				methodValue = instance[ options ].apply( instance, args );
+				if ( methodValue !== instance && methodValue !== undefined ) {
+					returnValue = methodValue && methodValue.jquery ?
+						returnValue.pushStack( methodValue.get() ) :
+						methodValue;
+					return false;
+				}
+			});
+		} else {
 
-    // Submits "remote" forms and links with ajax
-    handleRemote: function(element) {
-      var method, url, data, withCredentials, dataType, options;
+			// Allow multiple hashes to be passed on init
+			if ( args.length ) {
+				options = $.widget.extend.apply( null, [ options ].concat(args) );
+			}
 
-      if (rails.fire(element, 'ajax:before')) {
-        withCredentials = element.data('with-credentials') || null;
-        dataType = element.data('type') || ($.ajaxSettings && $.ajaxSettings.dataType);
+			this.each(function() {
+				var instance = $.data( this, fullName );
+				if ( instance ) {
+					instance.option( options || {} );
+					if ( instance._init ) {
+						instance._init();
+					}
+				} else {
+					$.data( this, fullName, new object( options, this ) );
+				}
+			});
+		}
 
-        if (element.is('form')) {
-          method = element.data('ujs:submit-button-formmethod') || element.attr('method');
-          url = element.data('ujs:submit-button-formaction') || element.attr('action');
-          data = $(element[0]).serializeArray();
-          // memoized value from clicked submit button
-          var button = element.data('ujs:submit-button');
-          if (button) {
-            data.push(button);
-            element.data('ujs:submit-button', null);
-          }
-          element.data('ujs:submit-button-formmethod', null);
-          element.data('ujs:submit-button-formaction', null);
-        } else if (element.is(rails.inputChangeSelector)) {
-          method = element.data('method');
-          url = element.data('url');
-          data = element.serialize();
-          if (element.data('params')) data = data + '&' + element.data('params');
-        } else if (element.is(rails.buttonClickSelector)) {
-          method = element.data('method') || 'get';
-          url = element.data('url');
-          data = element.serialize();
-          if (element.data('params')) data = data + '&' + element.data('params');
-        } else {
-          method = element.data('method');
-          url = rails.href(element);
-          data = element.data('params') || null;
-        }
+		return returnValue;
+	};
+};
 
-        options = {
-          type: method || 'GET', data: data, dataType: dataType,
-          // stopping the "ajax:beforeSend" event will cancel the ajax request
-          beforeSend: function(xhr, settings) {
-            if (settings.dataType === undefined) {
-              xhr.setRequestHeader('accept', '*/*;q=0.5, ' + settings.accepts.script);
-            }
-            if (rails.fire(element, 'ajax:beforeSend', [xhr, settings])) {
-              element.trigger('ajax:send', xhr);
-            } else {
-              return false;
-            }
-          },
-          success: function(data, status, xhr) {
-            element.trigger('ajax:success', [data, status, xhr]);
-          },
-          complete: function(xhr, status) {
-            element.trigger('ajax:complete', [xhr, status]);
-          },
-          error: function(xhr, status, error) {
-            element.trigger('ajax:error', [xhr, status, error]);
-          },
-          crossDomain: rails.isCrossDomain(url)
-        };
+$.Widget = function( /* options, element */ ) {};
+$.Widget._childConstructors = [];
 
-        // There is no withCredentials for IE6-8 when
-        // "Enable native XMLHTTP support" is disabled
-        if (withCredentials) {
-          options.xhrFields = {
-            withCredentials: withCredentials
-          };
-        }
+$.Widget.prototype = {
+	widgetName: "widget",
+	widgetEventPrefix: "",
+	defaultElement: "<div>",
+	options: {
+		disabled: false,
 
-        // Only pass url to `ajax` options if not blank
-        if (url) { options.url = url; }
+		// callbacks
+		create: null
+	},
+	_createWidget: function( options, element ) {
+		element = $( element || this.defaultElement || this )[ 0 ];
+		this.element = $( element );
+		this.uuid = widget_uuid++;
+		this.eventNamespace = "." + this.widgetName + this.uuid;
 
-        return rails.ajax(options);
-      } else {
-        return false;
-      }
-    },
+		this.bindings = $();
+		this.hoverable = $();
+		this.focusable = $();
 
-    // Determines if the request is a cross domain request.
-    isCrossDomain: function(url) {
-      var originAnchor = document.createElement('a');
-      originAnchor.href = location.href;
-      var urlAnchor = document.createElement('a');
+		if ( element !== this ) {
+			$.data( element, this.widgetFullName, this );
+			this._on( true, this.element, {
+				remove: function( event ) {
+					if ( event.target === element ) {
+						this.destroy();
+					}
+				}
+			});
+			this.document = $( element.style ?
+				// element within the document
+				element.ownerDocument :
+				// element is window or document
+				element.document || element );
+			this.window = $( this.document[0].defaultView || this.document[0].parentWindow );
+		}
 
-      try {
-        urlAnchor.href = url;
-        // This is a workaround to a IE bug.
-        urlAnchor.href = urlAnchor.href;
+		this.options = $.widget.extend( {},
+			this.options,
+			this._getCreateOptions(),
+			options );
 
-        // If URL protocol is false or is a string containing a single colon
-        // *and* host are false, assume it is not a cross-domain request
-        // (should only be the case for IE7 and IE compatibility mode).
-        // Otherwise, evaluate protocol and host of the URL against the origin
-        // protocol and host.
-        return !(((!urlAnchor.protocol || urlAnchor.protocol === ':') && !urlAnchor.host) ||
-          (originAnchor.protocol + '//' + originAnchor.host ===
-            urlAnchor.protocol + '//' + urlAnchor.host));
-      } catch (e) {
-        // If there is an error parsing the URL, assume it is crossDomain.
-        return true;
-      }
-    },
+		this._create();
+		this._trigger( "create", null, this._getCreateEventData() );
+		this._init();
+	},
+	_getCreateOptions: $.noop,
+	_getCreateEventData: $.noop,
+	_create: $.noop,
+	_init: $.noop,
 
-    // Handles "data-method" on links such as:
-    // <a href="/users/5" data-method="delete" rel="nofollow" data-confirm="Are you sure?">Delete</a>
-    handleMethod: function(link) {
-      var href = rails.href(link),
-        method = link.data('method'),
-        target = link.attr('target'),
-        csrfToken = rails.csrfToken(),
-        csrfParam = rails.csrfParam(),
-        form = $('<form method="post" action="' + href + '"></form>'),
-        metadataInput = '<input name="_method" value="' + method + '" type="hidden" />';
+	destroy: function() {
+		this._destroy();
+		// we can probably remove the unbind calls in 2.0
+		// all event bindings should go through this._on()
+		this.element
+			.unbind( this.eventNamespace )
+			.removeData( this.widgetFullName )
+			// support: jquery <1.6.3
+			// http://bugs.jquery.com/ticket/9413
+			.removeData( $.camelCase( this.widgetFullName ) );
+		this.widget()
+			.unbind( this.eventNamespace )
+			.removeAttr( "aria-disabled" )
+			.removeClass(
+				this.widgetFullName + "-disabled " +
+				"ui-state-disabled" );
 
-      if (csrfParam !== undefined && csrfToken !== undefined && !rails.isCrossDomain(href)) {
-        metadataInput += '<input name="' + csrfParam + '" value="' + csrfToken + '" type="hidden" />';
-      }
+		// clean up events and states
+		this.bindings.unbind( this.eventNamespace );
+		this.hoverable.removeClass( "ui-state-hover" );
+		this.focusable.removeClass( "ui-state-focus" );
+	},
+	_destroy: $.noop,
 
-      if (target) { form.attr('target', target); }
+	widget: function() {
+		return this.element;
+	},
 
-      form.hide().append(metadataInput).appendTo('body');
-      form.submit();
-    },
+	option: function( key, value ) {
+		var options = key,
+			parts,
+			curOption,
+			i;
 
-    // Helper function that returns form elements that match the specified CSS selector
-    // If form is actually a "form" element this will return associated elements outside the from that have
-    // the html form attribute set
-    formElements: function(form, selector) {
-      return form.is('form') ? $(form[0].elements).filter(selector) : form.find(selector);
-    },
+		if ( arguments.length === 0 ) {
+			// don't return a reference to the internal hash
+			return $.widget.extend( {}, this.options );
+		}
 
-    /* Disables form elements:
-      - Caches element value in 'ujs:enable-with' data store
-      - Replaces element text with value of 'data-disable-with' attribute
-      - Sets disabled property to true
-    */
-    disableFormElements: function(form) {
-      rails.formElements(form, rails.disableSelector).each(function() {
-        rails.disableFormElement($(this));
-      });
-    },
+		if ( typeof key === "string" ) {
+			// handle nested keys, e.g., "foo.bar" => { foo: { bar: ___ } }
+			options = {};
+			parts = key.split( "." );
+			key = parts.shift();
+			if ( parts.length ) {
+				curOption = options[ key ] = $.widget.extend( {}, this.options[ key ] );
+				for ( i = 0; i < parts.length - 1; i++ ) {
+					curOption[ parts[ i ] ] = curOption[ parts[ i ] ] || {};
+					curOption = curOption[ parts[ i ] ];
+				}
+				key = parts.pop();
+				if ( arguments.length === 1 ) {
+					return curOption[ key ] === undefined ? null : curOption[ key ];
+				}
+				curOption[ key ] = value;
+			} else {
+				if ( arguments.length === 1 ) {
+					return this.options[ key ] === undefined ? null : this.options[ key ];
+				}
+				options[ key ] = value;
+			}
+		}
 
-    disableFormElement: function(element) {
-      var method, replacement;
+		this._setOptions( options );
 
-      method = element.is('button') ? 'html' : 'val';
-      replacement = element.data('disable-with');
+		return this;
+	},
+	_setOptions: function( options ) {
+		var key;
 
-      if (replacement !== undefined) {
-        element.data('ujs:enable-with', element[method]());
-        element[method](replacement);
-      }
+		for ( key in options ) {
+			this._setOption( key, options[ key ] );
+		}
 
-      element.prop('disabled', true);
-      element.data('ujs:disabled', true);
-    },
+		return this;
+	},
+	_setOption: function( key, value ) {
+		this.options[ key ] = value;
 
-    /* Re-enables disabled form elements:
-      - Replaces element text with cached value from 'ujs:enable-with' data store (created in `disableFormElements`)
-      - Sets disabled property to false
-    */
-    enableFormElements: function(form) {
-      rails.formElements(form, rails.enableSelector).each(function() {
-        rails.enableFormElement($(this));
-      });
-    },
+		if ( key === "disabled" ) {
+			this.widget()
+				.toggleClass( this.widgetFullName + "-disabled", !!value );
 
-    enableFormElement: function(element) {
-      var method = element.is('button') ? 'html' : 'val';
-      if (element.data('ujs:enable-with') !== undefined) {
-        element[method](element.data('ujs:enable-with'));
-        element.removeData('ujs:enable-with'); // clean up cache
-      }
-      element.prop('disabled', false);
-      element.removeData('ujs:disabled');
-    },
+			// If the widget is becoming disabled, then nothing is interactive
+			if ( value ) {
+				this.hoverable.removeClass( "ui-state-hover" );
+				this.focusable.removeClass( "ui-state-focus" );
+			}
+		}
 
-   /* For 'data-confirm' attribute:
-      - Fires `confirm` event
-      - Shows the confirmation dialog
-      - Fires the `confirm:complete` event
+		return this;
+	},
 
-      Returns `true` if no function stops the chain and user chose yes; `false` otherwise.
-      Attaching a handler to the element's `confirm` event that returns a `falsy` value cancels the confirmation dialog.
-      Attaching a handler to the element's `confirm:complete` event that returns a `falsy` value makes this function
-      return false. The `confirm:complete` event is fired whether or not the user answered true or false to the dialog.
-   */
-    allowAction: function(element) {
-      var message = element.data('confirm'),
-          answer = false, callback;
-      if (!message) { return true; }
+	enable: function() {
+		return this._setOptions({ disabled: false });
+	},
+	disable: function() {
+		return this._setOptions({ disabled: true });
+	},
 
-      if (rails.fire(element, 'confirm')) {
-        try {
-          answer = rails.confirm(message);
-        } catch (e) {
-          (console.error || console.log).call(console, e.stack || e);
-        }
-        callback = rails.fire(element, 'confirm:complete', [answer]);
-      }
-      return answer && callback;
-    },
+	_on: function( suppressDisabledCheck, element, handlers ) {
+		var delegateElement,
+			instance = this;
 
-    // Helper function which checks for blank inputs in a form that match the specified CSS selector
-    blankInputs: function(form, specifiedSelector, nonBlank) {
-      var foundInputs = $(),
-        input,
-        valueToCheck,
-        radiosForNameWithNoneSelected,
-        radioName,
-        selector = specifiedSelector || 'input,textarea',
-        requiredInputs = form.find(selector),
-        checkedRadioButtonNames = {};
+		// no suppressDisabledCheck flag, shuffle arguments
+		if ( typeof suppressDisabledCheck !== "boolean" ) {
+			handlers = element;
+			element = suppressDisabledCheck;
+			suppressDisabledCheck = false;
+		}
 
-      requiredInputs.each(function() {
-        input = $(this);
-        if (input.is('input[type=radio]')) {
+		// no element argument, shuffle and use this.element
+		if ( !handlers ) {
+			handlers = element;
+			element = this.element;
+			delegateElement = this.widget();
+		} else {
+			element = delegateElement = $( element );
+			this.bindings = this.bindings.add( element );
+		}
 
-          // Don't count unchecked required radio as blank if other radio with same name is checked,
-          // regardless of whether same-name radio input has required attribute or not. The spec
-          // states https://www.w3.org/TR/html5/forms.html#the-required-attribute
-          radioName = input.attr('name');
+		$.each( handlers, function( event, handler ) {
+			function handlerProxy() {
+				// allow widgets to customize the disabled handling
+				// - disabled as an array instead of boolean
+				// - disabled class as method for disabling individual parts
+				if ( !suppressDisabledCheck &&
+						( instance.options.disabled === true ||
+							$( this ).hasClass( "ui-state-disabled" ) ) ) {
+					return;
+				}
+				return ( typeof handler === "string" ? instance[ handler ] : handler )
+					.apply( instance, arguments );
+			}
 
-          // Skip if we've already seen the radio with this name.
-          if (!checkedRadioButtonNames[radioName]) {
+			// copy the guid so direct unbinding works
+			if ( typeof handler !== "string" ) {
+				handlerProxy.guid = handler.guid =
+					handler.guid || handlerProxy.guid || $.guid++;
+			}
 
-            // If none checked
-            if (form.find('input[type=radio]:checked[name="' + radioName + '"]').length === 0) {
-              radiosForNameWithNoneSelected = form.find(
-                'input[type=radio][name="' + radioName + '"]');
-              foundInputs = foundInputs.add(radiosForNameWithNoneSelected);
-            }
+			var match = event.match( /^([\w:-]*)\s*(.*)$/ ),
+				eventName = match[1] + instance.eventNamespace,
+				selector = match[2];
+			if ( selector ) {
+				delegateElement.delegate( selector, eventName, handlerProxy );
+			} else {
+				element.bind( eventName, handlerProxy );
+			}
+		});
+	},
 
-            // We only need to check each name once.
-            checkedRadioButtonNames[radioName] = radioName;
-          }
-        } else {
-          valueToCheck = input.is('input[type=checkbox],input[type=radio]') ? input.is(':checked') : !!input.val();
-          if (valueToCheck === nonBlank) {
-            foundInputs = foundInputs.add(input);
-          }
-        }
-      });
-      return foundInputs.length ? foundInputs : false;
-    },
+	_off: function( element, eventName ) {
+		eventName = (eventName || "").split( " " ).join( this.eventNamespace + " " ) +
+			this.eventNamespace;
+		element.unbind( eventName ).undelegate( eventName );
 
-    // Helper function which checks for non-blank inputs in a form that match the specified CSS selector
-    nonBlankInputs: function(form, specifiedSelector) {
-      return rails.blankInputs(form, specifiedSelector, true); // true specifies nonBlank
-    },
+		// Clear the stack to avoid memory leaks (#10056)
+		this.bindings = $( this.bindings.not( element ).get() );
+		this.focusable = $( this.focusable.not( element ).get() );
+		this.hoverable = $( this.hoverable.not( element ).get() );
+	},
 
-    // Helper function, needed to provide consistent behavior in IE
-    stopEverything: function(e) {
-      $(e.target).trigger('ujs:everythingStopped');
-      e.stopImmediatePropagation();
-      return false;
-    },
+	_delay: function( handler, delay ) {
+		function handlerProxy() {
+			return ( typeof handler === "string" ? instance[ handler ] : handler )
+				.apply( instance, arguments );
+		}
+		var instance = this;
+		return setTimeout( handlerProxy, delay || 0 );
+	},
 
-    //  Replace element's html with the 'data-disable-with' after storing original html
-    //  and prevent clicking on it
-    disableElement: function(element) {
-      var replacement = element.data('disable-with');
+	_hoverable: function( element ) {
+		this.hoverable = this.hoverable.add( element );
+		this._on( element, {
+			mouseenter: function( event ) {
+				$( event.currentTarget ).addClass( "ui-state-hover" );
+			},
+			mouseleave: function( event ) {
+				$( event.currentTarget ).removeClass( "ui-state-hover" );
+			}
+		});
+	},
 
-      if (replacement !== undefined) {
-        element.data('ujs:enable-with', element.html()); // store enabled state
-        element.html(replacement);
-      }
+	_focusable: function( element ) {
+		this.focusable = this.focusable.add( element );
+		this._on( element, {
+			focusin: function( event ) {
+				$( event.currentTarget ).addClass( "ui-state-focus" );
+			},
+			focusout: function( event ) {
+				$( event.currentTarget ).removeClass( "ui-state-focus" );
+			}
+		});
+	},
 
-      element.bind('click.railsDisable', function(e) { // prevent further clicking
-        return rails.stopEverything(e);
-      });
-      element.data('ujs:disabled', true);
-    },
+	_trigger: function( type, event, data ) {
+		var prop, orig,
+			callback = this.options[ type ];
 
-    // Restore element to its original state which was disabled by 'disableElement' above
-    enableElement: function(element) {
-      if (element.data('ujs:enable-with') !== undefined) {
-        element.html(element.data('ujs:enable-with')); // set to old enabled state
-        element.removeData('ujs:enable-with'); // clean up cache
-      }
-      element.unbind('click.railsDisable'); // enable element
-      element.removeData('ujs:disabled');
+		data = data || {};
+		event = $.Event( event );
+		event.type = ( type === this.widgetEventPrefix ?
+			type :
+			this.widgetEventPrefix + type ).toLowerCase();
+		// the original event may come from any element
+		// so we need to reset the target on the new event
+		event.target = this.element[ 0 ];
+
+		// copy original event properties over to the new event
+		orig = event.originalEvent;
+		if ( orig ) {
+			for ( prop in orig ) {
+				if ( !( prop in event ) ) {
+					event[ prop ] = orig[ prop ];
+				}
+			}
+		}
+
+		this.element.trigger( event, data );
+		return !( $.isFunction( callback ) &&
+			callback.apply( this.element[0], [ event ].concat( data ) ) === false ||
+			event.isDefaultPrevented() );
+	}
+};
+
+$.each( { show: "fadeIn", hide: "fadeOut" }, function( method, defaultEffect ) {
+	$.Widget.prototype[ "_" + method ] = function( element, options, callback ) {
+		if ( typeof options === "string" ) {
+			options = { effect: options };
+		}
+		var hasOptions,
+			effectName = !options ?
+				method :
+				options === true || typeof options === "number" ?
+					defaultEffect :
+					options.effect || defaultEffect;
+		options = options || {};
+		if ( typeof options === "number" ) {
+			options = { duration: options };
+		}
+		hasOptions = !$.isEmptyObject( options );
+		options.complete = callback;
+		if ( options.delay ) {
+			element.delay( options.delay );
+		}
+		if ( hasOptions && $.effects && $.effects.effect[ effectName ] ) {
+			element[ method ]( options );
+		} else if ( effectName !== method && element[ effectName ] ) {
+			element[ effectName ]( options.duration, options.easing, callback );
+		} else {
+			element.queue(function( next ) {
+				$( this )[ method ]();
+				if ( callback ) {
+					callback.call( element[ 0 ] );
+				}
+				next();
+			});
+		}
+	};
+});
+
+var widget = $.widget;
+
+
+
+}));
+/*
+ * jQuery Iframe Transport Plugin
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2011, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+
+/* global define, require, window, document */
+
+
+;(function (factory) {
+    'use strict';
+    if (typeof define === 'function' && define.amd) {
+        // Register as an anonymous AMD module:
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node/CommonJS:
+        factory(require('jquery'));
+    } else {
+        // Browser globals:
+        factory(window.jQuery);
     }
-  };
+}(function ($) {
+    'use strict';
 
-  if (rails.fire($document, 'rails:attachBindings')) {
+    // Helper variable to create unique names for the transport iframes:
+    var counter = 0;
 
-    $.ajaxPrefilter(function(options, originalOptions, xhr){ if ( !options.crossDomain ) { rails.CSRFProtection(xhr); }});
-
-    // This event works the same as the load event, except that it fires every
-    // time the page is loaded.
-    //
-    // See https://github.com/rails/jquery-ujs/issues/357
-    // See https://developer.mozilla.org/en-US/docs/Using_Firefox_1.5_caching
-    $(window).on('pageshow.rails', function () {
-      $($.rails.enableSelector).each(function () {
-        var element = $(this);
-
-        if (element.data('ujs:disabled')) {
-          $.rails.enableFormElement(element);
+    // The iframe transport accepts four additional options:
+    // options.fileInput: a jQuery collection of file input fields
+    // options.paramName: the parameter name for the file form data,
+    //  overrides the name property of the file input field(s),
+    //  can be a string or an array of strings.
+    // options.formData: an array of objects with name and value properties,
+    //  equivalent to the return data of .serializeArray(), e.g.:
+    //  [{name: 'a', value: 1}, {name: 'b', value: 2}]
+    // options.initialIframeSrc: the URL of the initial iframe src,
+    //  by default set to "javascript:false;"
+    $.ajaxTransport('iframe', function (options) {
+        if (options.async) {
+            // javascript:false as initial iframe src
+            // prevents warning popups on HTTPS in IE6:
+            /*jshint scripturl: true */
+            var initialIframeSrc = options.initialIframeSrc || 'javascript:false;',
+            /*jshint scripturl: false */
+                form,
+                iframe,
+                addParamChar;
+            return {
+                send: function (_, completeCallback) {
+                    form = $('<form style="display:none;"></form>');
+                    form.attr('accept-charset', options.formAcceptCharset);
+                    addParamChar = /\?/.test(options.url) ? '&' : '?';
+                    // XDomainRequest only supports GET and POST:
+                    if (options.type === 'DELETE') {
+                        options.url = options.url + addParamChar + '_method=DELETE';
+                        options.type = 'POST';
+                    } else if (options.type === 'PUT') {
+                        options.url = options.url + addParamChar + '_method=PUT';
+                        options.type = 'POST';
+                    } else if (options.type === 'PATCH') {
+                        options.url = options.url + addParamChar + '_method=PATCH';
+                        options.type = 'POST';
+                    }
+                    // IE versions below IE8 cannot set the name property of
+                    // elements that have already been added to the DOM,
+                    // so we set the name along with the iframe HTML markup:
+                    counter += 1;
+                    iframe = $(
+                        '<iframe src="' + initialIframeSrc +
+                            '" name="iframe-transport-' + counter + '"></iframe>'
+                    ).bind('load', function () {
+                        var fileInputClones,
+                            paramNames = $.isArray(options.paramName) ?
+                                    options.paramName : [options.paramName];
+                        iframe
+                            .unbind('load')
+                            .bind('load', function () {
+                                var response;
+                                // Wrap in a try/catch block to catch exceptions thrown
+                                // when trying to access cross-domain iframe contents:
+                                try {
+                                    response = iframe.contents();
+                                    // Google Chrome and Firefox do not throw an
+                                    // exception when calling iframe.contents() on
+                                    // cross-domain requests, so we unify the response:
+                                    if (!response.length || !response[0].firstChild) {
+                                        throw new Error();
+                                    }
+                                } catch (e) {
+                                    response = undefined;
+                                }
+                                // The complete callback returns the
+                                // iframe content document as response object:
+                                completeCallback(
+                                    200,
+                                    'success',
+                                    {'iframe': response}
+                                );
+                                // Fix for IE endless progress bar activity bug
+                                // (happens on form submits to iframe targets):
+                                $('<iframe src="' + initialIframeSrc + '"></iframe>')
+                                    .appendTo(form);
+                                window.setTimeout(function () {
+                                    // Removing the form in a setTimeout call
+                                    // allows Chrome's developer tools to display
+                                    // the response result
+                                    form.remove();
+                                }, 0);
+                            });
+                        form
+                            .prop('target', iframe.prop('name'))
+                            .prop('action', options.url)
+                            .prop('method', options.type);
+                        if (options.formData) {
+                            $.each(options.formData, function (index, field) {
+                                $('<input type="hidden"/>')
+                                    .prop('name', field.name)
+                                    .val(field.value)
+                                    .appendTo(form);
+                            });
+                        }
+                        if (options.fileInput && options.fileInput.length &&
+                                options.type === 'POST') {
+                            fileInputClones = options.fileInput.clone();
+                            // Insert a clone for each file input field:
+                            options.fileInput.after(function (index) {
+                                return fileInputClones[index];
+                            });
+                            if (options.paramName) {
+                                options.fileInput.each(function (index) {
+                                    $(this).prop(
+                                        'name',
+                                        paramNames[index] || options.paramName
+                                    );
+                                });
+                            }
+                            // Appending the file input fields to the hidden form
+                            // removes them from their original location:
+                            form
+                                .append(options.fileInput)
+                                .prop('enctype', 'multipart/form-data')
+                                // enctype must be set as encoding for IE:
+                                .prop('encoding', 'multipart/form-data');
+                            // Remove the HTML5 form attribute from the input(s):
+                            options.fileInput.removeAttr('form');
+                        }
+                        form.submit();
+                        // Insert the file input fields at their original location
+                        // by replacing the clones with the originals:
+                        if (fileInputClones && fileInputClones.length) {
+                            options.fileInput.each(function (index, input) {
+                                var clone = $(fileInputClones[index]);
+                                // Restore the original name and form properties:
+                                $(input)
+                                    .prop('name', clone.prop('name'))
+                                    .attr('form', clone.attr('form'));
+                                clone.replaceWith(input);
+                            });
+                        }
+                    });
+                    form.append(iframe).appendTo(document.body);
+                },
+                abort: function () {
+                    if (iframe) {
+                        // javascript:false as iframe src aborts the request
+                        // and prevents warning popups on HTTPS in IE6.
+                        // concat is used to avoid the "Script URL" JSLint error:
+                        iframe
+                            .unbind('load')
+                            .prop('src', initialIframeSrc);
+                    }
+                    if (form) {
+                        form.remove();
+                    }
+                }
+            };
         }
-      });
+    });
 
-      $($.rails.linkDisableSelector).each(function () {
-        var element = $(this);
-
-        if (element.data('ujs:disabled')) {
-          $.rails.enableElement(element);
+    // The iframe transport returns the iframe content document as response.
+    // The following adds converters from iframe to text, json, html, xml
+    // and script.
+    // Please note that the Content-Type for JSON responses has to be text/plain
+    // or text/html, if the browser doesn't include application/json in the
+    // Accept header, else IE will show a download dialog.
+    // The Content-Type for XML responses on the other hand has to be always
+    // application/xml or text/xml, so IE properly parses the XML response.
+    // See also
+    // https://github.com/blueimp/jQuery-File-Upload/wiki/Setup#content-type-negotiation
+    $.ajaxSetup({
+        converters: {
+            'iframe text': function (iframe) {
+                return iframe && $(iframe[0].body).text();
+            },
+            'iframe json': function (iframe) {
+                return iframe && $.parseJSON($(iframe[0].body).text());
+            },
+            'iframe html': function (iframe) {
+                return iframe && $(iframe[0].body).html();
+            },
+            'iframe xml': function (iframe) {
+                var xmlDoc = iframe && iframe[0];
+                return xmlDoc && $.isXMLDoc(xmlDoc) ? xmlDoc :
+                        $.parseXML((xmlDoc.XMLDocument && xmlDoc.XMLDocument.xml) ||
+                            $(xmlDoc.body).html());
+            },
+            'iframe script': function (iframe) {
+                return iframe && $.globalEval($(iframe[0].body).text());
+            }
         }
-      });
     });
 
-    $document.on('ajax:complete', rails.linkDisableSelector, function() {
-        rails.enableElement($(this));
-    });
+}));
+/*
+ * jQuery File Upload Plugin
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2010, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
 
-    $document.on('ajax:complete', rails.buttonDisableSelector, function() {
-        rails.enableFormElement($(this));
-    });
+/* jshint nomen:false */
+/* global define, require, window, document, location, Blob, FormData */
 
-    $document.on('click.rails', rails.linkClickSelector, function(e) {
-      var link = $(this), method = link.data('method'), data = link.data('params'), metaClick = e.metaKey || e.ctrlKey;
-      if (!rails.allowAction(link)) return rails.stopEverything(e);
 
-      if (!metaClick && link.is(rails.linkDisableSelector)) rails.disableElement(link);
+;(function (factory) {
+    'use strict';
+    if (typeof define === 'function' && define.amd) {
+        // Register as an anonymous AMD module:
+        define([
+            'jquery',
+            'jquery.ui.widget'
+        ], factory);
+    } else if (typeof exports === 'object') {
+        // Node/CommonJS:
+        factory(
+            require('jquery'),
+            require('./vendor/jquery.ui.widget')
+        );
+    } else {
+        // Browser globals:
+        factory(window.jQuery);
+    }
+}(function ($) {
+    'use strict';
 
-      if (rails.isRemote(link)) {
-        if (metaClick && (!method || method === 'GET') && !data) { return true; }
+    // Detect file input support, based on
+    // http://viljamis.com/blog/2012/file-upload-support-on-mobile/
+    $.support.fileInput = !(new RegExp(
+        // Handle devices which give false positives for the feature detection:
+        '(Android (1\\.[0156]|2\\.[01]))' +
+            '|(Windows Phone (OS 7|8\\.0))|(XBLWP)|(ZuneWP)|(WPDesktop)' +
+            '|(w(eb)?OSBrowser)|(webOS)' +
+            '|(Kindle/(1\\.0|2\\.[05]|3\\.0))'
+    ).test(window.navigator.userAgent) ||
+        // Feature detection for all other devices:
+        $('<input type="file">').prop('disabled'));
 
-        var handleRemote = rails.handleRemote(link);
-        // Response from rails.handleRemote() will either be false or a deferred object promise.
-        if (handleRemote === false) {
-          rails.enableElement(link);
-        } else {
-          handleRemote.fail( function() { rails.enableElement(link); } );
+    // The FileReader API is not actually used, but works as feature detection,
+    // as some Safari versions (5?) support XHR file uploads via the FormData API,
+    // but not non-multipart XHR file uploads.
+    // window.XMLHttpRequestUpload is not available on IE10, so we check for
+    // window.ProgressEvent instead to detect XHR2 file upload capability:
+    $.support.xhrFileUpload = !!(window.ProgressEvent && window.FileReader);
+    $.support.xhrFormDataFileUpload = !!window.FormData;
+
+    // Detect support for Blob slicing (required for chunked uploads):
+    $.support.blobSlice = window.Blob && (Blob.prototype.slice ||
+        Blob.prototype.webkitSlice || Blob.prototype.mozSlice);
+
+    // Helper function to create drag handlers for dragover/dragenter/dragleave:
+    function getDragHandler(type) {
+        var isDragOver = type === 'dragover';
+        return function (e) {
+            e.dataTransfer = e.originalEvent && e.originalEvent.dataTransfer;
+            var dataTransfer = e.dataTransfer;
+            if (dataTransfer && $.inArray('Files', dataTransfer.types) !== -1 &&
+                    this._trigger(
+                        type,
+                        $.Event(type, {delegatedEvent: e})
+                    ) !== false) {
+                e.preventDefault();
+                if (isDragOver) {
+                    dataTransfer.dropEffect = 'copy';
+                }
+            }
+        };
+    }
+
+    // The fileupload widget listens for change events on file input fields defined
+    // via fileInput setting and paste or drop events of the given dropZone.
+    // In addition to the default jQuery Widget methods, the fileupload widget
+    // exposes the "add" and "send" methods, to add or directly send files using
+    // the fileupload API.
+    // By default, files added via file input selection, paste, drag & drop or
+    // "add" method are uploaded immediately, but it is possible to override
+    // the "add" callback option to queue file uploads.
+    $.widget('blueimp.fileupload', {
+
+        options: {
+            // The drop target element(s), by the default the complete document.
+            // Set to null to disable drag & drop support:
+            dropZone: $(document),
+            // The paste target element(s), by the default undefined.
+            // Set to a DOM node or jQuery object to enable file pasting:
+            pasteZone: undefined,
+            // The file input field(s), that are listened to for change events.
+            // If undefined, it is set to the file input fields inside
+            // of the widget element on plugin initialization.
+            // Set to null to disable the change listener.
+            fileInput: undefined,
+            // By default, the file input field is replaced with a clone after
+            // each input field change event. This is required for iframe transport
+            // queues and allows change events to be fired for the same file
+            // selection, but can be disabled by setting the following option to false:
+            replaceFileInput: true,
+            // The parameter name for the file form data (the request argument name).
+            // If undefined or empty, the name property of the file input field is
+            // used, or "files[]" if the file input name property is also empty,
+            // can be a string or an array of strings:
+            paramName: undefined,
+            // By default, each file of a selection is uploaded using an individual
+            // request for XHR type uploads. Set to false to upload file
+            // selections in one request each:
+            singleFileUploads: true,
+            // To limit the number of files uploaded with one XHR request,
+            // set the following option to an integer greater than 0:
+            limitMultiFileUploads: undefined,
+            // The following option limits the number of files uploaded with one
+            // XHR request to keep the request size under or equal to the defined
+            // limit in bytes:
+            limitMultiFileUploadSize: undefined,
+            // Multipart file uploads add a number of bytes to each uploaded file,
+            // therefore the following option adds an overhead for each file used
+            // in the limitMultiFileUploadSize configuration:
+            limitMultiFileUploadSizeOverhead: 512,
+            // Set the following option to true to issue all file upload requests
+            // in a sequential order:
+            sequentialUploads: false,
+            // To limit the number of concurrent uploads,
+            // set the following option to an integer greater than 0:
+            limitConcurrentUploads: undefined,
+            // Set the following option to true to force iframe transport uploads:
+            forceIframeTransport: false,
+            // Set the following option to the location of a redirect url on the
+            // origin server, for cross-domain iframe transport uploads:
+            redirect: undefined,
+            // The parameter name for the redirect url, sent as part of the form
+            // data and set to 'redirect' if this option is empty:
+            redirectParamName: undefined,
+            // Set the following option to the location of a postMessage window,
+            // to enable postMessage transport uploads:
+            postMessage: undefined,
+            // By default, XHR file uploads are sent as multipart/form-data.
+            // The iframe transport is always using multipart/form-data.
+            // Set to false to enable non-multipart XHR uploads:
+            multipart: true,
+            // To upload large files in smaller chunks, set the following option
+            // to a preferred maximum chunk size. If set to 0, null or undefined,
+            // or the browser does not support the required Blob API, files will
+            // be uploaded as a whole.
+            maxChunkSize: undefined,
+            // When a non-multipart upload or a chunked multipart upload has been
+            // aborted, this option can be used to resume the upload by setting
+            // it to the size of the already uploaded bytes. This option is most
+            // useful when modifying the options object inside of the "add" or
+            // "send" callbacks, as the options are cloned for each file upload.
+            uploadedBytes: undefined,
+            // By default, failed (abort or error) file uploads are removed from the
+            // global progress calculation. Set the following option to false to
+            // prevent recalculating the global progress data:
+            recalculateProgress: true,
+            // Interval in milliseconds to calculate and trigger progress events:
+            progressInterval: 100,
+            // Interval in milliseconds to calculate progress bitrate:
+            bitrateInterval: 500,
+            // By default, uploads are started automatically when adding files:
+            autoUpload: true,
+
+            // Error and info messages:
+            messages: {
+                uploadedBytes: 'Uploaded bytes exceed file size'
+            },
+
+            // Translation function, gets the message key to be translated
+            // and an object with context specific data as arguments:
+            i18n: function (message, context) {
+                message = this.messages[message] || message.toString();
+                if (context) {
+                    $.each(context, function (key, value) {
+                        message = message.replace('{' + key + '}', value);
+                    });
+                }
+                return message;
+            },
+
+            // Additional form data to be sent along with the file uploads can be set
+            // using this option, which accepts an array of objects with name and
+            // value properties, a function returning such an array, a FormData
+            // object (for XHR file uploads), or a simple object.
+            // The form of the first fileInput is given as parameter to the function:
+            formData: function (form) {
+                return form.serializeArray();
+            },
+
+            // The add callback is invoked as soon as files are added to the fileupload
+            // widget (via file input selection, drag & drop, paste or add API call).
+            // If the singleFileUploads option is enabled, this callback will be
+            // called once for each file in the selection for XHR file uploads, else
+            // once for each file selection.
+            //
+            // The upload starts when the submit method is invoked on the data parameter.
+            // The data object contains a files property holding the added files
+            // and allows you to override plugin options as well as define ajax settings.
+            //
+            // Listeners for this callback can also be bound the following way:
+            // .bind('fileuploadadd', func);
+            //
+            // data.submit() returns a Promise object and allows to attach additional
+            // handlers using jQuery's Deferred callbacks:
+            // data.submit().done(func).fail(func).always(func);
+            add: function (e, data) {
+                if (e.isDefaultPrevented()) {
+                    return false;
+                }
+                if (data.autoUpload || (data.autoUpload !== false &&
+                        $(this).fileupload('option', 'autoUpload'))) {
+                    data.process().done(function () {
+                        data.submit();
+                    });
+                }
+            },
+
+            // Other callbacks:
+
+            // Callback for the submit event of each file upload:
+            // submit: function (e, data) {}, // .bind('fileuploadsubmit', func);
+
+            // Callback for the start of each file upload request:
+            // send: function (e, data) {}, // .bind('fileuploadsend', func);
+
+            // Callback for successful uploads:
+            // done: function (e, data) {}, // .bind('fileuploaddone', func);
+
+            // Callback for failed (abort or error) uploads:
+            // fail: function (e, data) {}, // .bind('fileuploadfail', func);
+
+            // Callback for completed (success, abort or error) requests:
+            // always: function (e, data) {}, // .bind('fileuploadalways', func);
+
+            // Callback for upload progress events:
+            // progress: function (e, data) {}, // .bind('fileuploadprogress', func);
+
+            // Callback for global upload progress events:
+            // progressall: function (e, data) {}, // .bind('fileuploadprogressall', func);
+
+            // Callback for uploads start, equivalent to the global ajaxStart event:
+            // start: function (e) {}, // .bind('fileuploadstart', func);
+
+            // Callback for uploads stop, equivalent to the global ajaxStop event:
+            // stop: function (e) {}, // .bind('fileuploadstop', func);
+
+            // Callback for change events of the fileInput(s):
+            // change: function (e, data) {}, // .bind('fileuploadchange', func);
+
+            // Callback for paste events to the pasteZone(s):
+            // paste: function (e, data) {}, // .bind('fileuploadpaste', func);
+
+            // Callback for drop events of the dropZone(s):
+            // drop: function (e, data) {}, // .bind('fileuploaddrop', func);
+
+            // Callback for dragover events of the dropZone(s):
+            // dragover: function (e) {}, // .bind('fileuploaddragover', func);
+
+            // Callback for the start of each chunk upload request:
+            // chunksend: function (e, data) {}, // .bind('fileuploadchunksend', func);
+
+            // Callback for successful chunk uploads:
+            // chunkdone: function (e, data) {}, // .bind('fileuploadchunkdone', func);
+
+            // Callback for failed (abort or error) chunk uploads:
+            // chunkfail: function (e, data) {}, // .bind('fileuploadchunkfail', func);
+
+            // Callback for completed (success, abort or error) chunk upload requests:
+            // chunkalways: function (e, data) {}, // .bind('fileuploadchunkalways', func);
+
+            // The plugin options are used as settings object for the ajax calls.
+            // The following are jQuery ajax settings required for the file uploads:
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 0
+        },
+
+        // A list of options that require reinitializing event listeners and/or
+        // special initialization code:
+        _specialOptions: [
+            'fileInput',
+            'dropZone',
+            'pasteZone',
+            'multipart',
+            'forceIframeTransport'
+        ],
+
+        _blobSlice: $.support.blobSlice && function () {
+            var slice = this.slice || this.webkitSlice || this.mozSlice;
+            return slice.apply(this, arguments);
+        },
+
+        _BitrateTimer: function () {
+            this.timestamp = ((Date.now) ? Date.now() : (new Date()).getTime());
+            this.loaded = 0;
+            this.bitrate = 0;
+            this.getBitrate = function (now, loaded, interval) {
+                var timeDiff = now - this.timestamp;
+                if (!this.bitrate || !interval || timeDiff > interval) {
+                    this.bitrate = (loaded - this.loaded) * (1000 / timeDiff) * 8;
+                    this.loaded = loaded;
+                    this.timestamp = now;
+                }
+                return this.bitrate;
+            };
+        },
+
+        _isXHRUpload: function (options) {
+            return !options.forceIframeTransport &&
+                ((!options.multipart && $.support.xhrFileUpload) ||
+                $.support.xhrFormDataFileUpload);
+        },
+
+        _getFormData: function (options) {
+            var formData;
+            if ($.type(options.formData) === 'function') {
+                return options.formData(options.form);
+            }
+            if ($.isArray(options.formData)) {
+                return options.formData;
+            }
+            if ($.type(options.formData) === 'object') {
+                formData = [];
+                $.each(options.formData, function (name, value) {
+                    formData.push({name: name, value: value});
+                });
+                return formData;
+            }
+            return [];
+        },
+
+        _getTotal: function (files) {
+            var total = 0;
+            $.each(files, function (index, file) {
+                total += file.size || 1;
+            });
+            return total;
+        },
+
+        _initProgressObject: function (obj) {
+            var progress = {
+                loaded: 0,
+                total: 0,
+                bitrate: 0
+            };
+            if (obj._progress) {
+                $.extend(obj._progress, progress);
+            } else {
+                obj._progress = progress;
+            }
+        },
+
+        _initResponseObject: function (obj) {
+            var prop;
+            if (obj._response) {
+                for (prop in obj._response) {
+                    if (obj._response.hasOwnProperty(prop)) {
+                        delete obj._response[prop];
+                    }
+                }
+            } else {
+                obj._response = {};
+            }
+        },
+
+        _onProgress: function (e, data) {
+            if (e.lengthComputable) {
+                var now = ((Date.now) ? Date.now() : (new Date()).getTime()),
+                    loaded;
+                if (data._time && data.progressInterval &&
+                        (now - data._time < data.progressInterval) &&
+                        e.loaded !== e.total) {
+                    return;
+                }
+                data._time = now;
+                loaded = Math.floor(
+                    e.loaded / e.total * (data.chunkSize || data._progress.total)
+                ) + (data.uploadedBytes || 0);
+                // Add the difference from the previously loaded state
+                // to the global loaded counter:
+                this._progress.loaded += (loaded - data._progress.loaded);
+                this._progress.bitrate = this._bitrateTimer.getBitrate(
+                    now,
+                    this._progress.loaded,
+                    data.bitrateInterval
+                );
+                data._progress.loaded = data.loaded = loaded;
+                data._progress.bitrate = data.bitrate = data._bitrateTimer.getBitrate(
+                    now,
+                    loaded,
+                    data.bitrateInterval
+                );
+                // Trigger a custom progress event with a total data property set
+                // to the file size(s) of the current upload and a loaded data
+                // property calculated accordingly:
+                this._trigger(
+                    'progress',
+                    $.Event('progress', {delegatedEvent: e}),
+                    data
+                );
+                // Trigger a global progress event for all current file uploads,
+                // including ajax calls queued for sequential file uploads:
+                this._trigger(
+                    'progressall',
+                    $.Event('progressall', {delegatedEvent: e}),
+                    this._progress
+                );
+            }
+        },
+
+        _initProgressListener: function (options) {
+            var that = this,
+                xhr = options.xhr ? options.xhr() : $.ajaxSettings.xhr();
+            // Accesss to the native XHR object is required to add event listeners
+            // for the upload progress event:
+            if (xhr.upload) {
+                $(xhr.upload).bind('progress', function (e) {
+                    var oe = e.originalEvent;
+                    // Make sure the progress event properties get copied over:
+                    e.lengthComputable = oe.lengthComputable;
+                    e.loaded = oe.loaded;
+                    e.total = oe.total;
+                    that._onProgress(e, options);
+                });
+                options.xhr = function () {
+                    return xhr;
+                };
+            }
+        },
+
+        _isInstanceOf: function (type, obj) {
+            // Cross-frame instanceof check
+            return Object.prototype.toString.call(obj) === '[object ' + type + ']';
+        },
+
+        _initXHRData: function (options) {
+            var that = this,
+                formData,
+                file = options.files[0],
+                // Ignore non-multipart setting if not supported:
+                multipart = options.multipart || !$.support.xhrFileUpload,
+                paramName = $.type(options.paramName) === 'array' ?
+                    options.paramName[0] : options.paramName;
+            options.headers = $.extend({}, options.headers);
+            if (options.contentRange) {
+                options.headers['Content-Range'] = options.contentRange;
+            }
+            if (!multipart || options.blob || !this._isInstanceOf('File', file)) {
+                options.headers['Content-Disposition'] = 'attachment; filename="' +
+                    encodeURI(file.name) + '"';
+            }
+            if (!multipart) {
+                options.contentType = file.type || 'application/octet-stream';
+                options.data = options.blob || file;
+            } else if ($.support.xhrFormDataFileUpload) {
+                if (options.postMessage) {
+                    // window.postMessage does not allow sending FormData
+                    // objects, so we just add the File/Blob objects to
+                    // the formData array and let the postMessage window
+                    // create the FormData object out of this array:
+                    formData = this._getFormData(options);
+                    if (options.blob) {
+                        formData.push({
+                            name: paramName,
+                            value: options.blob
+                        });
+                    } else {
+                        $.each(options.files, function (index, file) {
+                            formData.push({
+                                name: ($.type(options.paramName) === 'array' &&
+                                    options.paramName[index]) || paramName,
+                                value: file
+                            });
+                        });
+                    }
+                } else {
+                    if (that._isInstanceOf('FormData', options.formData)) {
+                        formData = options.formData;
+                    } else {
+                        formData = new FormData();
+                        $.each(this._getFormData(options), function (index, field) {
+                            formData.append(field.name, field.value);
+                        });
+                    }
+                    if (options.blob) {
+                        formData.append(paramName, options.blob, file.name);
+                    } else {
+                        $.each(options.files, function (index, file) {
+                            // This check allows the tests to run with
+                            // dummy objects:
+                            if (that._isInstanceOf('File', file) ||
+                                    that._isInstanceOf('Blob', file)) {
+                                formData.append(
+                                    ($.type(options.paramName) === 'array' &&
+                                        options.paramName[index]) || paramName,
+                                    file,
+                                    file.uploadName || file.name
+                                );
+                            }
+                        });
+                    }
+                }
+                options.data = formData;
+            }
+            // Blob reference is not needed anymore, free memory:
+            options.blob = null;
+        },
+
+        _initIframeSettings: function (options) {
+            var targetHost = $('<a></a>').prop('href', options.url).prop('host');
+            // Setting the dataType to iframe enables the iframe transport:
+            options.dataType = 'iframe ' + (options.dataType || '');
+            // The iframe transport accepts a serialized array as form data:
+            options.formData = this._getFormData(options);
+            // Add redirect url to form data on cross-domain uploads:
+            if (options.redirect && targetHost && targetHost !== location.host) {
+                options.formData.push({
+                    name: options.redirectParamName || 'redirect',
+                    value: options.redirect
+                });
+            }
+        },
+
+        _initDataSettings: function (options) {
+            if (this._isXHRUpload(options)) {
+                if (!this._chunkedUpload(options, true)) {
+                    if (!options.data) {
+                        this._initXHRData(options);
+                    }
+                    this._initProgressListener(options);
+                }
+                if (options.postMessage) {
+                    // Setting the dataType to postmessage enables the
+                    // postMessage transport:
+                    options.dataType = 'postmessage ' + (options.dataType || '');
+                }
+            } else {
+                this._initIframeSettings(options);
+            }
+        },
+
+        _getParamName: function (options) {
+            var fileInput = $(options.fileInput),
+                paramName = options.paramName;
+            if (!paramName) {
+                paramName = [];
+                fileInput.each(function () {
+                    var input = $(this),
+                        name = input.prop('name') || 'files[]',
+                        i = (input.prop('files') || [1]).length;
+                    while (i) {
+                        paramName.push(name);
+                        i -= 1;
+                    }
+                });
+                if (!paramName.length) {
+                    paramName = [fileInput.prop('name') || 'files[]'];
+                }
+            } else if (!$.isArray(paramName)) {
+                paramName = [paramName];
+            }
+            return paramName;
+        },
+
+        _initFormSettings: function (options) {
+            // Retrieve missing options from the input field and the
+            // associated form, if available:
+            if (!options.form || !options.form.length) {
+                options.form = $(options.fileInput.prop('form'));
+                // If the given file input doesn't have an associated form,
+                // use the default widget file input's form:
+                if (!options.form.length) {
+                    options.form = $(this.options.fileInput.prop('form'));
+                }
+            }
+            options.paramName = this._getParamName(options);
+            if (!options.url) {
+                options.url = options.form.prop('action') || location.href;
+            }
+            // The HTTP request method must be "POST" or "PUT":
+            options.type = (options.type ||
+                ($.type(options.form.prop('method')) === 'string' &&
+                    options.form.prop('method')) || ''
+                ).toUpperCase();
+            if (options.type !== 'POST' && options.type !== 'PUT' &&
+                    options.type !== 'PATCH') {
+                options.type = 'POST';
+            }
+            if (!options.formAcceptCharset) {
+                options.formAcceptCharset = options.form.attr('accept-charset');
+            }
+        },
+
+        _getAJAXSettings: function (data) {
+            var options = $.extend({}, this.options, data);
+            this._initFormSettings(options);
+            this._initDataSettings(options);
+            return options;
+        },
+
+        // jQuery 1.6 doesn't provide .state(),
+        // while jQuery 1.8+ removed .isRejected() and .isResolved():
+        _getDeferredState: function (deferred) {
+            if (deferred.state) {
+                return deferred.state();
+            }
+            if (deferred.isResolved()) {
+                return 'resolved';
+            }
+            if (deferred.isRejected()) {
+                return 'rejected';
+            }
+            return 'pending';
+        },
+
+        // Maps jqXHR callbacks to the equivalent
+        // methods of the given Promise object:
+        _enhancePromise: function (promise) {
+            promise.success = promise.done;
+            promise.error = promise.fail;
+            promise.complete = promise.always;
+            return promise;
+        },
+
+        // Creates and returns a Promise object enhanced with
+        // the jqXHR methods abort, success, error and complete:
+        _getXHRPromise: function (resolveOrReject, context, args) {
+            var dfd = $.Deferred(),
+                promise = dfd.promise();
+            context = context || this.options.context || promise;
+            if (resolveOrReject === true) {
+                dfd.resolveWith(context, args);
+            } else if (resolveOrReject === false) {
+                dfd.rejectWith(context, args);
+            }
+            promise.abort = dfd.promise;
+            return this._enhancePromise(promise);
+        },
+
+        // Adds convenience methods to the data callback argument:
+        _addConvenienceMethods: function (e, data) {
+            var that = this,
+                getPromise = function (args) {
+                    return $.Deferred().resolveWith(that, args).promise();
+                };
+            data.process = function (resolveFunc, rejectFunc) {
+                if (resolveFunc || rejectFunc) {
+                    data._processQueue = this._processQueue =
+                        (this._processQueue || getPromise([this])).then(
+                            function () {
+                                if (data.errorThrown) {
+                                    return $.Deferred()
+                                        .rejectWith(that, [data]).promise();
+                                }
+                                return getPromise(arguments);
+                            }
+                        ).then(resolveFunc, rejectFunc);
+                }
+                return this._processQueue || getPromise([this]);
+            };
+            data.submit = function () {
+                if (this.state() !== 'pending') {
+                    data.jqXHR = this.jqXHR =
+                        (that._trigger(
+                            'submit',
+                            $.Event('submit', {delegatedEvent: e}),
+                            this
+                        ) !== false) && that._onSend(e, this);
+                }
+                return this.jqXHR || that._getXHRPromise();
+            };
+            data.abort = function () {
+                if (this.jqXHR) {
+                    return this.jqXHR.abort();
+                }
+                this.errorThrown = 'abort';
+                that._trigger('fail', null, this);
+                return that._getXHRPromise(false);
+            };
+            data.state = function () {
+                if (this.jqXHR) {
+                    return that._getDeferredState(this.jqXHR);
+                }
+                if (this._processQueue) {
+                    return that._getDeferredState(this._processQueue);
+                }
+            };
+            data.processing = function () {
+                return !this.jqXHR && this._processQueue && that
+                    ._getDeferredState(this._processQueue) === 'pending';
+            };
+            data.progress = function () {
+                return this._progress;
+            };
+            data.response = function () {
+                return this._response;
+            };
+        },
+
+        // Parses the Range header from the server response
+        // and returns the uploaded bytes:
+        _getUploadedBytes: function (jqXHR) {
+            var range = jqXHR.getResponseHeader('Range'),
+                parts = range && range.split('-'),
+                upperBytesPos = parts && parts.length > 1 &&
+                    parseInt(parts[1], 10);
+            return upperBytesPos && upperBytesPos + 1;
+        },
+
+        // Uploads a file in multiple, sequential requests
+        // by splitting the file up in multiple blob chunks.
+        // If the second parameter is true, only tests if the file
+        // should be uploaded in chunks, but does not invoke any
+        // upload requests:
+        _chunkedUpload: function (options, testOnly) {
+            options.uploadedBytes = options.uploadedBytes || 0;
+            var that = this,
+                file = options.files[0],
+                fs = file.size,
+                ub = options.uploadedBytes,
+                mcs = options.maxChunkSize || fs,
+                slice = this._blobSlice,
+                dfd = $.Deferred(),
+                promise = dfd.promise(),
+                jqXHR,
+                upload;
+            if (!(this._isXHRUpload(options) && slice && (ub || mcs < fs)) ||
+                    options.data) {
+                return false;
+            }
+            if (testOnly) {
+                return true;
+            }
+            if (ub >= fs) {
+                file.error = options.i18n('uploadedBytes');
+                return this._getXHRPromise(
+                    false,
+                    options.context,
+                    [null, 'error', file.error]
+                );
+            }
+            // The chunk upload method:
+            upload = function () {
+                // Clone the options object for each chunk upload:
+                var o = $.extend({}, options),
+                    currentLoaded = o._progress.loaded;
+                o.blob = slice.call(
+                    file,
+                    ub,
+                    ub + mcs,
+                    file.type
+                );
+                // Store the current chunk size, as the blob itself
+                // will be dereferenced after data processing:
+                o.chunkSize = o.blob.size;
+                // Expose the chunk bytes position range:
+                o.contentRange = 'bytes ' + ub + '-' +
+                    (ub + o.chunkSize - 1) + '/' + fs;
+                // Process the upload data (the blob and potential form data):
+                that._initXHRData(o);
+                // Add progress listeners for this chunk upload:
+                that._initProgressListener(o);
+                jqXHR = ((that._trigger('chunksend', null, o) !== false && $.ajax(o)) ||
+                        that._getXHRPromise(false, o.context))
+                    .done(function (result, textStatus, jqXHR) {
+                        ub = that._getUploadedBytes(jqXHR) ||
+                            (ub + o.chunkSize);
+                        // Create a progress event if no final progress event
+                        // with loaded equaling total has been triggered
+                        // for this chunk:
+                        if (currentLoaded + o.chunkSize - o._progress.loaded) {
+                            that._onProgress($.Event('progress', {
+                                lengthComputable: true,
+                                loaded: ub - o.uploadedBytes,
+                                total: ub - o.uploadedBytes
+                            }), o);
+                        }
+                        options.uploadedBytes = o.uploadedBytes = ub;
+                        o.result = result;
+                        o.textStatus = textStatus;
+                        o.jqXHR = jqXHR;
+                        that._trigger('chunkdone', null, o);
+                        that._trigger('chunkalways', null, o);
+                        if (ub < fs) {
+                            // File upload not yet complete,
+                            // continue with the next chunk:
+                            upload();
+                        } else {
+                            dfd.resolveWith(
+                                o.context,
+                                [result, textStatus, jqXHR]
+                            );
+                        }
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        o.jqXHR = jqXHR;
+                        o.textStatus = textStatus;
+                        o.errorThrown = errorThrown;
+                        that._trigger('chunkfail', null, o);
+                        that._trigger('chunkalways', null, o);
+                        dfd.rejectWith(
+                            o.context,
+                            [jqXHR, textStatus, errorThrown]
+                        );
+                    });
+            };
+            this._enhancePromise(promise);
+            promise.abort = function () {
+                return jqXHR.abort();
+            };
+            upload();
+            return promise;
+        },
+
+        _beforeSend: function (e, data) {
+            if (this._active === 0) {
+                // the start callback is triggered when an upload starts
+                // and no other uploads are currently running,
+                // equivalent to the global ajaxStart event:
+                this._trigger('start');
+                // Set timer for global bitrate progress calculation:
+                this._bitrateTimer = new this._BitrateTimer();
+                // Reset the global progress values:
+                this._progress.loaded = this._progress.total = 0;
+                this._progress.bitrate = 0;
+            }
+            // Make sure the container objects for the .response() and
+            // .progress() methods on the data object are available
+            // and reset to their initial state:
+            this._initResponseObject(data);
+            this._initProgressObject(data);
+            data._progress.loaded = data.loaded = data.uploadedBytes || 0;
+            data._progress.total = data.total = this._getTotal(data.files) || 1;
+            data._progress.bitrate = data.bitrate = 0;
+            this._active += 1;
+            // Initialize the global progress values:
+            this._progress.loaded += data.loaded;
+            this._progress.total += data.total;
+        },
+
+        _onDone: function (result, textStatus, jqXHR, options) {
+            var total = options._progress.total,
+                response = options._response;
+            if (options._progress.loaded < total) {
+                // Create a progress event if no final progress event
+                // with loaded equaling total has been triggered:
+                this._onProgress($.Event('progress', {
+                    lengthComputable: true,
+                    loaded: total,
+                    total: total
+                }), options);
+            }
+            response.result = options.result = result;
+            response.textStatus = options.textStatus = textStatus;
+            response.jqXHR = options.jqXHR = jqXHR;
+            this._trigger('done', null, options);
+        },
+
+        _onFail: function (jqXHR, textStatus, errorThrown, options) {
+            var response = options._response;
+            if (options.recalculateProgress) {
+                // Remove the failed (error or abort) file upload from
+                // the global progress calculation:
+                this._progress.loaded -= options._progress.loaded;
+                this._progress.total -= options._progress.total;
+            }
+            response.jqXHR = options.jqXHR = jqXHR;
+            response.textStatus = options.textStatus = textStatus;
+            response.errorThrown = options.errorThrown = errorThrown;
+            this._trigger('fail', null, options);
+        },
+
+        _onAlways: function (jqXHRorResult, textStatus, jqXHRorError, options) {
+            // jqXHRorResult, textStatus and jqXHRorError are added to the
+            // options object via done and fail callbacks
+            this._trigger('always', null, options);
+        },
+
+        _onSend: function (e, data) {
+            if (!data.submit) {
+                this._addConvenienceMethods(e, data);
+            }
+            var that = this,
+                jqXHR,
+                aborted,
+                slot,
+                pipe,
+                options = that._getAJAXSettings(data),
+                send = function () {
+                    that._sending += 1;
+                    // Set timer for bitrate progress calculation:
+                    options._bitrateTimer = new that._BitrateTimer();
+                    jqXHR = jqXHR || (
+                        ((aborted || that._trigger(
+                            'send',
+                            $.Event('send', {delegatedEvent: e}),
+                            options
+                        ) === false) &&
+                        that._getXHRPromise(false, options.context, aborted)) ||
+                        that._chunkedUpload(options) || $.ajax(options)
+                    ).done(function (result, textStatus, jqXHR) {
+                        that._onDone(result, textStatus, jqXHR, options);
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        that._onFail(jqXHR, textStatus, errorThrown, options);
+                    }).always(function (jqXHRorResult, textStatus, jqXHRorError) {
+                        that._onAlways(
+                            jqXHRorResult,
+                            textStatus,
+                            jqXHRorError,
+                            options
+                        );
+                        that._sending -= 1;
+                        that._active -= 1;
+                        if (options.limitConcurrentUploads &&
+                                options.limitConcurrentUploads > that._sending) {
+                            // Start the next queued upload,
+                            // that has not been aborted:
+                            var nextSlot = that._slots.shift();
+                            while (nextSlot) {
+                                if (that._getDeferredState(nextSlot) === 'pending') {
+                                    nextSlot.resolve();
+                                    break;
+                                }
+                                nextSlot = that._slots.shift();
+                            }
+                        }
+                        if (that._active === 0) {
+                            // The stop callback is triggered when all uploads have
+                            // been completed, equivalent to the global ajaxStop event:
+                            that._trigger('stop');
+                        }
+                    });
+                    return jqXHR;
+                };
+            this._beforeSend(e, options);
+            if (this.options.sequentialUploads ||
+                    (this.options.limitConcurrentUploads &&
+                    this.options.limitConcurrentUploads <= this._sending)) {
+                if (this.options.limitConcurrentUploads > 1) {
+                    slot = $.Deferred();
+                    this._slots.push(slot);
+                    pipe = slot.then(send);
+                } else {
+                    this._sequence = this._sequence.then(send, send);
+                    pipe = this._sequence;
+                }
+                // Return the piped Promise object, enhanced with an abort method,
+                // which is delegated to the jqXHR object of the current upload,
+                // and jqXHR callbacks mapped to the equivalent Promise methods:
+                pipe.abort = function () {
+                    aborted = [undefined, 'abort', 'abort'];
+                    if (!jqXHR) {
+                        if (slot) {
+                            slot.rejectWith(options.context, aborted);
+                        }
+                        return send();
+                    }
+                    return jqXHR.abort();
+                };
+                return this._enhancePromise(pipe);
+            }
+            return send();
+        },
+
+        _onAdd: function (e, data) {
+            var that = this,
+                result = true,
+                options = $.extend({}, this.options, data),
+                files = data.files,
+                filesLength = files.length,
+                limit = options.limitMultiFileUploads,
+                limitSize = options.limitMultiFileUploadSize,
+                overhead = options.limitMultiFileUploadSizeOverhead,
+                batchSize = 0,
+                paramName = this._getParamName(options),
+                paramNameSet,
+                paramNameSlice,
+                fileSet,
+                i,
+                j = 0;
+            if (!filesLength) {
+                return false;
+            }
+            if (limitSize && files[0].size === undefined) {
+                limitSize = undefined;
+            }
+            if (!(options.singleFileUploads || limit || limitSize) ||
+                    !this._isXHRUpload(options)) {
+                fileSet = [files];
+                paramNameSet = [paramName];
+            } else if (!(options.singleFileUploads || limitSize) && limit) {
+                fileSet = [];
+                paramNameSet = [];
+                for (i = 0; i < filesLength; i += limit) {
+                    fileSet.push(files.slice(i, i + limit));
+                    paramNameSlice = paramName.slice(i, i + limit);
+                    if (!paramNameSlice.length) {
+                        paramNameSlice = paramName;
+                    }
+                    paramNameSet.push(paramNameSlice);
+                }
+            } else if (!options.singleFileUploads && limitSize) {
+                fileSet = [];
+                paramNameSet = [];
+                for (i = 0; i < filesLength; i = i + 1) {
+                    batchSize += files[i].size + overhead;
+                    if (i + 1 === filesLength ||
+                            ((batchSize + files[i + 1].size + overhead) > limitSize) ||
+                            (limit && i + 1 - j >= limit)) {
+                        fileSet.push(files.slice(j, i + 1));
+                        paramNameSlice = paramName.slice(j, i + 1);
+                        if (!paramNameSlice.length) {
+                            paramNameSlice = paramName;
+                        }
+                        paramNameSet.push(paramNameSlice);
+                        j = i + 1;
+                        batchSize = 0;
+                    }
+                }
+            } else {
+                paramNameSet = paramName;
+            }
+            data.originalFiles = files;
+            $.each(fileSet || files, function (index, element) {
+                var newData = $.extend({}, data);
+                newData.files = fileSet ? element : [element];
+                newData.paramName = paramNameSet[index];
+                that._initResponseObject(newData);
+                that._initProgressObject(newData);
+                that._addConvenienceMethods(e, newData);
+                result = that._trigger(
+                    'add',
+                    $.Event('add', {delegatedEvent: e}),
+                    newData
+                );
+                return result;
+            });
+            return result;
+        },
+
+        _replaceFileInput: function (data) {
+            var input = data.fileInput,
+                inputClone = input.clone(true),
+                restoreFocus = input.is(document.activeElement);
+            // Add a reference for the new cloned file input to the data argument:
+            data.fileInputClone = inputClone;
+            $('<form></form>').append(inputClone)[0].reset();
+            // Detaching allows to insert the fileInput on another form
+            // without loosing the file input value:
+            input.after(inputClone).detach();
+            // If the fileInput had focus before it was detached,
+            // restore focus to the inputClone.
+            if (restoreFocus) {
+                inputClone.focus();
+            }
+            // Avoid memory leaks with the detached file input:
+            $.cleanData(input.unbind('remove'));
+            // Replace the original file input element in the fileInput
+            // elements set with the clone, which has been copied including
+            // event handlers:
+            this.options.fileInput = this.options.fileInput.map(function (i, el) {
+                if (el === input[0]) {
+                    return inputClone[0];
+                }
+                return el;
+            });
+            // If the widget has been initialized on the file input itself,
+            // override this.element with the file input clone:
+            if (input[0] === this.element[0]) {
+                this.element = inputClone;
+            }
+        },
+
+        _handleFileTreeEntry: function (entry, path) {
+            var that = this,
+                dfd = $.Deferred(),
+                errorHandler = function (e) {
+                    if (e && !e.entry) {
+                        e.entry = entry;
+                    }
+                    // Since $.when returns immediately if one
+                    // Deferred is rejected, we use resolve instead.
+                    // This allows valid files and invalid items
+                    // to be returned together in one set:
+                    dfd.resolve([e]);
+                },
+                successHandler = function (entries) {
+                    that._handleFileTreeEntries(
+                        entries,
+                        path + entry.name + '/'
+                    ).done(function (files) {
+                        dfd.resolve(files);
+                    }).fail(errorHandler);
+                },
+                readEntries = function () {
+                    dirReader.readEntries(function (results) {
+                        if (!results.length) {
+                            successHandler(entries);
+                        } else {
+                            entries = entries.concat(results);
+                            readEntries();
+                        }
+                    }, errorHandler);
+                },
+                dirReader, entries = [];
+            path = path || '';
+            if (entry.isFile) {
+                if (entry._file) {
+                    // Workaround for Chrome bug #149735
+                    entry._file.relativePath = path;
+                    dfd.resolve(entry._file);
+                } else {
+                    entry.file(function (file) {
+                        file.relativePath = path;
+                        dfd.resolve(file);
+                    }, errorHandler);
+                }
+            } else if (entry.isDirectory) {
+                dirReader = entry.createReader();
+                readEntries();
+            } else {
+                // Return an empy list for file system items
+                // other than files or directories:
+                dfd.resolve([]);
+            }
+            return dfd.promise();
+        },
+
+        _handleFileTreeEntries: function (entries, path) {
+            var that = this;
+            return $.when.apply(
+                $,
+                $.map(entries, function (entry) {
+                    return that._handleFileTreeEntry(entry, path);
+                })
+            ).then(function () {
+                return Array.prototype.concat.apply(
+                    [],
+                    arguments
+                );
+            });
+        },
+
+        _getDroppedFiles: function (dataTransfer) {
+            dataTransfer = dataTransfer || {};
+            var items = dataTransfer.items;
+            if (items && items.length && (items[0].webkitGetAsEntry ||
+                    items[0].getAsEntry)) {
+                return this._handleFileTreeEntries(
+                    $.map(items, function (item) {
+                        var entry;
+                        if (item.webkitGetAsEntry) {
+                            entry = item.webkitGetAsEntry();
+                            if (entry) {
+                                // Workaround for Chrome bug #149735:
+                                entry._file = item.getAsFile();
+                            }
+                            return entry;
+                        }
+                        return item.getAsEntry();
+                    })
+                );
+            }
+            return $.Deferred().resolve(
+                $.makeArray(dataTransfer.files)
+            ).promise();
+        },
+
+        _getSingleFileInputFiles: function (fileInput) {
+            fileInput = $(fileInput);
+            var entries = fileInput.prop('webkitEntries') ||
+                    fileInput.prop('entries'),
+                files,
+                value;
+            if (entries && entries.length) {
+                return this._handleFileTreeEntries(entries);
+            }
+            files = $.makeArray(fileInput.prop('files'));
+            if (!files.length) {
+                value = fileInput.prop('value');
+                if (!value) {
+                    return $.Deferred().resolve([]).promise();
+                }
+                // If the files property is not available, the browser does not
+                // support the File API and we add a pseudo File object with
+                // the input value as name with path information removed:
+                files = [{name: value.replace(/^.*\\/, '')}];
+            } else if (files[0].name === undefined && files[0].fileName) {
+                // File normalization for Safari 4 and Firefox 3:
+                $.each(files, function (index, file) {
+                    file.name = file.fileName;
+                    file.size = file.fileSize;
+                });
+            }
+            return $.Deferred().resolve(files).promise();
+        },
+
+        _getFileInputFiles: function (fileInput) {
+            if (!(fileInput instanceof $) || fileInput.length === 1) {
+                return this._getSingleFileInputFiles(fileInput);
+            }
+            return $.when.apply(
+                $,
+                $.map(fileInput, this._getSingleFileInputFiles)
+            ).then(function () {
+                return Array.prototype.concat.apply(
+                    [],
+                    arguments
+                );
+            });
+        },
+
+        _onChange: function (e) {
+            var that = this,
+                data = {
+                    fileInput: $(e.target),
+                    form: $(e.target.form)
+                };
+            this._getFileInputFiles(data.fileInput).always(function (files) {
+                data.files = files;
+                if (that.options.replaceFileInput) {
+                    that._replaceFileInput(data);
+                }
+                if (that._trigger(
+                        'change',
+                        $.Event('change', {delegatedEvent: e}),
+                        data
+                    ) !== false) {
+                    that._onAdd(e, data);
+                }
+            });
+        },
+
+        _onPaste: function (e) {
+            var items = e.originalEvent && e.originalEvent.clipboardData &&
+                    e.originalEvent.clipboardData.items,
+                data = {files: []};
+            if (items && items.length) {
+                $.each(items, function (index, item) {
+                    var file = item.getAsFile && item.getAsFile();
+                    if (file) {
+                        data.files.push(file);
+                    }
+                });
+                if (this._trigger(
+                        'paste',
+                        $.Event('paste', {delegatedEvent: e}),
+                        data
+                    ) !== false) {
+                    this._onAdd(e, data);
+                }
+            }
+        },
+
+        _onDrop: function (e) {
+            e.dataTransfer = e.originalEvent && e.originalEvent.dataTransfer;
+            var that = this,
+                dataTransfer = e.dataTransfer,
+                data = {};
+            if (dataTransfer && dataTransfer.files && dataTransfer.files.length) {
+                e.preventDefault();
+                this._getDroppedFiles(dataTransfer).always(function (files) {
+                    data.files = files;
+                    if (that._trigger(
+                            'drop',
+                            $.Event('drop', {delegatedEvent: e}),
+                            data
+                        ) !== false) {
+                        that._onAdd(e, data);
+                    }
+                });
+            }
+        },
+
+        _onDragOver: getDragHandler('dragover'),
+
+        _onDragEnter: getDragHandler('dragenter'),
+
+        _onDragLeave: getDragHandler('dragleave'),
+
+        _initEventHandlers: function () {
+            if (this._isXHRUpload(this.options)) {
+                this._on(this.options.dropZone, {
+                    dragover: this._onDragOver,
+                    drop: this._onDrop,
+                    // event.preventDefault() on dragenter is required for IE10+:
+                    dragenter: this._onDragEnter,
+                    // dragleave is not required, but added for completeness:
+                    dragleave: this._onDragLeave
+                });
+                this._on(this.options.pasteZone, {
+                    paste: this._onPaste
+                });
+            }
+            if ($.support.fileInput) {
+                this._on(this.options.fileInput, {
+                    change: this._onChange
+                });
+            }
+        },
+
+        _destroyEventHandlers: function () {
+            this._off(this.options.dropZone, 'dragenter dragleave dragover drop');
+            this._off(this.options.pasteZone, 'paste');
+            this._off(this.options.fileInput, 'change');
+        },
+
+        _setOption: function (key, value) {
+            var reinit = $.inArray(key, this._specialOptions) !== -1;
+            if (reinit) {
+                this._destroyEventHandlers();
+            }
+            this._super(key, value);
+            if (reinit) {
+                this._initSpecialOptions();
+                this._initEventHandlers();
+            }
+        },
+
+        _initSpecialOptions: function () {
+            var options = this.options;
+            if (options.fileInput === undefined) {
+                options.fileInput = this.element.is('input[type="file"]') ?
+                        this.element : this.element.find('input[type="file"]');
+            } else if (!(options.fileInput instanceof $)) {
+                options.fileInput = $(options.fileInput);
+            }
+            if (!(options.dropZone instanceof $)) {
+                options.dropZone = $(options.dropZone);
+            }
+            if (!(options.pasteZone instanceof $)) {
+                options.pasteZone = $(options.pasteZone);
+            }
+        },
+
+        _getRegExp: function (str) {
+            var parts = str.split('/'),
+                modifiers = parts.pop();
+            parts.shift();
+            return new RegExp(parts.join('/'), modifiers);
+        },
+
+        _isRegExpOption: function (key, value) {
+            return key !== 'url' && $.type(value) === 'string' &&
+                /^\/.*\/[igm]{0,3}$/.test(value);
+        },
+
+        _initDataAttributes: function () {
+            var that = this,
+                options = this.options,
+                data = this.element.data();
+            // Initialize options set via HTML5 data-attributes:
+            $.each(
+                this.element[0].attributes,
+                function (index, attr) {
+                    var key = attr.name.toLowerCase(),
+                        value;
+                    if (/^data-/.test(key)) {
+                        // Convert hyphen-ated key to camelCase:
+                        key = key.slice(5).replace(/-[a-z]/g, function (str) {
+                            return str.charAt(1).toUpperCase();
+                        });
+                        value = data[key];
+                        if (that._isRegExpOption(key, value)) {
+                            value = that._getRegExp(value);
+                        }
+                        options[key] = value;
+                    }
+                }
+            );
+        },
+
+        _create: function () {
+            this._initDataAttributes();
+            this._initSpecialOptions();
+            this._slots = [];
+            this._sequence = this._getXHRPromise(true);
+            this._sending = this._active = 0;
+            this._initProgressObject(this);
+            this._initEventHandlers();
+        },
+
+        // This method is exposed to the widget API and allows to query
+        // the number of active uploads:
+        active: function () {
+            return this._active;
+        },
+
+        // This method is exposed to the widget API and allows to query
+        // the widget upload progress.
+        // It returns an object with loaded, total and bitrate properties
+        // for the running uploads:
+        progress: function () {
+            return this._progress;
+        },
+
+        // This method is exposed to the widget API and allows adding files
+        // using the fileupload API. The data parameter accepts an object which
+        // must have a files property and can contain additional options:
+        // .fileupload('add', {files: filesList});
+        add: function (data) {
+            var that = this;
+            if (!data || this.options.disabled) {
+                return;
+            }
+            if (data.fileInput && !data.files) {
+                this._getFileInputFiles(data.fileInput).always(function (files) {
+                    data.files = files;
+                    that._onAdd(null, data);
+                });
+            } else {
+                data.files = $.makeArray(data.files);
+                this._onAdd(null, data);
+            }
+        },
+
+        // This method is exposed to the widget API and allows sending files
+        // using the fileupload API. The data parameter accepts an object which
+        // must have a files or fileInput property and can contain additional options:
+        // .fileupload('send', {files: filesList});
+        // The method returns a Promise object for the file upload call.
+        send: function (data) {
+            if (data && !this.options.disabled) {
+                if (data.fileInput && !data.files) {
+                    var that = this,
+                        dfd = $.Deferred(),
+                        promise = dfd.promise(),
+                        jqXHR,
+                        aborted;
+                    promise.abort = function () {
+                        aborted = true;
+                        if (jqXHR) {
+                            return jqXHR.abort();
+                        }
+                        dfd.reject(null, 'abort', 'abort');
+                        return promise;
+                    };
+                    this._getFileInputFiles(data.fileInput).always(
+                        function (files) {
+                            if (aborted) {
+                                return;
+                            }
+                            if (!files.length) {
+                                dfd.reject();
+                                return;
+                            }
+                            data.files = files;
+                            jqXHR = that._onSend(null, data);
+                            jqXHR.then(
+                                function (result, textStatus, jqXHR) {
+                                    dfd.resolve(result, textStatus, jqXHR);
+                                },
+                                function (jqXHR, textStatus, errorThrown) {
+                                    dfd.reject(jqXHR, textStatus, errorThrown);
+                                }
+                            );
+                        }
+                    );
+                    return this._enhancePromise(promise);
+                }
+                data.files = $.makeArray(data.files);
+                if (data.files.length) {
+                    return this._onSend(null, data);
+                }
+            }
+            return this._getXHRPromise(false, data && data.context);
         }
-        return false;
 
-      } else if (method) {
-        rails.handleMethod(link);
-        return false;
-      }
     });
 
-    $document.on('click.rails', rails.buttonClickSelector, function(e) {
-      var button = $(this);
+}));
 
-      if (!rails.allowAction(button) || !rails.isRemote(button)) return rails.stopEverything(e);
 
-      if (button.is(rails.buttonDisableSelector)) rails.disableFormElement(button);
 
-      var handleRemote = rails.handleRemote(button);
-      // Response from rails.handleRemote() will either be false or a deferred object promise.
-      if (handleRemote === false) {
-        rails.enableFormElement(button);
-      } else {
-        handleRemote.fail( function() { rails.enableFormElement(button); } );
-      }
-      return false;
-    });
+/*
+ * JavaScript Templates 2.4.1
+ * https://github.com/blueimp/JavaScript-Templates
+ *
+ * Copyright 2011, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ *
+ * Inspired by John Resig's JavaScript Micro-Templating:
+ * http://ejohn.org/blog/javascript-micro-templating/
+ */
 
-    $document.on('change.rails', rails.inputChangeSelector, function(e) {
-      var link = $(this);
-      if (!rails.allowAction(link) || !rails.isRemote(link)) return rails.stopEverything(e);
+/*jslint evil: true, regexp: true, unparam: true */
+/*global document, define */
 
-      rails.handleRemote(link);
-      return false;
-    });
 
-    $document.on('submit.rails', rails.formSubmitSelector, function(e) {
-      var form = $(this),
-        remote = rails.isRemote(form),
-        blankRequiredInputs,
-        nonBlankFileInputs;
-
-      if (!rails.allowAction(form)) return rails.stopEverything(e);
-
-      // Skip other logic when required values are missing or file upload is present
-      if (form.attr('novalidate') === undefined) {
-        if (form.data('ujs:formnovalidate-button') === undefined) {
-          blankRequiredInputs = rails.blankInputs(form, rails.requiredInputSelector, false);
-          if (blankRequiredInputs && rails.fire(form, 'ajax:aborted:required', [blankRequiredInputs])) {
-            return rails.stopEverything(e);
-          }
-        } else {
-          // Clear the formnovalidate in case the next button click is not on a formnovalidate button
-          // Not strictly necessary to do here, since it is also reset on each button click, but just to be certain
-          form.data('ujs:formnovalidate-button', undefined);
+(function ($) {
+    "use strict";
+    var tmpl = function (str, data) {
+        var f = !/[^\w\-\.:]/.test(str) ? tmpl.cache[str] = tmpl.cache[str] ||
+                tmpl(tmpl.load(str)) :
+                    new Function(
+                        tmpl.arg + ',tmpl',
+                        "var _e=tmpl.encode" + tmpl.helper + ",_s='" +
+                            str.replace(tmpl.regexp, tmpl.func) +
+                            "';return _s;"
+                    );
+        return data ? f(data, tmpl) : function (data) {
+            return f(data, tmpl);
+        };
+    };
+    tmpl.cache = {};
+    tmpl.load = function (id) {
+        return document.getElementById(id).innerHTML;
+    };
+    tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
+    tmpl.func = function (s, p1, p2, p3, p4, p5) {
+        if (p1) { // whitespace, quote and backspace in HTML context
+            return {
+                "\n": "\\n",
+                "\r": "\\r",
+                "\t": "\\t",
+                " " : " "
+            }[p1] || "\\" + p1;
         }
-      }
-
-      if (remote) {
-        nonBlankFileInputs = rails.nonBlankInputs(form, rails.fileInputSelector);
-        if (nonBlankFileInputs) {
-          // Slight timeout so that the submit button gets properly serialized
-          // (make it easy for event handler to serialize form without disabled values)
-          setTimeout(function(){ rails.disableFormElements(form); }, 13);
-          var aborted = rails.fire(form, 'ajax:aborted:file', [nonBlankFileInputs]);
-
-          // Re-enable form elements if event bindings return false (canceling normal form submission)
-          if (!aborted) { setTimeout(function(){ rails.enableFormElements(form); }, 13); }
-
-          return aborted;
+        if (p2) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
+            if (p2 === "=") {
+                return "'+_e(" + p3 + ")+'";
+            }
+            return "'+(" + p3 + "==null?'':" + p3 + ")+'";
         }
-
-        rails.handleRemote(form);
-        return false;
-
-      } else {
-        // Slight timeout so that the submit button gets properly serialized
-        setTimeout(function(){ rails.disableFormElements(form); }, 13);
-      }
-    });
-
-    $document.on('click.rails', rails.formInputClickSelector, function(event) {
-      var button = $(this);
-
-      if (!rails.allowAction(button)) return rails.stopEverything(event);
-
-      // Register the pressed submit button
-      var name = button.attr('name'),
-        data = name ? {name:name, value:button.val()} : null;
-
-      var form = button.closest('form');
-      if (form.length === 0) {
-        form = $('#' + button.attr('form'));
-      }
-      form.data('ujs:submit-button', data);
-
-      // Save attributes from button
-      form.data('ujs:formnovalidate-button', button.attr('formnovalidate'));
-      form.data('ujs:submit-button-formaction', button.attr('formaction'));
-      form.data('ujs:submit-button-formmethod', button.attr('formmethod'));
-    });
-
-    $document.on('ajax:send.rails', rails.formSubmitSelector, function(event) {
-      if (this === event.target) rails.disableFormElements($(this));
-    });
-
-    $document.on('ajax:complete.rails', rails.formSubmitSelector, function(event) {
-      if (this === event.target) rails.enableFormElements($(this));
-    });
-
-    $(function(){
-      rails.refreshCSRFTokens();
-    });
-  }
-
-})( jQuery );
+        if (p4) { // evaluation start tag: {%
+            return "';";
+        }
+        if (p5) { // evaluation end tag: %}
+            return "_s+='";
+        }
+    };
+    tmpl.encReg = /[<>&"'\x00]/g;
+    tmpl.encMap = {
+        "<"   : "&lt;",
+        ">"   : "&gt;",
+        "&"   : "&amp;",
+        "\""  : "&quot;",
+        "'"   : "&#39;"
+    };
+    tmpl.encode = function (s) {
+        /*jshint eqnull:true */
+        return (s == null ? "" : "" + s).replace(
+            tmpl.encReg,
+            function (c) {
+                return tmpl.encMap[c] || "";
+            }
+        );
+    };
+    tmpl.arg = "o";
+    tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
+        ",include=function(s,d){_s+=tmpl(s,d);}";
+    if (typeof define === "function" && define.amd) {
+        define(function () {
+            return tmpl;
+        });
+    } else {
+        $.tmpl = tmpl;
+    }
+}(this));
 /*!
  * bootstrap-fileinput v4.4.9
  * http://plugins.krajee.com/file-input
@@ -16042,172 +17847,483 @@ return jQuery;
         }
     });
 }));
-// By: Hans Fj�llemark and John Papa
-// https://github.com/CodeSeven/toastr
-// 
-// Modified to support css styling instead of inline styling
-// Inspired by https://github.com/Srirangan/notifer.js/
+/*
+ * Toastr
+ * Copyright 2012-2015
+ * Authors: John Papa, Hans Fjällemark, and Tim Ferrell.
+ * All Rights Reserved.
+ * Use, reproduction, distribution, and modification of this code is subject to the terms and
+ * conditions of the MIT license, available at http://www.opensource.org/licenses/mit-license.php
+ *
+ * ARIA Support: Greta Krafsig
+ *
+ * Project: https://github.com/CodeSeven/toastr
+ */
+/* global define */
 
-;(function(window, $) {
-    window.toastr = (function() {
-        var 
-            defaults = {
-                tapToDismiss: true,
-                toastClass: 'toast',
-                containerId: 'toast-container',
-                debug: false,
-                fadeIn: 300,
-                fadeOut: 1000,
-                extendedTimeOut: 1000,
-                iconClasses: {
-                    error: 'toast-error',
-                    info: 'toast-info',
-                    success: 'toast-success',
-                    warning: 'toast-warning'
-                },
-                iconClass: 'toast-info',
-                positionClass: 'toast-top-right',
-                timeOut: 5000, // Set timeOut to 0 to make it sticky
-                titleClass: 'toast-title',
-                messageClass: 'toast-message'
-            },
+(function (define) {
+    define(['jquery'], function ($) {
+        return (function () {
+            var $container;
+            var listener;
+            var toastId = 0;
+            var toastType = {
+                error: 'error',
+                info: 'info',
+                success: 'success',
+                warning: 'warning'
+            };
 
+            var toastr = {
+                clear: clear,
+                remove: remove,
+                error: error,
+                getContainer: getContainer,
+                info: info,
+                options: {},
+                subscribe: subscribe,
+                success: success,
+                version: '2.1.3',
+                warning: warning
+            };
 
-            error = function(message, title) {
+            var previousToast;
+
+            return toastr;
+
+            ////////////////
+
+            function error(message, title, optionsOverride) {
                 return notify({
+                    type: toastType.error,
                     iconClass: getOptions().iconClasses.error,
                     message: message,
+                    optionsOverride: optionsOverride,
                     title: title
-                })
-            },
-
-            getContainer = function(options) {
-                var $container = $('#' + options.containerId)
-
-                if ($container.length)
-                    return $container
-
-                $container = $('<div/>')
-                    .attr('id', options.containerId)
-                    .addClass(options.positionClass)
-
-                $container.appendTo($('body'))
-
-                return $container
-            },
-
-            getOptions = function() {
-                return $.extend({}, defaults, toastr.options)
-            },
-
-            info = function(message, title) {
-                return notify({
-                    iconClass: getOptions().iconClasses.info,
-                    message: message,
-                    title: title
-                })
-            },
-
-            notify = function(map) {
-                var 
-                    options = getOptions(),
-                    iconClass = map.iconClass || options.iconClass,
-                    intervalId = null,
-                    $container = getContainer(options),
-                    $toastElement = $('<div/>'),
-                    $titleElement = $('<div/>'),
-                    $messageElement = $('<div/>'),
-                    response = { options: options, map: map }
-
-                if (map.iconClass) {
-                    $toastElement.addClass(options.toastClass).addClass(iconClass)
-                }
-
-                if (map.title) {
-                    $titleElement.append(map.title).addClass(options.titleClass)
-                    $toastElement.append($titleElement)
-                }
-
-                if (map.message) {
-                    $messageElement.append(map.message).addClass(options.messageClass)
-                    $toastElement.append($messageElement)
-                }
-
-                var fadeAway = function() {
-                    if ($(':focus', $toastElement).length > 0)
-                		return
-                	
-                    var fade = function() {
-                        return $toastElement.fadeOut(options.fadeOut)
-                    }
-
-                    $.when(fade()).done(function() {
-                        if ($toastElement.is(':visible')) {
-                            return
-                        }
-                        $toastElement.remove()
-                        if ($container.children().length === 0)
-                            $container.remove()
-                    })
-                }
-
-                var delayedFadeAway = function() {
-                    if (options.timeOut > 0 || options.extendedTimeOut > 0) {
-                        intervalId = setTimeout(fadeAway, options.extendedTimeOut)
-                    }
-                }
-
-                var stickAround = function() {
-                    clearTimeout(intervalId)
-                    $toastElement.stop(true, true)
-                        .fadeIn(options.fadeIn)
-                }
-
-                $toastElement.hide()
-                $container.prepend($toastElement)
-                $toastElement.fadeIn(options.fadeIn)
-
-                if (options.timeOut > 0) {
-                    intervalId = setTimeout(fadeAway, options.timeOut)
-                }
-
-                $toastElement.hover(stickAround, delayedFadeAway)
-
-                if (options.tapToDismiss) {
-                    $toastElement.click(fadeAway)
-                }
-
-                if (options.debug) {
-                    console.log(response)
-                }
-                return $toastElement
-            },
-
-            success = function(message, title) {
-                return notify({
-                    iconClass: getOptions().iconClasses.success,
-                    message: message,
-                    title: title
-                })
-            },
-
-            warning = function(message, title) {
-                return notify({
-                    iconClass: getOptions().iconClasses.warning,
-                    message: message,
-                    title: title
-                })
+                });
             }
 
-        return {
-            error: error,
-            info: info,
-            options: {},
-            success: success,
-            warning: warning
-        }
-    })()
-} (window, jQuery));
+            function getContainer(options, create) {
+                if (!options) { options = getOptions(); }
+                $container = $('#' + options.containerId);
+                if ($container.length) {
+                    return $container;
+                }
+                if (create) {
+                    $container = createContainer(options);
+                }
+                return $container;
+            }
+
+            function info(message, title, optionsOverride) {
+                return notify({
+                    type: toastType.info,
+                    iconClass: getOptions().iconClasses.info,
+                    message: message,
+                    optionsOverride: optionsOverride,
+                    title: title
+                });
+            }
+
+            function subscribe(callback) {
+                listener = callback;
+            }
+
+            function success(message, title, optionsOverride) {
+                return notify({
+                    type: toastType.success,
+                    iconClass: getOptions().iconClasses.success,
+                    message: message,
+                    optionsOverride: optionsOverride,
+                    title: title
+                });
+            }
+
+            function warning(message, title, optionsOverride) {
+                return notify({
+                    type: toastType.warning,
+                    iconClass: getOptions().iconClasses.warning,
+                    message: message,
+                    optionsOverride: optionsOverride,
+                    title: title
+                });
+            }
+
+            function clear($toastElement, clearOptions) {
+                var options = getOptions();
+                if (!$container) { getContainer(options); }
+                if (!clearToast($toastElement, options, clearOptions)) {
+                    clearContainer(options);
+                }
+            }
+
+            function remove($toastElement) {
+                var options = getOptions();
+                if (!$container) { getContainer(options); }
+                if ($toastElement && $(':focus', $toastElement).length === 0) {
+                    removeToast($toastElement);
+                    return;
+                }
+                if ($container.children().length) {
+                    $container.remove();
+                }
+            }
+
+            // internal functions
+
+            function clearContainer (options) {
+                var toastsToClear = $container.children();
+                for (var i = toastsToClear.length - 1; i >= 0; i--) {
+                    clearToast($(toastsToClear[i]), options);
+                }
+            }
+
+            function clearToast ($toastElement, options, clearOptions) {
+                var force = clearOptions && clearOptions.force ? clearOptions.force : false;
+                if ($toastElement && (force || $(':focus', $toastElement).length === 0)) {
+                    $toastElement[options.hideMethod]({
+                        duration: options.hideDuration,
+                        easing: options.hideEasing,
+                        complete: function () { removeToast($toastElement); }
+                    });
+                    return true;
+                }
+                return false;
+            }
+
+            function createContainer(options) {
+                $container = $('<div/>')
+                    .attr('id', options.containerId)
+                    .addClass(options.positionClass);
+
+                $container.appendTo($(options.target));
+                return $container;
+            }
+
+            function getDefaults() {
+                return {
+                    tapToDismiss: true,
+                    toastClass: 'toast',
+                    containerId: 'toast-container',
+                    debug: false,
+
+                    showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
+                    showDuration: 300,
+                    showEasing: 'swing', //swing and linear are built into jQuery
+                    onShown: undefined,
+                    hideMethod: 'fadeOut',
+                    hideDuration: 1000,
+                    hideEasing: 'swing',
+                    onHidden: undefined,
+                    closeMethod: false,
+                    closeDuration: false,
+                    closeEasing: false,
+                    closeOnHover: true,
+
+                    extendedTimeOut: 1000,
+                    iconClasses: {
+                        error: 'toast-error',
+                        info: 'toast-info',
+                        success: 'toast-success',
+                        warning: 'toast-warning'
+                    },
+                    iconClass: 'toast-info',
+                    positionClass: 'toast-top-right',
+                    timeOut: 5000, // Set timeOut and extendedTimeOut to 0 to make it sticky
+                    titleClass: 'toast-title',
+                    messageClass: 'toast-message',
+                    escapeHtml: false,
+                    target: 'body',
+                    closeHtml: '<button type="button">&times;</button>',
+                    closeClass: 'toast-close-button',
+                    newestOnTop: true,
+                    preventDuplicates: false,
+                    progressBar: false,
+                    progressClass: 'toast-progress',
+                    rtl: false
+                };
+            }
+
+            function publish(args) {
+                if (!listener) { return; }
+                listener(args);
+            }
+
+            function notify(map) {
+                var options = getOptions();
+                var iconClass = map.iconClass || options.iconClass;
+
+                if (typeof (map.optionsOverride) !== 'undefined') {
+                    options = $.extend(options, map.optionsOverride);
+                    iconClass = map.optionsOverride.iconClass || iconClass;
+                }
+
+                if (shouldExit(options, map)) { return; }
+
+                toastId++;
+
+                $container = getContainer(options, true);
+
+                var intervalId = null;
+                var $toastElement = $('<div/>');
+                var $titleElement = $('<div/>');
+                var $messageElement = $('<div/>');
+                var $progressElement = $('<div/>');
+                var $closeElement = $(options.closeHtml);
+                var progressBar = {
+                    intervalId: null,
+                    hideEta: null,
+                    maxHideTime: null
+                };
+                var response = {
+                    toastId: toastId,
+                    state: 'visible',
+                    startTime: new Date(),
+                    options: options,
+                    map: map
+                };
+
+                personalizeToast();
+
+                displayToast();
+
+                handleEvents();
+
+                publish(response);
+
+                if (options.debug && console) {
+                    console.log(response);
+                }
+
+                return $toastElement;
+
+                function escapeHtml(source) {
+                    if (source == null) {
+                        source = '';
+                    }
+
+                    return source
+                        .replace(/&/g, '&amp;')
+                        .replace(/"/g, '&quot;')
+                        .replace(/'/g, '&#39;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;');
+                }
+
+                function personalizeToast() {
+                    setIcon();
+                    setTitle();
+                    setMessage();
+                    setCloseButton();
+                    setProgressBar();
+                    setRTL();
+                    setSequence();
+                    setAria();
+                }
+
+                function setAria() {
+                    var ariaValue = '';
+                    switch (map.iconClass) {
+                        case 'toast-success':
+                        case 'toast-info':
+                            ariaValue =  'polite';
+                            break;
+                        default:
+                            ariaValue = 'assertive';
+                    }
+                    $toastElement.attr('aria-live', ariaValue);
+                }
+
+                function handleEvents() {
+                    if (options.closeOnHover) {
+                        $toastElement.hover(stickAround, delayedHideToast);
+                    }
+
+                    if (!options.onclick && options.tapToDismiss) {
+                        $toastElement.click(hideToast);
+                    }
+
+                    if (options.closeButton && $closeElement) {
+                        $closeElement.click(function (event) {
+                            if (event.stopPropagation) {
+                                event.stopPropagation();
+                            } else if (event.cancelBubble !== undefined && event.cancelBubble !== true) {
+                                event.cancelBubble = true;
+                            }
+
+                            if (options.onCloseClick) {
+                                options.onCloseClick(event);
+                            }
+
+                            hideToast(true);
+                        });
+                    }
+
+                    if (options.onclick) {
+                        $toastElement.click(function (event) {
+                            options.onclick(event);
+                            hideToast();
+                        });
+                    }
+                }
+
+                function displayToast() {
+                    $toastElement.hide();
+
+                    $toastElement[options.showMethod](
+                        {duration: options.showDuration, easing: options.showEasing, complete: options.onShown}
+                    );
+
+                    if (options.timeOut > 0) {
+                        intervalId = setTimeout(hideToast, options.timeOut);
+                        progressBar.maxHideTime = parseFloat(options.timeOut);
+                        progressBar.hideEta = new Date().getTime() + progressBar.maxHideTime;
+                        if (options.progressBar) {
+                            progressBar.intervalId = setInterval(updateProgress, 10);
+                        }
+                    }
+                }
+
+                function setIcon() {
+                    if (map.iconClass) {
+                        $toastElement.addClass(options.toastClass).addClass(iconClass);
+                    }
+                }
+
+                function setSequence() {
+                    if (options.newestOnTop) {
+                        $container.prepend($toastElement);
+                    } else {
+                        $container.append($toastElement);
+                    }
+                }
+
+                function setTitle() {
+                    if (map.title) {
+                        var suffix = map.title;
+                        if (options.escapeHtml) {
+                            suffix = escapeHtml(map.title);
+                        }
+                        $titleElement.append(suffix).addClass(options.titleClass);
+                        $toastElement.append($titleElement);
+                    }
+                }
+
+                function setMessage() {
+                    if (map.message) {
+                        var suffix = map.message;
+                        if (options.escapeHtml) {
+                            suffix = escapeHtml(map.message);
+                        }
+                        $messageElement.append(suffix).addClass(options.messageClass);
+                        $toastElement.append($messageElement);
+                    }
+                }
+
+                function setCloseButton() {
+                    if (options.closeButton) {
+                        $closeElement.addClass(options.closeClass).attr('role', 'button');
+                        $toastElement.prepend($closeElement);
+                    }
+                }
+
+                function setProgressBar() {
+                    if (options.progressBar) {
+                        $progressElement.addClass(options.progressClass);
+                        $toastElement.prepend($progressElement);
+                    }
+                }
+
+                function setRTL() {
+                    if (options.rtl) {
+                        $toastElement.addClass('rtl');
+                    }
+                }
+
+                function shouldExit(options, map) {
+                    if (options.preventDuplicates) {
+                        if (map.message === previousToast) {
+                            return true;
+                        } else {
+                            previousToast = map.message;
+                        }
+                    }
+                    return false;
+                }
+
+                function hideToast(override) {
+                    var method = override && options.closeMethod !== false ? options.closeMethod : options.hideMethod;
+                    var duration = override && options.closeDuration !== false ?
+                        options.closeDuration : options.hideDuration;
+                    var easing = override && options.closeEasing !== false ? options.closeEasing : options.hideEasing;
+                    if ($(':focus', $toastElement).length && !override) {
+                        return;
+                    }
+                    clearTimeout(progressBar.intervalId);
+                    return $toastElement[method]({
+                        duration: duration,
+                        easing: easing,
+                        complete: function () {
+                            removeToast($toastElement);
+                            clearTimeout(intervalId);
+                            if (options.onHidden && response.state !== 'hidden') {
+                                options.onHidden();
+                            }
+                            response.state = 'hidden';
+                            response.endTime = new Date();
+                            publish(response);
+                        }
+                    });
+                }
+
+                function delayedHideToast() {
+                    if (options.timeOut > 0 || options.extendedTimeOut > 0) {
+                        intervalId = setTimeout(hideToast, options.extendedTimeOut);
+                        progressBar.maxHideTime = parseFloat(options.extendedTimeOut);
+                        progressBar.hideEta = new Date().getTime() + progressBar.maxHideTime;
+                    }
+                }
+
+                function stickAround() {
+                    clearTimeout(intervalId);
+                    progressBar.hideEta = 0;
+                    $toastElement.stop(true, true)[options.showMethod](
+                        {duration: options.showDuration, easing: options.showEasing}
+                    );
+                }
+
+                function updateProgress() {
+                    var percentage = ((progressBar.hideEta - (new Date().getTime())) / progressBar.maxHideTime) * 100;
+                    $progressElement.width(percentage + '%');
+                }
+            }
+
+            function getOptions() {
+                return $.extend({}, getDefaults(), toastr.options);
+            }
+
+            function removeToast($toastElement) {
+                if (!$container) { $container = getContainer(); }
+                if ($toastElement.is(':visible')) {
+                    return;
+                }
+                $toastElement.remove();
+                $toastElement = null;
+                if ($container.children().length === 0) {
+                    $container.remove();
+                    previousToast = undefined;
+                }
+            }
+
+        })();
+    });
+}(typeof define === 'function' && define.amd ? define : function (deps, factory) {
+    if (typeof module !== 'undefined' && module.exports) { //Node
+        module.exports = factory(require('jquery'));
+    } else {
+        window.toastr = factory(window.jQuery);
+    }
+}));
 (function($) {
 
   var cocoon_element_counter = 0;
@@ -54913,6 +57029,818 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 
 
 }));
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+// Generated by LiveScript 1.3.1
+var presets, simpleStr, wrap, slice$ = [].slice, toString$ = {}.toString;
+presets = require('./presets').presets;
+simpleStr = function(arr){
+  return arr.join('');
+};
+wrap = function(content){
+  return "data:image/svg+xml;base64," + btoa(content);
+};
+(function(){
+  var make, handler, ldBar;
+  make = {
+    head: function(viewBox){
+      return "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"" + viewBox + "\">";
+    },
+    gradient: function(dir, dur){
+      var colors, ret, len, gx, gy, x, y, i$, i, idx;
+      dir == null && (dir = 45);
+      dur == null && (dur = 1);
+      colors = slice$.call(arguments, 2);
+      ret = [this.head("0 0 100 100")];
+      len = colors.length * 4 + 1;
+      dir = dir * Math.PI / 180;
+      gx = Math.pow(Math.cos(dir), 2);
+      gy = Math.sqrt(gx - Math.pow(gx, 2));
+      if (dir > Math.PI * 0.25) {
+        gy = Math.pow(Math.sin(dir), 2);
+        gx = Math.sqrt(gy - Math.pow(gy, 2));
+      }
+      x = gx * 100;
+      y = gy * 100;
+      ret.push("<defs><linearGradient id=\"gradient\" x1=\"0\" x2=\"" + gx + "\" y1=\"0\" y2=\"" + gy + "\">");
+      for (i$ = 0; i$ < len; ++i$) {
+        i = i$;
+        idx = i * 100 / (len - 1);
+        ret.push("<stop offset=\"" + idx + "%\" stop-color=\"" + colors[i % colors.length] + "\"/>");
+      }
+      ret.push("</linearGradient></defs>\n<rect x=\"0\" y=\"0\" width=\"400\" height=\"400\" fill=\"url(#gradient)\">\n<animateTransform attributeName=\"transform\" type=\"translate\" from=\"-" + x + ",-" + y + "\"\nto=\"0,0\" dur=\"" + dur + "s\" repeatCount=\"indefinite\"/></rect></svg>");
+      return wrap(ret.join(""));
+    },
+    stripe: function(c1, c2, dur){
+      var ret, i;
+      c1 == null && (c1 = '#b4b4b4');
+      c2 == null && (c2 = '#e6e6e6');
+      dur == null && (dur = 1);
+      ret = [this.head("0 0 100 100")];
+      ret = ret.concat([
+        "<rect fill=\"" + c2 + "\" width=\"100\" height=\"100\"/>", "<g><g>", (function(){
+          var i$, results$ = [];
+          for (i$ = 0; i$ < 13; ++i$) {
+            i = i$;
+            results$.push(("<polygon fill=\"" + c1 + "\" ") + ("points=\"" + (-90 + i * 20) + ",100 " + (-100 + i * 20) + ",") + ("100 " + (-60 + i * 20) + ",0 " + (-50 + i * 20) + ",0 \"/>"));
+          }
+          return results$;
+        }()).join(""), "</g><animateTransform attributeName=\"transform\" type=\"translate\" ", "from=\"0,0\" to=\"20,0\" dur=\"" + dur + "s\" repeatCount=\"indefinite\"/></g></svg>"
+      ].join(""));
+      return wrap(ret);
+    },
+    bubble: function(c1, c2, count, dur, size, sw){
+      var ret, i$, i, idx, x, r, d;
+      c1 == null && (c1 = '#39d');
+      c2 == null && (c2 = '#9cf');
+      count == null && (count = 15);
+      dur == null && (dur = 1);
+      size == null && (size = 6);
+      sw == null && (sw = 1);
+      ret = [this.head("0 0 200 200"), "<rect x=\"0\" y=\"0\" width=\"200\" height=\"200\" fill=\"" + c1 + "\"/>"];
+      for (i$ = 0; i$ < count; ++i$) {
+        i = i$;
+        idx = -(i / count) * dur;
+        x = Math.random() * 184 + 8;
+        r = (Math.random() * 0.7 + 0.3) * size;
+        d = dur * (1 + Math.random() * 0.5);
+        ret.push(["<circle cx=\"" + x + "\" cy=\"0\" r=\"" + r + "\" fill=\"none\" stroke=\"" + c2 + "\" stroke-width=\"" + sw + "\">", "<animate attributeName=\"cy\" values=\"190;-10\" times=\"0;1\" ", "dur=\"" + d + "s\" begin=\"" + idx + "s\" repeatCount=\"indefinite\"/>", "</circle>", "<circle cx=\"" + x + "\" cy=\"0\" r=\"" + r + "\" fill=\"none\" stroke=\"" + c2 + "\" stroke-width=\"" + sw + "\">", "<animate attributeName=\"cy\" values=\"390;190\" times=\"0;1\" ", "dur=\"" + d + "s\" begin=\"" + idx + "s\" repeatCount=\"indefinite\"/>", "</circle>"].join(""));
+      }
+      return wrap(ret.join("") + "</svg>");
+    }
+  };
+  handler = {
+    queue: {},
+    running: false,
+    main: function(timestamp){
+      var keepon, removed, k, ref$, func, ret, this$ = this;
+      keepon = false;
+      removed = [];
+      for (k in ref$ = this.queue) {
+        func = ref$[k];
+        ret = func(timestamp);
+        if (!ret) {
+          removed.push(func);
+        }
+        keepon = keepon || ret;
+      }
+      for (k in ref$ = this.queue) {
+        func = ref$[k];
+        if (removed.indexOf(func) >= 0) {
+          delete this.queue[k];
+        }
+      }
+      if (keepon) {
+        return requestAnimationFrame(function(it){
+          return this$.main(it);
+        });
+      } else {
+        return this.running = false;
+      }
+    },
+    add: function(key, f){
+      var this$ = this;
+      if (!this.queue[key]) {
+        this.queue[key] = f;
+      }
+      if (!this.running) {
+        this.running = true;
+        return requestAnimationFrame(function(it){
+          return this$.main(it);
+        });
+      }
+    }
+  };
+  window.ldBar = ldBar = function(selector, option){
+    var xmlns, root, cls, idPrefix, id, domTree, newNode, x$, config, attr, that, isStroke, parseRes, dom, svg, text, group, length, path0, path1, patimg, img, ret, size, this$ = this;
+    option == null && (option = {});
+    xmlns = {
+      xlink: "http://www.w3.org/1999/xlink"
+    };
+    root = toString$.call(selector).slice(8, -1) === 'String' ? document.querySelector(selector) : selector;
+    if (!root.ldBar) {
+      root.ldBar = this;
+    } else {
+      return root.ldBar;
+    }
+    cls = root.getAttribute('class') || '';
+    if (!~cls.indexOf('ldBar')) {
+      root.setAttribute('class', cls + " ldBar");
+    }
+    idPrefix = "ldBar-" + Math.random().toString(16).substring(2);
+    id = {
+      key: idPrefix,
+      clip: idPrefix + "-clip",
+      filter: idPrefix + "-filter",
+      pattern: idPrefix + "-pattern",
+      mask: idPrefix + "-mask",
+      maskPath: idPrefix + "-mask-path"
+    };
+    domTree = function(n, o){
+      var k, v;
+      n = newNode(n);
+      for (k in o) {
+        v = o[k];
+        if (k !== 'attr') {
+          n.appendChild(domTree(k, v || {}));
+        }
+      }
+      n.attrs(o.attr || {});
+      return n;
+    };
+    newNode = function(n){
+      return document.createElementNS("http://www.w3.org/2000/svg", n);
+    };
+    x$ = document.body.__proto__.__proto__.__proto__;
+    x$.text = function(t){
+      return this.appendChild(document.createTextNode(t));
+    };
+    x$.attrs = function(o){
+      var k, v, ret, results$ = [];
+      for (k in o) {
+        v = o[k];
+        ret = /([^:]+):([^:]+)/.exec(k);
+        if (!ret || !xmlns[ret[1]]) {
+          results$.push(this.setAttribute(k, v));
+        } else {
+          results$.push(this.setAttributeNS(xmlns[ret[1]], k, v));
+        }
+      }
+      return results$;
+    };
+    x$.styles = function(o){
+      var k, v, results$ = [];
+      for (k in o) {
+        v = o[k];
+        results$.push(this.style[k] = v);
+      }
+      return results$;
+    };
+    x$.append = function(n){
+      var r;
+      return this.appendChild(r = document.createElementNS("http://www.w3.og/2000/svg", n));
+    };
+    x$.attr = function(n, v){
+      if (v != null) {
+        return this.setAttribute(n, v);
+      } else {
+        return this.getAttribute(n);
+      }
+    };
+    config = {
+      "type": 'stroke',
+      "img": '',
+      "path": 'M10 10L90 10M90 8M90 12',
+      "fill-dir": 'btt',
+      "fill": '#25b',
+      "fill-background": '#ddd',
+      "fill-background-extrude": 3,
+      "pattern-size": null,
+      "stroke-dir": 'normal',
+      "stroke": '#25b',
+      "stroke-width": '3',
+      "stroke-trail": '#ddd',
+      "stroke-trail-width": 0.5,
+      "duration": 1,
+      "easing": 'linear',
+      "value": 0,
+      "img-size": null,
+      "bbox": null,
+      "set-dim": true,
+      "aspect-ratio": "xMidYMid",
+      "transition-in": false,
+      "min": 0,
+      "max": 100,
+      "precision": 0,
+      "padding": undefined
+    };
+    config["preset"] = root.attr("data-preset") || option["preset"];
+    if (config.preset != null) {
+      import$(config, presets[config.preset]);
+    }
+    for (attr in config) {
+      if (that = that = root.attr("data-" + attr)) {
+        config[attr] = that;
+      }
+    }
+    import$(config, option);
+    if (config.img) {
+      config.path = null;
+    }
+    isStroke = config.type === 'stroke';
+    parseRes = function(v){
+      var parser, ret;
+      parser = /data:ldbar\/res,([^()]+)\(([^)]+)\)/;
+      ret = parser.exec(v);
+      if (!ret) {
+        return v;
+      }
+      return ret = make[ret[1]].apply(make, ret[2].split(','));
+    };
+    config.fill = parseRes(config.fill);
+    config.stroke = parseRes(config.stroke);
+    if (config["set-dim"] === 'false') {
+      config["set-dim"] = false;
+    }
+    dom = {
+      attr: {
+        "xmlns:xlink": 'http://www.w3.org/1999/xlink',
+        preserveAspectRatio: config["aspect-ratio"],
+        width: "100%",
+        height: "100%"
+      },
+      defs: {
+        filter: {
+          attr: {
+            id: id.filter,
+            x: -1,
+            y: -1,
+            width: 3,
+            height: 3
+          },
+          feMorphology: {
+            attr: {
+              operator: +config["fill-background-extrude"] >= 0 ? 'dilate' : 'erode',
+              radius: Math.abs(+config["fill-background-extrude"])
+            }
+          },
+          feColorMatrix: {
+            attr: {
+              values: '0 0 0 0 1    0 0 0 0 1    0 0 0 0 1    0 0 0 1 0',
+              result: "cm"
+            }
+          }
+        },
+        mask: {
+          attr: {
+            id: id.mask
+          },
+          image: {
+            attr: {
+              "xlink:href": config.img,
+              filter: "url(#" + id.filter + ")",
+              x: 0,
+              y: 0,
+              width: 100,
+              height: 100,
+              preserveAspectRatio: config["aspect-ratio"]
+            }
+          }
+        },
+        g: {
+          mask: {
+            attr: {
+              id: id.maskPath
+            },
+            path: {
+              attr: {
+                d: config.path || "",
+                fill: '#fff',
+                stroke: '#fff',
+                filter: "url(#" + id.filter + ")"
+              }
+            }
+          }
+        },
+        clipPath: {
+          attr: {
+            id: id.clip
+          },
+          rect: {
+            attr: {
+              'class': 'mask',
+              fill: '#000'
+            }
+          }
+        },
+        pattern: {
+          attr: {
+            id: id.pattern,
+            patternUnits: 'userSpaceOnUse',
+            x: 0,
+            y: 0,
+            width: 300,
+            height: 300
+          },
+          image: {
+            attr: {
+              x: 0,
+              y: 0,
+              width: 300,
+              height: 300
+            }
+          }
+        }
+      }
+    };
+    svg = domTree('svg', dom);
+    text = document.createElement('div');
+    text.setAttribute('class', 'ldBar-label');
+    root.appendChild(svg);
+    root.appendChild(text);
+    group = [0, 0];
+    length = 0;
+    this.fit = function(){
+      var that, box, d, rect;
+      if (that = config["bbox"]) {
+        box = that.split(' ').map(function(it){
+          return +it.trim();
+        });
+        box = {
+          x: box[0],
+          y: box[1],
+          width: box[2],
+          height: box[3]
+        };
+      } else {
+        box = group[1].getBBox();
+      }
+      if (!box || box.width === 0 || box.height === 0) {
+        box = {
+          x: 0,
+          y: 0,
+          width: 100,
+          height: 100
+        };
+      }
+      d = Math.max.apply(null, ['stroke-width', 'stroke-trail-width', 'fill-background-extrude'].map(function(it){
+        return config[it];
+      })) * 1.5;
+      if (config["padding"] != null) {
+        d = +config["padding"];
+      }
+      svg.attrs({
+        viewBox: [box.x - d, box.y - d, box.width + d * 2, box.height + d * 2].join(" ")
+      });
+      if (config["set-dim"]) {
+        ['width', 'height'].map(function(it){
+          if (!root.style[it] || this$.fit[it]) {
+            root.style[it] = (box[it] + d * 2) + "px";
+            return this$.fit[it] = true;
+          }
+        });
+      }
+      rect = group[0].querySelector('rect');
+      if (rect) {
+        return rect.attrs({
+          x: box.x - d,
+          y: box.y - d,
+          width: box.width + d * 2,
+          height: box.height + d * 2
+        });
+      }
+    };
+    if (config.path) {
+      if (isStroke) {
+        group[0] = domTree('g', {
+          path: {
+            attr: {
+              d: config.path,
+              fill: 'none',
+              'class': 'baseline'
+            }
+          }
+        });
+      } else {
+        group[0] = domTree('g', {
+          rect: {
+            attr: {
+              x: 0,
+              y: 0,
+              width: 100,
+              height: 100,
+              mask: "url(#" + id.maskPath + ")",
+              fill: config["fill-background"],
+              'class': 'frame'
+            }
+          }
+        });
+      }
+      svg.appendChild(group[0]);
+      group[1] = domTree('g', {
+        path: {
+          attr: {
+            d: config.path,
+            'class': isStroke ? 'mainline' : 'solid',
+            "clip-path": config.type === 'fill' ? "url(#" + id.clip + ")" : ''
+          }
+        }
+      });
+      svg.appendChild(group[1]);
+      path0 = group[0].querySelector(isStroke ? 'path' : 'rect');
+      path1 = group[1].querySelector('path');
+      if (isStroke) {
+        path1.attrs({
+          fill: 'none'
+        });
+      }
+      patimg = svg.querySelector('pattern image');
+      img = new Image();
+      img.addEventListener('load', function(){
+        var box, that;
+        box = (that = config["pattern-size"])
+          ? {
+            width: +that,
+            height: +that
+          }
+          : img.width && img.height
+            ? {
+              width: img.width,
+              height: img.height
+            }
+            : {
+              width: 300,
+              height: 300
+            };
+        svg.querySelector('pattern').attrs({
+          width: box.width,
+          height: box.height
+        });
+        return patimg.attrs({
+          width: box.width,
+          height: box.height
+        });
+      });
+      if (/.+\..+|^data:/.exec(!isStroke
+        ? config.fill
+        : config.stroke)) {
+        img.src = !isStroke
+          ? config.fill
+          : config.stroke;
+        patimg.attrs({
+          "xlink:href": img.src
+        });
+      }
+      if (isStroke) {
+        path0.attrs({
+          stroke: config["stroke-trail"],
+          "stroke-width": config["stroke-trail-width"]
+        });
+        path1.attrs({
+          "stroke-width": config["stroke-width"],
+          stroke: /.+\..+|^data:/.exec(config.stroke)
+            ? "url(#" + id.pattern + ")"
+            : config.stroke
+        });
+      }
+      if (config.fill && !isStroke) {
+        path1.attrs({
+          fill: /.+\..+|^data:/.exec(config.fill)
+            ? "url(#" + id.pattern + ")"
+            : config.fill
+        });
+      }
+      length = path1.getTotalLength();
+      this.fit();
+      this.inited = true;
+    } else if (config.img) {
+      if (config["img-size"]) {
+        ret = config["img-size"].split(',');
+        size = {
+          width: +ret[0],
+          height: +ret[1]
+        };
+      } else {
+        size = {
+          width: 100,
+          height: 100
+        };
+      }
+      group[0] = domTree('g', {
+        rect: {
+          attr: {
+            x: 0,
+            y: 0,
+            width: 100,
+            height: 100,
+            mask: "url(#" + id.mask + ")",
+            fill: config["fill-background"]
+          }
+        }
+      });
+      svg.querySelector('mask image').attrs({
+        width: size.width,
+        height: size.height
+      });
+      group[1] = domTree('g', {
+        image: {
+          attr: {
+            width: size.width,
+            height: size.height,
+            x: 0,
+            y: 0,
+            preserveAspectRatio: config["aspect-ratio"],
+            "clip-path": config.type === 'fill' ? "url(#" + id.clip + ")" : '',
+            "xlink:href": config.img,
+            'class': 'solid'
+          }
+        }
+      });
+      img = new Image();
+      img.addEventListener('load', function(){
+        var ret, size, v;
+        if (config["img-size"]) {
+          ret = config["img-size"].split(',');
+          size = {
+            width: +ret[0],
+            height: +ret[1]
+          };
+        } else if (img.width && img.height) {
+          size = {
+            width: img.width,
+            height: img.height
+          };
+        } else {
+          size = {
+            width: 100,
+            height: 100
+          };
+        }
+        svg.querySelector('mask image').attrs({
+          width: size.width,
+          height: size.height
+        });
+        group[1].querySelector('image').attrs({
+          width: size.width,
+          height: size.height
+        });
+        this$.fit();
+        v = this$.value;
+        this$.value = undefined;
+        this$.set(v, true);
+        return this$.inited = true;
+      });
+      img.src = config.img;
+      svg.appendChild(group[0]);
+      svg.appendChild(group[1]);
+    }
+    svg.attrs({
+      width: '100%',
+      height: '100%'
+    });
+    this.transition = {
+      value: {
+        src: 0,
+        des: 0
+      },
+      time: {},
+      ease: function(t, b, c, d){
+        t = t / (d * 0.5);
+        if (t < 1) {
+          return c * 0.5 * t * t + b;
+        }
+        t = t - 1;
+        return -c * 0.5 * (t * (t - 2) - 1) + b;
+      },
+      handler: function(time, doTransition){
+        var ref$, min, max, prec, dv, dt, dur, v, p, node, style, box, dir;
+        doTransition == null && (doTransition = true);
+        if (this.time.src == null) {
+          this.time.src = time;
+        }
+        ref$ = [config["min"], config["max"], 1 / config["precision"]], min = ref$[0], max = ref$[1], prec = ref$[2];
+        ref$ = [this.value.des - this.value.src, (time - this.time.src) * 0.001, +config["duration"] || 1], dv = ref$[0], dt = ref$[1], dur = ref$[2];
+        v = doTransition
+          ? this.ease(dt, this.value.src, dv, dur)
+          : this.value.des;
+        if (config.precision) {
+          v = Math.round(v * prec) / prec;
+        } else if (doTransition) {
+          v = Math.round(v);
+        }
+        v >= min || (v = min);
+        v <= max || (v = max);
+        text.textContent = v;
+        p = 100.0 * (v - min) / (max - min);
+        if (isStroke) {
+          node = path1;
+          style = {
+            "stroke-dasharray": config["stroke-dir"] === 'reverse'
+              ? "0 " + length * (100 - p) * 0.01 + " " + length * p * 0.01 + " 0"
+              : p * 0.01 * length + " " + ((100 - p) * 0.01 * length + 1)
+          };
+        } else {
+          box = group[1].getBBox();
+          dir = config["fill-dir"];
+          style = dir === 'btt' || !dir
+            ? {
+              y: box.y + box.height * (100 - p) * 0.01,
+              height: box.height * p * 0.01,
+              x: box.x,
+              width: box.width
+            }
+            : dir === 'ttb'
+              ? {
+                y: box.y,
+                height: box.height * p * 0.01,
+                x: box.x,
+                width: box.width
+              }
+              : dir === 'ltr'
+                ? {
+                  y: box.y,
+                  height: box.height,
+                  x: box.x,
+                  width: box.width * p * 0.01
+                }
+                : dir === 'rtl' ? {
+                  y: box.y,
+                  height: box.height,
+                  x: box.x + box.width * (100 - p) * 0.01,
+                  width: box.width * p * 0.01
+                } : void 8;
+          node = svg.querySelector('rect');
+        }
+        node.attrs(style);
+        if (dt >= dur) {
+          delete this.time.src;
+          return false;
+        }
+        return true;
+      },
+      start: function(src, des, doTransition){
+        var ref$, this$ = this;
+        ref$ = this.value;
+        ref$.src = src;
+        ref$.des = des;
+        !!(root.offsetWidth || root.offsetHeight || root.getClientRects().length);
+        if (!doTransition || !(root.offsetWidth || root.offsetHeight || root.getClientRects().length)) {
+          this.time.src = 0;
+          this.handler(1000, false);
+          return;
+        }
+        return handler.add(id.key, function(time){
+          return this$.handler(time);
+        });
+      }
+    };
+    this.set = function(v, doTransition){
+      var src, des;
+      doTransition == null && (doTransition = true);
+      src = this.value || 0;
+      if (v != null) {
+        this.value = v;
+      } else {
+        v = this.value;
+      }
+      des = this.value;
+      return this.transition.start(src, des, doTransition);
+    };
+    this.set(+config.value || 0, config["transition-in"]) || false;
+    return this;
+  };
+  return window.addEventListener('load', function(){
+    var i$, ref$, len$, node, results$ = [];
+    for (i$ = 0, len$ = (ref$ = document.querySelectorAll('.ldBar')).length; i$ < len$; ++i$) {
+      node = ref$[i$];
+      if (!node.ldBar) {
+        results$.push(node.ldBar = new ldBar(node));
+      }
+    }
+    return results$;
+  }, false);
+})();
+module.exports = ldBar;
+function import$(obj, src){
+  var own = {}.hasOwnProperty;
+  for (var key in src) if (own.call(src, key)) obj[key] = src[key];
+  return obj;
+}
+
+},{"./presets":2}],2:[function(require,module,exports){
+// Generated by LiveScript 1.3.1
+var presets, out$ = typeof exports != 'undefined' && exports || this;
+out$.presets = presets = {
+  rainbow: {
+    "type": 'stroke',
+    "path": 'M10 10L90 10',
+    "stroke": 'data:ldbar/res,gradient(0,1,#a551df,#fd51ad,#ff7f82,#ffb874,#ffeb90)',
+    "bbox": "10 10 80 10"
+  },
+  energy: {
+    "type": 'fill',
+    "path": 'M15 5L85 5A5 5 0 0 1 85 15L15 15A5 5 0 0 1 15 5',
+    "stroke": '#f00',
+    "fill": 'data:ldbar/res,gradient(45,2,#4e9,#8fb,#4e9)',
+    "fill-dir": "ltr",
+    "fill-background": '#444',
+    "fill-background-extrude": 1,
+    "bbox": "10 5 80 10"
+  },
+  stripe: {
+    "type": 'fill',
+    "path": 'M15 5L85 5A5 5 0 0 1 85 15L15 15A5 5 0 0 1 15 5',
+    "stroke": '#f00',
+    "fill": 'data:ldbar/res,stripe(#25b,#58e,1)',
+    "fill-dir": "ltr",
+    "fill-background": '#ddd',
+    "fill-background-extrude": 1,
+    "bbox": "10 5 80 10"
+  },
+  text: {
+    "type": 'fill',
+    "img": "data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"70\" height=\"20\" viewBox=\"0 0 70 20\"><text x=\"35\" y=\"10\" text-anchor=\"middle\" dominant-baseline=\"central\" font-family=\"arial\">LOADING</text></svg>",
+    "fill-background-extrude": 1.3,
+    "pattern-size": 100,
+    "fill-dir": "ltr",
+    "img-size": "70,20",
+    "bbox": "0 0 70 20"
+  },
+  line: {
+    "type": 'stroke',
+    "path": 'M10 10L90 10',
+    "stroke": '#25b',
+    "stroke-width": 3,
+    "stroke-trail": '#ddd',
+    "stroke-trail-width": 1,
+    "bbox": "10 10 80 10"
+  },
+  fan: {
+    "type": 'stroke',
+    "path": 'M10 90A40 40 0 0 1 90 90',
+    "fill-dir": 'btt',
+    "fill": '#25b',
+    "fill-background": '#ddd',
+    "fill-background-extrude": 3,
+    "stroke-dir": 'normal',
+    "stroke": '#25b',
+    "stroke-width": '3',
+    "stroke-trail": '#ddd',
+    "stroke-trail-width": 0.5,
+    "bbox": "10 50 80 40"
+  },
+  circle: {
+    "type": 'stroke',
+    "path": 'M50 10A40 40 0 0 1 50 90A40 40 0 0 1 50 10',
+    "fill-dir": 'btt',
+    "fill": '#25b',
+    "fill-background": '#ddd',
+    "fill-background-extrude": 3,
+    "stroke-dir": 'normal',
+    "stroke": '#25b',
+    "stroke-width": '3',
+    "stroke-trail": '#ddd',
+    "stroke-trail-width": 0.5,
+    "bbox": "10 10 80 80"
+  },
+  bubble: {
+    "type": 'fill',
+    "path": 'M50 10A40 40 0 0 1 50 90A40 40 0 0 1 50 10',
+    "fill-dir": 'btt',
+    "fill": 'data:ldbar/res,bubble(#39d,#cef)',
+    "pattern-size": "150",
+    "fill-background": '#ddd',
+    "fill-background-extrude": 2,
+    "stroke-dir": 'normal',
+    "stroke": '#25b',
+    "stroke-width": '3',
+    "stroke-trail": '#ddd',
+    "stroke-trail-width": 0.5,
+    "bbox": "10 10 80 80"
+  }
+};
+
+},{}]},{},[1]);
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){var presets,simpleStr,wrap,slice$=[].slice,toString$={}.toString;presets=require("./presets").presets;simpleStr=function(arr){return arr.join("")};wrap=function(content){return"data:image/svg+xml;base64,"+btoa(content)};(function(){var make,handler,ldBar;make={head:function(viewBox){return'<?xml version="1.0" encoding="utf-8"?>\n        <svg xmlns="http://www.w3.org/2000/svg" viewBox="'+viewBox+'">'},gradient:function(dir,dur){var colors,ret,len,gx,gy,x,y,i$,i,idx;dir==null&&(dir=45);dur==null&&(dur=1);colors=slice$.call(arguments,2);ret=[this.head("0 0 100 100")];len=colors.length*4+1;dir=dir*Math.PI/180;gx=Math.pow(Math.cos(dir),2);gy=Math.sqrt(gx-Math.pow(gx,2));if(dir>Math.PI*.25){gy=Math.pow(Math.sin(dir),2);gx=Math.sqrt(gy-Math.pow(gy,2))}x=gx*100;y=gy*100;ret.push('<defs><linearGradient id="gradient" x1="0" x2="'+gx+'" y1="0" y2="'+gy+'">');for(i$=0;i$<len;++i$){i=i$;idx=i*100/(len-1);ret.push('<stop offset="'+idx+'%" stop-color="'+colors[i%colors.length]+'"/>')}ret.push('</linearGradient></defs>\n<rect x="0" y="0" width="400" height="400" fill="url(#gradient)">\n<animateTransform attributeName="transform" type="translate" from="-'+x+",-"+y+'"\nto="0,0" dur="'+dur+'s" repeatCount="indefinite"/></rect></svg>');return wrap(ret.join(""))},stripe:function(c1,c2,dur){var ret,i;c1==null&&(c1="#b4b4b4");c2==null&&(c2="#e6e6e6");dur==null&&(dur=1);ret=[this.head("0 0 100 100")];ret=ret.concat(['<rect fill="'+c2+'" width="100" height="100"/>',"<g><g>",function(){var i$,results$=[];for(i$=0;i$<13;++i$){i=i$;results$.push('<polygon fill="'+c1+'" '+('points="'+(-90+i*20)+",100 "+(-100+i*20)+",")+("100 "+(-60+i*20)+",0 "+(-50+i*20)+',0 "/>'))}return results$}().join(""),'</g><animateTransform attributeName="transform" type="translate" ','from="0,0" to="20,0" dur="'+dur+'s" repeatCount="indefinite"/></g></svg>'].join(""));return wrap(ret)},bubble:function(c1,c2,count,dur,size,sw){var ret,i$,i,idx,x,r,d;c1==null&&(c1="#39d");c2==null&&(c2="#9cf");count==null&&(count=15);dur==null&&(dur=1);size==null&&(size=6);sw==null&&(sw=1);ret=[this.head("0 0 200 200"),'<rect x="0" y="0" width="200" height="200" fill="'+c1+'"/>'];for(i$=0;i$<count;++i$){i=i$;idx=-(i/count)*dur;x=Math.random()*184+8;r=(Math.random()*.7+.3)*size;d=dur*(1+Math.random()*.5);ret.push(['<circle cx="'+x+'" cy="0" r="'+r+'" fill="none" stroke="'+c2+'" stroke-width="'+sw+'">','<animate attributeName="cy" values="190;-10" times="0;1" ','dur="'+d+'s" begin="'+idx+'s" repeatCount="indefinite"/>',"</circle>",'<circle cx="'+x+'" cy="0" r="'+r+'" fill="none" stroke="'+c2+'" stroke-width="'+sw+'">','<animate attributeName="cy" values="390;190" times="0;1" ','dur="'+d+'s" begin="'+idx+'s" repeatCount="indefinite"/>',"</circle>"].join(""))}return wrap(ret.join("")+"</svg>")}};handler={queue:{},running:false,main:function(timestamp){var keepon,removed,k,ref$,func,ret,this$=this;keepon=false;removed=[];for(k in ref$=this.queue){func=ref$[k];ret=func(timestamp);if(!ret){removed.push(func)}keepon=keepon||ret}for(k in ref$=this.queue){func=ref$[k];if(removed.indexOf(func)>=0){delete this.queue[k]}}if(keepon){return requestAnimationFrame(function(it){return this$.main(it)})}else{return this.running=false}},add:function(key,f){var this$=this;if(!this.queue[key]){this.queue[key]=f}if(!this.running){this.running=true;return requestAnimationFrame(function(it){return this$.main(it)})}}};window.ldBar=ldBar=function(selector,option){var xmlns,root,cls,idPrefix,id,domTree,newNode,x$,config,attr,that,isStroke,parseRes,dom,svg,text,group,length,path0,path1,patimg,img,ret,size,this$=this;option==null&&(option={});xmlns={xlink:"http://www.w3.org/1999/xlink"};root=toString$.call(selector).slice(8,-1)==="String"?document.querySelector(selector):selector;if(!root.ldBar){root.ldBar=this}else{return root.ldBar}cls=root.getAttribute("class")||"";if(!~cls.indexOf("ldBar")){root.setAttribute("class",cls+" ldBar")}idPrefix="ldBar-"+Math.random().toString(16).substring(2);id={key:idPrefix,clip:idPrefix+"-clip",filter:idPrefix+"-filter",pattern:idPrefix+"-pattern",mask:idPrefix+"-mask",maskPath:idPrefix+"-mask-path"};domTree=function(n,o){var k,v;n=newNode(n);for(k in o){v=o[k];if(k!=="attr"){n.appendChild(domTree(k,v||{}))}}n.attrs(o.attr||{});return n};newNode=function(n){return document.createElementNS("http://www.w3.org/2000/svg",n)};x$=document.body.__proto__.__proto__.__proto__;x$.text=function(t){return this.appendChild(document.createTextNode(t))};x$.attrs=function(o){var k,v,ret,results$=[];for(k in o){v=o[k];ret=/([^:]+):([^:]+)/.exec(k);if(!ret||!xmlns[ret[1]]){results$.push(this.setAttribute(k,v))}else{results$.push(this.setAttributeNS(xmlns[ret[1]],k,v))}}return results$};x$.styles=function(o){var k,v,results$=[];for(k in o){v=o[k];results$.push(this.style[k]=v)}return results$};x$.append=function(n){var r;return this.appendChild(r=document.createElementNS("http://www.w3.og/2000/svg",n))};x$.attr=function(n,v){if(v!=null){return this.setAttribute(n,v)}else{return this.getAttribute(n)}};config={type:"stroke",img:"",path:"M10 10L90 10M90 8M90 12","fill-dir":"btt",fill:"#25b","fill-background":"#ddd","fill-background-extrude":3,"pattern-size":null,"stroke-dir":"normal",stroke:"#25b","stroke-width":"3","stroke-trail":"#ddd","stroke-trail-width":.5,duration:1,easing:"linear",value:0,"img-size":null,bbox:null,"set-dim":true,"aspect-ratio":"xMidYMid","transition-in":false,min:0,max:100,precision:0,padding:undefined};config["preset"]=root.attr("data-preset")||option["preset"];if(config.preset!=null){import$(config,presets[config.preset])}for(attr in config){if(that=that=root.attr("data-"+attr)){config[attr]=that}}import$(config,option);if(config.img){config.path=null}isStroke=config.type==="stroke";parseRes=function(v){var parser,ret;parser=/data:ldbar\/res,([^()]+)\(([^)]+)\)/;ret=parser.exec(v);if(!ret){return v}return ret=make[ret[1]].apply(make,ret[2].split(","))};config.fill=parseRes(config.fill);config.stroke=parseRes(config.stroke);if(config["set-dim"]==="false"){config["set-dim"]=false}dom={attr:{"xmlns:xlink":"http://www.w3.org/1999/xlink",preserveAspectRatio:config["aspect-ratio"],width:"100%",height:"100%"},defs:{filter:{attr:{id:id.filter,x:-1,y:-1,width:3,height:3},feMorphology:{attr:{operator:+config["fill-background-extrude"]>=0?"dilate":"erode",radius:Math.abs(+config["fill-background-extrude"])}},feColorMatrix:{attr:{values:"0 0 0 0 1    0 0 0 0 1    0 0 0 0 1    0 0 0 1 0",result:"cm"}}},mask:{attr:{id:id.mask},image:{attr:{"xlink:href":config.img,filter:"url(#"+id.filter+")",x:0,y:0,width:100,height:100,preserveAspectRatio:config["aspect-ratio"]}}},g:{mask:{attr:{id:id.maskPath},path:{attr:{d:config.path||"",fill:"#fff",stroke:"#fff",filter:"url(#"+id.filter+")"}}}},clipPath:{attr:{id:id.clip},rect:{attr:{class:"mask",fill:"#000"}}},pattern:{attr:{id:id.pattern,patternUnits:"userSpaceOnUse",x:0,y:0,width:300,height:300},image:{attr:{x:0,y:0,width:300,height:300}}}}};svg=domTree("svg",dom);text=document.createElement("div");text.setAttribute("class","ldBar-label");root.appendChild(svg);root.appendChild(text);group=[0,0];length=0;this.fit=function(){var that,box,d,rect;if(that=config["bbox"]){box=that.split(" ").map(function(it){return+it.trim()});box={x:box[0],y:box[1],width:box[2],height:box[3]}}else{box=group[1].getBBox()}if(!box||box.width===0||box.height===0){box={x:0,y:0,width:100,height:100}}d=Math.max.apply(null,["stroke-width","stroke-trail-width","fill-background-extrude"].map(function(it){return config[it]}))*1.5;if(config["padding"]!=null){d=+config["padding"]}svg.attrs({viewBox:[box.x-d,box.y-d,box.width+d*2,box.height+d*2].join(" ")});if(config["set-dim"]){["width","height"].map(function(it){if(!root.style[it]||this$.fit[it]){root.style[it]=box[it]+d*2+"px";return this$.fit[it]=true}})}rect=group[0].querySelector("rect");if(rect){return rect.attrs({x:box.x-d,y:box.y-d,width:box.width+d*2,height:box.height+d*2})}};if(config.path){if(isStroke){group[0]=domTree("g",{path:{attr:{d:config.path,fill:"none",class:"baseline"}}})}else{group[0]=domTree("g",{rect:{attr:{x:0,y:0,width:100,height:100,mask:"url(#"+id.maskPath+")",fill:config["fill-background"],class:"frame"}}})}svg.appendChild(group[0]);group[1]=domTree("g",{path:{attr:{d:config.path,class:isStroke?"mainline":"solid","clip-path":config.type==="fill"?"url(#"+id.clip+")":""}}});svg.appendChild(group[1]);path0=group[0].querySelector(isStroke?"path":"rect");path1=group[1].querySelector("path");if(isStroke){path1.attrs({fill:"none"})}patimg=svg.querySelector("pattern image");img=new Image;img.addEventListener("load",function(){var box,that;box=(that=config["pattern-size"])?{width:+that,height:+that}:img.width&&img.height?{width:img.width,height:img.height}:{width:300,height:300};svg.querySelector("pattern").attrs({width:box.width,height:box.height});return patimg.attrs({width:box.width,height:box.height})});if(/.+\..+|^data:/.exec(!isStroke?config.fill:config.stroke)){img.src=!isStroke?config.fill:config.stroke;patimg.attrs({"xlink:href":img.src})}if(isStroke){path0.attrs({stroke:config["stroke-trail"],"stroke-width":config["stroke-trail-width"]});path1.attrs({"stroke-width":config["stroke-width"],stroke:/.+\..+|^data:/.exec(config.stroke)?"url(#"+id.pattern+")":config.stroke})}if(config.fill&&!isStroke){path1.attrs({fill:/.+\..+|^data:/.exec(config.fill)?"url(#"+id.pattern+")":config.fill})}length=path1.getTotalLength();this.fit();this.inited=true}else if(config.img){if(config["img-size"]){ret=config["img-size"].split(",");size={width:+ret[0],height:+ret[1]}}else{size={width:100,height:100}}group[0]=domTree("g",{rect:{attr:{x:0,y:0,width:100,height:100,mask:"url(#"+id.mask+")",fill:config["fill-background"]}}});svg.querySelector("mask image").attrs({width:size.width,height:size.height});group[1]=domTree("g",{image:{attr:{width:size.width,height:size.height,x:0,y:0,preserveAspectRatio:config["aspect-ratio"],"clip-path":config.type==="fill"?"url(#"+id.clip+")":"","xlink:href":config.img,class:"solid"}}});img=new Image;img.addEventListener("load",function(){var ret,size,v;if(config["img-size"]){ret=config["img-size"].split(",");size={width:+ret[0],height:+ret[1]}}else if(img.width&&img.height){size={width:img.width,height:img.height}}else{size={width:100,height:100}}svg.querySelector("mask image").attrs({width:size.width,height:size.height});group[1].querySelector("image").attrs({width:size.width,height:size.height});this$.fit();v=this$.value;this$.value=undefined;this$.set(v,true);return this$.inited=true});img.src=config.img;svg.appendChild(group[0]);svg.appendChild(group[1])}svg.attrs({width:"100%",height:"100%"});this.transition={value:{src:0,des:0},time:{},ease:function(t,b,c,d){t=t/(d*.5);if(t<1){return c*.5*t*t+b}t=t-1;return-c*.5*(t*(t-2)-1)+b},handler:function(time,doTransition){var ref$,min,max,prec,dv,dt,dur,v,p,node,style,box,dir;doTransition==null&&(doTransition=true);if(this.time.src==null){this.time.src=time}ref$=[config["min"],config["max"],1/config["precision"]],min=ref$[0],max=ref$[1],prec=ref$[2];ref$=[this.value.des-this.value.src,(time-this.time.src)*.001,+config["duration"]||1],dv=ref$[0],dt=ref$[1],dur=ref$[2];v=doTransition?this.ease(dt,this.value.src,dv,dur):this.value.des;if(config.precision){v=Math.round(v*prec)/prec}else if(doTransition){v=Math.round(v)}v>=min||(v=min);v<=max||(v=max);text.textContent=v;p=100*(v-min)/(max-min);if(isStroke){node=path1;style={"stroke-dasharray":config["stroke-dir"]==="reverse"?"0 "+length*(100-p)*.01+" "+length*p*.01+" 0":p*.01*length+" "+((100-p)*.01*length+1)}}else{box=group[1].getBBox();dir=config["fill-dir"];style=dir==="btt"||!dir?{y:box.y+box.height*(100-p)*.01,height:box.height*p*.01,x:box.x,width:box.width}:dir==="ttb"?{y:box.y,height:box.height*p*.01,x:box.x,width:box.width}:dir==="ltr"?{y:box.y,height:box.height,x:box.x,width:box.width*p*.01}:dir==="rtl"?{y:box.y,height:box.height,x:box.x+box.width*(100-p)*.01,width:box.width*p*.01}:void 8;node=svg.querySelector("rect")}node.attrs(style);if(dt>=dur){delete this.time.src;return false}return true},start:function(src,des,doTransition){var ref$,this$=this;ref$=this.value;ref$.src=src;ref$.des=des;!!(root.offsetWidth||root.offsetHeight||root.getClientRects().length);if(!doTransition||!(root.offsetWidth||root.offsetHeight||root.getClientRects().length)){this.time.src=0;this.handler(1e3,false);return}return handler.add(id.key,function(time){return this$.handler(time)})}};this.set=function(v,doTransition){var src,des;doTransition==null&&(doTransition=true);src=this.value||0;if(v!=null){this.value=v}else{v=this.value}des=this.value;return this.transition.start(src,des,doTransition)};this.set(+config.value||0,config["transition-in"])||false;return this};return window.addEventListener("load",function(){var i$,ref$,len$,node,results$=[];for(i$=0,len$=(ref$=document.querySelectorAll(".ldBar")).length;i$<len$;++i$){node=ref$[i$];if(!node.ldBar){results$.push(node.ldBar=new ldBar(node))}}return results$},false)})();module.exports=ldBar;function import$(obj,src){var own={}.hasOwnProperty;for(var key in src)if(own.call(src,key))obj[key]=src[key];return obj}},{"./presets":2}],2:[function(require,module,exports){var presets,out$=typeof exports!="undefined"&&exports||this;out$.presets=presets={rainbow:{type:"stroke",path:"M10 10L90 10",stroke:"data:ldbar/res,gradient(0,1,#a551df,#fd51ad,#ff7f82,#ffb874,#ffeb90)",bbox:"10 10 80 10"},energy:{type:"fill",path:"M15 5L85 5A5 5 0 0 1 85 15L15 15A5 5 0 0 1 15 5",stroke:"#f00",fill:"data:ldbar/res,gradient(45,2,#4e9,#8fb,#4e9)","fill-dir":"ltr","fill-background":"#444","fill-background-extrude":1,bbox:"10 5 80 10"},stripe:{type:"fill",path:"M15 5L85 5A5 5 0 0 1 85 15L15 15A5 5 0 0 1 15 5",stroke:"#f00",fill:"data:ldbar/res,stripe(#25b,#58e,1)","fill-dir":"ltr","fill-background":"#ddd","fill-background-extrude":1,bbox:"10 5 80 10"},text:{type:"fill",img:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="70" height="20" viewBox="0 0 70 20"><text x="35" y="10" text-anchor="middle" dominant-baseline="central" font-family="arial">LOADING</text></svg>',"fill-background-extrude":1.3,"pattern-size":100,"fill-dir":"ltr","img-size":"70,20",bbox:"0 0 70 20"},line:{type:"stroke",path:"M10 10L90 10",stroke:"#25b","stroke-width":3,"stroke-trail":"#ddd","stroke-trail-width":1,bbox:"10 10 80 10"},fan:{type:"stroke",path:"M10 90A40 40 0 0 1 90 90","fill-dir":"btt",fill:"#25b","fill-background":"#ddd","fill-background-extrude":3,"stroke-dir":"normal",stroke:"#25b","stroke-width":"3","stroke-trail":"#ddd","stroke-trail-width":.5,bbox:"10 50 80 40"},circle:{type:"stroke",path:"M50 10A40 40 0 0 1 50 90A40 40 0 0 1 50 10","fill-dir":"btt",fill:"#25b","fill-background":"#ddd","fill-background-extrude":3,"stroke-dir":"normal",stroke:"#25b","stroke-width":"3","stroke-trail":"#ddd","stroke-trail-width":.5,bbox:"10 10 80 80"},bubble:{type:"fill",path:"M50 10A40 40 0 0 1 50 90A40 40 0 0 1 50 10","fill-dir":"btt",fill:"data:ldbar/res,bubble(#39d,#cef)","pattern-size":"150","fill-background":"#ddd","fill-background-extrude":2,"stroke-dir":"normal",stroke:"#25b","stroke-width":"3","stroke-trail":"#ddd","stroke-trail-width":.5,bbox:"10 10 80 80"}}},{}]},{},[1]);
 //! moment.js
 
 ;(function (global, factory) {
@@ -62973,6 +65901,8 @@ window.theme.fn = {
 // about supported directives.
 //
 
+// require jquery_ujs
+
 
 
 
@@ -62984,33 +65914,30 @@ toastr.options = {
   "progressBar": true,
   "positionClass": "toast-top-right",
   "showDuration": "300",
-  "hideDuration": "1000",
-  "timeOut": "5000",
+  "fadeOut": "3000",
+  "timeOut": "3000",
   "extendedTimeOut": "1000",
   "showEasing": "swing",
   "hideEasing": "linear",
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
-  function image() {
-    var now = $('.carousel-li.active').index() + 1;
-    var total = $('.carousel-li').length;
-    $('.image-quantity').text(now + " / " + total);
-    if(now > 4){
-      var n = $(".article-slide .carousel-indicators").height();
+
+function image() {
+  var now = $('.carousel-li.active').index() + 1;
+  var total = $('.carousel-li').length;
+  $('.image-quantity').text(now + " / " + total);
+  if (now > 4) {
+    var n = $(".article-slide .carousel-indicators").height();
     $('.article-slide .carousel-indicators').animate({ scrollTop: n }, 0);
-    }
-    else{
-     $('.article-slide .carousel-indicators').animate({ scrollTop: 0 }, 0); 
-    }
+  } else {
+    $('.article-slide .carousel-indicators').animate({ scrollTop: 0 }, 0);
   }
+}
 $(document).ready(function() {
   image();
   $('.carousel-indicators li').addClass('carousel-li');
   $('.carousel-li:eq(0)').addClass("active");
-
-  toastr.options.closeHtml = '<button><i class="icon-on"></i></button>';
-  toastr.options.closeHtml = true;
   $('.alert').delay(2000).fadeOut();
   $('#multi-form input[type="text"]').addClass('form-control');
   $('#multi-form input[type="number"]').addClass('form-control');
@@ -63031,9 +65958,9 @@ $(document).ready(function() {
   $('#multi-form select').attr("required", true);
   $('#multi-form textarea').attr("required", true);
 });
-  $(document).bind('ready click keyup mousedown mouseup change', function() {
-    image();
-  })
+$(document).bind('ready click keyup mousedown mouseup change', function() {
+  image();
+})
 $(document).ready(function() {
   $("html").addClass('js');
   $(".input-file-trigger").keydown(function(event) {
@@ -63071,8 +65998,9 @@ $(function() {
     var value4 = value3 + 25;
     var valuet = value4 * value2;
     var valuec = valuet * 52;
-    var valuef = valuec * 0.46 ;
-    $("#amountf").val("$" + valuef);
+    var valuef = valuec * 0.46;
+    $("#amountf").val("$" + Math.trunc(valuef));
+
   }
 
   function amountf2() {
@@ -63276,102 +66204,97 @@ $(document).ready(function() {
 $(document).click(function() {
   modal_click_2();
 });
+(function(b) {
+  var d = window,
+    c, f = function(a, b) { return function() { a.apply(c, b) } },
+    g = function() { var a; if (!c) throw "Tracker has not been defined"; for (a in c) "_" === a.charAt(0) && b.isFunction(c[a]) && (b.ga[a.substr(1)] = f(c[a], arguments)) };
+  b.ga = {};
+  b.ga.load = function(a, e) {
+    b.ajax({
+      type: "get",
+      url: ("https:" === document.location.protocol ? "https:www") + ".google-analytics.com/ga.js",
+      cache: !0,
+      success: function() {
+        if (!d._gat || !d._gat._getTracker) throw "Tracker has not been defined";
+        c = d._gat._getTracker(a);
+        g();
+        b.isFunction(e) && e(c);
+        c._trackPageview()
+      },
+      dataType: "script",
+      data: null
+    })
+  }
+})(jQuery);
 
-
-/* jQuery Google Analytics Plugin https://github.com/shamasis/jquery-ga - http://www.shamasis.net/projects/ga/ @version 2.0.2 */
-(function(b){var d=window,c,f=function(a,b){return function(){a.apply(c,b)}},g=function(){var a;if(!c)throw"Tracker has not been defined";for(a in c)"_"===a.charAt(0)&&b.isFunction(c[a])&&(b.ga[a.substr(1)]=f(c[a],arguments))};b.ga={};b.ga.load=function(a,e){b.ajax({type:"get",url:("https:"===document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js",cache:!0,success:function(){if(!d._gat||!d._gat._getTracker)throw"Tracker has not been defined";c=d._gat._getTracker(a);g();
-b.isFunction(e)&&e(c);c._trackPageview()},dataType:"script",data:null})}})(jQuery);
-
-// création du cookie
 function createCookie(name, value, days) {
-    if(days){
-		var date = new Date();
-		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-		var expires = "; expires=" + date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie  = name + "=" + value + expires + "; path=/";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    var expires = "; expires=" + date.toGMTString();
+  } else var expires = "";
+  document.cookie = name + "=" + value + expires + "; path=/";
 }
-// lecture du cookie
+
 function readCookie(name) {
-	var nameEQ = name + "=";
-	var ca     = document.cookie.split(';');
-	for(var i = 0; i < ca.length; i ++) {
-		var c = ca[i];
-		while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-	}
-	return null;
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
 }
-
-$( window ).load(function() {
-    // Notifications pour les cookies
-    var cookie_avert   = readCookie("cookie_avert"),
-        g_analytics_id = "xxxxxx-x", // Id unique google analytics 
-        domain_name    = "www.tekkova.com"; // nom de domaine du site
-
-    if(cookie_avert === null) { // si le cookie n'existe pas
-        banner_text = 'Please use a PC, laptop or a tablet instead of a mobile phone to signup, list your vehicle or if you are simply just browsing tekkova, in order to have a smoother experience, Thank you. <button class="btn btn-success btn-gradient btn-sm" id="accept-cookie"><i class="fas fa-check"></i></button>';
-        $("body").prepend('<div id="cookies-banner" class="alert alert-info pr-5">' + banner_text + '</div>');
-        
-        // si on accepte, le cookie avec la valeur 'set' est créée, sinon, la valeur 'not'
-        $("#accept-cookie").click(function(){
-            id_button     = $(this).attr("id");
-            action_button = (id_button == "accept-cookie")? 'set' : 'not';
-        
-            createCookie("cookie_avert", action_button, 365);
-    	    $("#cookies-banner").slideUp(350).remove();
-        
-            if(action_button == "set"){ // le cookie avec la valeur 'set' est créée (accept)
-                // on charge Google analytics
-                $.ga.load(g_analytics_id, function(pageTracker) {
-    	    		pageTracker._setDomainName(host);
-				});
-            }
-        });
-    
-        // si aucune action au bout de 10 secondes (implicite)
-        setTimeout(function(){
-          createCookie("cookie_avert", 365);
-            $("#cookies-banner").slideUp(350).remove();
-            
-            // on charge Google analytics
-            $.ga.load(g_analytics_id, function(pageTracker) {
-    	    	pageTracker._setDomainName(host);
-			});
-        }, 15000); // 10 sec
-        
-    }else if(cookie_avert == "set"){ // si le cookie existe avec la valeur 'set'
-        // on charge google analytics
+$(window).load(function() {
+  var cookie_avert = readCookie("cookie_avert"),
+    g_analytics_id = "xxxxxx-x",
+    domain_name = "www.tekkova.com";
+  if (cookie_avert === null) {
+    banner_text = 'Please use a PC, laptop or a tablet instead of a mobile phone to signup, list your vehicle or if you are simply just browsing tekkova, in order to have a smoother experience, Thank you. <button class="btn btn-success btn-gradient btn-sm" id="accept-cookie"><i class="fas fa-check"></i></button>';
+    $("body").prepend('<div id="cookies-banner" class="alert alert-info pr-5">' + banner_text + '</div>');
+    $("#accept-cookie").click(function() {
+      id_button = $(this).attr("id");
+      action_button = (id_button == "accept-cookie") ? 'set' : 'not';
+      createCookie("cookie_avert", action_button, 365);
+      $("#cookies-banner").slideUp(350).remove();
+      if (action_button == "set") {
         $.ga.load(g_analytics_id, function(pageTracker) {
-    	    pageTracker._setDomainName(host);
-		});
-    }
+          pageTracker._setDomainName(host);
+        });
+      }
+    });
+    setTimeout(function() {
+      createCookie("cookie_avert", 365);
+      $("#cookies-banner").slideUp(350).remove();
+      $.ga.load(g_analytics_id, function(pageTracker) {
+        pageTracker._setDomainName(host);
+      });
+    }, 15000);
+  } else if (cookie_avert == "set") {
+    $.ga.load(g_analytics_id, function(pageTracker) {
+      pageTracker._setDomainName(host);
+    });
+  }
 });
-
 var text_max = 50;
 $('#count_text').html(text_max + ' remaining');
-
 $(document).ready(function() {
-    $(".words_count").on('keyup', function() {
-        var words = this.value.match(/\S+/g).length;
-        if (words > 50) {
-            // Split the string on first 200 words and rejoin on spaces
-            var trimmed = $(this).val().split(/\s+/, 50).join(" ");
-            // Add a space at the end to keep new typing making new words
-            $(this).val(trimmed + " ");
-            alert('You can\'t enter more than 30 words. Your introduction will be trimmed to 30 words.');
-        } else {
-
-            $('#count_text').html('' + 50 - words + ' remaining');
-        }
-    });
+  $(".words_count").on('keyup', function() {
+    var words = this.value.match(/\S+/g).length;
+    if (words > 50) {
+      var trimmed = $(this).val().split(/\s+/, 50).join(" ");
+      $(this).val(trimmed + " ");
+      alert('You can\'t enter more than 30 words. Your introduction will be trimmed to 30 words.');
+    } else {
+      $('#count_text').html('' + 50 - words + ' remaining');
+    }
+  });
 });
-
-$(document).ready(function(){
+$(document).ready(function() {
   var chk1 = $("input:checkbox[name='offer1']");
   var chk2 = $(("input:checkbox[name='offer2']"));
-  chk1.on('change', function(){
-  chk2.prop('checked',this.checked);
-});
+  chk1.on('change', function() {
+    chk2.prop('checked', this.checked);
+  });
 });

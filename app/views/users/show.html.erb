@@ -1,336 +1,309 @@
 <%= render "layouts/profileheader",user: @user %>
-
-
 <section class="section-no-border background-color-light m-0">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="custom-box-details background-color-light col-lg-12 ml-5 float-right clearfix">
-                    <div class="row pt-4">
-                        <div class="col-md-6">
-                            <h4>Personal Details</h4>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <% if current_user == @user %>
-                                <%= link_to 'Update details', edit_user_path, class:"btn btn-sm btn-primary pf-btn mb-1" %>
-                                <%= link_to 'Update password', edit_user_registration_path, class:"btn btn-sm btn-primary pf-btn mb-1" %>
-                                <button type="button" class="btn btn-sm btn-primary pf-btn" data-toggle="modal" data-target="#deletemodal">Deactivate my Account</button>
-                                <!--<= button_to "Cancel my account", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete %>-->
-                               
-                            <% end %>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <ul class="custom-list-style-2 p-0 mb-0">
-                                <li>
-                                    <span class="text-color-dark">Email:</span>
-                                    <span class="custom-text-color-2"><a class="custom-text-color-2" href="mailto:<%= @user.email %>"><%= @user.email %></a></span>
-                                </li>
-                                <li>
-                                    <span class="text-color-dark">Mobile Number: </span>
-                                    <span class="custom-text-color-2">  <%= @user.personal_mobile %></span>
-                                </li>
-                                <li>
-                                    <span class="text-color-dark"> Home Phone Number: </span>
-                                    <span class="custom-text-color-2">  <%= @user.home_phone_number %></span>
-                                </li>
-                                <li>
-                                    <span class="text-color-dark">Date of Birth:</span>
-                                    <span class="custom-text-color-2"><%= @user.personal_dob.strftime("%e-%m-%y") if @user.personal_dob.present? %></span>
-                                </li>
-                                <li>
-                                  <span class="text-color-dark"> 
-                                    User of Other Company:
-                                  </span>
-                                  <span class="custom-text-color-2">
-                                    <%#= @user.research.present? ? (@user.research ? 'Yes': 'No'): 'Skipped' %>
-                                    <%= @user.skip? ? 'Skipped':@user.research.capitalize %>
-                                  </span>
-                                </li>
-
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="custom-list-style-1 p-0 mb-0">
-                                <li>
-                                    <span class="text-color-dark">House No:</span>
-                                    <span class="custom-text-color-2"><%= @user.personal_house_number %></span>
-                                </li>
-
-                                <li>
-                                    <span class="text-color-dark">Street Name:</span>
-                                    <span class="custom-text-color-2"><%= @user.personal_street_name %></span>
-                                </li>
-                                <li>
-                                    <span class="text-color-dark">Suburb:</span>
-                                    <span class="custom-text-color-2"><%= @user.personal_suburb %></span>
-                                </li>
-                                <li>
-                                    <span class="text-color-dark">State:</span>
-                                    <span class="custom-text-color-2"><%= @user.personal_state %></span>
-                                </li>
-                                <li>
-                                    <span class="text-color-dark">Postal Code:</span>
-                                    <span class="custom-text-color-2"><%= @user.personal_postcode %></span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="custom-box-details background-color-light col-lg-12 ml-5 float-right clearfix">
+          <div class="row pt-4">
+            <div class="col-md-6">
+              <h4>Personal Details</h4>
             </div>
+            <div class="col-md-6 mb-3">
+              <% if current_user == @user %>
+                <%= link_to 'Update details', edit_user_path, class:"btn btn-sm btn-primary pf-btn mb-1" %>
+                <%= link_to 'Update password', edit_user_registration_path, class:"btn btn-sm btn-primary pf-btn mb-1" %>
+                <button type="button" class="btn btn-sm btn-primary pf-btn" data-toggle="modal" data-target="#deletemodal">Deactivate my Account</button>
+                <!--<= button_to "Cancel my account", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete %>-->
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="custom-list-style-2 p-0 mb-0">
+                <li>
+                  <span class="text-color-dark">Email:</span>
+                  <span class="custom-text-color-2"><a class="custom-text-color-2" href="mailto:<%= @user.email %>"><%= @user.email %></a></span>
+                </li>
+                <li>
+                  <span class="text-color-dark">Mobile Number: </span>
+                  <span class="custom-text-color-2">  <%= @user.personal_mobile %></span>
+                </li>
+                <li>
+                  <span class="text-color-dark"> Home Phone Number: </span>
+                  <span class="custom-text-color-2">  <%= @user.home_phone_number %></span>
+                </li>
+                <li>
+                  <span class="text-color-dark">Date of Birth:</span>
+                  <span class="custom-text-color-2"><%= @user.personal_dob.strftime("%e-%m-%y") if @user.personal_dob.present? %></span>
+                </li>
+                <li>
+                  <span class="text-color-dark">
+                    User of Other Company:
+                  </span>
+                  <span class="custom-text-color-2">
+                    <%#= @user.research.present? ? (@user.research ? 'Yes': 'No'): 'Skipped' %>
+                    <%= @user.skip? ? 'Skipped':@user.research.capitalize %>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="custom-list-style-1 p-0 mb-0">
+                <li>
+                  <span class="text-color-dark">House No:</span>
+                  <span class="custom-text-color-2"><%= @user.personal_house_number %></span>
+                </li>
+                <li>
+                  <span class="text-color-dark">Street Name:</span>
+                  <span class="custom-text-color-2"><%= @user.personal_street_name %></span>
+                </li>
+                <li>
+                  <span class="text-color-dark">Suburb:</span>
+                  <span class="custom-text-color-2"><%= @user.personal_suburb %></span>
+                </li>
+                <li>
+                  <span class="text-color-dark">State:</span>
+                  <span class="custom-text-color-2"><%= @user.personal_state %></span>
+                </li>
+                <li>
+                  <span class="text-color-dark">Postal Code:</span>
+                  <span class="custom-text-color-2"><%= @user.personal_postcode %></span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 <section class="section-no-border background-color-light m-0">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="custom-box-details background-color-light col-lg-12 ml-5 float-right clearfix">
-                    <h4>Driver's Licence Details</h4>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <ul class="custom-list-style-3 p-0 mb-0">
-                                <li class="my-2">
-                                    <span class="text-color-dark">First Name:</span>
-                                    <span class="custom-text-color-2"><%= @user.driving_liecense_firstname %></span>
-                                </li>
-                                <% if @user.driving_liecense_middlename.present? %>
-                                    <li class="my-2">
-                                        <span class="text-color-dark">Middle Name:</span>
-                                        <span class="custom-text-color-2"><%= @user.driving_liecense_middlename %></span>
-                                    </li>
-                                <% end %>
-                                <li class="my-2">
-                                    <span class="text-color-dark">Last Name:</span>
-                                    <span class="custom-text-color-2"><%= @user.driving_liecense_lastname %></span>
-                                </li>
-                                <li>
-                                    <span class="text-color-dark">Licence Number:</span>
-                                    <span class="custom-text-color-2"><%= @user.driving_liecense_number %></span>
-                                </li>
-                                <li class="my-2">
-                                    <span class="text-color-dark">State:</span>
-                                    <span class="custom-text-color-2"><%= @user.driving_liecense_state %></span>
-                                </li>
-                                <li class="my-2">
-                                    <span class="text-color-dark">Country:</span>
-                                    <span class="custom-text-color-2"><%= @user.driving_liecense_country %></span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            
-                        <%= form_for(current_user, html: { method: :put }) do |f| %>
-                        <div class="row">
-                            
-                        <div class="col-md-6">
-                            <p class="font-weight-bold mb-0">Front of drivers licence</p>
-                            <div class="custom-file-container" data-upload-id="imagefront">
-                                <a href="javascript:void(0)" class="custom-file-container__image-clear custom-file-container__image-clearfront float-right btn btn-sm" title="Clear Image">x</a>
-                                <div class="custom-file-container__image-preview custom-file-container__image-previewfront mb-1">
-                                </div>
-                                <label class="custom-file-container__custom-file mb-2">
-                                    <%= f.file_field :licensefront, class:"custom-file-container__custom-file__custom-file-input", id:"license_front_image", required: true %>
-                                    <!--<input type="hidden" name="car[car_pictures_attributes][front][delete_picture]" id="delete-picturefront">-->
-                                    <!--<input type="hidden" value="front" name="car[car_pictures_attributes][front][id]" id="car_car_pictures_attributes_front_id">-->
-                                    <span class="custom-file-container__custom-file__custom-file-control"></span>
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <p class="font-weight-bold mb-0">Back of drivers licence</p>
-                            <div class="custom-file-container" data-upload-id="imageback">
-                                <a href="javascript:void(0)" class="custom-file-container__image-clear custom-file-container__image-clearback float-right btn btn-sm" title="Clear Image">x</a>
-                                <div class="custom-file-container__image-preview custom-file-container__image-previewback mb-1">
-                                </div>
-                                <label class="custom-file-container__custom-file mb-2">
-                                    <%= f.file_field :licenseback, class:"custom-file-container__custom-file__custom-file-input", id:"license_back_image", required: true %>
-                                    <!--<input type="hidden" name="car[car_pictures_attributes][back][delete_picture]" id="delete-pictureback">-->
-                                    <!--<input type="hidden" value="back" name="car[car_pictures_attributes][back][id]" id="car_car_pictures_attributes_back_id">-->
-                                    <span class="custom-file-container__custom-file__custom-file-control"></span>
-                                </label>
-                            </div>
-                        </div>  
-                        </div>
-                        <%= f.submit "Update", class: "login loginmodal-submit loginmodal-button" %>
-                        </div>
-                        <% end %>
-                                <!--<div class="col-md-6 my-4 my-md-0">-->
-                                <!--    <p class="lead text-color-dark">License Front Image</p>-->
-                                <!--    <img src="<%#= (@user.licensefront.url if @user.licensefront.present?) || " /missing.jpg " %>" class="img-fluid">-->
-                                <!--    </img>-->
-                                <!--</div>-->
-                                <!--<div class="col-md-6">-->
-                                <!--    <p class="lead text-color-dark">License Back Image</p>-->
-                                <!--    <img src="<%#= (@user.licenseback.url if @user.licenseback.present?) || " /missing.jpg " %>" class="img-fluid">-->
-                                <!--    </img>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                    </div>
-                </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="custom-box-details background-color-light col-lg-12 ml-5 float-right clearfix">
+          <h4>Driver's Licence Details</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="custom-list-style-3 p-0 mb-0">
+                <li class="my-2">
+                  <span class="text-color-dark">First Name:</span>
+                  <span class="custom-text-color-2"><%= @user.driving_liecense_firstname %></span>
+                </li>
+                <% if @user.driving_liecense_middlename.present? %>
+                  <li class="my-2">
+                    <span class="text-color-dark">Middle Name:</span>
+                    <span class="custom-text-color-2"><%= @user.driving_liecense_middlename %></span>
+                  </li>
+                <% end %>
+                <li class="my-2">
+                  <span class="text-color-dark">Last Name:</span>
+                  <span class="custom-text-color-2"><%= @user.driving_liecense_lastname %></span>
+                </li>
+                <li>
+                  <span class="text-color-dark">Licence Number:</span>
+                  <span class="custom-text-color-2"><%= @user.driving_liecense_number %></span>
+                </li>
+                <li class="my-2">
+                  <span class="text-color-dark">State:</span>
+                  <span class="custom-text-color-2"><%= @user.driving_liecense_state %></span>
+                </li>
+                <li class="my-2">
+                  <span class="text-color-dark">Country:</span>
+                  <span class="custom-text-color-2"><%= @user.driving_liecense_country %></span>
+                </li>
+              </ul>
             </div>
+            <div class="col-md-6">
+              <%= form_for(current_user, html: { method: :put }) do |f| %>
+                <div class="row">
+                  <div class="col-md-6">
+                    <p class="font-weight-bold mb-0">Front of drivers licence</p>
+                    <div class="custom-file-container" data-upload-id="imagefront">
+                      <a href="javascript:void(0)" class="custom-file-container__image-clear custom-file-container__image-clearfront float-right btn btn-sm" title="Clear Image">x</a>
+                      <div class="custom-file-container__image-preview custom-file-container__image-previewfront mb-1">
+                      </div>
+                      <label class="custom-file-container__custom-file mb-2">
+                        <%= f.file_field :licensefront, class:"custom-file-container__custom-file__custom-file-input", id:"license_front_image", required: true %>
+                        <!--<input type="hidden" name="car[car_pictures_attributes][front][delete_picture]" id="delete-picturefront">-->
+                        <!--<input type="hidden" value="front" name="car[car_pictures_attributes][front][id]" id="car_car_pictures_attributes_front_id">-->
+                        <span class="custom-file-container__custom-file__custom-file-control"></span>
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <p class="font-weight-bold mb-0">Back of drivers licence</p>
+                    <div class="custom-file-container" data-upload-id="imageback">
+                      <a href="javascript:void(0)" class="custom-file-container__image-clear custom-file-container__image-clearback float-right btn btn-sm" title="Clear Image">x</a>
+                      <div class="custom-file-container__image-preview custom-file-container__image-previewback mb-1">
+                      </div>
+                      <label class="custom-file-container__custom-file mb-2">
+                        <%= f.file_field :licenseback, class:"custom-file-container__custom-file__custom-file-input", id:"license_back_image", required: true %>
+                        <!--<input type="hidden" name="car[car_pictures_attributes][back][delete_picture]" id="delete-pictureback">-->
+                        <!--<input type="hidden" value="back" name="car[car_pictures_attributes][back][id]" id="car_car_pictures_attributes_back_id">-->
+                        <span class="custom-file-container__custom-file__custom-file-control"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <%= f.submit "Update", class: "login loginmodal-submit loginmodal-button" %>
+              <% end %>
+            </div>
+            <!--<div class="col-md-6 my-4 my-md-0">-->
+            <!--    <p class="lead text-color-dark">License Front Image</p>-->
+            <!--    <img src="<%#= (@user.licensefront.url if @user.licensefront.present?) || " /missing.jpg " %>" class="img-fluid">-->
+            <!--    </img>-->
+            <!--</div>-->
+            <!--<div class="col-md-6">-->
+            <!--    <p class="lead text-color-dark">License Back Image</p>-->
+            <!--    <img src="<%#= (@user.licenseback.url if @user.licenseback.present?) || " /missing.jpg " %>" class="img-fluid">-->
+            <!--    </img>-->
+            <!--</div>-->
+            <!--</div>-->
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 <% if current_user.admin %>
-    <div class="container-fluid py-3">
-      <div class="row">
-      	 <div class="loginmodal-container loginmodal-container-new">
-      		<div class="loginmodal-container-2">
-             <h1 class="text-center">Admin Area</h1>
-             <% if @user.licensefront.present? or @user.licenseback.present? %>
-               <strong>Driver License Details: </strong>
-               <%= (link_to "View License Front", @user.licensefront.url) if @user.licensefront.present? %>
-               <%= (link_to "View License Back", @user.licensefront.url) if @user.licenseback.present? %>
-              <% end %>
-             
-             <div class="comments mb-4">
-             <strong>Comment:</strong>
-                <%= form_for @user do |form| %>
-                   <%= form.text_area :comment, class:"form-control mb-2" %>
-                   <%= form.submit "Save", class:"btn btn-primary btn-sm" %>
-                <% end %>
-             </div>
-             <div class="files mb-4">
-    
-                 <strong>List of Already Attached Files: </strong>
-                <% attachments = @user.comment_files %>
-                <% if attachments.present? %>
-                  <table class="table table-bordered">
-                      <thead>
-                          <th>File Name</th>
-                          <th colspan="2">View</th>
-                      </thead>
-                      <tbody>
-                    <% attachments.each do |attachment| %>
-                      <% if attachment.persisted?%>
-                      <tr>
-                      <td>
-                        <%= attachment.file_file_name %> 
-                      </td>
-                      <td>
-                        <%= link_to "View File", "#{attachment.file.url}",target: "_blank", class:"btn btn-primary btn-sm"  %>
-                      </td>
-                      
-                        <td><%= link_to '<i class="fas fa-trash icon-chat" style="font-size: 19px" title="Delete"></i>'.html_safe, attachment,method: :delete %>
-                      </td>
-                      </tr>
-                      <% end %>
-                    <% end %>
-                      </tbody>
-                  </table>
-                      
-                  
-                <% else %>
-                  <p>No Files Attached Yet.</p>
-                <% end %>
-                <strong>Attach New Files: </strong>
-                <%= form_for(CommentFile.new) do |f| %>
-                    <!--<div class="input-file-container">  -->
-                    <!--    <%#= f.file_field :file, required: true, class:"input-file", :data => { :buttonText => 'bar' } %>-->
-                    <!--    <label tabindex="0" for="input-file" class="input-file-trigger bg-primary">Choose File</label>-->
-                    <!--    <span class="file-return">No File Choosen</span>-->
-                    <!--</div>-->
-                    <%= f.file_field :file,required: true %>
-                    <%= f.hidden_field :user_id, value: @user.id %>
-                    <br/>
-                    <%= f.submit "Save", class:"btn btn-primary btn-sm" %>
-                <% end %>
-
-             </div>
-    
+  <div class="container-fluid py-3">
+    <div class="row">
+      <div class="loginmodal-container loginmodal-container-new">
+        <div class="loginmodal-container-2">
+          <h1 class="text-center">Admin Area</h1>
+          <% if @user.licensefront.present? or @user.licenseback.present? %>
+            <strong>Driver License Details: </strong>
+            <%= (link_to "View License Front", @user.licensefront.url) if @user.licensefront.present? %>
+            <%= (link_to "View License Back", @user.licensefront.url) if @user.licenseback.present? %>
+          <% end %>
+          
+          <div class="comments mb-4">
+            <strong>Comment:</strong>
+            <%= form_for @user do |form| %>
+              <%= form.text_area :comment, class:"form-control mb-2" %>
+              <%= form.submit "Save", class:"btn btn-primary btn-sm" %>
+            <% end %>
           </div>
-       </div>
+          <div class="files mb-4">
+            <strong>List of Already Attached Files: </strong>
+            <% attachments = @user.comment_files %>
+            <% if attachments.present? %>
+              <table class="table table-bordered">
+                <thead>
+                  <th>File Name</th>
+                  <th colspan="2">View</th>
+                </thead>
+                <tbody>
+                  <% attachments.each do |attachment| %>
+                  <% if attachment.persisted?%>
+                  <tr>
+                    <td>
+                      <%= attachment.file_file_name %>
+                    </td>
+                    <td>
+                      <%= link_to "View File", "#{attachment.file.url}",target: "_blank", class:"btn btn-primary btn-sm"  %>
+                    </td>
+                    <td><%= link_to '<i class="fas fa-trash icon-chat" style="font-size: 19px" title="Delete"></i>'.html_safe, attachment,method: :delete %>
+                    </td>
+                  </tr>
+                  <% end %>
+                  <% end %>
+                </tbody>
+              </table>
+            <% else %>
+              <p>No Files Attached Yet.</p>
+            <% end %>
+            <strong>Attach New Files: </strong>
+            <%= form_for(CommentFile.new) do |f| %>
+            <!--<div class="input-file-container">  -->
+            <!--    <%#= f.file_field :file, required: true, class:"input-file", :data => { :buttonText => 'bar' } %>-->
+            <!--    <label tabindex="0" for="input-file" class="input-file-trigger bg-primary">Choose File</label>-->
+            <!--    <span class="file-return">No File Choosen</span>-->
+            <!--</div>-->
+            <%= f.file_field :file,required: true %>
+            <%= f.hidden_field :user_id, value: @user.id %>
+            <br/>
+            <%= f.submit "Save", class:"btn btn-primary btn-sm" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
+  </div>
 <% end %>
-
-
 <!--delete account modal start-->
 <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content dlt-mdl">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" class="float-right" style="color: #fff; margin-right: 5px;">&times;</span>
-        </button>
-      
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true" class="float-right" style="color: #fff; margin-right: 5px;">&times;</span>
+      </button>
       <div class="modal-body">
         Are you sure that you would like to deactivate your account?
       </div>
       <div class="btn-set">
-          <%= link_to "Yes", registration_path(current_user), method: :delete, class:"btn btn-danger" %>
-         <button type="button" class="btn btn-primary float-right" data-dismiss="modal">No</button>
+        <%= link_to "Yes", registration_path(current_user), method: :delete, class:"btn btn-danger" %>
+        <button type="button" class="btn btn-primary float-right" data-dismiss="modal">No</button>
       </div>
     </div>
   </div>
 </div>
-  
 <!--delete account modal end-->
-
-
 <script>
-$(document).ready(function () {
+  $(document).ready(function() {
     var firstUpload = new FileUploadWithPreview('imagefront');
-    $('#license_front_image').on('change', function (event) {
-        var _this = this;
-        var selectedFilesfront = this.files.length;
-        if (selectedFilesfront != 0) {
-            $('#delete-picturefront').removeAttr('value');
-        }
-    }); 
-$('.custom-file-container__image-previewfront').click(function(){
-  $('#license_front_image').click();
-  });
-  $('.custom-file-container__image-clearfront').click(function(){;
-  $('.custom-file-container__image-clearfront').hide();
-  $('#delete-picturefront').val('1');
-
-  });
-  $(".custom-file-container__image-previewfront").css('background-image','url("<%= @user.licensefront.url %>")');
-  var background = $('.custom-file-container__image-previewfront').css('background-image');
+    $('#license_front_image').on('change', function(event) {
+      var _this = this;
+      var selectedFilesfront = this.files.length;
+      if (selectedFilesfront != 0) {
+        $('#delete-picturefront').removeAttr('value');
+      }
+    });
+    $('.custom-file-container__image-previewfront').click(function() {
+      $('#license_front_image').click();
+    });
+    $('.custom-file-container__image-clearfront').click(function() {;
+      $('.custom-file-container__image-clearfront').hide();
+      $('#delete-picturefront').val('1');
+    });
+    $(".custom-file-container__image-previewfront").css('background-image', 'url("<%= @user.licensefront.url %>")');
+    var background = $('.custom-file-container__image-previewfront').css('background-image');
     if (background.indexOf("/missing.png") >= 0) {
       $('.custom-file-container__image-clearfront').hide();
-      
+
+    } else {
+      $('.custom-file-container__image-clearfront').show();
     }
-  else{
-    $('.custom-file-container__image-clearfront').show();
-  }
-});
-
-
-
-
-$(document).ready(function () {
+  });
+  $(document).ready(function() {
     var firstUpload = new FileUploadWithPreview('imageback');
-    $('#license_back_image').on('change', function (event) {
-        var _this = this;
-        var selectedFilesfront = this.files.length;
-        if (selectedFilesfront != 0) {
-            $('#delete-pictureback').removeAttr('value');
-        }
-    }); 
-$('.custom-file-container__image-previewback').click(function(){
-  $('#license_back_image').click();
-  });
-  $('.custom-file-container__image-clearback').click(function(){;
-  $('.custom-file-container__image-clearback').hide();
-  $('#delete-pictureback').val('1');
-
-  });
-  $(".custom-file-container__image-previewback").css('background-image', 'url("<%= @user.licenseback.url %>")');
-  var background = $('.custom-file-container__image-previewback').css('background-image');
+    $('#license_back_image').on('change', function(event) {
+      var _this = this;
+      var selectedFilesfront = this.files.length;
+      if (selectedFilesfront != 0) {
+        $('#delete-pictureback').removeAttr('value');
+      }
+    });
+    $('.custom-file-container__image-previewback').click(function() {
+      $('#license_back_image').click();
+    });
+    $('.custom-file-container__image-clearback').click(function() {;
+      $('.custom-file-container__image-clearback').hide();
+      $('#delete-pictureback').val('1');
+    });
+    $(".custom-file-container__image-previewback").css('background-image', 'url("<%= @user.licenseback.url %>")');
+    var background = $('.custom-file-container__image-previewback').css('background-image');
     if (background.indexOf("/missing.png") >= 0) {
       $('.custom-file-container__image-clearback').hide();
-      
+
+    } else {
+      $('.custom-file-container__image-clearback').show();
     }
-  else{
-    $('.custom-file-container__image-clearback').show();
-  }
-});
-  
+  });
+
   <%  if !(@user.licensefront.present? and @user.licenseback.present?)  %>
-      toastr.success('Please add clear photos of the front and back of your driver’s licence and click update', {closeButton: true,closeHtml: '<button><i class="icon-on"></i></button>'});
+    toastr.success('Please add clear photos of the front and back of your driver’s licence and click update', { closeButton: true, closeHtml: '<button><i class="icon-on"></i></button>' });
   <% end %>
 </script>

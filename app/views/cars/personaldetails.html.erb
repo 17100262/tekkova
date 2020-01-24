@@ -1,107 +1,100 @@
 <div class="container-fluid">
-<div class="row mt-2">
-<div class="col-md-12 btn-group btn-breadcrumb car-details-tabs main-tabs">
-    <a href="#" class="btn btn-primary no-link car_details" style="margin-left: -5px !important;">Car Details</a>
-    <a href="#" class="btn btn-primary no-link car_pictures" style="margin-left: -5px !important;">Car Pictures</a>
-    <a href="#" class="btn btn-primary no-link car_preference" style="margin-left: -5px !important;">Car Preference</a>
-    <a href="#" class="btn btn-primary presonal_details active">Personal Details</a>
-    <a href="#" class="btn btn-default driver_license no-link" style="margin-left: -5px !important;">Driver Licence</a>
-    <a href="#" class="btn btn-default availibility_pickup no-link" style="margin-left: -5px !important;">Availability & Pickup</a>
-    <a href="#" class="btn btn-default research_development no-link" style="margin-left: -5px !important; z-index:0 !important;">Research & Development</a>
-</div>
-</div>
+  <div class="row mt-2">
+    <div class="col-md-12 btn-group btn-breadcrumb car-details-tabs main-tabs">
+      <a href="#" class="btn btn-primary no-link car_details" style="margin-left: -5px !important;">Car Details</a>
+      <a href="#" class="btn btn-primary no-link car_pictures" style="margin-left: -5px !important;">Car Pictures</a>
+      <a href="#" class="btn btn-primary no-link car_preference" style="margin-left: -5px !important;">Car Preference</a>
+      <a href="#" class="btn btn-primary presonal_details active">Personal Details</a>
+      <a href="#" class="btn btn-default driver_license no-link" style="margin-left: -5px !important;">Driver Licence</a>
+      <a href="#" class="btn btn-default availibility_pickup no-link" style="margin-left: -5px !important;">Availability & Pickup</a>
+      <a href="#" class="btn btn-default research_development no-link" style="margin-left: -5px !important; z-index:0 !important;">Research & Development</a>
+    </div>
+  </div>
 </div>
 <h2 class="heading mt-4">Personal Details</h2>
 <div class="w-100">
-
-<img src="/prsnl_detail3.jpg" class="img-fluid background-bg-arow" style="height: 275px !important">
+  <img src="/prsnl_detail3.jpg" class="img-fluid background-bg-arow" style="height: 275px !important">
 </div>
 <div class="container py-4">
-<div id="multi-form" class="car-personal">
-<%= form_for(@user) do |form| %>
-  <%  address = Geocoder.search(request.remote_ip).first %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this car from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+  <div id="multi-form" class="car-personal">
+    <%= form_for(@user) do |form| %>
+      <%  address = Geocoder.search(request.remote_ip).first %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this car from being saved:</h2>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-  
-  <div id="wizard">
-    <section>
-      <h5>Address</h5>
-      <div class="row">
-        <div class="col-md-6">
-          <%= form.label "House / Unit / Street Number" %> 
-          <%= form.text_field :personal_house_number  %>
-        </div>
-        <div class="col-md-6">
-          <%= form.label "Steet Name & Type" %> 
-          <%= form.text_field :personal_street_name  %>
-        </div>
-      </div>  
-      <div class="row">
-        <div class="col-lg-4 col-md-6">
-          <%= form.label "Suburb" %> 
-          <%= form.text_field :personal_suburb,value: (address.city if address)  %>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <%= form.label "State" %> 
-          <%= form.text_field :personal_state,value: (address.state if address) %>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <%= form.label "Postcode" %> 
-          <%= form.text_field :personal_postcode,value: (address.postal if address)  %>
-        </div>
+      <div id="wizard">
+        <section>
+          <h5>Address</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <%= form.label "House / Unit / Street Number" %>
+              <%= form.text_field :personal_house_number  %>
+            </div>
+            <div class="col-md-6">
+              <%= form.label "Steet Name & Type" %>
+              <%= form.text_field :personal_street_name  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-md-6">
+              <%= form.label "Suburb" %>
+              <%= form.text_field :personal_suburb,value: (address.city if address)  %>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <%= form.label "State" %>
+              <%= form.text_field :personal_state,value: (address.state if address) %>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <%= form.label "Postcode" %>
+              <%= form.text_field :personal_postcode,value: (address.postal if address)  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <%= form.label "Date of Birth" %>
+              <%= form.text_field :personal_dob,  id:"date-auto-slash", placeholder:' dd/mm/yy', onkeypress:"allowNumbersOnly(event)", max: '99999999'%>
+            </div>
+            <div class="col-md-6">
+              <%= form.label "Home Phone Number" %>
+              <%= form.text_field :home_phone_number  %>
+            </div>
+          </div>
+        </section>
+        <%= form.hidden_field :step, value: 1 %>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <%= form.label "Date of Birth" %> 
-          <%= form.text_field :personal_dob,  id:"date-auto-slash", placeholder:' dd/mm/yy', onkeypress:"allowNumbersOnly(event)", max: '99999999'%>
-        </div>
-        <div class="col-md-6">
-          <%= form.label "Home Phone Number" %> 
-          <%= form.text_field :home_phone_number  %>
-      </div>  
+      <div class="float-left my-2">
+        <%= link_to car_steps_path(id: @user.cars.first.id,step: 3) ,class: "btn btn-primary btn-sm pl-3 pr-3",role: "button" do %>
+          <i class="fas fa-caret-left"></i> Back
+        <% end %>
       </div>
-    </section>
-    <%= form.hidden_field :step, value: 1 %>
-  </div>
-
-  <div class="float-left my-2">
-    <%= link_to car_steps_path(id: @user.cars.first.id,step: 3) ,class: "btn btn-primary btn-sm pl-3 pr-3",role: "button" do %>
-     <i class="fas fa-caret-left"></i> Back
+      <div class="float-right my-2">
+        <%#= form.submit "Next", class:"btn btn-primary btn-sm pl-3 pr-3" %>
+        <button type="submit" class="btn btn-primary btn-sm pl-3 pr-3 float-right">Next <i class="fas fa-caret-right"></i></button>
+      </div>
+      <br>
+      <br>
     <% end %>
-  </div>  
-  <div class="float-right my-2">
-  <%#= form.submit "Next", class:"btn btn-primary btn-sm pl-3 pr-3" %>
-   <button type="submit" class="btn btn-primary btn-sm pl-3 pr-3 float-right">Next <i class="fas fa-caret-right"></i></button>
   </div>
-  <br>
-  <br>
-<% end %>
 </div>
-</div>
-
-
 <script>
-  $( document ).ready(function() {
-	$('#date-auto-slash').bind('keyup','keydown', function(event) {
-  	var inputLength = event.target.value.length;
-    if (event.keyCode != 8){
-      if(inputLength === 2 || inputLength === 5){
+$(document).ready(function() {
+  $('#date-auto-slash').bind('keyup', 'keydown', function(event) {
+    var inputLength = event.target.value.length;
+    if (event.keyCode != 8) {
+      if (inputLength === 2 || inputLength === 5) {
         var thisVal = event.target.value;
         thisVal += '/';
         $(event.target).val(thisVal);
-    	}
+      }
     }
   });
-
   $('#date-auto-slash').on('input', function(ev) {
     var $this = $(this);
     var maxlength = $this.attr('max').length;
@@ -110,11 +103,12 @@
       $this.val(value.substr(0, maxlength));
     }
   });
-  });
-  function allowNumbersOnly(e) {
-    var code = (e.which) ? e.which : e.keyCode;
-    if (code > 31 && (code < 48 || code > 57)) {
-        e.preventDefault();
-    }
+});
+
+function allowNumbersOnly(e) {
+  var code = (e.which) ? e.which : e.keyCode;
+  if (code > 31 && (code < 48 || code > 57)) {
+    e.preventDefault();
+  }
 };
 </script>

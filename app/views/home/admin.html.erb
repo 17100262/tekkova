@@ -2,108 +2,96 @@
   <!-- Navigation-->
   <%= render 'layouts/admin_sidebar' %>
   <div class="content-wrapper p-4">
-  <!-- Breadcrumbs-->
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active">Users</li>
-  </ol>
-  <!-- Icon Cards-->
-  <div class="row">
-    <div class="col-xl-3 col-sm-6 mb-3">
-      <a class="no-color" href="<%= users_path %>">
-      <div class="card text-center border border-primary bg-default o-hidden">
-        <div class="card-body py-3">
-          <div class="">Total Number of Users</div>
-        </div>
-        <h2 class="card-footer text-primary clearfix z-1 text-center py-2 m-0">
-          <%= User.count - 1  %>
-        </h2>  
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active">Users</li>
+    </ol>
+    <!-- Icon Cards-->
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 mb-3">
+        <a class="no-color" href="<%= users_path %>">
+          <div class="card text-center border border-primary bg-default o-hidden">
+            <div class="card-body py-3">
+              <div class="">Total Number of Users</div>
+            </div>
+            <h2 class="card-footer text-primary clearfix z-1 text-center py-2 m-0">
+            <%= User.count - 1  %>
+            </h2>
+          </div>
         </a>
       </div>
+    </div>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active">Cars</li>
+    </ol>
+    <!-- Icon Cards-->
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 mb-3">
+        <a class="no-color" href="/car_management">
+          <div class="card text-center border border-primary bg-default o-hidden">
+            <div class="card-body py-3">
+              <div class="">Published Cars</div>
+            </div>
+            <h2 class="card-footer text-primary clearfix z-1 text-center py-2 m-0">
+            <%= Car.completed.count %>
+            </h2>
+          </div>
+        </a>
+      </div>
+      <div class="col-xl-3 col-sm-6 mb-3">
+        <a class="no-color" href="/car_management">
+          <div class="card text-center border border-primary bg-default o-hidden">
+            <div class="card-body py-3">
+              <div class="">Total Drafts</div>
+            </div>
+            <h2 class="card-footer text-primary clearfix z-1 text-center py-2 m-0">
+            <%= Car.not_completed.count %>
+            </h2>
+          </a>
+        </div>
       </a>
     </div>
-    
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active">Cars by Type</li>
+    </ol>
+    <!-- Icon Cards-->
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 mb-3">
+        <a class="no-color" href="/car_management">
+          <div class="card text-center border border-primary bg-default o-hidden">
+            <div class="card-body py-3">
+              <div class="">All Wheel Drive</div>
+            </div>
+            <h2 class="card-footer text-primary clearfix z-1 text-center py-2 m-0">
+            <%= Car.where(drive_type: "All wheel drive").count %>
+            </h2>
+          </div>
+        </a>
+      </div>
+      <div class="col-xl-3 col-sm-6 mb-3">
+        <a class="no-color" href="/car_management">
+          <div class="card text-center border border-primary bg-default o-hidden">
+            <div class="card-body py-3">
+              <div class="">Front Wheel Drive</div>
+            </div>
+            <h2 class="card-footer text-primary clearfix z-1 text-center py-2 m-0 m-0">
+            <%= Car.where(drive_type: "Front wheel drive").count %>
+            </h2>
+          </div>
+        </a>
+      </div>
+      <div class="col-xl-3 col-sm-6 mb-3">
+        <a class="no-color" href="/car_management">
+          <div class="card text-center border border-primary bg-default o-hidden">
+            <div class="card-body py-3">
+              <div class="">Rear Wheel Drive</div>
+            </div>
+            <h2 class="card-footer text-primary clearfix z-1 text-center py-2 m-0">
+            <%= Car.where(drive_type: "Rear wheel drive").count %>
+            </h2>
+          </div>
+        </a>
+      </div>
+    </div>
   </div>
-  
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active">Cars</li>
-  </ol>
-  <!-- Icon Cards-->
-  <div class="row">
-    <div class="col-xl-3 col-sm-6 mb-3">
-      <a class="no-color" href="/car_management">
-      <div class="card text-center border border-primary bg-default o-hidden">
-        <div class="card-body py-3">
-          <div class="">Published Cars</div>
-        </div>
-        <h2 class="card-footer text-primary clearfix z-1 text-center py-2 m-0">
-          <%= Car.completed.count %>
-        </h2>  
-        </a>
-      </div>
-      </a>
-    </div>
-    <div class="col-xl-3 col-sm-6 mb-3">
-      <a class="no-color" href="/car_management">
-      <div class="card text-center border border-primary bg-default o-hidden">
-        <div class="card-body py-3">
-          <div class="">Total Drafts</div>
-        </div>
-        <h2 class="card-footer text-primary clearfix z-1 text-center py-2 m-0">
-          <%= Car.not_completed.count %>
-        </h2>  
-        </a>
-      </div>
-      </a>
-    </div>
-    
-  </div>
-  
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active">Cars by Type</li>
-  </ol>
-  <!-- Icon Cards-->
-  <div class="row">
-    <div class="col-xl-3 col-sm-6 mb-3">
-      <a class="no-color" href="/car_management">
-      <div class="card text-center border border-primary bg-default o-hidden">
-        <div class="card-body py-3">
-          <div class="">All Wheel Drive</div>
-        </div>
-        <h2 class="card-footer text-primary clearfix z-1 text-center py-2 m-0">
-          <%= Car.where(drive_type: "All wheel drive").count %>
-        </h2>  
-        </a>
-      </div>
-      </a>
-    </div>
-    
-    <div class="col-xl-3 col-sm-6 mb-3">
-      <a class="no-color" href="/car_management">
-      <div class="card text-center border border-primary bg-default o-hidden">
-        <div class="card-body py-3">
-          <div class="">Front Wheel Drive</div>
-        </div>
-        <h2 class="card-footer text-primary clearfix z-1 text-center py-2 m-0 m-0">
-          <%= Car.where(drive_type: "Front wheel drive").count %>
-        </h2>  
-      </div>
-        </a>
-    </div>
-    
-    <div class="col-xl-3 col-sm-6 mb-3">
-      <a class="no-color" href="/car_management">
-      <div class="card text-center border border-primary bg-default o-hidden">
-        <div class="card-body py-3">
-          <div class="">Rear Wheel Drive</div>
-        </div>
-        <h2 class="card-footer text-primary clearfix z-1 text-center py-2 m-0">
-          <%= Car.where(drive_type: "Rear wheel drive").count %>
-        </h2>  
-        </a>
-      </div>
-      </a>
-    </div>
-    
-  </div>
-</div>  
 </div>

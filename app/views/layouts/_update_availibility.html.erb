@@ -1,159 +1,141 @@
-<!-- Modal -->
-
 <div class="modal fade" id="availibailty">
-    <div class="modal-dialog modal-lg garage-modal">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-           <h4 class="modal-title"> Availability & Pickup Details</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-           <%= form_for(user) do |form| %>
-            <% if user.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-          
-                <ul>
+  <div class="modal-dialog modal-lg garage-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> Availability & Pickup Details</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <%= form_for(user) do |form| %>
+          <% if user.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+              <ul>
                 <% user.errors.full_messages.each do |message| %>
                   <li><%= message %></li>
                 <% end %>
-                </ul>
-              </div>
-            <% end %>
-            <div id="wizard">
-              <section>
-                <h5>What is your user's pickup location?</h5>
-                <div class="row">
-                  <div class="col-lg-4 col-md-6">
-                    <label>Suburb</label>
-                    <%= form.text_field :pickup_suburb,  class:"form-control"  %>
-                  </div>
-                  <div class="col-lg-4 col-md-6">
-                    <label>Postcode</label>
-                  <%= form.text_field :pickup_postcode,  class:"form-control"  %>
-                  </div>
-                  <div class="col-lg-4 col-md-6">
-                    <label>State</label>
-                  <%= form.text_field :pickup_state,  class:"form-control"  %>
-                  </div>
-                </div>  
-                <hr>
-                <h5 class="mt-3">What day of the week is your user available?</h5>
-                <div class="checkbox-form inner-check-box">
-                <% ["Any day","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-              		
-                  <%= check_box_tag "user[availibility_days][]", day,(user.availibility_days.include?(day) if user.availibility_days.present?) ,id: "day#{index}",class: "ablebox" %>
-                  <%= form.label day,for: "day#{index}" %>
-              	<% end %>	
-              	</div>
-              	
-              	<hr>
-              	
-              	<h5 class="mt-3">Do you prefer short term or long term rentals?</h5>
-                <div class="checkbox-form inner-check-box">
-                  <%= radio_button_tag "user[rental]","Short term",user.rental=="Short term"  %>
-                  <%= form.label "Short Term, 1 to 15 days per week" %>
-                  <%= radio_button_tag "user[rental]","Long term",user.rental=="Long term"  %>
-                  <%= form.label "Long Term, 15 to 30 days per week" %>
-                
-              	</div>
-              	<hr>
-              	
-              	<h5 class="mt-3">How much advance notice do you need?</h5>
-                <div class="checkbox-form inner-check-box">
-                  <%= radio_button_tag "user[advance_notice]","Anytime",user.advance_notice=="Anytime"  %>
-                  <%= form.label "Pickup Availible at any time" %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","6 to 12 hours",user.advance_notice=="6 to 12 hours"  %>
-                  <%= form.label "6 to 12 hours" %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","Two days",user.advance_notice=="Two days"  %>
-                  <%= form.label "Two days" %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","1 to 6 hours",user.advance_notice=="1 to 6 hours"  %>
-                  <%= form.label "1 to 6 hours" %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","12 to 24 hours",user.advance_notice=="12 to 24 hours"  %>
-                  <%= form.label "12 to 24 hours" %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","3 days",user.advance_notice=="3 days"  %>
-                  <%= form.label "3 days" %>
-                
-              	</div>
-              	<hr>
-              </section>
-              </div>
-                <center>  <%= form.submit "Submit",id: "pickup_submit", class:"btn btn-primary btn-sm" %></center>
+              </ul>
+            </div>
           <% end %>
-        </div>
-        
-        
-        
+          <div id="wizard">
+            <section>
+              <h5>What is your user's pickup location?</h5>
+              <div class="row">
+                <div class="col-lg-4 col-md-6">
+                  <label>Suburb</label>
+                  <%= form.text_field :pickup_suburb,  class:"form-control"  %>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <label>Postcode</label>
+                  <%= form.text_field :pickup_postcode,  class:"form-control"  %>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <label>State</label>
+                  <%= form.text_field :pickup_state,  class:"form-control"  %>
+                </div>
+              </div>
+              <hr>
+              <h5 class="mt-3">What day of the week is your user available?</h5>
+              <div class="checkbox-form inner-check-box">
+                <% ["Any day","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+                <%= check_box_tag "user[availibility_days][]", day,(user.availibility_days.include?(day) if user.availibility_days.present?) ,id: "day#{index}",class: "ablebox" %>
+                <%= form.label day,for: "day#{index}" %>
+                <% end %>
+              </div>
+              <hr>
+              <h5 class="mt-3">Do you prefer short term or long term rentals?</h5>
+              <div class="checkbox-form inner-check-box">
+                <%= radio_button_tag "user[rental]","Short term",user.rental=="Short term"  %>
+                <%= form.label "Short Term, 1 to 15 days per week" %>
+                <%= radio_button_tag "user[rental]","Long term",user.rental=="Long term"  %>
+                <%= form.label "Long Term, 15 to 30 days per week" %>
+              </div>
+              <hr>
+              <h5 class="mt-3">How much advance notice do you need?</h5>
+              <div class="checkbox-form inner-check-box">
+                <%= radio_button_tag "user[advance_notice]","Anytime",user.advance_notice=="Anytime"  %>
+                <%= form.label "Pickup Availible at any time" %>
+                
+                <%= radio_button_tag "user[advance_notice]","6 to 12 hours",user.advance_notice=="6 to 12 hours"  %>
+                <%= form.label "6 to 12 hours" %>
+                
+                <%= radio_button_tag "user[advance_notice]","Two days",user.advance_notice=="Two days"  %>
+                <%= form.label "Two days" %>
+                
+                <%= radio_button_tag "user[advance_notice]","1 to 6 hours",user.advance_notice=="1 to 6 hours"  %>
+                <%= form.label "1 to 6 hours" %>
+                
+                <%= radio_button_tag "user[advance_notice]","12 to 24 hours",user.advance_notice=="12 to 24 hours"  %>
+                <%= form.label "12 to 24 hours" %>
+                
+                <%= radio_button_tag "user[advance_notice]","3 days",user.advance_notice=="3 days"  %>
+                <%= form.label "3 days" %>
+              </div>
+              <hr>
+            </section>
+          </div>
+          <center>  <%= form.submit "Submit",id: "pickup_submit", class:"btn btn-primary btn-sm" %></center>
+        <% end %>
       </div>
     </div>
   </div>
-
-  <script>
-  $(document).ready(function () {
-        var checkedval = false;
-        if ($("#day0").prop("checked")) {
-             <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-                $('#day<%=index+1%>').attr('disabled', true);
-             <%end%>
-          // $('#Anyday').attr('disabled', false);
-            // checkedval = true
-        } else {
-             <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-                $('#day<%=index+1%>').attr('disabled', false);
-                $('#day<%=index+1%>').attr('disabled', false);
-             <%end%>
-        }
-       <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-           if ($('#day<%=index+1%>').prop("checked")) {
-             checkedval = true
-           }
-       <%end%>
-       if(checkedval == true){
-            $('#day0').attr('disabled', true);
-       }else{
-            $('#day0').attr('disabled', false);
-       }
-        
-    });
-  $('.ablebox').change(function () {
-        var checkedval = false;
-        if ($("#day0").prop("checked")) {
-             <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-                $('#day<%=index+1%>').attr('disabled', true);
-             <%end%>
-        } else {
-             <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-                $('#day<%=index+1%>').attr('disabled', false);
-             <%end%>
-        }
-       <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-           if ($('#day<%=index+1%>').prop("checked")) {
-             checkedval = true
-           }
-       <%end%>
-       if(checkedval == true){
-            $('#day0').attr('disabled', true);
-       }else{
-            $('#day0').attr('disabled', false);
-       }
-        
-    });
-
-  $('#pickup_submit').on('click', function(event) {
-    if (!$("#day0").prop("checked")) {
-      if ($('.ablebox:checked').size() < 3){
-        toastr.error("Please tick up to 3 days or Any day");
-        return false
-      }
+</div>
+<script>
+$(document).ready(function() {
+  var checkedval = false;
+  if ($("#day0").prop("checked")) {
+    <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+      $('#day<%=index+1%>').attr('disabled', true);
+    <%end%>
+    // $('#Anyday').attr('disabled', false);
+    // checkedval = true
+  } else {
+    <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+      $('#day<%=index+1%>').attr('disabled', false);
+      $('#day<%=index+1%>').attr('disabled', false);
+    <%end%>
+  }
+  <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+    if ($('#day<%=index+1%>').prop("checked")) {
+      checkedval = true
     }
-  });
+  <%end%>
+  if (checkedval == true) {
+    $('#day0').attr('disabled', true);
+  } else {
+    $('#day0').attr('disabled', false);
+  }
+
+});
+$('.ablebox').change(function() {
+  var checkedval = false;
+  if ($("#day0").prop("checked")) {
+    <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+      $('#day<%=index+1%>').attr('disabled', true);
+    <%end%>
+  } else {
+    <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+      $('#day<%=index+1%>').attr('disabled', false);
+    <%end%>
+  }
+  <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+    if ($('#day<%=index+1%>').prop("checked")) {
+      checkedval = true
+    }
+  <%end%>
+  if (checkedval == true) {
+    $('#day0').attr('disabled', true);
+  } else {
+    $('#day0').attr('disabled', false);
+  }
+
+});
+$('#pickup_submit').on('click', function(event) {
+  if (!$("#day0").prop("checked")) {
+    if ($('.ablebox:checked').size() < 3) {
+      toastr.error("Please tick up to 3 days or Any day");
+      return false
+    }
+  }
+});
 </script>

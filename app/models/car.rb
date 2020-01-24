@@ -18,6 +18,7 @@ class Car < ApplicationRecord
     attr_accessor :road_worthy_check
     attr_accessor :write_off_check
     attr_accessor :maintained_check
+    attr_accessor :availability_check
     
     validates :model_year_check, inclusion: { in: ["1"],message: "%{value} is not a valid size" },:if => Proc.new{|f| f.step == "0" }
     validates :usage_limit_check, inclusion: { in: ["1"]},:if => Proc.new{|f| f.step == "0" }
@@ -25,7 +26,7 @@ class Car < ApplicationRecord
     validates :road_worthy_check, inclusion: { in: ["1"]},:if => Proc.new{|f| f.step == "0" }
     validates :write_off_check, inclusion: { in: ["1"]},:if => Proc.new{|f| f.step == "0" }
     validates :maintained_check, inclusion: { in: ["1"]},:if => Proc.new{|f| f.step == "0" }
-    
+    validates :availability_check, inclusion: { in: ["1"]},:if => Proc.new{|f| f.step == "0" }
     
     validates :driving_liecense_number, length: { is: 7 },:if => Proc.new{|f| f.step == "5" }
     validates :personal_mobile, length: { is: 10 },:if => Proc.new{|f| f.step == "6" }, numericality: { only_integer: true }

@@ -11,23 +11,20 @@
     </div>
     <div class="row">
       <div class="col-md-6 mt-3">
-          <!--<ul class="custom-list-style-1 p-0 mb-0">-->
-          <!--    <li>-->
-                <table>
-                 <tr>
-                    <td><span class="text-color-dark mygrge-prf">Pickup State:</span></td>
-                    <td><span class="custom-text-color-2 mygrge-prf">  <%= @user.pickup_state %></span></td>
-                 </tr>
-                  
-                 <tr>
-                    <td><span class="text-color-dark mygrge-prf">Pickup Suburb:</span></td>
-                    <td><span class="custom-text-color-2 mygrge-prf"><%= @user.pickup_suburb %></a></span></td>
-                  </tr>
-                 <tr>
-                    <td><span class="text-color-dark mygrge-prf">Pickup Postal Code:</span></td>
-                    <td><span class="custom-text-color-2 mygrge-prf"><%= @user.pickup_postcode %></span></td>
-                 </tr>
-              </table>
+        <table>
+          <tr>
+            <td><span class="text-color-dark mygrge-prf">Pickup State:</span></td>
+            <td><span class="custom-text-color-2 mygrge-prf">  <%= @user.pickup_state %></span></td>
+          </tr>
+          <tr>
+            <td><span class="text-color-dark mygrge-prf">Pickup Suburb:</span></td>
+            <td><span class="custom-text-color-2 mygrge-prf"><%= @user.pickup_suburb %></a></span></td>
+          </tr>
+          <tr>
+            <td><span class="text-color-dark mygrge-prf">Pickup Postal Code:</span></td>
+            <td><span class="custom-text-color-2 mygrge-prf"><%= @user.pickup_postcode %></span></td>
+          </tr>
+        </table>
       </div>
       <div class="col-md-6 mt-3">
         <table>
@@ -49,77 +46,67 @@
     <hr class="my-5">
     <div class="row">
       <div class="col-md-8">
-      <h3>Listed Cars</h3>
-        
+        <h3>Listed Cars</h3>
       </div>
       <div class="col-md-4 text-right">
         <%= link_to 'Add New Car', new_car_path, class:"btn btn-sm btn-primary mb-2" %>
       </div>
     </div>
     <table class="table table-bordered">
-          <thead>
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Make</th>
+          <th>Model</th>
+          <th>Status</th>
+          <% if current_user.admin %>
+          <th>Posted by</th>
+          <% end %>
+          <th>Car as Advertised</th>
+          <th>Basic Overview</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cars.each do |car| %>
+          <% if can? :read, car %>
             <tr>
-              <th>Year</th>
-              <th>Make</th>
-              <th>Model</th>
-              <th>Status</th>
+              <td><%= car.year %></td>
+              <td> <%= car.make %></td>
+              <td> <%= car.model %></td>
+              <td><%= car.status.humanize %></td>
               <% if current_user.admin %>
-                <th>Posted by</th>
+              <td> <%= car.user.name %></td>
               <% end %>
-              <th>Car as Advertised</th>
-              <th>Basic Overview</th>
-              <th>Edit</th>
-              <th>Delete</th>
+              <td><%= link_to 'Show', car_details_path(car), class:"btn car-shw-btn btn-sm " %>
+              </td>
+              <td><%= link_to 'View', car_path(car), class:"btn btn-primary btn-sm " %></td>
+              <td><%= link_to 'Edit'.html_safe, edit_car_path(car), class:"btn btn-primary btn-sm" %></td>
+              <td> <i class="fas fa-trash icon-chat" style="font-size: 19px; color: #21a5D6;" title="Delete" data-toggle="modal" data-target="#deletemodal"></i></td>
             </tr>
-          </thead>
-          <tbody>
-            <% @cars.each do |car| %>    
-              <% if can? :read, car %>
-                <tr>
-                  <td><%= car.year %></td>
-                  <td> <%= car.make %></td>
-                  <td> <%= car.model %></td>
-                  <td><%= car.status.humanize %></td>
-                  <% if current_user.admin %>
-                    <td> <%= car.user.name %></td>
-                  <% end %>
-                <td><%= link_to 'Show', car_details_path(car), class:"btn car-shw-btn btn-sm " %>
-                </td>
-                <td><%= link_to 'View', car_path(car), class:"btn btn-primary btn-sm " %></td>
-                <td><%= link_to 'Edit'.html_safe, edit_car_path(car), class:"btn btn-primary btn-sm" %></td>
-               <td> <i class="fas fa-trash icon-chat" style="font-size: 19px; color: #21a5D6;" title="Delete" data-toggle="modal" data-target="#deletemodal"></i></td>
-              
-                
-                </tr>
-                <!--modal start-->
-<div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content dlt-mdl">
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
+<% @cars.each do |car| %>
+  <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content dlt-mdl">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" class="float-right" style="color: #fff; margin-right: 5px;">&times;</span>
+        <span aria-hidden="true" class="float-right" style="color: #fff; margin-right: 5px;">&times;</span>
         </button>
-      
-      <div class="modal-body">
-        Are you sure that you would like to delete this car?
-      </div>
-      <div class="btn-set">
-        <%= link_to 'yes'.html_safe, car, method: :delete, class:'btn btn-danger' %>
-         <button type="button" class="btn btn-primary float-right" data-dismiss="modal">No</button>
+        <div class="modal-body">
+          Are you sure that you would like to delete this car?
+        </div>
+        <div class="btn-set">
+          <%= link_to 'yes'.html_safe, car, method: :delete, class:'btn btn-danger' %>
+          <button type="button" class="btn btn-primary float-right" data-dismiss="modal">No</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!--modal end-->
-              <% end %>
-            <% end %>
-            
-          </tbody>
-        </table>
-  
-  </div>
-</section>
-
-
-
-
+<% end %>
 <%= render "layouts/update_availibility",user: @user %>

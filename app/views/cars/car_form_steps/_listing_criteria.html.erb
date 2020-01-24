@@ -36,8 +36,10 @@
               <label for="5">No write off history</label> <br>
               
               <%= f.check_box :maintained_check, required: true, id:"6" %>
-             <label for="6">Well maintained, serviced as scheduled and recommended by the manafacturer </label><br><br>
-             
+             <label for="6">Well maintained, serviced as scheduled and recommended by the manafacturer </label><br>
+
+             <%= f.check_box :availability_check, required: true, id:"7" %>
+             <label for="7">Vehicle needs to be available 3 days a week or more, Availability days of the vehicle does not have to be consecutive</label><br><br>
               <%= f.hidden_field :step, value: 0 %>
               <%= f.hidden_field :status, value: "not_completed" %>
               <div class="row">

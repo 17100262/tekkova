@@ -69,6 +69,6 @@ gem 'aws-sdk-s3', '~> 1.17'
 gem 'cocoon'
 gem 'figaro'
 gem 'bulky', git: "https://github.com/17100262/rails-bulky.git"
-gem 'toastr-rails'
+gem 'toastr_rails'
 gem 'geocoder'
 gem 'jquery-fileupload-rails'

@@ -3,100 +3,87 @@
 <!--    <span class="remove">&#10006</span>-->
 <!--</div>-->
 <header id="header" class="header-narrow">
-    <div class="header-body header-top header-top-colored header-top-dark">
-        <div class="header-container container-fluid">
-            <div class="header-row">
-                <div class="header-column">
-                    <div class="header-row">
-                        <div class="header-logo">
-                            <a href="/" style="text-decoration:none;">
-                                <img alt="Tekkova" height="65" data-sticky-width="82" data-sticky-height="40" data-sticky-top="33" src="/logo-t2.png">
-
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="header-column justify-content-end">
-                    <div class="header-row">
-                        <div class="header-nav">
-                            <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1">
-                                <nav class="collapse">
-                                <ul class="nav nav-pills" id="mainNav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<%= new_car_path %>">List your Car <span class="sr-only">(current)</span></a>
-                                </li>
-                                <% if user_signed_in? %>
-                                    <% if current_user.cars.count > 0%>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/my_garage">My Garage <span class="sr-only">(current)</span></a>
-                                        </li>
-                                    <% end %>
-                                    <% if current_user.admin %>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="<%= main_app.admin_path %>">Admin Dashboard</a>
-                                        </li>
-                                    <% end %>
-                                <% end %>
-                                <li class="dropdown">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Learn More</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="/listing_criteria">Listing Criteria</a></li>
-                                        <li><a class="dropdown-item" href="/how_it_works">How it works</a></li>
-                                        <li><a class="dropdown-item" href="/policies">Policies</a></li>
-                                        <li><a class="dropdown-item" href="/contact_us">Contact Us</a></li>
-                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/about_us">About Us</a>
-                                        </li>
-                                    </ul>
-                               
-
-                            <% if user_signed_in? %>
-                           
-                            
-                             <li class="dropdown p-image">
-                                    
-                                <a class="dropdown-item dropdown-toggle header-user" href="#"><%= current_user.name %></a>
-                                <%= image_tag(current_user.profile_image.url, size: "50x50", class:"header_img dropdown-toggle") %>
-                                
-                            
-                                    <ul class="dropdown-menu" style="right: 0;">
-                                        <li><a class="dropdown-item" href="<%= main_app.user_path(current_user) %>">Profile</a></li>
-                                        <li><a class="dropdown-item" href="<%= main_app.edit_user_path(current_user) %>">Update Personal Information</a></li>
-                                        <li><a class="dropdown-item" href="<%= main_app.destroy_user_session_path %>" data-method="delete">Log Out</a></li>
-                                        
-                                    </ul>
-                                </li>
-                            <% else %>
-                                <li class="nav-item">
-                                    <%#= main_app.new_user_registration_path %><a class="nav-link" href="<%= main_app.sign_up_page_path %>">Sign Up</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<%= main_app.new_user_session_path %>">Log In</a>
-                                </li>
-                            <% end %>
-                                <!--<li class="nav-item">-->
-                                <!--  <a class="nav-link disabled" href="#">Disabled</a>-->
-                                <!--</li>-->
-                            </ul>
-                                </nav>
-                            </div>
-                            <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main nav">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+  <div class="header-body header-top header-top-colored header-top-dark">
+    <div class="header-container container-fluid">
+      <div class="header-row">
+        <div class="header-column">
+          <div class="header-row">
+            <div class="header-logo">
+              <a href="/" style="text-decoration:none;">
+                <img alt="Tekkova" height="65" data-sticky-width="82" data-sticky-height="40" data-sticky-top="33" src="/logo-t2.png">
+              </a>
             </div>
+          </div>
         </div>
+        <div class="header-column justify-content-end">
+          <div class="header-row">
+            <div class="header-nav">
+              <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1">
+                <nav class="collapse">
+                  <ul class="nav nav-pills" id="mainNav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="<%= new_car_path %>">List your Car <span class="sr-only">(current)</span></a>
+                    </li>
+                    <% if user_signed_in? %>
+                    <% if current_user.cars.count > 0%>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/my_garage">My Garage <span class="sr-only">(current)</span></a>
+                    </li>
+                    <% end %>
+                    <% if current_user.admin %>
+                    <li class="nav-item">
+                      <a class="nav-link" href="<%= main_app.admin_path %>">Admin Dashboard</a>
+                    </li>
+                    <% end %>
+                    <% end %>
+                    <li class="dropdown">
+                      <a class="dropdown-item dropdown-toggle" href="#">Learn More</a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/listing_criteria">Listing Criteria</a></li>
+                        <li><a class="dropdown-item" href="/how_it_works">How it works</a></li>
+                        <li><a class="dropdown-item" href="/policies">Policies</a></li>
+                        <li><a class="dropdown-item" href="/contact_us">Contact Us</a></li>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/about_us">About Us</a>
+                      </li>
+                    </ul>
+                    <% if user_signed_in? %>
+                    <li class="dropdown p-image">
+                      <a class="dropdown-item dropdown-toggle header-user" href="#"><%= current_user.name %></a>
+                      <%= image_tag(current_user.profile_image.url, size: "50x50", class:"header_img dropdown-toggle") %>
+                      <ul class="dropdown-menu" style="right: 0;">
+                        <li><a class="dropdown-item" href="<%= main_app.user_path(current_user) %>">Profile</a></li>
+                        <li><a class="dropdown-item" href="<%= main_app.edit_user_path(current_user) %>">Update Personal Information</a></li>
+                        <li><a class="dropdown-item" href="<%= main_app.destroy_user_session_path %>" data-method="delete">Log Out</a></li>
+                      </ul>
+                    </li>
+                    <% else %>
+                    <li class="nav-item">
+                      <%#= main_app.new_user_registration_path %><a class="nav-link" href="<%= main_app.sign_up_page_path %>">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="<%= main_app.new_user_session_path %>">Log In</a>
+                    </li>
+                    <% end %>
+                    <!--<li class="nav-item">-->
+                    <!--  <a class="nav-link disabled" href="#">Disabled</a>-->
+                    <!--</li>-->
+                  </ul>
+                </nav>
+              </div>
+              <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main nav">
+              <i class="fa fa-bars"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </header>
-
-
 <!--modal start here-->
 <!-- Button trigger modal -->
-
-
 <!-- Modal -->
 <!--<div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
 <!--  <div class="modal-dialog" role="document">-->
@@ -108,7 +95,7 @@
 <!--        </button>-->
 <!--      </div>-->
 <!--      <div class="modal-body">-->
-        
+
 <!--        <button class="btn btn-primary btn-block btn-lg">Rent a Car, Coming Soon!</button>-->
 <!--        <a href="/users/sign_up" class="btn btn-primary btn-lg btn-block">Become a host, Rent out my Car</a>-->
 <!--      </div>-->
@@ -119,11 +106,7 @@
 <!--  </div>-->
 <!--</div>-->
 <!--modal end-->
-
-
-
-
- <script>
+<script>
 // $(document).ready(function(){
 //   $(".remove").click(function(){
 //     $(".top-notification-header").remove();
