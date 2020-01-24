@@ -5582,7 +5582,7 @@ button.close {
 	right: 0;
 	bottom: 10px;
 	left: 0;
-	z-index: 15;
+	z-index: 0;
 	display: -ms-flexbox;
 	display: flex;
 	-ms-flex-pack: center;
@@ -22002,8 +22002,19 @@ html .car-details-tabs .btn-primary:hover {
 
 @media (min-width: 768px) {
   img.car_slider_pic {
-    width: 100%;
+    max-height: 400px;
+    max-width: 100%;
+  }
+
+  .carousel-item.active,
+  .carousel-item-next,
+  .carousel-item-prev {
     height: 400px;
+    display: inline-flex;
+  }
+
+  .carousel-item {
+    justify-content: center;
   }
 
   .indicator-fix-height {
@@ -22040,7 +22051,7 @@ html .car-details-tabs .btn-primary:hover {
   position: absolute;
   bottom: 0px;
   right: 0px;
-  z-index: 9999;
+  z-index: 0;
 }
 
 .car-detail-highlighted {
@@ -22487,8 +22498,24 @@ label {
   display: inline;
 }
 
-#toast-container > div {
+#toast-container>div {
   opacity: 1;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   filter: alpha(opacity=100);
+}
+
+
+@media(max-width:576px) {
+  .iframe-video {
+    height: 230px !important;
+  }
+}
+
+.iframe-video {
+  height: 360px;
+}
+
+#toast-container>div {
+  padding: 15px 35px 15px 15px !important;
+  background-position: 270px 8px !important;
 }

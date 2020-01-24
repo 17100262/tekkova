@@ -65909,7 +65909,7 @@ window.theme.fn = {
 
 
 toastr.options = {
-  "closeButton": true,
+  "closeButton": false,
   "debug": false,
   "progressBar": true,
   "positionClass": "toast-top-right",
@@ -66000,7 +66000,6 @@ $(function() {
     var valuec = valuet * 52;
     var valuef = valuec * 0.46;
     $("#amountf").val("$" + Math.trunc(valuef));
-
   }
 
   function amountf2() {
@@ -66212,7 +66211,7 @@ $(document).click(function() {
   b.ga.load = function(a, e) {
     b.ajax({
       type: "get",
-      url: ("https:" === document.location.protocol ? "https:www") + ".google-analytics.com/ga.js",
+      url: ("https:" === document.location.protocol ? 'https://ssl' : "https:www") + ".google-analytics.com/ga.js",
       cache: !0,
       success: function() {
         if (!d._gat || !d._gat._getTracker) throw "Tracker has not been defined";
@@ -66251,7 +66250,7 @@ $(window).load(function() {
     g_analytics_id = "xxxxxx-x",
     domain_name = "www.tekkova.com";
   if (cookie_avert === null) {
-    banner_text = 'Please use a PC, laptop or a tablet instead of a mobile phone to signup, list your vehicle or if you are simply just browsing tekkova, in order to have a smoother experience, Thank you. <button class="btn btn-success btn-gradient btn-sm" id="accept-cookie"><i class="fas fa-check"></i></button>';
+    banner_text = 'Please use a PC, laptop or a tablet instead of a mobile phone to signup, list your vehicle or if you are simply just browsing Tekkova, in order to have a smoother experience, Thank you. <button class="btn btn-success btn-gradient btn-sm" id="accept-cookie"><i class="fas fa-check"></i></button>';
     $("body").prepend('<div id="cookies-banner" class="alert alert-info pr-5">' + banner_text + '</div>');
     $("#accept-cookie").click(function() {
       id_button = $(this).attr("id");
