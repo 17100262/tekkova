@@ -1,15 +1,14 @@
-
 <div class="container-fluid py-3">
   <div class="row">
-  	 <div class="loginmodal-container loginmodal-container-new">
-  		<div class="loginmodal-container-2">
-  		  <h1>Profile</h1>
+    <div class="loginmodal-container loginmodal-container-new">
+      <div class="loginmodal-container-2">
+        <h1>Profile</h1>
         <center>
-           <span id="icon-span" data-toggle="modal" data-target="#updateavatar"></span>
-            <%= image_tag @user.profile_image.url, size:"100x100", id:"profileImage", data: {toggle: "modal", target: "#updateavatar"} %>
-            <%= render "layouts/updateavatar", resource_name: current_user,resource: User %>
-           <h2 class="mb-0"><%= @user.name %></h2>
-           <p><%= @user.email %></p>
+        <span id="icon-span" data-toggle="modal" data-target="#updateavatar"></span>
+        <%= image_tag @user.profile_image.url, size:"100x100", id:"profileImage", data: {toggle: "modal", target: "#updateavatar"} %>
+        <%= render "layouts/updateavatar", resource_name: current_user,resource: User %>
+        <h2 class="mb-0"><%= @user.name %></h2>
+        <p><%= @user.email %></p>
         </center>
         <div class="table-responsive">
           <table class="table table-bordered bg-white">
@@ -23,108 +22,108 @@
                 <td><%= @user.cars.count %></td>
               </tr>
             </tbody>
-          
+            
           </table>
-         
+          
         </div>
       </div>
     </div>
   </div>
-</div>  
- <hr>
+</div>
+<hr>
 <% if current_user.admin %>
-    <div class="container-fluid py-3">
-      <div class="row">
-      	 <div class="loginmodal-container loginmodal-container-new">
-      		<div class="loginmodal-container-2">
-             <h1 class="text-center">Admin Area</h1>
-             <% if @user.licensefront.present? or @user.licenseback.present? %>
-               <strong>Driver License Details: </strong>
-               <%= (link_to "View License Front", @user.licensefront.url) if @user.licensefront.present? %>
-               <%= (link_to "View Licence Back", @user.licensefront.url) if @user.licenseback.present? %>
+<div class="container-fluid py-3">
+  <div class="row">
+    <div class="loginmodal-container loginmodal-container-new">
+      <div class="loginmodal-container-2">
+        <h1 class="text-center">Admin Area</h1>
+        <% if @user.licensefront.present? or @user.licenseback.present? %>
+        <strong>Driver License Details: </strong>
+        <%= (link_to "View License Front", @user.licensefront.url) if @user.licensefront.present? %>
+        <%= (link_to "View Licence Back", @user.licensefront.url) if @user.licenseback.present? %>
+        <% end %>
+        
+        <div class="comments mb-4">
+          <strong>Comment:</strong>
+          <%= form_for @user do |form| %>
+          <%= form.text_area :comment, class:"form-control mb-2" %>
+          <%= form.submit "Save", class:"btn btn-primary btn-sm" %>
+          <% end %>
+        </div>
+        <div class="files mb-4">
+          
+          <strong>List of Already Attached Files: </strong>
+          <% attachments = @user.comment_files %>
+          <% if attachments.present? %>
+          <table class="table table-bordered">
+            <thead>
+              <th>File Name</th>
+              <th colspan="2">View</th>
+            </thead>
+            <tbody>
+              <% attachments.each do |attachment| %>
+              <% if attachment.persisted?%>
+              <tr>
+                <td>
+                  <%= attachment.file_file_name %>
+                </td>
+                <td>
+                  <%= link_to "View File", "#{attachment.file.url}",target: "_blank", class:"btn btn-primary btn-sm"  %>
+                </td>
+                
+                <td><%= link_to '<i class="fas fa-trash icon-chat" style="font-size: 19px" title="Delete"></i>'.html_safe, attachment,method: :delete %>
+                </td>
+              </tr>
               <% end %>
-             
-             <div class="comments mb-4">
-             <strong>Comment:</strong>
-                <%= form_for @user do |form| %>
-                   <%= form.text_area :comment, class:"form-control mb-2" %>
-                   <%= form.submit "Save", class:"btn btn-primary btn-sm" %>
-                <% end %>
-             </div>
-             <div class="files mb-4">
-    
-                 <strong>List of Already Attached Files: </strong>
-                <% attachments = @user.comment_files %>
-                <% if attachments.present? %>
-                  <table class="table table-bordered">
-                      <thead>
-                          <th>File Name</th>
-                          <th colspan="2">View</th>
-                      </thead>
-                      <tbody>
-                    <% attachments.each do |attachment| %>
-                      <% if attachment.persisted?%>
-                      <tr>
-                      <td>
-                        <%= attachment.file_file_name %> 
-                      </td>
-                      <td>
-                        <%= link_to "View File", "#{attachment.file.url}",target: "_blank", class:"btn btn-primary btn-sm"  %>
-                      </td>
-                      
-                        <td><%= link_to '<i class="fas fa-trash icon-chat" style="font-size: 19px" title="Delete"></i>'.html_safe, attachment,method: :delete %>
-                      </td>
-                      </tr>
-                      <% end %>
-                    <% end %>
-                      </tbody>
-                  </table>
-                      
-                  
-                <% else %>
-                  <p>No Files Attached Yet.</p>
-                <% end %>
-                
-                
-                <!--<div id=comment_files>-->
-                <!--    <= form.fields_for :comment_files do |comment_file| %>-->
-                <!--        <= render 'comment_file_fields', f: comment_file %>-->
-                <!--    < end %>-->
-                <!--    <div class="links">-->
-                <!--     <= link_to_add_association 'add FILE', form, :comment_files %>-->
-                <!--    </div>-->
-                <!--</div>-->
-                
-                <strong>Attach New Files: </strong>
-                <%= form_for(CommentFile.new) do |f| %>
-                    <div class="input-file-container">  
-                        <%= f.file_field :file, required: true, class:"input-file", :data => { :buttonText => 'bar' } %>
-                        <label tabindex="0" for="input-file" class="input-file-trigger bg-primary">Choose File</label>
-                        <span class="file-return">No File Choosen</span>
-                    </div>
-                    <%#= f.file_field :file,required: true %>
-                    <%= f.hidden_field :user_id, value: @user.id %>
-                    <br/>
-                    <%= f.submit "Save", class:"btn btn-primary btn-sm" %>
-                <% end %>
-                
-                
-             <!--   <div id="comment_files">-->
-             <!--      <h3>Files</h3>-->
-             <!--      <%#= form.fields_for :comment_files do |comment_file| %>-->
-             <!--         <%#= render 'comment_file_fields', f: comment_file %>-->
-             <!--      <%# end %>-->
-                   
-             <!--      <div class="links">-->
-             <!--         <%#= link_to_add_association '<i class="fas fa-plus mr-2"></i>Add Another File'.html_safe, form, :comment_files, class:"btn btn-primary btn-sm float-right" %>-->
-             <!--      </div>-->
-             <!--   </div>-->
-             <!--   <= form.submit "Save", class:"btn btn-primary mt-3" %>-->
-             <!--< end %>-->
-             </div>
-    
+              <% end %>
+            </tbody>
+          </table>
+          
+          
+          <% else %>
+          <p>No Files Attached Yet.</p>
+          <% end %>
+          
+          
+          <!--<div id=comment_files>-->
+          <!--    <= form.fields_for :comment_files do |comment_file| %>-->
+          <!--        <= render 'comment_file_fields', f: comment_file %>-->
+          <!--    < end %>-->
+          <!--    <div class="links">-->
+          <!--     <= link_to_add_association 'add FILE', form, :comment_files %>-->
+          <!--    </div>-->
+          <!--</div>-->
+          
+          <strong>Attach New Files: </strong>
+          <%= form_for(CommentFile.new) do |f| %>
+          <div class="input-file-container">
+            <%= f.file_field :file, required: true, class:"input-file", :data => { :buttonText => 'bar' } %>
+            <label tabindex="0" for="input-file" class="input-file-trigger bg-primary">Choose File</label>
+            <span class="file-return">No File Choosen</span>
           </div>
-       </div>
+          <%#= f.file_field :file,required: true %>
+          <%= f.hidden_field :user_id, value: @user.id %>
+          <br/>
+          <%= f.submit "Save", class:"btn btn-primary btn-sm" %>
+          <% end %>
+          
+          
+          <!--   <div id="comment_files">-->
+          <!--      <h3>Files</h3>-->
+          <!--      <%#= form.fields_for :comment_files do |comment_file| %>-->
+          <!--         <%#= render 'comment_file_fields', f: comment_file %>-->
+          <!--      <%# end %>-->
+          
+          <!--      <div class="links">-->
+          <!--         <%#= link_to_add_association '<i class="fas fa-plus mr-2"></i>Add Another File'.html_safe, form, :comment_files, class:"btn btn-primary btn-sm float-right" %>-->
+          <!--      </div>-->
+          <!--   </div>-->
+          <!--   <= form.submit "Save", class:"btn btn-primary mt-3" %>-->
+          <!--< end %>-->
+        </div>
+        
+      </div>
     </div>
-    </div>
+  </div>
+</div>
 <% end %>

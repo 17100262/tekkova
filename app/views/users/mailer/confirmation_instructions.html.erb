@@ -1,100 +1,92 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<style>
-@media only screen and (min-width: 768px) {
-.mail-box {
-    width: 50% !important;
-}
-}
-a .btn-account{
-    color: #fff !important;
-}
-hr{
-	margin: 0;
-}
+  <head>
+    <style>
+    @media only screen and (min-width: 768px) {
+      .mail-box {
+        width: 50% !important;
+      }
+    }
+    a .btn-account{
+      color: #fff !important;
+    }
+    hr{
+      margin: 0;
+    }
     .mail-box {
-        width: 80%;
-        -moz-box-shadow: 0 0 5px #888;
-       -webkit-box-shadow: 0 0 5px#888;
-        box-shadow: 0 0 5px #888;
-        padding: 20px;
-        display: block;
-        margin: 0 auto;
-        background: #fff;
+      width: 80%;
+      -moz-box-shadow: 0 0 5px #888;
+      -webkit-box-shadow: 0 0 5px#888;
+      box-shadow: 0 0 5px #888;
+      padding: 20px;
+      display: block;
+      margin: 0 auto;
+      background: #fff;
     }
     .btn-account {
-    	
-        background-color: #21a5D6;
-        border-color: #21a5D6 #21a5D6 #0088cc;
-        color: #ffffff !important;
-        padding: 13px 10px 13px 10px;
-        border: none;
-        border-radius: 3px;
-        text-decoration: none;
-        cursor: pointer;
-            font-size: 16px;
-        font-weight: bold;
-
+      background-color: #21a5D6;
+      border-color: #21a5D6 #21a5D6 #0088cc;
+      color: #ffffff !important;
+      padding: 13px 10px 13px 10px;
+      border: none;
+      border-radius: 3px;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
     }
     .whole-body {i
-        background: #f1f1f1;
-        padding-top: 30px;
-        padding-bottom: 30px;
+      background: #f1f1f1;
+      padding-top: 30px;
+      padding-bottom: 30px;
     }
     .background-b{
-        background: #000;
-        padding-top: 30px;
-        padding-bottom: 30px;
+      background: #000;
+      padding-top: 30px;
+      padding-bottom: 30px;
     }
     .address-bg {
-        background-color: #21a5D6;
-        padding: 10px 10px;
-        color: #fff;
+      background-color: #21a5D6;
+      padding: 10px 10px;
+      color: #fff;
     }
     .footer-bg {
-        background-color: #fff;
-        padding: 10px 10px;
-        color: #000;
+      background-color: #fff;
+      padding: 10px 10px;
+      color: #000;
     }
-</style>
-</head>
-    <body class="whole-body">
-        <div class="mail-box">
-            
-            <div class="background-b">
-                 <center><img src="http://tekkova.herokuapp.com/logo-t2.png" width="200" height="100"></center>
-            </div>
-            <br>
-            <p style="text-transform: capitalize;"><strong>Hi <%= @resource.name.titlecase %></strong></p>
-            
-            <p>Please activate your account in order to list your car and slash your car maintenance expenses.</p>
-            <br>
-            <br>
-            <center><a class="btn-account" href = "<%= confirmation_url(@resource, confirmation_token: @token) %>">Activate</a></center><br/>
-              <br>
-              <br>
-              <img src="http://tekkova.herokuapp.com/car-main.email.jpg" style="width: 100%">
-              <br>
-              <br>
-        
-            <div class="address-bg">
-                <p style="text-align: center;"><strong>Our Mailing Address is</strong></p>
-                <p style="text-align: center;">
-                    67 Howe Street<br> 
-                   Osborne Park<br>
-                   WA 6017
-                </p>
-            </div>
-           
-            <div class="footer-bg">
-                <p>
-                    This email was sent by Tekkova. Tekkova is an online marketplace that facilitates peer to peer private car rented share
-                </p>
-            </div>
-        
-        </div>
-    
-    
-    </body>
+    </style>
+  </head>
+  <body class="whole-body">
+    <div class="mail-box">
+      
+      <div class="background-b">
+        <center><img src="http://tekkova.herokuapp.com/logo-t2.png" width="200" height="100"></center>
+      </div>
+      <br>
+      <p style="text-transform: capitalize;"><strong>Hi <%= @resource.name.titlecase %></strong></p>
+      <p>Please activate your account in order to list your car and slash your car maintenance expenses.</p>
+      <br>
+      <br>
+      <center><a class="btn-account" href = "<%= confirmation_url(@resource, confirmation_token: @token) %>">Activate</a></center><br/>
+      <br>
+      <br>
+      <img src="http://tekkova.herokuapp.com/car-main.email.jpg" style="width: 100%">
+      <br>
+      <br>
+      <div class="address-bg">
+        <p style="text-align: center;"><strong>Our Mailing Address is</strong></p>
+        <p style="text-align: center;">
+          67 Howe Street<br>
+          Osborne Park<br>
+          WA 6017
+        </p>
+      </div>
+      <div class="footer-bg">
+        <p>
+          This email was sent by Tekkova. Tekkova is an online marketplace that facilitates peer to peer private car rented share
+        </p>
+      </div>
+    </div>
+  </body>
 </html>

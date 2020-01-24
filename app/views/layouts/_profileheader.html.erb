@@ -1,87 +1,83 @@
 <link rel="stylesheet" href="/profile.css">
 <section id="about-me" class="section section-no-border section-parallax custom-position-1 custom-xs-bg-size-cover parallax-no-overflow m-0 p-0">
-    <div class="back-overlay">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6 offset-lg-2 custom-xs-margin-bottom-1">
-                    <center>
-                    <span id="icon-span" data-toggle="modal" data-target="#updateavatar"></span>
-                    </center>
-                    <img id="profileImage" src="<%= user.profile_image.url %>" data-toggle="modal" data-target="#updateavatar" } class="img-fluid img-profile custom-border custom-image-position-2" alt />
-                    <%= render "layouts/updateavatar", resource_name: current_user,resource: User %>
-                </div>
-                <div class="col-lg-6 col-xl-5 col-md-6 col-sm-6">
-                    <h1 class="text-white custom-font-size-1"><%= user.name %></h1>
-                    <!--<p class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">-->
-                    <!--    <= user.email %>-->
-                    <!--</p>-->
-                    <!--<p class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">Cars Posted:-->
-                    <!--    <= user.cars.count %>-->
-                    <!--</p>-->
-                    <!--<p class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">Total Earnings: $12345 </p>-->
-                    <!--<p class="text-color-light font-weight-normal custom-font-size-2 m-0">Rating: 5 </p>-->
-
-                </div>
-            </div>
+  <div class="back-overlay">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 offset-lg-2 custom-xs-margin-bottom-1">
+          <center>
+          <span id="icon-span" data-toggle="modal" data-target="#updateavatar"></span>
+          </center>
+          <img id="profileImage" src="<%= user.profile_image.url %>" data-toggle="modal" data-target="#updateavatar" } class="img-fluid img-profile custom-border custom-image-position-2" alt />
+          <%= render "layouts/updateavatar", resource_name: current_user,resource: User %>
         </div>
+        <div class="col-lg-6 col-xl-5 col-md-6 col-sm-6">
+          <h1 class="text-white custom-font-size-1"><%= user.name %></h1>
+          <!--<p class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">-->
+          <!--    <= user.email %>-->
+          <!--</p>-->
+          <!--<p class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">Cars Posted:-->
+          <!--    <= user.cars.count %>-->
+          <!--</p>-->
+          <!--<p class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">Total Earnings: $12345 </p>-->
+          <!--<p class="text-color-light font-weight-normal custom-font-size-2 m-0">Rating: 5 </p>-->
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 <% if !current_user.admin %>
-    <div class="custom-about-me-links background-color-light">
-    <!--<div class="container-fluid">-->
-        <div class="row">
-            <a href="<%= user_path(user) %>" class="<%= "active" if action_name == "show"%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
-                <span class="custom-nav-button text-color-dark inner-text">
-					<i class="fas fa-calendar text-color-primary inner-text"></i>
-					My Information
-				</span>
-            </a>
-            <% if current_user.cars.count > 0 %>
-                <a href="/my_garage" class="<%= "active" if action_name == "my_garage"%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
-                    <span class="custom-nav-button text-color-dark inner-text">
-    					<i class="fas fa-car text-color-primary inner-text"></i>
-    					My Garage
-    				</span>
-                </a>
-            <% end %>
-            
-            <a href="/my_documents" class="<%= "active" if action_name == "my_documents"%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
-                <span class="custom-nav-button text-color-dark inner-text">
-					<i class="fas fa-file text-color-primary inner-text"></i>
-					My Documents
-				</span>
-            </a>
-            <a href="/inbox" class="<%= "active" if action_name == "inbox"%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
-                <span class="custom-nav-button text-color-dark inner-text">
-					<i class="fas fa-envelope text-color-primary inner-text"></i>
-					My Inbox
-				</span>
-            </a>
-            <a href="/my_bookings" class="<%= "active" if action_name == "my_bookings"%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
-                <span class="custom-nav-button text-color-dark inner-text">
-					<i class="far fa-calendar-check text-color-primary inner-text"></i>
-					My Bookings
-				</span>
-            </a>
-            <a href="/my_payments" class="<%= "active" if action_name == "my_payments"%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
-                <span class="custom-nav-button text-color-dark inner-text">
-					<i class="fas fa-money-bill text-color-primary inner-text"></i>
-					My Payments
-				</span>
-            </a>
-            <a href="/my_ratings" class="<%= "active" if action_name == "my_ratings"%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
-                <span class="custom-nav-button text-color-dark inner-text">
-					<i class="fas fa-Star text-color-primary inner-text icon-star"></i>
-					My Ratings
-				</span>
-            </a>
-            <a href="/my_handover" class="<%= "active" if action_name == "my_handover"%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
-                <span class="custom-nav-button text-color-dark inner-text">
-                    <i class="fas fa-file text-color-primary inner-text"></i>
-					My Handover
-				</span>
-            </a>
-        </div>
-    <!--</div>-->
-</div>
+  <div class="custom-about-me-links background-color-light">
+    <div class="row">
+      <a href="<%= user_path(user) %>" class="<%= 'active' if action_name == 'show'%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
+        <span class="custom-nav-button text-color-dark inner-text">
+          <i class="fas fa-calendar text-color-primary inner-text"></i>
+          My Information
+        </span>
+      </a>
+      <% if current_user.cars.count > 0 %>
+        <a href="/my_garage" class="<%= 'active' if action_name == 'my_garage'%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
+          <span class="custom-nav-button text-color-dark inner-text">
+            <i class="fas fa-car text-color-primary inner-text"></i>
+            My Garage
+          </span>
+        </a>
+      <% end %>
+      <a href="/my_documents" class="<%= 'active' if action_name == 'my_documents'%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
+        <span class="custom-nav-button text-color-dark inner-text">
+          <i class="fas fa-file text-color-primary inner-text"></i>
+          My Documents
+        </span>
+      </a>
+      <a href="/inbox" class="<%= 'active' if action_name == 'inbox'%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
+        <span class="custom-nav-button text-color-dark inner-text">
+          <i class="fas fa-envelope text-color-primary inner-text"></i>
+          My Inbox
+        </span>
+      </a>
+      <a href="/my_bookings" class="<%= 'active' if action_name == 'my_bookings'%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
+        <span class="custom-nav-button text-color-dark inner-text">
+          <i class="far fa-calendar-check text-color-primary inner-text"></i>
+          My Bookings
+        </span>
+      </a>
+      <a href="/my_payments" class="<%= 'active' if action_name == 'my_payments'%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
+        <span class="custom-nav-button text-color-dark inner-text">
+          <i class="fas fa-money-bill text-color-primary inner-text"></i>
+          My Payments
+        </span>
+      </a>
+      <a href="/my_ratings" class="<%= 'active' if action_name == 'my_ratings'%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
+        <span class="custom-nav-button text-color-dark inner-text">
+          <i class="fas fa-Star text-color-primary inner-text icon-star"></i>
+          My Ratings
+        </span>
+      </a>
+      <a href="/my_handover" class="<%= 'active' if action_name == 'my_handover'%> text-decoration-none col-lg-3 col-md-4 col-6 border p-0 profile-links">
+        <span class="custom-nav-button text-color-dark inner-text">
+          <i class="fas fa-file text-color-primary inner-text"></i>
+          My Handover
+        </span>
+      </a>
+    </div>
+  </div>
 <% end %>

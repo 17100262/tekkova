@@ -171,7 +171,7 @@ ActiveRecord::Schema.define(version: 2019_12_27_121706) do
     t.text "comment"
     t.datetime "deleted_at"
     t.string "home_phone_number"
-    t.boolean "research"
+    t.integer "research"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

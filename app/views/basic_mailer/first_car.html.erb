@@ -1,91 +1,85 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<style>
-@media only screen and (min-width: 768px) {
-.mail-box {
-    width: 50% !important;
-}
-}
-a .btn-account{
-    color: #fff !important;
-}
-hr{
-	margin: 0;
-}
+  <head>
+    <style>
+    @media only screen and (min-width: 768px) {
+      .mail-box {
+        width: 50% !important;
+      }
+    }
+    a .btn-account{
+      color: #fff !important;
+    }
+    hr{
+      margin: 0;
+    }
     .mail-box {
-        width: 80%;
-        -moz-box-shadow: 0 0 5px #888;
-       -webkit-box-shadow: 0 0 5px#888;
-        box-shadow: 0 0 5px #888;
-        padding: 20px;
-        display: block;
-        margin: 0 auto;
-        background: #fff;
+      width: 80%;
+      -moz-box-shadow: 0 0 5px #888;
+      -webkit-box-shadow: 0 0 5px#888;
+      box-shadow: 0 0 5px #888;
+      padding: 20px;
+      display: block;
+      margin: 0 auto;
+      background: #fff;
     }
     .btn-account {
-    	
-    background-color: #21a5D6;
-    border-color: #21a5D6 #21a5D6 #0088cc;
-    color: #ffffff !important;
-    padding: 13px 10px 13px 10px;
-    border: none;
-    border-radius: 3px;
-    text-decoration: none;
-    cursor: pointer;
-        font-size: 16px;
-    font-weight: bold;
-
-}
-.whole-body {
-    background: #f1f1f1;
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-.background-b{
-    background: #000;
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-.address-bg {
-    background-color: #21a5D6;
-    padding: 10px 10px;
-    color: #fff;
-}
-</style>
-</head>
-<body class="whole-body">
-<div class="mail-box">
-    
-    <div class="background-b">
-         <center><img src="http://tekkova.herokuapp.com/logo-t2.png" width="200" height="100"></center>
+      background-color: #21a5D6;
+      border-color: #21a5D6 #21a5D6 #0088cc;
+      color: #ffffff !important;
+      padding: 13px 10px 13px 10px;
+      border: none;
+      border-radius: 3px;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .whole-body {
+      background: #f1f1f1;
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+    .background-b{
+      background: #000;
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+    .address-bg {
+      background-color: #21a5D6;
+      padding: 10px 10px;
+      color: #fff;
+    }
+    </style>
+  </head>
+  <body class="whole-body">
+    <div class="mail-box">
+      <div class="background-b">
+        <center><img src="http://tekkova.herokuapp.com/logo-t2.png" width="200" height="100"></center>
+      </div>
+      <h3 style="text-align: center">Congratulations!</h3>
+      <p style="text-transform: capitalize;"><strong>Hi <%= @recepient.name.titlecase %></strong></p>
+      <p>You have successfully created an account with us.<br/> 
+      Please give us some time until we have enough cars listed so we could obtain the best absolute insurance deal for our valued members such as yourself. <br/>
+      Please be aware that there will be no out of pocket expenses, regarding insurance cost whatsoever, to our car hosts. Tekkova has already taken into consideration your vehicles insurance cost into our daily rental prices. <br/>
+      We will notify you once we are ready to start our operations.<br/> 
+      Thank you in advance for your patience. </p>
+      <br>
+      <br>
+      <center><a class="btn-account" href = "http://tekkova.herokuapp.com/">Visit Your Account</a></center>
+      <br>
+      <br>
+      <div class="address-bg">
+        <p style="text-align: center;"><strong>Our Mailing Address is</strong></p>
+        <p style="text-align: center;">
+          67 Howe Street<br>
+          Osborne Park<br>
+          WA 6017
+        </p>
+      </div>
+      <p>
+        This email was sent by Tekkova. Tekkova is an online marketplace that facilitates peer to peer private car rented share.
+      </p>
     </div>
-    <h3 style="text-align: center">Congratulations!</h3>
-    <p style="text-transform: capitalize;"><strong>Hi <%= @recepient.name.titlecase %></strong></p>
-    <p>You have successfully created an account with us.<br>
-     Please remain patient with us until we have enough members so we can obtain the best absolute insurance deal for our members.</p>
-     
-     <p>We appreciate your support & will notify you once we are ready to start our operations.</p>
-     <br>
-     <br>
-    <center><a class="btn-account" href = "http://tekkova.herokuapp.com/">Visit Your Account</a></center>
-    <br>
-    <br>
-    <div class="address-bg">
-    <p style="text-align: center;"><strong>Our Mailing Address is</strong></p>
-    <p style="text-align: center;">
-        67 Howe Street<br> 
-       Osborne Park<br>
-       WA 6017
-    </p>
-    </div>
-
-<p>
-    This email was sent by Tekkova. Tekkova is an online marketplace that facilitates peer to peer private car rented share.
-</p>
-
-</div>
-
-
-</body>
+  </body>
 </html>

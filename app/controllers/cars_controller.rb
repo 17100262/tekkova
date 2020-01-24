@@ -35,7 +35,7 @@ class CarsController < ApplicationController
     render 'cars/listing_criteria'
   end
   def submit_listing_criteria
-    if params[:model_year_check]=="1" and params[:usage_limit_check]=="1" and params[:register_check]=="1" and params[:road_worthy_check]=="1" and params[:write_off_check]=="1" and params[:maintained_check]=="1"
+    if params[:model_year_check]=="1" and params[:usage_limit_check]=="1" and params[:register_check]=="1" and params[:road_worthy_check]=="1" and params[:write_off_check]=="1" and params[:maintained_check]=="1" and params[:availability_check]=="1"
       render 'cars/new'
     else
       
@@ -145,6 +145,6 @@ class CarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
-      params.require(:car).permit(:status,:model_year_check, :usage_limit_check, :register_check, :road_worthy_check, :write_off_check, :maintained_check,:step,:year, :make, :model, :series, :odometer, :trans_mission, :body_type, :color, :fuel_type, :power,:number_of_seats, :drive_type,:description, :liecense_plate_number, :state, :insurance_provider,:agreed_insurance_value,:allow_personal_commercial_use,:daily_drive_limit,:cylinders,:engine_size,car_feature_ids:[],car_pictures_attributes: [:avatar,:_destroy,:id,:position,:delete_picture])
+      params.require(:car).permit(:status,:model_year_check, :usage_limit_check, :register_check, :road_worthy_check, :write_off_check, :maintained_check, :availability_check,:step,:year, :make, :model, :series, :odometer, :trans_mission, :body_type, :color, :fuel_type, :power,:number_of_seats, :drive_type,:description, :liecense_plate_number, :state, :insurance_provider,:agreed_insurance_value,:allow_personal_commercial_use,:daily_drive_limit,:cylinders,:engine_size,car_feature_ids:[],car_pictures_attributes: [:avatar,:_destroy,:id,:position,:delete_picture])
     end
 end

@@ -1,16 +1,14 @@
 /*
- * Base structure
- */
-
+* Base structure
+*/
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   /*padding-top: 50px;*/
 }
 
 /*
- * Typography
- */
-
+* Typography
+*/
 h1 {
   margin-bottom: 20px;
   padding-bottom: 9px;
@@ -18,9 +16,8 @@ h1 {
 }
 
 /*
- * Sidebar
- */
-
+* Sidebar
+*/
 .sidebar {
   position: fixed;
   top: 51px;
@@ -29,7 +26,8 @@ h1 {
   z-index: 1000;
   padding: 20px;
   overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  overflow-y: auto;
+  /* Scrollable contents if viewport is shorter than content. */
   border-right: 1px solid #eee;
 }
 
@@ -47,7 +45,7 @@ h1 {
   width: 100%;
 }
 
-.sidebar .nav-item + .nav-item {
+.sidebar .nav-item+.nav-item {
   margin-left: 0;
 }
 
@@ -56,10 +54,9 @@ h1 {
 }
 
 /*
- * Dashboard
- */
-
- /* Placeholders */
+* Dashboard
+*/
+/* Placeholders */
 .placeholders {
   padding-bottom: 3rem;
 }

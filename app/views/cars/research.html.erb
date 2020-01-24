@@ -1,44 +1,45 @@
 <div class="container-fluid">
-	<div class="row mt-2">
-		<div class="col-md-12 btn-group btn-breadcrumb car-details-tabs main-tabs mx-auto">
-			<a href="#" class="btn btn-primary no-link car_details" style="margin-left: -5px !important;">Car Details</a>
-			<a href="#" class="btn btn-primary no-link car_pictures" style="margin-left: -5px !important;">Car Pictures</a>
-			<a href="#" class="btn btn-primary no-link car_preference" style="margin-left: -5px !important;">Car Preference</a>
-			<a href="#" class="btn btn-primary presonal_details no-link" style="margin-left: -5px !important;">Personal Details</a>
-			<a href="#" class="btn btn-primary driver_license no-link" style="margin-left: -5px !important;">Driver Licence</a>
-			<a href="#" class="btn btn-primary availibility_pickup no-link" style="margin-left: -5px !important;">Availability & Pickup</a>
-			<a href="#" class="btn btn-primary research_development active no-link" style="z-index: 0 !important;">Research & Development</a>
-		</div>
+  <div class="row mt-2">
+    <div class="col-md-12 btn-group btn-breadcrumb car-details-tabs main-tabs mx-auto">
+      <a href="#" class="btn btn-primary no-link car_details" style="margin-left: -5px !important;">Car Details</a>
+      <a href="#" class="btn btn-primary no-link car_pictures" style="margin-left: -5px !important;">Car Pictures</a>
+      <a href="#" class="btn btn-primary no-link car_preference" style="margin-left: -5px !important;">Car Preference</a>
+      <a href="#" class="btn btn-primary presonal_details no-link" style="margin-left: -5px !important;">Personal Details</a>
+      <a href="#" class="btn btn-primary driver_license no-link" style="margin-left: -5px !important;">Driver Licence</a>
+      <a href="#" class="btn btn-primary availibility_pickup no-link" style="margin-left: -5px !important;">Availability & Pickup</a>
+      <a href="#" class="btn btn-primary research_development active no-link" style="z-index: 0 !important;">Research & Development</a>
+    </div>
+  </div>
 </div>
+<h2 class="heading mt-4">Research & Development</h2>
+<div class="w-100">
+  <img src="/research.jpg" class="img-fluid background-bg-arow">
 </div>
-	<h2 class="heading mt-4">Research & Development</h2>
-	<div class="w-100">
-	<img src="/research.jpg" class="img-fluid background-bg-arow">
-	</div>
-
-<div class="container py-4">	
-	<p class="mt-3">Would you mind helping our research & development team?
-	Please note your answer will not have any affect on your car listing process with us.
-	</p>
-	Are you currently a car host for rental purposes with another company?
-	<%= form_for(@user) do |form| %>
-	<div class="checkbox-form my-2">
-			<div class="checkbox-form inner-check-box">
-				<%= radio_button_tag "user[research]",true,@user.research == true,id: 'research_yes' %>
-				<%= form.label "Yes",for: 'research_yes' %>
-				<%= radio_button_tag "user[research]",false,@user.research == false,id: 'research_no'  %>
-				<%= form.label "No", for: 'research_no' %>
-				<%= radio_button_tag "user[research]",false,@user.research == nil,id: 'research_skip'  %>
-				<%= form.label "Skip", for: 'research_skip' %>
-				<%= form.hidden_field :step, value: 4 %>
-			</div>
-	</div>
-	<hr>
-	<a href="<%=pickupdetails_path%>" class="btn btn-sm btn-primary pl-3 pr-3"><i class="fas fa-caret-left"></i> Back</a>
-	<span class="float-right">
-    	<button type="submit" class="btn btn-sm btn-primary pl-3 pr-3">Submit</button>
-	</span>
-	<% end %>
+<div class="container py-4">
+  <p class="mt-3">Would you mind helping our research & development team?
+    <span style="color: #868585">Please note your answer will not have any affect on your car listing process with us.</span>
+  </p>
+  Are you currently a car host for rental purposes with another company?
+  <%= form_for(@user) do |form| %>
+    <div class="checkbox-form my-2">
+      <div class="checkbox-form inner-check-box">
+        <%#= radio_button_tag "user[research]",true,@user.research == true,id: 'research_yes' %>
+        <%#= form.label "Yes",for: 'research_yes' %>
+        <%#= radio_button_tag "user[research]",false,@user.research == false,id: 'research_no'  %>
+        <%#= form.label "No", for: 'research_no' %>
+        <%#= form.input :research, as: :radio, collection: User.researches %>
+        <%= form.collection_radio_buttons :research, User.researches, :first,:first do |b|
+          b.label { b.radio_button + b.text.capitalize }
+        end %>
+        <%#= radio_button_tag "user[research]",nil,@user.research == nil,id: 'research_skip'  %>
+        <%#= form.label "Skip", for: 'research_skip' %>
+        <%= form.hidden_field :step, value: 4 %>
+      </div>
+    </div>
+    <hr>
+    <a href="<%=pickupdetails_path%>" class="btn btn-sm btn-primary pl-3 pr-3"><i class="fas fa-caret-left"></i> Back</a>
+    <span class="float-right">
+      <button type="submit" class="btn btn-sm btn-primary pl-3 pr-3">Submit</button>
+    </span>
+  <% end %>
 </div>
-
-

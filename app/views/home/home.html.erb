@@ -1,208 +1,189 @@
 <% if user_signed_in? and current_user.sign_in_count <= 1 %>
-    <%= render 'cars/congrats' %>
+  <%= render 'cars/congrats' %>
 <% end %>
 <section id="banner" class="page-header custom-product">
-	<div class="container-fluid section-banner">
-		<div class="row">
-			<div class="col-sm-12 py-2 text-center">
-				<h1>Provide a car for every occasion</h1>
-				<!--<h3 class="text-light">Have your car pay for itself </h3>-->
-				<h3 class="text-light mb-3">Have your car pay for itself</h2>
-				<a href="/how_it_works" class="btn btn-primary btn-lg mb-2">How Tekkova works</a><br>
-				<a href="/listing_criteria" class="btn btn-primary btn-lg mb-3 mr-2">Listing Criteria</a>
-				<a href="/cars/new" class="btn btn-primary btn-lg mb-3 mr-2 pl-4 pr-4">List your car</a>
-				<p class="lead">Become one of our car hosts by the end of  February  2020 &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and we will waive our fees for your first initial 8 bookings.</p>
-				<p class="text-light lead mb-3 font-weight-bold pb-3">List your car & start earning soon</p>
-			</div>
-		
-		</div>
-	</div>
-</section>
-
-<div class="calculator-section">
-<section class="estimate text-center">
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="heading-primary">
-                    Is it worth it?
-                </h1>
-                <h3>
-                    How much can I earn renting out my car?
-                </h3>
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-md-6">
-                <h5 class="mb-4">Agreed value of your car</h5>
-                <div id="slider"></div>
-                <p class="mt-5">
-                <input type="text" id="amount" class="text-center range-text calculator-field-trans" readonly>
-                <label for="amount"></label>
-                </p>
-            </div>
-            <div class="col-md-6">
-                <h5 class="mb-4">Days per week your car is hired</h5>
-                <div id="slider2"></div>
-                <p class="mt-5">
-                <input type="text" id="amount2" class="text-center lead range-text calculator-field-trans" readonly>
-               <label for="amount2"></label>
-                </p>
-                 
-            </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-lg-4 d-none d-lg-block">
-            <img src="/calc.img.png" class="img-fluid">
-          </div>
-            <div class="col-lg-4">
-                <p class="mt-5">
-            <h4 class="text-center mb-4">You could potentially earn</h4>
-            <input type="text" id="amountf" class="text-center range-text-earn w-100 calculator-field-trans" readonly>
-            <label for="amountf"></label>
-            <h5>Annually</h5>
-            <center>  <a href="#" class="btn btn-primary mt-4 fees-btn-home"  data-toggle="modal" data-target="#feesInfo">Fees & Important Information</a></center>
-            </div>
-            <div class="col-lg-4 d-none d-lg-block">
-              <img src="/calc-card.png" class="img-fluid">
-            </div>
-        </div>
+  <div class="container-fluid section-banner">
+    <div class="row">
+      <div class="col-sm-12 py-2 text-center">
+        <h1>Provide a car for every occasion</h1>
+        <!--<h3 class="text-light">Have your car pay for itself </h3>-->
+        <h3 class="text-light mb-3">Have your car pay for itself</h3>
+        <a href="/how_it_works" class="btn btn-primary btn-lg mb-2">How Tekkova works</a><br>
+        <a href="/listing_criteria" class="btn btn-primary btn-lg mb-3 mr-2">Listing Criteria</a>
+        <a href="/cars/new" class="btn btn-primary btn-lg mb-3 mr-2 pl-4 pr-4">List your car</a>
+        <p class="lead">Become one of our car hosts by the end of  March  2020 &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and we will waive our fees for your first initial 5 bookings.</p>
+        <p class="text-light lead mb-3 font-weight-bold pb-3">List your car & start earning soon</p>
+      </div>
     </div>
+  </div>
 </section>
+<div class="calculator-section">
+  <section class="estimate text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="heading-primary">
+          Is it worth it?
+          </h1>
+          <h3>
+          How much can I earn renting out my car?
+          </h3>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-6">
+          <h5 class="mb-4">Agreed insurance value of your car</h5>
+          <div id="slider"></div>
+          <p class="mt-5">
+            <input type="text" id="amount" class="text-center range-text calculator-field-trans" readonly>
+            <label for="amount"></label>
+          </p>
+        </div>
+        <div class="col-md-6">
+          <h5 class="mb-4">Days per week your car is hired</h5>
+          <div id="slider2"></div>
+          <p class="mt-5">
+            <input type="text" id="amount2" class="text-center lead range-text calculator-field-trans" readonly>
+            <label for="amount2"></label>
+          </p>
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-lg-4 d-none d-lg-block">
+          <img src="/calc.img.png" class="img-fluid">
+        </div>
+        <div class="col-lg-4">
+          <h4 class="text-center mb-4 mt-5">You could potentially earn</h4>
+          <input type="text" id="amountf" class="text-center range-text-earn w-100 calculator-field-trans" readonly>
+          <label for="amountf"></label>
+          <h5>Annually</h5>
+          <center> <a href="#" class="btn btn-primary mt-4 fees-btn-home" data-toggle="modal" data-target="#feesInfo">Fees & Important Information</a></center>
+        </div>
+        <div class="col-lg-4 d-none d-lg-block">
+          <img src="/calc-card.png" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
-
- <div class="video-bg-home">
+<div class="video-bg-home">
   <div class="container py-md-4">
-    <div class="col-md-6 mx-auto">
-    <iframe src="https://player.vimeo.com/video/376773003?autoplay=1&loop=1&autopause=0&muted=1" width="100%" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <div class="col-lg-6 mx-auto">
+      <iframe src="https://player.vimeo.com/video/376773003?autoplay=1&muted=1" width="100%" class="iframe-video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen muted></iframe>
+      <center>
+      <h5>Check our Listing criteria out for more information</h5></center>
     </div>
   </div>
 </div>
-    <div class="home-bg-footer">
-    <div class="container"> 
-    	<h2 class="text-center heading-primary mb-4 ">Will I be able to increase my rental price?</h2>
-    	<div class="col-lg-4 mx-auto">
-    	<h4 class="text-center">Dynamic Pricing</h4>
-    	<p class="">
-    	<span>
-					Tekkova as of now endeavours to beat the price & <br>
-					pay car hosts more than any other marketplace<br>
-					operating in Australia, whilst at the same time<br>
-					ensuring car owners obtain bookings, by staying<br>
-					competitive within the peer to peer car rental share<br>
-					atmosphere. In spite of this, by the end of every</span>
-					<span class="show-text">
-					 calendar month or 4 consecutive weeks our top car<br>
-					host performers in any location across Australia<br>
-					whom receive and accept 3 bookings or manage to<br>
-					rent out their vehicle for 3 or more days per week will
-					have the opportunity to increase & set their own
-					rental price on the particular top performing vehicle
-					anywhere from 5 to $10, the exact figure will depend
-					on the agreed insured value of the vehicle.
+<div class="home-bg-footer">
+  <div class="container">
+    <h2 class="text-center heading-primary mb-4 ">Will I be able to increase my rental price?</h2>
+    <div class="col-lg-4 mx-auto">
+      <h4 class="text-center">Dynamic Pricing</h4>
+      <p class="">
+        <span>
+          Tekkova as of now endeavours to beat the price & <br>
+          pay car hosts more than any other marketplace<br>
+          operating in Australia, whilst at the same time<br>
+          ensuring car owners obtain bookings, by staying<br>
+          competitive within the peer to peer car rental share<br>
+          atmosphere. In spite of this, by the end of every
         </span>
-         <span class=" mb-2 clickable btn-text-less text-primary text-center show-less"><span class="">More</span></span>
-         </p>
-          
+        <span class="show-text">
+          calendar month or 4 consecutive weeks our top car<br>
+          host performers in any location across Australia<br>
+          whom receive and accept 3 bookings or manage to<br>
+          rent out their vehicle for 3 or more days per week will
+          have the opportunity to increase & set their own
+          rental price on the particular top performing vehicle
+          anywhere from 5 to $10, the exact figure will depend
+          on the agreed insured value of the vehicle.
+        </span>
+        <span class=" mb-2 clickable btn-text-less text-primary text-center show-less">
+          <span class="">
+            More
+          </span>
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+<section class="home-bg-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <h2 class="heading-primary mb-4">My Earnings</h2>
+        <div class="feature-box feature-box-style-2 reverse mb-5 appear-animation" data-appear-animation="fadeInLeft" data-appear-animation-delay="300">
+          <div class="feature-box-info">
+            <h4 class="mb-2">Rental Price</h4>
+            <p class="mb-4">Tekkova takes into consideration your vehicle’s agreed insurance value due to certain cars having more accessories or features than others within the same make and vehicle model line. Demand or no demand of certain vehicles will either increase or decrease daily rental prices.</p>
+          </div>
         </div>
-	</div>
-	</div>
-		<section class="home-bg-footer">
-			<div class="container">
-	    
-		<div class="row">
-			<div class="col-lg-4">
-			    <h2 class="heading-primary mb-4">My Earnings</h2>
-				<div class="feature-box feature-box-style-2 reverse mb-5 appear-animation" data-appear-animation="fadeInLeft" data-appear-animation-delay="300">
-					<div class="feature-box-info">
-						<h4 class="mb-2">Renting Price</h4>
-						<p class="mb-4">Tekkova takes into consideration your insurance agreed value due to certain cars having more extras in terms of features than others. Demand of certain models will either increase or decrease potential earnings.</p>
-					</div>
-				</div>
-					<div class="feature-box feature-box-style-2 mb-5 appear-animation" data-appear-animation="fadeInRight" data-appear-animation-delay="300">
-					<div class="feature-box-info">
-						<h4 class="mb-2">My Payment</h4>
-						<p class="mb-4">Tekkova pays you fortnightly via direct transfer to your nominated bank account or credit card. Tekkova fee of 20% applies for all successful bookings and will be deducted however we have waived our first 5 initial booking fees for car owners who list their vehicle with us by the end of January 2020.</p>
-					</div>
-				</div>
-				
-			</div>
-			<div class="col-lg-4 mt-md-5 pt-md-5 pb-5">
-				<img src="logo-t2.png" class="img-fluid mockup-landing-page appear-animation" alt="Porto" data-appear-animation="zoomIn" data-appear-animation-delay="300">
-			</div>
-			<div class="col-lg-4">
-			    <h2 class="heading-primary mb-4">How am I covered?</h2>
-			    <div class="feature-box feature-box-style-2 reverse mb-5 appear-animation" data-appear-animation="fadeInLeft" data-appear-animation-delay="300">
-					<div class="feature-box-info">
-						<h4 class="mb-2">Your car is protected</h4>
-						<p class="mb-4">We are currently working with our insurance partners to have you covered against the theft, exterior or interior damage. We will not operate our services & enable bookings unless you are covered before hand.</p>
-					</div>
-				</div>
-				
-				<div class="feature-box feature-box-style-2 mb-5 appear-animation" data-appear-animation="fadeInRight" data-appear-animation-delay="300">
-					<div class="feature-box-info">
-						<h4 class="mb-2">You are in control</h4>
-						<p class="mb-4">Once you have accepted a booking request you will then be able to visit hirers profile & see relevant information such as their personal photo, driver’s licence validity and Rating.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-		</section>
-
-
-
+        <div class="feature-box feature-box-style-2 mb-5 appear-animation" data-appear-animation="fadeInRight" data-appear-animation-delay="300">
+          <div class="feature-box-info">
+            <h4 class="mb-2">My Payment</h4>
+            <p class="mb-4">Tekkova pays you fortnightly via direct transfer to your nominated bank account or credit card. Tekkova fee of 20% applies for all successful bookings and will be deducted however we have waived our first 5 initial booking fees for car owners who list their vehicle with us by the end of March 2020.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mt-md-5 pt-md-5 pb-5">
+        <img src="logo-t2.png" class="img-fluid mockup-landing-page appear-animation" alt="Porto" data-appear-animation="zoomIn" data-appear-animation-delay="300">
+      </div>
+      <div class="col-lg-4">
+        <h2 class="heading-primary mb-4">How am I covered?</h2>
+        <div class="feature-box feature-box-style-2 reverse mb-5 appear-animation" data-appear-animation="fadeInLeft" data-appear-animation-delay="300">
+          <div class="feature-box-info">
+            <h4 class="mb-2">Your car is protected</h4>
+            <p class="mb-4">We are currently working with our insurance partners to have you covered against theft, exterior or interior damage. We will not operate our services & enable bookings unless you are covered before hand.</p>
+          </div>
+        </div>
+        <div class="feature-box feature-box-style-2 mb-5 appear-animation" data-appear-animation="fadeInRight" data-appear-animation-delay="300">
+          <div class="feature-box-info">
+            <h4 class="mb-2">You are in control</h4>
+            <p class="mb-4">Once you have accepted a booking request you will then be able to visit hirers profile & see relevant information such as their personal photo, driver’s licence validity and Rating.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <!--<= render 'cars/policies_popup2' %>-->
 <!--fees and important information modal-->
 <!-- Button trigger modal -->
-
-
 <!-- Modal -->
 <div class="modal fade" id="feesInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-lg-fees" role="document">
     <div class="modal-content">
       <div class="modal-header">
-      	<h4>Fees & Important Information</h4>
+        <h4>Fees & Important Information</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body bg-primary text-white">
-       <p>Please note that the above potential earning is subjected to 20% tekkova fee and an additional insurance fee of 10% deductions however insurance fees may vary from one state to the next based on the car’s postcode location. Tekkova gives you the option to choose what days of the week your car is available weekly from 1 to 3 days per week to be rented out however we encourage our hosts to select availability days from 1 to 5 days per week to increase chances of receiving bookings thus increasing their potential earnings.</p>
+        <p>Please note that the above potential earning is subjected to 20% Tekkova fee and an additional insurance fee of 10% deductions however insurance fees may vary from one state to the next based on the car’s postcode location. Tekkova gives you the option to choose what days of the week your car is available weekly from 1 to 3 days per week to be rented out however we encourage our hosts to select availability days from 1 to 5 days per week to increase chances of receiving bookings thus increasing their potential earnings.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        
       </div>
     </div>
   </div>
 </div>
-
-
-
 <script>
-	
-$(document).ready(function(){
-	$(".show-text").hide();
-  $(".clickable").click(function(){
-  	if($('.show-text').is(':hidden')){
-  		$('.show-text').show();
-  		$(".clickable i").addClass('fa-chevron-up');
-  		$(".clickable i").removeClass('fa-chevron-down');
-  		$(".clickable span").text("Less");
-  	}
-  	else{
-  		$('.show-text').hide();
-  		$(".clickable i").removeClass('fa-chevron-up');
-  		$(".clickable i").addClass('fa-chevron-down');
-  	$(".clickable span").text("More");
-  	}
-    
+  $(document).ready(function() {
+    $(".show-text").hide();
+    $(".clickable").click(function() {
+      if ($('.show-text').is(':hidden')) {
+        $('.show-text').show();
+        $(".clickable i").addClass('fa-chevron-up');
+        $(".clickable i").removeClass('fa-chevron-down');
+        $(".clickable span").text("Less");
+      } else {
+        $('.show-text').hide();
+        $(".clickable i").removeClass('fa-chevron-up');
+        $(".clickable i").addClass('fa-chevron-down');
+        $(".clickable span").text("More");
+      }
+    });
   });
-});
-
-
- 
- 
 </script>

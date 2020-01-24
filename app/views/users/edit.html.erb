@@ -1,168 +1,124 @@
 <div class="container pt-5 pb-5" >
-  	  <div class="loginmodal-container loginmodal-container-edit pt-4">
-  			<div class="loginmodal-container-2">
-        <%= form_for(@user, html: { method: :put }) do |f| %>
+  <div class="loginmodal-container loginmodal-container-edit pt-4">
+    <div class="loginmodal-container-2">
+      <%= form_for(@user, html: { method: :put }) do |f| %>
         <%  address = Geocoder.search(request.remote_ip).first %>
         <% if @user.errors.any? %>
-            <div id="error_explanation">
-              <h2>Please fix these errors, before you can continue:</h2>
-        
-              <ul>
+          <div id="error_explanation">
+            <h2>Please fix these errors, before you can continue:</h2>
+            <ul>
               <% @user.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
               <% end %>
-              </ul>
-            </div>
-          <% end %>
-  			  <div class="row">
-  			    <div class="col-md-6">
-  				    <h3 class="text-center mb-3">Update Profile</h3>
-                <div class="form-group">
-                      <%= f.label :email %>
-                      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-md", required: true %>
-                </div>
-                <div class="form-group">
-                      <%= f.label "First Name" %>
-                      <%= f.text_field :firstname, class: "form-control form-control-md", required: true %>
-                </div>
-                <div class="form-group">
-                    
-                      <%= f.label "Last Name" %>
-                    
-                      <%= f.text_field :lastname, class: "form-control form-control-md", required: true %>
-                </div>
-                <div class="form-group">
-                    
-                      <%= f.label "Phone Number" %>
-                    
-                      <%= f.number_field :personal_mobile, class: "form-control form-control-md", required: true %>
-                </div>
-                <div class="form-group">
-                    
-                      <%= f.label "House Number" %>
-                    
-                      <%= f.text_field :personal_house_number,min: 0, class: "form-control form-control-md", required: true %>
-                </div>
-                <div class="form-group">
-                    
-                      <%= f.label "Street Name" %>
-                    
-                      <%= f.text_field :personal_street_name, class: "form-control form-control-md", required: true %>
-                </div>
-                <div class="form-group">
-                    
-                      <%= f.label "Suburb" %>
-                    
-                      <%= f.text_field :personal_suburb, class: "form-control form-control-md", required: true %>
-                </div>
-                <div class="form-group">
-                    
-                      <%= f.label "State" %>
-                    
-                      <%= f.text_field :personal_state, class: "form-control form-control-md", required: true %>
-                </div>
-                <div class="form-group">
-                    
-                      <%= f.label "Post Code" %>
-                    
-                      <%= f.text_field :personal_postcode, class: "form-control form-control-md", required: true %>
-                </div>
-                <div class="form-group">
-                    
-                      <%= f.label "Date of Birth" %>
-                    
-                      <%= f.text_field :personal_dob, id: 'date-auto-slash', class: "form-control form-control-md", required: true, placeholder: 'DD/MM/YY' %>
-                </div>
-                <div class="form-group">
-                    
-                      <%= f.label "Phone Number" %>
-                    
-                      <%= f.number_field :personal_mobile, class: "form-control form-control-md", required: true %>
-                </div>
-                
-                <div class="form-group">
-                    
-                    
-                      <%= f.check_box :offers,checked: f.object.offers%> <span class="mb-0" for="user_offers">Yes,send me special offers,discounts and updates</span><br>
-                </div>
-                
-  			    </div>
-            <div class="col-md-6">
-                    
-                 <h3 class="text-center mb-3">Driving licence Details</h3>
-                
-                <div class="form-group">
-                    
-                      <%= f.label "Country" %>
-                      
-                      <%= f.text_field :driving_liecense_country,value: address.country, class: "form-control form-control-md", required: true %>
-                    </div>
-                
-                <div class="form-group">
-                    
-                      <%= f.label "State" %>
-                    
-                      <%= f.text_field :driving_liecense_state,value: address.state, class: "form-control form-control-md", required: true %>
-                    </div>
-                
-                <div class="form-group">
-                    
-                      <%= f.label "Licence Number" %>
-                    
-                      <%= f.text_field :driving_liecense_number, class: "form-control form-control-md", required: true %>
-                    </div>
-                
-                <div class="form-group">
-                    
-                      <%= f.label "First Name" %>
-                    
-                      <%= f.text_field :driving_liecense_firstname, class: "form-control form-control-md", required: true %>
-                    </div>
-                
-                <div class="form-group">
-                    
-                      <%= f.label "Middle Name" %>
-                    
-                      <%= f.text_field :driving_liecense_middlename, class: "form-control form-control-md" %>
-                    </div>
-                
-                <div class="form-group">
-                    
-                      <%= f.label "Last Name" %>
-                    
-                      <%= f.text_field :driving_liecense_lastname, class: "form-control form-control-md", required: true %>
-                    </div>
-                
-                <!--<div class="form-group">-->
-                    
-                <!--      <%#= f.label "Driver License Front " %>-->
-                <!--      <%# if @user.licensefront.present? %>-->
-                <!--        &nbsp;  &nbsp; <%#= (link_to "View Current File",@user.licensefront.url,target: "_blank")  %>-->
-                <!--        <div class="">-->
-                <!--          <%#= f.file_field :licensefront, class: "" %>-->
-                <!--        </div>-->
-                <!--      <%# else%>-->
-                <!--        <div class="">-->
-                <!--          <%#= f.file_field :licensefront, class: "", required: true %>-->
-                <!--        </div>-->
-                <!--      <%# end%>-->
-                <!--    </div>-->
-                <!--<div class="form-group">-->
-                    
-                <!--      <%#= f.label "Driver License Back" %>-->
-                <!--      <%# if @user.licenseback.present?  %>-->
-                <!--      &nbsp; &nbsp; <%#= (link_to "View Current File",@user.licenseback.url,target: "_blank") %>-->
-                <!--        <div class="">-->
-                <!--          <%#= f.file_field :licenseback, class: "" %>-->
-                <!--        </div>-->
-                <!--      <%#else%>-->
-                <!--        <div class="">-->
-                <!--          <%#= f.file_field :licenseback, class: "", required: true %>-->
-                <!--        </div>-->
-                <!--      <%#end%>-->
-                <!--    </div>-->
-  			      </div>
+            </ul>
           </div>
+        <% end %>
+        <div class="row">
+          <div class="col-md-6">
+            <h3 class="text-center mb-3">Update Profile</h3>
+            <div class="form-group">
+              <%= f.label :email %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.label "First Name" %>
+              <%= f.text_field :firstname, class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.label "Last Name" %>
+              <%= f.text_field :lastname, class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.label "Phone Number" %>
+              <%= f.number_field :personal_mobile, class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.label "House Number" %>
+              <%= f.text_field :personal_house_number,min: 0, class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.label "Street Name" %>
+              <%= f.text_field :personal_street_name, class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.label "Suburb" %>
+              <%= f.text_field :personal_suburb, class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.label "State" %>
+              <%= f.text_field :personal_state, class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.label "Post Code" %>
+              <%= f.text_field :personal_postcode, class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.label "Date of Birth" %>
+              <%= f.text_field :personal_dob, id: 'date-auto-slash', class: "form-control form-control-md", required: true, placeholder: 'DD/MM/YY' %>
+            </div>
+            <div class="form-group">
+              <%= f.label "Phone Number" %>
+              <%= f.number_field :personal_mobile, class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.check_box :offers,checked: f.object.offers%> <span class="mb-0" for="user_offers">Yes,send me special offers,discounts and updates</span><br>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h3 class="text-center mb-3">Driving licence Details</h3>
+            <div class="form-group">
+              <%= f.label "Country" %>
+              <%= f.text_field :driving_liecense_country,value: address.country, class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.label "State" %>
+              <%= f.text_field :driving_liecense_state,value: address.state, class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.label "Licence Number" %>
+              <%= f.text_field :driving_liecense_number, class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.label "First Name" %>
+              <%= f.text_field :driving_liecense_firstname, class: "form-control form-control-md", required: true %>
+            </div>
+            <div class="form-group">
+              <%= f.label "Middle Name" %>
+              <%= f.text_field :driving_liecense_middlename, class: "form-control form-control-md" %>
+            </div>
+            <div class="form-group">
+              <%= f.label "Last Name" %>
+              <%= f.text_field :driving_liecense_lastname, class: "form-control form-control-md", required: true %>
+            </div>
+            <!--<div class="form-group">-->
+            <!--      <%#= f.label "Driver License Front " %>-->
+            <!--      <%# if @user.licensefront.present? %>-->
+            <!--        &nbsp;  &nbsp; <%#= (link_to "View Current File",@user.licensefront.url,target: "_blank")  %>-->
+            <!--        <div class="">-->
+            <!--          <%#= f.file_field :licensefront, class: "" %>-->
+            <!--        </div>-->
+            <!--      <%# else%>-->
+            <!--        <div class="">-->
+            <!--          <%#= f.file_field :licensefront, class: "", required: true %>-->
+            <!--        </div>-->
+            <!--      <%# end%>-->
+            <!--    </div>-->
+            <!--<div class="form-group">-->
+            
+            <!--      <%#= f.label "Driver License Back" %>-->
+            <!--      <%# if @user.licenseback.present?  %>-->
+            <!--      &nbsp; &nbsp; <%#= (link_to "View Current File",@user.licenseback.url,target: "_blank") %>-->
+            <!--        <div class="">-->
+            <!--          <%#= f.file_field :licenseback, class: "" %>-->
+            <!--        </div>-->
+            <!--      <%#else%>-->
+            <!--        <div class="">-->
+            <!--          <%#= f.file_field :licenseback, class: "", required: true %>-->
+            <!--        </div>-->
+            <!--      <%#end%>-->
+            <!--    </div>-->
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-4 offset-md-4">
             <div class="form-group">
@@ -171,36 +127,31 @@
             </div>
           </div>
         </div>
-			  <% end %>
-			</div>
+      <% end %>
     </div>
+  </div>
 </div>
 <script>
-$( document ).ready(function() {
-  $('#date-auto-slash').bind('keyup','keydown', function(event) {
-    var inputLength = event.target.value.length;
-    if (event.keyCode != 8){
-      if(inputLength === 2 || inputLength === 5){
-        var thisVal = event.target.value;
-        thisVal += '/';
-        $(event.target).val(thisVal);
+  $(document).ready(function() {
+    $('#date-auto-slash').bind('keyup', 'keydown', function(event) {
+      var inputLength = event.target.value.length;
+      if (event.keyCode != 8) {
+        if (inputLength === 2 || inputLength === 5) {
+          var thisVal = event.target.value;
+          thisVal += '/';
+          $(event.target).val(thisVal);
+        }
       }
-    }
+    });
+    $('#date-auto-slash').on('input', function(ev) {
+      var $this = $(this);
+      var maxlength = $this.attr('max').length;
+      var value = $this.val();
+      if (value && value.length >= maxlength) {
+        $this.val(value.substr(0, maxlength));
+      }
+    });
+    $("#date-auto-slash").val(moment().format('DD/MM/YYYY'));
+    var today = moment().format('DD, MMM, YYYY');
   });
-
-  $('#date-auto-slash').on('input', function(ev) {
-    var $this = $(this);
-    var maxlength = $this.attr('max').length;
-    var value = $this.val();
-    if (value && value.length >= maxlength) {
-      $this.val(value.substr(0, maxlength));
-    }
-  });
-  $("#date-auto-slash").val( moment().format('DD/MM/YYYY') );
-     var today = moment().format('DD, MMM, YYYY');  
-  });
-
-  
 </script>
-
-

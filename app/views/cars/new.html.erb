@@ -1,32 +1,29 @@
 <div class="container-fluid my-5 mobile-hide">
   <div class="row">
-  	 <div class="loginmodal-container loginmodal-container-new">
-  			<div class="loginmodal-container-2">
-
-                <center><h2 class="my-3">New Car</h2></center>
-                <!--<= render 'form', car: @car %>-->
-                <%= render 'cars/car_form_steps/listing_criteria', car: @car,scenario: "new" %>
-                
-            </div>
-  		</div> 
+    <div class="loginmodal-container loginmodal-container-new">
+      <div class="loginmodal-container-2">
+        <center><h2 class="my-3">New Car</h2></center>
+        <!--<= render 'form', car: @car %>-->
+        <%= render 'cars/car_form_steps/listing_criteria', car: @car,scenario: "new" %>
+      </div>
     </div>
+  </div>
 </div>
 <div class="container-fluid my-2 mobile-show">
   <div class="row">
-  	 <div class=" py-5">
-  			<div class="loginmodal-container-2">
-          <h2 class="mb-0">Please use a PC, Laptop or a tablet for a more efficient listing process of your car</h2>  
-        </div>
-  		</div> 
+    <div class=" py-5">
+      <div class="loginmodal-container-2">
+        <h2 class="mb-0">Please use a PC, Laptop or a tablet for a more efficient listing process of your car</h2>
+      </div>
     </div>
+  </div>
 </div>
-                
 <script>
   if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
- $('.mobile-hide').hide();
- $('.mobile-show').show();
-}
-else{
-  $('.mobile-show').hide();
-}
+    $('.mobile-hide').hide();
+    $('.mobile-show').show();
+  }
+  else{
+    $('.mobile-show').hide();
+  }
 </script>

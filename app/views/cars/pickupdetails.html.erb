@@ -1,170 +1,158 @@
 <div class="container-fluid">
-<div class="row mt-2">
-<div class="col-md-12 btn-group btn-breadcrumb car-details-tabs main-tabs">
-    <a href="#" class="btn btn-primary no-link car_details" style="margin-left: -5px !important;">Car Details</a>
-    <a href="#" class="btn btn-primary no-link car_pictures" style="margin-left: -5px !important;">Car Pictures</a>
-    <a href="#" class="btn btn-primary no-link car_preference" style="margin-left: -5px !important;">Car Preference</a>
-    <a href="#" class="btn btn-primary presonal_details no-link" style="margin-left: -5px !important;">Personal Details</a>
+  <div class="row mt-2">
+    <div class="col-md-12 btn-group btn-breadcrumb car-details-tabs main-tabs">
+      <a href="#" class="btn btn-primary no-link car_details" style="margin-left: -5px !important;">Car Details</a>
+      <a href="#" class="btn btn-primary no-link car_pictures" style="margin-left: -5px !important;">Car Pictures</a>
+      <a href="#" class="btn btn-primary no-link car_preference" style="margin-left: -5px !important;">Car Preference</a>
+      <a href="#" class="btn btn-primary presonal_details no-link" style="margin-left: -5px !important;">Personal Details</a>
       <a href="#" class="btn btn-primary driver_license no-link" style="margin-left: -5px !important;">Driver Licence</a>
       <a href="#" class="btn btn-primary availibility_pickup active no-link" style="">Availability & Pickup</a>
-       <a href="#" class="btn btn-default research_development no-link" style="margin-left: -5px !important;">Research & Development</a>
-</div>
-</div>
+      <a href="#" class="btn btn-default research_development no-link" style="margin-left: -5px !important;">Research & Development</a>
+    </div>
+  </div>
 </div>
 <h2 class="heading mt-4">Availability & Pickup</h2>
 <div class="w-100">
-<img src="/car-pick_1.jpg" class="img-fluid background-bg-arow">
+  <img src="/car-pick_1.jpg" class="img-fluid background-bg-arow">
 </div>
 <div class="container py-4">
-<div id="" class="car_availibility">
-
-
-
-<%= form_for(@user) do |form| %>
-        <%  address = Geocoder.search(request.remote_ip).first %>
-            <% if @user.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(@user.errors.count, "error") %> prohibited this @user from being saved:</h2>
-          
-                <ul>
-                <% @user.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-                </ul>
-              </div>
+  <div id="" class="car_availibility">
+    <%= form_for(@user) do |form| %>
+      <%  address = Geocoder.search(request.remote_ip).first %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this @user from being saved:</h2>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
             <% end %>
-            <div id="wizard">
-              <section>
-                <h5>What is your car's pickup location?</h5>
-                <div class="row">
-                  <div class="col-lg-4 col-md-6">
-                    <label>Suburb</label>
-                    <%= form.text_field :pickup_suburb,  class:"form-control", required: true, value: (address.city if address)  %>
-                  </div>
-                  <div class="col-lg-4 col-md-6">
-                    <label>Postcode</label>
-                  <%= form.text_field :pickup_postcode,  class:"form-control", required: true ,value: (address.postal if address) %>
-                  </div>
-                  <div class="col-lg-4 col-md-6">
-                    <label>State</label>
-                  <%= form.text_field :pickup_state,  class:"form-control", required: true ,value: (address.state if address)  %>
-                  </div>
-                </div>  
-                <hr>
-                <h5 class="mt-3">What day of the week is your car available?</h5>
-                <div class="checkbox-form inner-check-box">
-                <% ["Any day","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-              		
-                  <%= check_box_tag "user[availibility_days][]", day,(@user.availibility_days.include?(day) if @user.availibility_days.present?),id: "day#{index}",class: "ablebox" %>
-                  <%= form.label day,for: "day#{index}" %>
-              	<% end %>	
-              	</div>
-              	
-              	<hr>
-              	
-              	<h5 class="mt-3">On average on a monthly basis, Do you prefer short or long term rentals?</h5>
-                <div class="checkbox-form inner-check-box">
-                  <%= radio_button_tag "user[rental]","Short term",@user.rental=="Short term", name: 'preferterm', required: true,id: 'prefershort' %>
-                  <%= form.label "Short Term, 1 to 15 days per month",for: 'prefershort' %>
-                  <%= radio_button_tag "user[rental]","Long term",@user.rental=="Long term", name: 'preferterm',id: 'preferlong'  %>
-                  <%= form.label "Long Term, 15 to 30 days per month",for: 'preferlong' %>
-                
-              	</div>
-              	<hr>
-              	
-              	<h5 class="mt-3">How much advance notice do you need?</h5>
-                <div class="checkbox-form inner-check-box">
-                  <%= radio_button_tag "user[advance_notice]","Anytime",@user.advance_notice=="Anytime", name: 'advancenotice', required: true, id: 'advance_notice_anytime' %>
-                  <%= form.label "Pickup Available at anytime before 6 Pm", for: 'advance_notice_anytime' %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","1 to 6 hours",@user.advance_notice=="1 to 6 hours", name: 'advancenotice', id: 'advance_notice_6'  %>
-                  <%= form.label "1 to 6 hours", for: 'advance_notice_6' %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","6 to 12 hours",@user.advance_notice=="6 to 12 hours", name: 'advancenotice', id: 'advance_notice_12'  %>
-                  <%= form.label "6 to 12 hours", for: 'advance_notice_12' %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","12 to 24 hours",@user.advance_notice=="12 to 24 hours", name: 'advancenotice', id: 'advance_notice_24'  %>
-                  <%= form.label "12 to 24 hours", for: 'advance_notice_24' %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","Two days",@user.advance_notice=="Two days", name: 'advancenotice', id: 'advance_notice_2'  %>
-                  <%= form.label "Two days", for: 'advance_notice_2' %>
-                  
-                  <%= radio_button_tag "user[advance_notice]","3 days",@user.advance_notice=="3 days" , name: 'advancenotice', id: 'advance_notice_3' %>
-                  <%= form.label "3 days", for: 'advance_notice_3' %>
-                    <%= form.hidden_field :step, value: 3 %>
-              	</div>
-              	<hr>
-              </section>
-              </div>
-                
-                  <a href="<%= driverdetails_path %>" class="btn btn-sm btn-primary pl-3 pr-3"><i class="fas fa-caret-left"></i> Back</a>
-                  <span class="float-right">
-                  <button type="submit" id="pickup_submit" class="btn btn-primary btn-sm pl-3 pr-3">Next <i class="fas fa-caret-right"></i></button>
-                  </span>
-                    
-                 
-          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div id="wizard">
+        <section>
+          <h5>What is your car's pickup location?</h5>
+          <div class="row">
+            <div class="col-lg-4 col-md-6">
+              <label>Suburb</label>
+              <%= form.text_field :pickup_suburb,  class:"form-control", required: true, value: (address.city if address)  %>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <label>Postcode</label>
+              <%= form.text_field :pickup_postcode,  class:"form-control", required: true ,value: (address.postal if address) %>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <label>State</label>
+              <%= form.text_field :pickup_state,  class:"form-control", required: true ,value: (address.state if address)  %>
+            </div>
+          </div>
+          <hr>
+          <h5 class="mt-3">What day of the week is your car available?</h5>
+          <div class="checkbox-form inner-check-box">
+            <% ["Any day","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+            
+            <%= check_box_tag "user[availibility_days][]", day,(@user.availibility_days.include?(day) if @user.availibility_days.present?),id: "day#{index}",class: "ablebox" %>
+            <%= form.label day,for: "day#{index}" %>
+            <% end %>
+          </div>
           
-</div>
+          <hr>
+          
+          <h5 class="mt-3">On average on a monthly basis, Do you prefer short or long term rentals?</h5>
+          <div class="checkbox-form inner-check-box">
+            <%= radio_button_tag "user[rental]","Short term",@user.rental=="Short term", name: 'preferterm', required: true,id: 'prefershort' %>
+            <%= form.label "Short Term, 1 to 15 days per month",for: 'prefershort' %>
+            <%= radio_button_tag "user[rental]","Long term",@user.rental=="Long term", name: 'preferterm',id: 'preferlong'  %>
+            <%= form.label "Long Term, 15 to 30 days per month",for: 'preferlong' %>
+            
+          </div>
+          <hr>
+          
+          <h5 class="mt-3">How much advance notice do you need?</h5>
+          <div class="checkbox-form inner-check-box">
+            <%= radio_button_tag "user[advance_notice]","Anytime",@user.advance_notice=="Anytime", name: 'advancenotice', required: true, id: 'advance_notice_anytime' %>
+            <%= form.label "Pickup Available at anytime before 6 Pm", for: 'advance_notice_anytime' %>
+            
+            <%= radio_button_tag "user[advance_notice]","1 to 6 hours",@user.advance_notice=="1 to 6 hours", name: 'advancenotice', id: 'advance_notice_6'  %>
+            <%= form.label "1 to 6 hours", for: 'advance_notice_6' %>
+            
+            <%= radio_button_tag "user[advance_notice]","6 to 12 hours",@user.advance_notice=="6 to 12 hours", name: 'advancenotice', id: 'advance_notice_12'  %>
+            <%= form.label "6 to 12 hours", for: 'advance_notice_12' %>
+            
+            <%= radio_button_tag "user[advance_notice]","12 to 24 hours",@user.advance_notice=="12 to 24 hours", name: 'advancenotice', id: 'advance_notice_24'  %>
+            <%= form.label "12 to 24 hours", for: 'advance_notice_24' %>
+            
+            <%= radio_button_tag "user[advance_notice]","Two days",@user.advance_notice=="Two days", name: 'advancenotice', id: 'advance_notice_2'  %>
+            <%= form.label "Two days", for: 'advance_notice_2' %>
+            
+            <%= radio_button_tag "user[advance_notice]","3 days",@user.advance_notice=="3 days" , name: 'advancenotice', id: 'advance_notice_3' %>
+            <%= form.label "3 days", for: 'advance_notice_3' %>
+            <%= form.hidden_field :step, value: 3 %>
+          </div>
+          <hr>
+        </section>
+      </div>
+      <a href="<%= driverdetails_path %>" class="btn btn-sm btn-primary pl-3 pr-3"><i class="fas fa-caret-left"></i> Back</a>
+      <span class="float-right">
+        <button type="submit" id="pickup_submit" class="btn btn-primary btn-sm pl-3 pr-3">Next <i class="fas fa-caret-right"></i></button>
+      </span>
+    <% end %>
+  </div>
 </div><div class="container">
-
 <script>
-  $(document).ready(function () {
-        var checkedval = false;
-        if ($("#day0").prop("checked")) {
-             <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-                $('#day<%=index+1%>').attr('disabled', true);
-             <%end%>
-          // $('#Anyday').attr('disabled', false);
-            // checkedval = true
-        } else {
-             <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-                $('#day<%=index+1%>').attr('disabled', false);
-                $('#day<%=index+1%>').attr('disabled', false);
-             <%end%>
-        }
-       <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-           if ($('#day<%=index+1%>').prop("checked")) {
-             checkedval = true
-           }
-       <%end%>
-       if(checkedval == true){
-            $('#day0').attr('disabled', true);
-       }else{
-            $('#day0').attr('disabled', false);
-       }
-        
-    });
-  $('.ablebox').change(function () {
-        var checkedval = false;
-        if ($("#day0").prop("checked")) {
-             <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-                $('#day<%=index+1%>').attr('disabled', true);
-             <%end%>
-        } else {
-             <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-                $('#day<%=index+1%>').attr('disabled', false);
-             <%end%>
-        }
-       <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
-           if ($('#day<%=index+1%>').prop("checked")) {
-             checkedval = true
-           }
-       <%end%>
-       if(checkedval == true){
-            $('#day0').attr('disabled', true);
-       }else{
-            $('#day0').attr('disabled', false);
-       }
-        
-    });
-
-  $('#pickup_submit').on('click', function(event) {
-    if (!$("#day0").prop("checked")) {
-      if ($('.ablebox:checked').size() < 3){
-        toastr.error("Please tick up to 3 days or Any day");
-        return false
-      }
+$(document).ready(function() {
+  var checkedval = false;
+  if ($("#day0").prop("checked")) {
+    <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+      $('#day<%=index+1%>').attr('disabled', true);
+    <% end %>
+    // $('#Anyday').attr('disabled', false);
+    // checkedval = true
+  } else {
+    <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+      $('#day<%=index+1%>').attr('disabled', false);
+      $('#day<%=index+1%>').attr('disabled', false);
+    <% end %>
+  }
+  <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+    if ($('#day<%=index+1%>').prop("checked")) {
+      checkedval = true
     }
-  });
+  <%end%>
+  if (checkedval == true) {
+    $('#day0').attr('disabled', true);
+  } else {
+    $('#day0').attr('disabled', false);
+  }
+});
+$('.ablebox').change(function() {
+  var checkedval = false;
+  if ($("#day0").prop("checked")) {
+    <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+      $('#day<%=index+1%>').attr('disabled', true);
+    <%end%>
+  } else {
+    <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+      $('#day<%=index+1%>').attr('disabled', false);
+    <%end%>
+  }
+  <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day,index| %>
+    if ($('#day<%=index+1%>').prop("checked")) {
+      checkedval = true
+    }
+  <%end%>
+  if (checkedval == true) {
+    $('#day0').attr('disabled', true);
+  } else {
+    $('#day0').attr('disabled', false);
+  }
+});
+$('#pickup_submit').on('click', function(event) {
+  if (!$("#day0").prop("checked")) {
+    if ($('.ablebox:checked').size() < 3) {
+      toastr.error("Please tick up to 3 days or Any day");
+      return false
+    }
+  }
+});
 </script>

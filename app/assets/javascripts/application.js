@@ -19,38 +19,35 @@
 //= require cocoon
 //= require_tree .
 toastr.options = {
-  "closeButton": true,
+  "closeButton": false,
   "debug": false,
   "progressBar": true,
   "positionClass": "toast-top-right",
   "showDuration": "300",
-  "hideDuration": "1000",
-  "timeOut": "5000",
+  "fadeOut": "3000",
+  "timeOut": "3000",
   "extendedTimeOut": "1000",
   "showEasing": "swing",
   "hideEasing": "linear",
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
-  function image() {
-    var now = $('.carousel-li.active').index() + 1;
-    var total = $('.carousel-li').length;
-    $('.image-quantity').text(now + " / " + total);
-    if(now > 4){
-      var n = $(".article-slide .carousel-indicators").height();
+
+function image() {
+  var now = $('.carousel-li.active').index() + 1;
+  var total = $('.carousel-li').length;
+  $('.image-quantity').text(now + " / " + total);
+  if (now > 4) {
+    var n = $(".article-slide .carousel-indicators").height();
     $('.article-slide .carousel-indicators').animate({ scrollTop: n }, 0);
-    }
-    else{
-     $('.article-slide .carousel-indicators').animate({ scrollTop: 0 }, 0); 
-    }
+  } else {
+    $('.article-slide .carousel-indicators').animate({ scrollTop: 0 }, 0);
   }
+}
 $(document).ready(function() {
   image();
   $('.carousel-indicators li').addClass('carousel-li');
   $('.carousel-li:eq(0)').addClass("active");
-
-  toastr.options.closeHtml = '<button><i class="icon-on"></i></button>';
-  toastr.options.closeHtml = true;
   $('.alert').delay(2000).fadeOut();
   $('#multi-form input[type="text"]').addClass('form-control');
   $('#multi-form input[type="number"]').addClass('form-control');
@@ -71,9 +68,9 @@ $(document).ready(function() {
   $('#multi-form select').attr("required", true);
   $('#multi-form textarea').attr("required", true);
 });
-  $(document).bind('ready click keyup mousedown mouseup change', function() {
-    image();
-  })
+$(document).bind('ready click keyup mousedown mouseup change', function() {
+  image();
+})
 $(document).ready(function() {
   $("html").addClass('js');
   $(".input-file-trigger").keydown(function(event) {
@@ -111,9 +108,8 @@ $(function() {
     var value4 = value3 + 25;
     var valuet = value4 * value2;
     var valuec = valuet * 52;
-    var valuef = valuec * 0.46 ;
+    var valuef = valuec * 0.46;
     $("#amountf").val("$" + Math.trunc(valuef));
-
   }
 
   function amountf2() {
@@ -317,102 +313,97 @@ $(document).ready(function() {
 $(document).click(function() {
   modal_click_2();
 });
+(function(b) {
+  var d = window,
+    c, f = function(a, b) { return function() { a.apply(c, b) } },
+    g = function() { var a; if (!c) throw "Tracker has not been defined"; for (a in c) "_" === a.charAt(0) && b.isFunction(c[a]) && (b.ga[a.substr(1)] = f(c[a], arguments)) };
+  b.ga = {};
+  b.ga.load = function(a, e) {
+    b.ajax({
+      type: "get",
+      url: ("https:" === document.location.protocol ? 'https://ssl' : "https:www") + ".google-analytics.com/ga.js",
+      cache: !0,
+      success: function() {
+        if (!d._gat || !d._gat._getTracker) throw "Tracker has not been defined";
+        c = d._gat._getTracker(a);
+        g();
+        b.isFunction(e) && e(c);
+        c._trackPageview()
+      },
+      dataType: "script",
+      data: null
+    })
+  }
+})(jQuery);
 
-
-/* jQuery Google Analytics Plugin https://github.com/shamasis/jquery-ga - http://www.shamasis.net/projects/ga/ @version 2.0.2 */
-(function(b){var d=window,c,f=function(a,b){return function(){a.apply(c,b)}},g=function(){var a;if(!c)throw"Tracker has not been defined";for(a in c)"_"===a.charAt(0)&&b.isFunction(c[a])&&(b.ga[a.substr(1)]=f(c[a],arguments))};b.ga={};b.ga.load=function(a,e){b.ajax({type:"get",url:("https:"===document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js",cache:!0,success:function(){if(!d._gat||!d._gat._getTracker)throw"Tracker has not been defined";c=d._gat._getTracker(a);g();
-b.isFunction(e)&&e(c);c._trackPageview()},dataType:"script",data:null})}})(jQuery);
-
-// création du cookie
 function createCookie(name, value, days) {
-    if(days){
-		var date = new Date();
-		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-		var expires = "; expires=" + date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie  = name + "=" + value + expires + "; path=/";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    var expires = "; expires=" + date.toGMTString();
+  } else var expires = "";
+  document.cookie = name + "=" + value + expires + "; path=/";
 }
-// lecture du cookie
+
 function readCookie(name) {
-	var nameEQ = name + "=";
-	var ca     = document.cookie.split(';');
-	for(var i = 0; i < ca.length; i ++) {
-		var c = ca[i];
-		while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-	}
-	return null;
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
 }
-
-$( window ).load(function() {
-    // Notifications pour les cookies
-    var cookie_avert   = readCookie("cookie_avert"),
-        g_analytics_id = "xxxxxx-x", // Id unique google analytics 
-        domain_name    = "www.tekkova.com"; // nom de domaine du site
-
-    if(cookie_avert === null) { // si le cookie n'existe pas
-        banner_text = 'Please use a PC, laptop or a tablet instead of a mobile phone to signup, list your vehicle or if you are simply just browsing tekkova, in order to have a smoother experience, Thank you. <button class="btn btn-success btn-gradient btn-sm" id="accept-cookie"><i class="fas fa-check"></i></button>';
-        $("body").prepend('<div id="cookies-banner" class="alert alert-info pr-5">' + banner_text + '</div>');
-        
-        // si on accepte, le cookie avec la valeur 'set' est créée, sinon, la valeur 'not'
-        $("#accept-cookie").click(function(){
-            id_button     = $(this).attr("id");
-            action_button = (id_button == "accept-cookie")? 'set' : 'not';
-        
-            createCookie("cookie_avert", action_button, 365);
-    	    $("#cookies-banner").slideUp(350).remove();
-        
-            if(action_button == "set"){ // le cookie avec la valeur 'set' est créée (accept)
-                // on charge Google analytics
-                $.ga.load(g_analytics_id, function(pageTracker) {
-    	    		pageTracker._setDomainName(host);
-				});
-            }
-        });
-    
-        // si aucune action au bout de 10 secondes (implicite)
-        setTimeout(function(){
-          createCookie("cookie_avert", 365);
-            $("#cookies-banner").slideUp(350).remove();
-            
-            // on charge Google analytics
-            $.ga.load(g_analytics_id, function(pageTracker) {
-    	    	pageTracker._setDomainName(host);
-			});
-        }, 15000); // 10 sec
-        
-    }else if(cookie_avert == "set"){ // si le cookie existe avec la valeur 'set'
-        // on charge google analytics
+$(window).load(function() {
+  var cookie_avert = readCookie("cookie_avert"),
+    g_analytics_id = "xxxxxx-x",
+    domain_name = "www.tekkova.com";
+  if (cookie_avert === null) {
+    banner_text = 'Please use a PC, laptop or a tablet instead of a mobile phone to signup, list your vehicle or if you are simply just browsing Tekkova, in order to have a smoother experience, Thank you. <button class="btn btn-success btn-gradient btn-sm" id="accept-cookie"><i class="fas fa-check"></i></button>';
+    $("body").prepend('<div id="cookies-banner" class="alert alert-info pr-5">' + banner_text + '</div>');
+    $("#accept-cookie").click(function() {
+      id_button = $(this).attr("id");
+      action_button = (id_button == "accept-cookie") ? 'set' : 'not';
+      createCookie("cookie_avert", action_button, 365);
+      $("#cookies-banner").slideUp(350).remove();
+      if (action_button == "set") {
         $.ga.load(g_analytics_id, function(pageTracker) {
-    	    pageTracker._setDomainName(host);
-		});
-    }
+          pageTracker._setDomainName(host);
+        });
+      }
+    });
+    setTimeout(function() {
+      createCookie("cookie_avert", 365);
+      $("#cookies-banner").slideUp(350).remove();
+      $.ga.load(g_analytics_id, function(pageTracker) {
+        pageTracker._setDomainName(host);
+      });
+    }, 15000);
+  } else if (cookie_avert == "set") {
+    $.ga.load(g_analytics_id, function(pageTracker) {
+      pageTracker._setDomainName(host);
+    });
+  }
 });
-
 var text_max = 50;
 $('#count_text').html(text_max + ' remaining');
-
 $(document).ready(function() {
-    $(".words_count").on('keyup', function() {
-        var words = this.value.match(/\S+/g).length;
-        if (words > 50) {
-            // Split the string on first 200 words and rejoin on spaces
-            var trimmed = $(this).val().split(/\s+/, 50).join(" ");
-            // Add a space at the end to keep new typing making new words
-            $(this).val(trimmed + " ");
-            alert('You can\'t enter more than 30 words. Your introduction will be trimmed to 30 words.');
-        } else {
-
-            $('#count_text').html('' + 50 - words + ' remaining');
-        }
-    });
+  $(".words_count").on('keyup', function() {
+    var words = this.value.match(/\S+/g).length;
+    if (words > 50) {
+      var trimmed = $(this).val().split(/\s+/, 50).join(" ");
+      $(this).val(trimmed + " ");
+      alert('You can\'t enter more than 30 words. Your introduction will be trimmed to 30 words.');
+    } else {
+      $('#count_text').html('' + 50 - words + ' remaining');
+    }
+  });
 });
-
-$(document).ready(function(){
+$(document).ready(function() {
   var chk1 = $("input:checkbox[name='offer1']");
   var chk2 = $(("input:checkbox[name='offer2']"));
-  chk1.on('change', function(){
-  chk2.prop('checked',this.checked);
-});
+  chk1.on('change', function() {
+    chk2.prop('checked', this.checked);
+  });
 });

@@ -1,24 +1,22 @@
-  <div class="modal" id="policyoffers">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <p>Please read and review the below policies in order to sign up or for more information access all our policies under "Learn More" at the top right hand side of the page. By clicking agree you acknowledge you have read and understood the below policies.</p>
-          <ul>
-            <li>MarketPlace Terms & Conditions</li>
-            <li>Privacy Policy</li>
-            <li>Non-discrimination Policy</li>
-          </ul>
-          <%= form_for(current_user) do |f|%>
-            <%= f.check_box :offers %> <span class="mb-0">Yes,send me special offers,discounts and updates</span><br>
-        </div>
-        <div class="modal-footer">
-            <%= f.submit "Agree",class: "btn btn-primary" %>
-            <!--<a href="<= new_user_session_path %>" class="btn btn-primary" role="button" >Agree</a>-->
-          <% end %>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Disagree</button>
-        </div>
+<div class="modal" id="policyoffers">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Please read and review the below policies in order to sign up or for more information access all our policies under "Learn More" at the top right hand side of the page. By clicking agree you acknowledge you have read and understood the below policies.</p>
+        <ul>
+          <li>MarketPlace Terms & Conditions</li>
+          <li>Privacy Policy</li>
+          <li>Non-discrimination Policy</li>
+        </ul>
+        <%= form_for(current_user) do |f|%>
+        <%= f.check_box :offers %> <span class="mb-0">Yes,send me special offers,discounts and updates</span><br>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit "Agree",class: "btn btn-primary" %>
+        <!--<a href="<= new_user_session_path %>" class="btn btn-primary" role="button" >Agree</a>-->
+        <% end %>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Disagree</button>
       </div>
     </div>
   </div>
-  
-  
+</div>

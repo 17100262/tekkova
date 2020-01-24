@@ -4,277 +4,235 @@
       <div id="car_carousal_slider<%= @car.id %>" class="carousel slide article-slide" data-ride="carousel" data-interval="30px00">
         <div class="row">
           <div class="col-10 pr-1">
-              <div class="carousel-inner">
-                <% @car.car_pictures.order("position ASC").each_with_index  do |image, index| %>
-                  <div class="carousel-item <%= "active" if index == 0 %>">
-                    <%= image_tag(image.avatar.url, class:'car_slider_pic') %>
-                  </div>
-                <% end %>
-                <div class="image-quantity"></div>
-              </div>
-              <a class="carousel-control-prev" href="#car_carousal_slider<%= @car.id %>" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="carousel-control-next" href="#car_carousal_slider<%= @car.id %>" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-              </a>
-              
+            <div class="carousel-inner">
+              <% @car.car_pictures.order("position ASC").each_with_index  do |image, index| %>
+                <div class="carousel-item <%= 'active' if index == 0 %>">
+                  <%= image_tag(image.avatar.url, class:'car_slider_pic') %>
+                </div>
+              <% end %>
+              <div class="image-quantity"></div>
+            </div>
+            <a class="carousel-control-prev" href="#car_carousal_slider<%= @car.id %>" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#car_carousal_slider<%= @car.id %>" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
-        <div class="col-2 pl-0">
-          <div class="top-arrow"></div>
-          <ol class="carousel-indicators indicator-fix-height">
-            
-            <% @car.car_pictures.order("created_at ASC").each_with_index  do |image, index| %>
-              <li data-target="#car_carousal_slider<%= @car.id %>" style="background:url('<%= image.avatar.url %>')" data-slide-to="<%= index %>" <%= "active" if index == 0 %>>
-                <!--<div ></div>-->
-              </li>
-            <% end %>
-          </ol>
-          <div class="down-arrow"></div>
+          <div class="col-2 pl-0">
+            <div class="top-arrow"></div>
+            <ol class="carousel-indicators indicator-fix-height">
+              <% @car.car_pictures.order("created_at ASC").each_with_index  do |image, index| %>
+                  <li data-target="#car_carousal_slider<%= @car.id %>" style="background:url('<%= image.avatar.url %>') center center" data-slide-to="<%= index %>" <%= "active" if index == 0 %>
+                  </li>
+              <% end %>
+            </ol>
+            <div class="down-arrow"></div>
+          </div>
         </div>
       </div>
-   </div>
-  </div>
-  <div class="col-md-2">
-    <button class="btn btn-primary mb-2 px-3 mt-2">Send <br>Booking Request</button>
-    <button class="btn btn-primary px-5 mt-2 mb-2">Contact <br>Owner</button>
-  </div>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary mb-2 px-3 mt-2">Send <br>Booking Request</button>
+      <button class="btn btn-primary px-5 mt-2 mb-2">Contact <br>Owner</button>
+    </div>
   </div>
 </div>
-
 <div class="container py-2">
- <div class="car-detail-highlighted">
-      <p class="mb-0"><strong>
-                    <%= @car.year %>
-                    <%= @car.make %>
-                    <%= @car.model %>
-                    <%= @car.series %>
-                    <%= @car.trans_mission %>
-            </strong> </p>
-     </div>
- </div>
-          
+  <div class="car-detail-highlighted">
+    <p class="mb-0"><strong>
+      <%= @car.year %>
+      <%= @car.make %>
+      <%= @car.model %>
+      <%= @car.series %>
+      <%= @car.trans_mission %>
+    </strong> </p>
+  </div>
+</div>
 <hr>
-
-
 <div class="container py-1">
   <div class="row">
-     <div class="col-md-3">
-       <p class="mb-0 mt-2"><strong>Pickup Location</strong></p>
-     </div>
-     <div class="col-md-9">
-       <div class="pick-car-show-ans">
-         <p class="mb-0"> 
-         <strong>
-           <%= @car.user.pickup_state %>
-           <%= @car.user.pickup_suburb %>
-           <%= @car.user.pickup_postcode %>
-         </strong>
-       </p>
-       </div>
-     </div>
-   </div>
-
- </div>
+    <div class="col-md-3">
+      <p class="mb-0 mt-2"><strong>Pickup Location</strong></p>
+    </div>
+    <div class="col-md-9">
+      <div class="pick-car-show-ans">
+        <p class="mb-0">
+          <strong>
+          <%= @car.user.pickup_state %>
+          <%= @car.user.pickup_suburb %>
+          <%= @car.user.pickup_postcode %>
+          </strong>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 <hr>
-
 <div class="container">
-<section id="tabs">
-
-				<nav>
-					<!--<div class="tabs-border">-->
-					  <div class="nav nav-tabs nav-fill btn-group btn-breadcrumb car-details-tabs car-adver-tb" id="nav-tab" role="tablist">
-					    <a class="btn btn-primary active" id="nav-owner-tab" data-toggle="tab" href="#nav-owner" role="tab" aria-controls="nav-owner" aria-selected="true">Owner's Comments </a>
-              <a id="nav-specs-tab" class="btn btn-primary  "  data-toggle="tab" href="#nav-specs" role="tab" aria-controls="nav-specs" aria-selected="false">Specs</a>
-              <a id="nav-features-tab" class="btn btn-primary  "  data-toggle="tab" href="#nav-features" role="tab" aria-controls="nav-specs" aria-selected="false">Features</a>
-              <a id="nav-features-tab" class="btn btn-primary  "  data-toggle="tab" href="#nav-usetype" role="tab" aria-controls="nav-specs" aria-selected="false">Use Type</a>
-              <a id="nav-allwance-tab" class="btn btn-primary  "  data-toggle="tab" href="#nav-allwance" role="tab" aria-controls="nav-specs" aria-selected="false">Daily Drive Allowance</a>
+  <section id="tabs">
+    <nav>
+      <!--<div class="tabs-border">-->
+      <div class="nav nav-tabs nav-fill btn-group btn-breadcrumb car-details-tabs car-adver-tb" id="nav-tab" role="tablist">
+        <a class="btn btn-primary active" id="nav-owner-tab" data-toggle="tab" href="#nav-owner" role="tab" aria-controls="nav-owner" aria-selected="true">Owner's Comments </a>
+        <a id="nav-specs-tab" class="btn btn-primary  "  data-toggle="tab" href="#nav-specs" role="tab" aria-controls="nav-specs" aria-selected="false">Specs</a>
+        <a id="nav-features-tab" class="btn btn-primary  "  data-toggle="tab" href="#nav-features" role="tab" aria-controls="nav-specs" aria-selected="false">Features</a>
+        <a id="nav-features-tab" class="btn btn-primary  "  data-toggle="tab" href="#nav-usetype" role="tab" aria-controls="nav-specs" aria-selected="false">Use Type</a>
+        <a id="nav-allwance-tab" class="btn btn-primary  "  data-toggle="tab" href="#nav-allwance" role="tab" aria-controls="nav-specs" aria-selected="false">Daily Drive Allowance</a>
+      </div>
+    </nav>
+    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-owner" role="tabpanel" aria-labelledby="nav-owner-tab">
+        <hr>
+        <strong>Owner's Comments</strong>
+        <hr>
+        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal">Edit</button>
+        <%#= link_to 'Edit'.html_safe, edit_car_path(@car), class:"btn btn-primary float-right" %>
+        <div style="margin-top: 4rem !important">
+          <p class="mt-5"><%= simple_format(@car.description)%></p>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-specs" role="tabpanel" aria-labelledby="nav-specs-tab">
+        <hr>
+        <strong> Specs</strong>
+        <hr>
+        <table>
+          <tr>
+            <td class="spec-car">Body Type</td>
+            <td><%= @car.body_type %></td>
+          </tr>
+          <tr>
+            <td class="spec-car">Colour</td>
+            <td><%= @car.color %></td>
+          </tr>
+          <tr>
+            <td class="spec-car">Drive Type</td>
+            <td><%= @car.drive_type %></td>
+          </tr>
+          <tr>
+            <td class="spec-car">Number of Seats</td>
+            <td><%= @car.number_of_seats %></td>
+          </tr>
+          <tr>
+            <td class="spec-car" width="60%">Number of Cylinders</td>
+            <td><%= @car.cylinders %></td>
+          </tr>
+          <tr>
+            <td class="spec-car">Engine Size</td>
+            <td><%= @car.engine_size %> Litres</td>
+          </tr>
+          <tr>
+            <td class="spec-car">Power (KW)</td>
+            <td><%= @car.power %></td>
+          </tr>
+          <tr>
+            <td class="spec-car">Fuel Type</td>
+            <td><%= @car.fuel_type %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="nav-features" role="tabpanel" aria-labelledby="nav-features-tab">
+        <hr>
+        <strong>Features</strong>
+        <hr>
+        <div class="row">
+          <% @car.car_features.each do |feature|%>
+          <div class="col-md-4">
+            <%= feature.name%>
           </div>
-				</nav>
-				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-					<div class="tab-pane fade show active" id="nav-owner" role="tabpanel" aria-labelledby="nav-owner-tab">
-					  <hr>
-					      <strong>Owner's Comments</strong>
-					  <hr>
-					   <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal">Edit</button>
-					  <%#= link_to 'Edit'.html_safe, edit_car_path(@car), class:"btn btn-primary float-right" %>
-					  <div style="margin-top: 4rem !important">
-					  <p class="mt-5"><%= simple_format(@car.description)%></p>
-					 </div>
-					</div>
-					<div class="tab-pane fade" id="nav-specs" role="tabpanel" aria-labelledby="nav-specs-tab">
-					   <hr>
-					     <strong> Specs</strong>
-					  <hr>
-						 <table>
-                  <tr>
-                    <td class="spec-car">Body Type</td>
-                      <td><%= @car.body_type %></td>
-                  </tr>
-                  
-                  <tr>
-                    <td class="spec-car">Colour</td>
-                      <td><%= @car.color %></td>
-                  </tr>
-                  
-                   <tr>
-                    <td class="spec-car">Drive Type</td>
-                      <td><%= @car.drive_type %></td>
-                  </tr>
-                  
-                    <tr>
-                    <td class="spec-car">Number of Seats</td>
-                      <td><%= @car.number_of_seats %></td>
-                  </tr>
-                  
-                  <tr>
-                    <td class="spec-car" width="60%">Number of Cylinders</td>
-                      <td><%= @car.cylinders %></td>
-                  </tr>
-                  
-                  
-                  <tr>
-                    <td class="spec-car">Engine Size</td>
-                      <td><%= @car.engine_size %> Litres</td>
-                  </tr>
-                  
-                  <tr>
-                    <td class="spec-car">Power (KW)</td>
-                      <td><%= @car.power %></td>
-                  </tr>
-                  
-                 <tr>
-                    <td class="spec-car">Fuel Type</td>
-                      <td><%= @car.fuel_type %></td>
-                  </tr>
-                  </table>
-                 
-					</div>
-					<div class="tab-pane fade" id="nav-features" role="tabpanel" aria-labelledby="nav-features-tab">
-					   <hr>
-					      <strong>Features</strong>
-					  <hr>
-						  <div class="row">
-						      <% @car.car_features.each do |feature|%>
-						      <div class="col-md-4">
-						        <%= feature.name%>
-						      </div>
-						      <% end %>
-						  </div>
-					</div>
-					<div class="tab-pane fade" id="nav-usetype" role="tabpanel" aria-labelledby="nav-features-tab">
-					   <hr>
-					      <strong>Use Type</strong>
-					  <hr>
-					  
-					  <% if @car.allow_personal_commercial_use%>
-					   <p>This vehicle may be used on unsealed roads as indicated by the car owner</p>
-					   <%else%>
-					     <p>This vehicle as indicated by the car owner may only be used on sealed roads.</p>
-					   <% end%>
-					</div>
-					<div class="tab-pane fade" id="nav-allwance" role="tabpanel" aria-labelledby="nav-allwance-tab">
-					  <hr>
-					      <strong>Daily Drive Allowance</strong>
-					  <hr>
-						     <p>150 kilometers is the daily distance driven odometer allowance on this car. <br>
-						     Odometer allowance starts at pick up & ends at the time of drop off.<br>
-                As a courtesy please notify car owner in advance if you plan on using the vehicle 50 km over the set allowance.</p>
-					</div>
-				</div>
-	</div>
+          <% end %>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-usetype" role="tabpanel" aria-labelledby="nav-features-tab">
+        <hr>
+        <strong>Use Type</strong>
+        <hr>
+        <% if @car.allow_personal_commercial_use%>
+          <p>This vehicle may be used on unsealed roads as indicated by the car owner</p>
+        <%else%>
+          <p>This vehicle as indicated by the car owner may only be used on sealed roads.</p>
+        <% end%>
+      </div>
+      <div class="tab-pane fade" id="nav-allwance" role="tabpanel" aria-labelledby="nav-allwance-tab">
+        <hr>
+        <strong>Daily Drive Allowance</strong>
+        <hr>
+        <p>150 kilometers is the daily distance driven odometer allowance on this car. <br>
+        Odometer allowance starts at pick up & ends at the time of drop off.<br>
+        As a courtesy please notify car owner in advance if you plan on using the vehicle 50 km over the set allowance.</p>
+      </div>
+    </div>
+  </div>
 </section>
 <div class="container mb-3">
   <hr>
-					<strong>Received Ratings & Reviews</strong>
-					<hr>
-					<p>By Tekkove Team Testing</p>
-					<p class="mb-0">Average overall ratings</p>
-          
-					<img src="/emoji-1.png" height="30px">
-					<img src="/emoji-2.png" height="30px">
-					<img src="/emoji-3.png" height="35px">
-					<img src="/emoji-4.png" height="30px">
-					<img src="/emoji-5.png" height="30px">
-          
-					<p class="mb-0 mt-2">Communication</p>
-           
-				   <img src="/emoji-1.png" height="30px">
-					<img src="/emoji-2.png" height="30px">
-					<img src="/emoji-3.png" height="35px">
-					<img src="/emoji-4.png" height="30px">
-					<img src="/emoji-5.png" height="30px">
-       
-					<p class="mb-0 mt-2">Agreed pick up time punctuality</p>
-					<img src="/emoji-1.png" height="30px">
-					<img src="/emoji-2.png" height="30px">
-					<img src="/emoji-3.png" height="35px">
-					<img src="/emoji-4.png" height="30px">
-					<img src="/emoji-5.png" height="30px">
-					<p class="mb-0 mt-2">Fuel level</p>
-					<img src="/emoji-1.png" height="30px">
-					<img src="/emoji-2.png" height="30px">
-					<img src="/emoji-3.png" height="35px">
-					<img src="/emoji-4.png" height="30px">
-					<img src="/emoji-5.png" height="30px">
-					<p class="mb-0 mt-2">Car reliability</p>
-					<img src="/emoji-1.png" height="30px">
-					<img src="/emoji-2.png" height="30px">
-					<img src="/emoji-3.png" height="35px">
-					<img src="/emoji-4.png" height="30px">
-					<img src="/emoji-5.png" height="30px">
-					<p class="mb-0 mt-2">Car interior & exterior cleanliness</p>
-				    <img src="/emoji-1.png" height="30px">
-					<img src="/emoji-2.png" height="30px">
-					<img src="/emoji-3.png" height="35px">
-					<img src="/emoji-4.png" height="30px">
-					<img src="/emoji-5.png" height="30px">
+  <strong>Received Ratings & Reviews</strong>
+  <hr>
+  <p>By Tekkove Team Testing</p>
+  <p class="mb-0">Average overall ratings</p>
+  <img src="/emoji-1.png" height="30px">
+  <img src="/emoji-2.png" height="30px">
+  <img src="/emoji-3.png" height="35px">
+  <img src="/emoji-4.png" height="30px">
+  <img src="/emoji-5.png" height="30px">
+  <p class="mb-0 mt-2">Communication</p>
+  <img src="/emoji-1.png" height="30px">
+  <img src="/emoji-2.png" height="30px">
+  <img src="/emoji-3.png" height="35px">
+  <img src="/emoji-4.png" height="30px">
+  <img src="/emoji-5.png" height="30px">
+  <p class="mb-0 mt-2">Agreed pick up time punctuality</p>
+  <img src="/emoji-1.png" height="30px">
+  <img src="/emoji-2.png" height="30px">
+  <img src="/emoji-3.png" height="35px">
+  <img src="/emoji-4.png" height="30px">
+  <img src="/emoji-5.png" height="30px">
+  <p class="mb-0 mt-2">Fuel level</p>
+  <img src="/emoji-1.png" height="30px">
+  <img src="/emoji-2.png" height="30px">
+  <img src="/emoji-3.png" height="35px">
+  <img src="/emoji-4.png" height="30px">
+  <img src="/emoji-5.png" height="30px">
+  <p class="mb-0 mt-2">Car reliability</p>
+  <img src="/emoji-1.png" height="30px">
+  <img src="/emoji-2.png" height="30px">
+  <img src="/emoji-3.png" height="35px">
+  <img src="/emoji-4.png" height="30px">
+  <img src="/emoji-5.png" height="30px">
+  <p class="mb-0 mt-2">Car interior & exterior cleanliness</p>
+  <img src="/emoji-1.png" height="30px">
+  <img src="/emoji-2.png" height="30px">
+  <img src="/emoji-3.png" height="35px">
+  <img src="/emoji-4.png" height="30px">
+  <img src="/emoji-5.png" height="30px">
 </div>
-<!--modal content-->
-<!-- Large modal -->
-
-
-
-
-
 <div class="container">
   <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-lg w-75">
       <div class="modal-content">
-      
-        <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Modal Heading</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-          <%= form_for(@car,remote: true) do |form| %>
-      <%= form.hidden_field :step,value: 4 %>
-      <%= form.text_area :description, rows:"5", class:'form-control', placeholder:"Please provide a description as it will appear on your car advertised profile to renters to see before booking, these may include vehicle modifications or any particular notes that you may have regrading your vehicle"  %>
-      
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <%= form.submit "Save", class:'refresh-page btn btn-primary'%>
-          <%end %>
-          <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-        </div>
-       
+        <%= form_for(@car,remote: true) do |form| %>
+          <div class="modal-body">
+            <%= form.hidden_field :step,value: 4 %>
+            <%= form.text_area :description, rows:"5", class:'form-control', placeholder:"Please provide a description as it will appear on your car advertised profile to renters to see before booking, these may include vehicle modifications or any particular notes that you may have regrading your vehicle"  %>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <%= form.submit "Save", class:'refresh-page btn btn-primary'%>
+            <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+          </div>
+        <%end %>
       </div>
     </div>
   </div>
-  
 </div>
-
-
 <script>
   $('.refresh-page').click(function() {
     setTimeout(location.reload.bind(location), 2000);
-});
- 
+  });
 </script>
