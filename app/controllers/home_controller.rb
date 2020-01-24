@@ -3,22 +3,22 @@ class HomeController < ApplicationController
 
     def home
     end
-    
+
     def car_management
         @cars = Car.all
     end
-    
+
     # def user_management
     # end
 
     def how_it_works
     end
-    
+
     def policies
     end
-    
+
     def contact_us
-    end 
+    end
     def listing_criteria
     end
     def terms_and_conditions
@@ -38,6 +38,8 @@ class HomeController < ApplicationController
     def mass_email
     end
 
+    def send_contact_query
 
-    
+    end
+
 end
