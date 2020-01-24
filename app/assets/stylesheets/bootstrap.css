@@ -5581,7 +5581,7 @@ button.close {
 	right: 0;
 	bottom: 10px;
 	left: 0;
-	z-index: 15;
+	z-index: 0;
 	display: -ms-flexbox;
 	display: flex;
 	-ms-flex-pack: center;
