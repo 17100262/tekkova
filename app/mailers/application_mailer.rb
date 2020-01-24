@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'support@tekkova.com'
+  default from: 'Tekkova customer support <tekkova@customersupport.com>'
   layout 'mailer'
 end
