@@ -1356,6 +1356,7 @@ label {
 }
 
 #toast-container>div {
+  background-size: 19px !important;
   padding: 15px 35px 15px 15px !important;
-  background-position: 270px 8px !important;
+  background-position: 270px 10px !important;
 }
