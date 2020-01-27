@@ -17,7 +17,7 @@
     						<%#= link_to 'Continue with Google',  "#{root_url}users/auth/google_oauth2" ,:class => "login loginmodal-button loginmodal-google" %>
                 <%= f.text_field :firstname , autofocus: true,required: true,class: "form-control form-control-md mb-2", placeholder: "Enter Your First Name" %>
                 <%= f.text_field :lastname , required: true,class: "form-control form-control-md mb-2", placeholder: "Enter Your Last Name" %>
-                <%= f.text_field :personal_mobile ,required: true,class: "form-control form-control-md mb-2", placeholder: "Enter Your Mobile Number" %>
+                <%= f.text_field :personal_mobile ,required: true,class: "form-control form-control-md mb-2", placeholder: "Enter Your Mobile Number", maxlength:"10", minlength:"10",  oninvalid:"this.setCustomValidity('Please ensure your mobile number is correct')", oninput:"this.setCustomValidity('')" %>
                 <%= f.email_field :email, autocomplete: "email",required: true, class: "form-control form-control-md mb-2", placeholder: "Enter Your Email" , id: "join_email" %>
                 <%= f.password_field :password, autocomplete: "off",required: true, class: "form-control form-control-md pss_next mb-2", placeholder: "Enter Your Password"  , id: "join_pword" %>
                 <%= f.password_field :password_confirmation, autocomplete: "off",required: true, class: "form-control form-control-md mb-2", placeholder: "Confirm Your Password", id: "join_cpword" %>
@@ -116,9 +116,5 @@ draggable.on('mousedown', function(e){
       dr.removeClass("drag");
   });
 });
-
-
-
-
 
 </script>
