@@ -4,7 +4,7 @@
             <% if @car.errors.any? %>
               <div id="error_explanation">
                 <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
-          
+
                 <ul>
                 <% @car.errors.full_messages.each do |message| %>
                   <li><%= message %></li>
@@ -12,32 +12,31 @@
                 </ul>
               </div>
             <% end %>
-            
+
               <p>Please ensure that your vehicle meets the following criteria</p>
               <%= f.check_box :model_year_check, required: true, id:"1" %>
               <label for="1">2013-2020 model year</label> <br>
-              
+
               <%= f.check_box :usage_limit_check, required: true, id:"2" %>
               <label for="2">Less than 150,000 in kms</label> <br>
-              
+
+
+              <%= f.check_box :road_worthy_check, required: true, id:"4" %>
+              <label for="4">Road Worthy</label> <br>
+
+              <%= f.check_box :write_off_check, required: true, id:"5" %>
+              <label for="5">No write off history</label> <br>
+
+              <%= f.check_box :maintained_check, required: true, id:"6" %>
+             <label for="6">Well maintained, serviced as scheduled and recommended by the manafacturer </label><br>
               <div class="row mb-2">
                 <div class="col-1 pr-0 list-checkox-width">
                   <%= f.check_box :register_check, required: true, id:"3" %>
                 </div>
                 <div class="col-11 pl-0">
-                    <label for="3" class="d-inline">( Registered plus CTP insurance. In new south wales CTP is also called greenslip. In Queensland CTP needs to to be arranged separately to your vehicle registration. )</label>
+                    <label for="3" class="d-inline">Registered plus CTP insurance. In new south wales CTP is also called greenslip. In Queensland CTP needs to to be arranged separately to your vehicle registration.</label>
                 </div>
               </div>
-              
-              <%= f.check_box :road_worthy_check, required: true, id:"4" %>
-              <label for="4">Road Worthy</label> <br>
-              
-              <%= f.check_box :write_off_check, required: true, id:"5" %>
-              <label for="5">No write off history</label> <br>
-              
-              <%= f.check_box :maintained_check, required: true, id:"6" %>
-             <label for="6">Well maintained, serviced as scheduled and recommended by the manafacturer </label><br>
-
              <%= f.check_box :availability_check, required: true, id:"7" %>
              <label for="7">Vehicle needs to be available 3 days a week or more, Availability days of the vehicle does not have to be consecutive</label><br><br>
               <%= f.hidden_field :step, value: 0 %>
@@ -48,10 +47,9 @@
                   <%#= f.submit "Next", class:"btn btn-primary btn-sm float-right pr-4 pl-4"%>
                   <button type="submit" class="btn btn-primary btn-sm pl-3 pr-3 float-right">Next <i class="fas fa-caret-right"></i></button>
                 </div>
-              
+
               </div>
                 <center>
                <img src="/Listing_criteria_photo.png" class="img-fluid mt-2">
                </center>
-          <% end %> 
-          
+          <% end %>
