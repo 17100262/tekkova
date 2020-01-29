@@ -924,28 +924,28 @@ html .car-details-tabs .btn-primary:hover {
   transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
 }
 
-/*.top-arrow::before {
+.top-arrow::before {
   position: absolute;
-  right: 12px;
-  top: 5px;
+  right: 9px;
+  top: 12px;
   display: inline-block;
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f0de" !important;
   z-index: 999;
-  font-size: 24px;
+  font-size: 33px;
 }
 .down-arrow::before {
   position: absolute;
-  right: 12px;
+  right: 9px;
   display: inline-block;
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f0dd" !important;
   z-index: 999;
-  font-size: 24px;
-  bottom: 20px;
-}*/
+  font-size: 33px;
+  bottom: 27px;
+}
 .article-slide .carousel-indicators {
   scroll-behavior: smooth !important;
 }
@@ -1363,4 +1363,15 @@ label {
   background-size: 19px !important;
   padding: 15px 35px 15px 15px !important;
   background-position: 270px 10px !important;
+}
+.slider-icon {
+  font-size: 25px;
+  color: #a9a9a9;
+}
+span.currency-symbol {
+  position: absolute;
+  padding-left: 3px;
+  top: 29px;
+  color: #495057;
+  font-size: 1rem;
 }

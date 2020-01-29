@@ -13,11 +13,13 @@
               <div class="image-quantity"></div>
             </div>
             <a class="carousel-control-prev" href="#car_carousal_slider<%= @car.id %>" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <i class="fas fa-chevron-left slider-icon"></i>
+              <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
               <span class="sr-only">Previous</span>
             </a>
             <a class="carousel-control-next" href="#car_carousal_slider<%= @car.id %>" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <i class="fas fa-chevron-right slider-icon"></i>
+              <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
               <span class="sr-only">Next</span>
             </a>
           </div>
@@ -25,7 +27,8 @@
             <div class="top-arrow"></div>
             <ol class="carousel-indicators indicator-fix-height">
               <% @car.car_pictures.order("created_at ASC").each_with_index  do |image, index| %>
-                  <li data-target="#car_carousal_slider<%= @car.id %>" style="background:url('<%= image.avatar.url %>') center center" data-slide-to="<%= index %>" <%= "active" if index == 0 %>
+                  <li data-target="#car_carousal_slider<%= @car.id %>" 
+                    style="background:url('<%= image.avatar.url %>') center center" data-slide-to="<%= index %>" <%= "active" if index == 0 %>
                   </li>
               <% end %>
             </ol>
@@ -176,37 +179,37 @@
   <img src="/emoji-2.png" height="30px">
   <img src="/emoji-3.png" height="35px">
   <img src="/emoji-4.png" height="30px">
-  <img src="/emoji-5.png" height="30px">
+  <img src="/emoji-5.png" height="36px">
   <p class="mb-0 mt-2">Communication</p>
   <img src="/emoji-1.png" height="30px">
   <img src="/emoji-2.png" height="30px">
   <img src="/emoji-3.png" height="35px">
   <img src="/emoji-4.png" height="30px">
-  <img src="/emoji-5.png" height="30px">
+  <img src="/emoji-5.png" height="36px">
   <p class="mb-0 mt-2">Agreed pick up time punctuality</p>
   <img src="/emoji-1.png" height="30px">
   <img src="/emoji-2.png" height="30px">
   <img src="/emoji-3.png" height="35px">
   <img src="/emoji-4.png" height="30px">
-  <img src="/emoji-5.png" height="30px">
+  <img src="/emoji-5.png" height="36px">
   <p class="mb-0 mt-2">Fuel level</p>
   <img src="/emoji-1.png" height="30px">
   <img src="/emoji-2.png" height="30px">
   <img src="/emoji-3.png" height="35px">
   <img src="/emoji-4.png" height="30px">
-  <img src="/emoji-5.png" height="30px">
+  <img src="/emoji-5.png" height="36px">
   <p class="mb-0 mt-2">Car reliability</p>
   <img src="/emoji-1.png" height="30px">
   <img src="/emoji-2.png" height="30px">
   <img src="/emoji-3.png" height="35px">
   <img src="/emoji-4.png" height="30px">
-  <img src="/emoji-5.png" height="30px">
+  <img src="/emoji-5.png" height="36px">
   <p class="mb-0 mt-2">Car interior & exterior cleanliness</p>
   <img src="/emoji-1.png" height="30px">
   <img src="/emoji-2.png" height="30px">
   <img src="/emoji-3.png" height="35px">
   <img src="/emoji-4.png" height="30px">
-  <img src="/emoji-5.png" height="30px">
+  <img src="/emoji-5.png" height="36px">
 </div>
 <div class="container">
   <div class="modal fade" id="myModal">

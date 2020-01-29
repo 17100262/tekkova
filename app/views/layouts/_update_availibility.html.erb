@@ -133,7 +133,7 @@ $('.ablebox').change(function() {
 $('#pickup_submit').on('click', function(event) {
   if (!$("#day0").prop("checked")) {
     if ($('.ablebox:checked').size() < 3) {
-      toastr.error("Please tick up to 3 days or Any day");
+      toastr.error("Please tick a minimum of 3 days");
       return false
     }
   }
