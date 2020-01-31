@@ -1375,3 +1375,11 @@ span.currency-symbol {
   color: #495057;
   font-size: 1rem;
 }
+.pre-dollar {
+  background-color: #ddd;
+  height: 38px;
+  padding: 8px 15px;
+}
+.dollar-sign.form-control:focus {
+box-shadow: 0 0 0 0 rgb(34, 165, 214);
+}
