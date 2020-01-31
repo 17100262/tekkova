@@ -87,7 +87,7 @@
   $(document).on('click','#pic_submit', function(event) {
     var len = $('.aabb').length;
     if (len > 0){
-      toastr.warning('Please add atleast 8 images');
+      toastr.error('Please add atleast 8 images');
       event.preventDefault();
     }
     else{

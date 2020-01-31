@@ -161,9 +161,16 @@
       </div>
       
       <div class="col-md-4">
-        <label>Agreed insurance value($)</label>
+         <label>Agreed insurance value</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend pre-dollar">
+            <span class="input-group-text" id="basic-addon1">$</span>
+          </div>
+          <%= form.number_field :agreed_insurance_value, class:"currency_1 dollar-sign"%>
+        </div>
+       <!--  <label>Agreed insurance value</label> -->
         <%#= form.label :agreed_insurance_value %> 
-        <%= form.number_field :agreed_insurance_value, class:"currency_1", placeholder: "$"%>
+        <%#= form.number_field :agreed_insurance_value, class:"currency_1 dollar-sign"%>
       </div>
     </div>
     </section>
@@ -197,4 +204,21 @@ if(myValue.indexOf() != 0) {
 }
 document.getElementById("add_km").value = myValue;
 }
+
+(function($) {
+  $.fn.currencyInput = function() {
+    this.each(function() {
+      var wrapper = $("<div class='currency-input' />");
+      $(this).wrap(wrapper);
+      $(this).before("<span class='currency-symbol'>$</span>");
+    });
+  };
+})(jQuery);
+
+// $(document).ready(function() {
+//   $('input.dollar-sign').currencyInput();
+// });
+
+
+
 </script>
