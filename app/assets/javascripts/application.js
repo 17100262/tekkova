@@ -110,8 +110,14 @@ $(function() {
     var valuec = valuet * 52;
     var valuef = valuec * 0.46;
     $("#amountf").val("$" + Math.trunc(valuef));
-  }
-
+    $('#amountf').val(function(index, value) {
+      return value
+      .replace(/\D/g, "")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    });
+    var valuecomma = $('#amountf').val();
+    $("#amountf").val("$" + valuecomma);
+    }
   function amountf2() {
     var value1 = $("#slider").slider("value");
     var value2 = $("#slider2").slider("value");

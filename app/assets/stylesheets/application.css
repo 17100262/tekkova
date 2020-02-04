@@ -139,6 +139,9 @@ h2.heading {
   .btn-breadcrumb .btn {
     padding: 5px 5px 5px 20px;
   }
+  .range-text {
+    font-size: 25px !important;
+  }
 
   .btn-breadcrumb .btn:first-child {
     padding: 5px;
