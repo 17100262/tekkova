@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-car_features = ['Front Center Armrests', 'Rear Center Armrests',
+car_features = ['Front Centre Armrests', 'Rear Centre Armrests',
                 'Multifunctional Steering Wheel', '2 Zone Climate Control',
                 'Daytime LED Lights', 'Traction Control', 'Blind Spot Sensor',
                 'Parking Sensors', 'Rear View Camera', 'Starter Button',
@@ -15,6 +15,10 @@ car_features = ['Front Center Armrests', 'Rear Center Armrests',
                 'Parking assist', 'Blind Spot Mirrors',
                 'Day time LED running lights']
 
+CarFeature.all.destroy_all
+
 car_features.each do |feature|
   CarFeature.create(name: feature)
 end
+
+##### AFTER HEROKU PUSH RUN COMMAND : > heroku run rake db:seed --app instashowing

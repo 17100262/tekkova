@@ -1,12 +1,16 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-10">
-      <div id="car_carousal_slider<%= @car.id %>" class="carousel slide article-slide" data-ride="carousel" data-interval="30px00">
+      <div id="car_carousal_slider<%= @car.id %>" class="carousel slide article-slide" data-ride="carousel">
         <div class="row">
           <div class="col-10 pr-1">
             <div class="carousel-inner">
               <% @car.car_pictures.order("position ASC").each_with_index  do |image, index| %>
+                
                 <div class="carousel-item <%= 'active' if index == 0 %>">
+                  <% if index == 0 %>
+                  <button class="btn btn-primary image-up-btn"><%= @car.trans_mission %></button>
+                <% end %>
                   <%= image_tag(image.avatar.url, class:'car_slider_pic') %>
                 </div>
               <% end %>
@@ -27,8 +31,10 @@
             <div class="top-arrow"></div>
             <ol class="carousel-indicators indicator-fix-height">
               <% @car.car_pictures.order("created_at ASC").each_with_index  do |image, index| %>
-                  <li data-target="#car_carousal_slider<%= @car.id %>" 
-                    style="background:url('<%= image.avatar.url %>') center center" data-slide-to="<%= index %>" <%= "active" if index == 0 %>
+                  <li data-target="#car_carousal_slider<%= @car.id %>"
+                    style="background:url('<%= image.avatar.url %>') center center"
+                    data-slide-to="<%= index %>"
+                    class="<%= 'active' if index == 0 %>">
                   </li>
               <% end %>
             </ol>
@@ -38,8 +44,8 @@
       </div>
     </div>
     <div class="col-md-2">
-      <button class="btn btn-primary mb-2 px-3 mt-2">Send <br>Booking Request</button>
-      <button class="btn btn-primary px-5 mt-2 mb-2">Contact <br>Owner</button>
+      <a href="" class="btn btn-primary mb-2 px-3 mt-2 owner-btn">Send Booking Request</a>
+      <a href="" class="btn btn-primary px-5 mt-2 mb-2 owner-btn">Contact Owner</a>
     </div>
   </div>
 </div>
@@ -101,40 +107,88 @@
         <hr>
         <strong> Specs</strong>
         <hr>
-        <table>
-          <tr>
-            <td class="spec-car">Body Type</td>
-            <td><%= @car.body_type %></td>
-          </tr>
-          <tr>
-            <td class="spec-car">Colour</td>
-            <td><%= @car.color %></td>
-          </tr>
-          <tr>
-            <td class="spec-car">Drive Type</td>
-            <td><%= @car.drive_type %></td>
-          </tr>
-          <tr>
-            <td class="spec-car">Number of Seats</td>
-            <td><%= @car.number_of_seats %></td>
-          </tr>
-          <tr>
-            <td class="spec-car" width="60%">Number of Cylinders</td>
-            <td><%= @car.cylinders %></td>
-          </tr>
-          <tr>
-            <td class="spec-car">Engine Size</td>
-            <td><%= @car.engine_size %> Litres</td>
-          </tr>
-          <tr>
-            <td class="spec-car">Power (KW)</td>
-            <td><%= @car.power %></td>
-          </tr>
-          <tr>
-            <td class="spec-car">Fuel Type</td>
-            <td><%= @car.fuel_type %></td>
-          </tr>
-        </table>
+        <div class="col-md-5">
+        <div class="specs-body">
+          <div class="row">
+            <div class="col-6">
+             <h6 class="mb-0"> Body Type</h6>
+            </div>
+            <div class="col-6 spec-show-text">
+              <%= @car.body_type %>
+            </div>
+          </div>
+        </div>
+        <div class="specs-body">
+          <div class="row">
+            <div class="col-6">
+              <h6 class="mb-0">Colour</h6>
+            </div>
+            <div class="col-6 spec-show-text">
+              <%= @car.color %>
+            </div>
+          </div>
+        </div>
+        <div class="specs-body">
+          <div class="row">
+            <div class="col-6">
+              <h6 class="mb-0">Drive Type</h6>
+            </div>
+            <div class="col-6 spec-show-text">
+              <%= @car.drive_type %>
+            </div>
+          </div>
+        </div>
+         <div class="specs-body">
+          <div class="row">
+            <div class="col-6">
+             <h6 class="mb-0">Number of Seats</h6>
+            </div>
+            <div class="col-6 spec-show-text">
+              <%= @car.number_of_seats %>
+            </div>
+          </div>
+        </div>
+        <div class="specs-body">
+          <div class="row">
+            <div class="col-6">
+             <h6 class="mb-0">Number of Cylinders</h6>
+            </div>
+            <div class="col-6 spec-show-text">
+             <%= @car.cylinders %>
+            </div>
+          </div>
+        </div>
+        <div class="specs-body">
+          <div class="row">
+            <div class="col-6">
+             <h6 class="mb-0">Engine Size</h6>
+            </div>
+            <div class="col-6 spec-show-text">
+             <%= @car.engine_size %> Litres
+            </div>
+          </div>
+        </div>
+        <div class="specs-body">
+          <div class="row">
+            <div class="col-6">
+            <h6 class="mb-0">Power (KW)</h6>
+            </div>
+            <div class="col-6 spec-show-text">
+             <%= @car.power %>
+            </div>
+          </div>
+        </div>
+        <div class="specs-body">
+          <div class="row">
+            <div class="col-6">
+              <h6 class="mb-0">Fuel Type</h6>
+            </div>
+            <div class="col-6 spec-show-text">
+             <%= @car.fuel_type %>
+            </div>
+          </div>
+        </div>
+          </div>
       </div>
       <div class="tab-pane fade" id="nav-features" role="tabpanel" aria-labelledby="nav-features-tab">
         <hr>
@@ -175,40 +229,40 @@
   <hr>
   <p>By Tekkove Team Testing</p>
   <p class="mb-0">Average overall ratings</p>
-  <img src="/emoji-1.png" height="30px">
-  <img src="/emoji-2.png" height="30px">
-  <img src="/emoji-3.png" height="35px">
-  <img src="/emoji-4.png" height="30px">
+  <img src="/emoji-1.png" height="30px" class="opacityrate">
+  <img src="/emoji-2.png" height="30px"  class="opacityrate">
+  <img src="/emoji-3.png" height="35px"  class="opacityrate">
+  <img src="/emoji-4.png" height="30px"  class="opacityrate">
   <img src="/emoji-5.png" height="38px">
   <p class="mb-0 mt-2">Communication</p>
-  <img src="/emoji-1.png" height="30px">
-  <img src="/emoji-2.png" height="30px">
-  <img src="/emoji-3.png" height="35px">
-  <img src="/emoji-4.png" height="30px">
+  <img src="/emoji-1.png" height="30px" class="opacityrate">
+  <img src="/emoji-2.png" height="30px"  class="opacityrate">
+  <img src="/emoji-3.png" height="35px"  class="opacityrate">
+  <img src="/emoji-4.png" height="30px"  class="opacityrate">
   <img src="/emoji-5.png" height="38px">
   <p class="mb-0 mt-2">Agreed pick up time punctuality</p>
-  <img src="/emoji-1.png" height="30px">
-  <img src="/emoji-2.png" height="30px">
-  <img src="/emoji-3.png" height="35px">
-  <img src="/emoji-4.png" height="30px">
+  <img src="/emoji-1.png" height="30px" class="opacityrate">
+  <img src="/emoji-2.png" height="30px"  class="opacityrate">
+  <img src="/emoji-3.png" height="35px"  class="opacityrate">
+  <img src="/emoji-4.png" height="30px"  class="opacityrate">
   <img src="/emoji-5.png" height="38px">
   <p class="mb-0 mt-2">Fuel level</p>
-  <img src="/emoji-1.png" height="30px">
-  <img src="/emoji-2.png" height="30px">
-  <img src="/emoji-3.png" height="35px">
-  <img src="/emoji-4.png" height="30px">
+  <img src="/emoji-1.png" height="30px" class="opacityrate">
+  <img src="/emoji-2.png" height="30px"  class="opacityrate">
+  <img src="/emoji-3.png" height="35px"  class="opacityrate">
+  <img src="/emoji-4.png" height="30px"  class="opacityrate">
   <img src="/emoji-5.png" height="38px">
   <p class="mb-0 mt-2">Car reliability</p>
-  <img src="/emoji-1.png" height="30px">
-  <img src="/emoji-2.png" height="30px">
-  <img src="/emoji-3.png" height="35px">
-  <img src="/emoji-4.png" height="30px">
+  <img src="/emoji-1.png" height="30px" class="opacityrate">
+  <img src="/emoji-2.png" height="30px"  class="opacityrate">
+  <img src="/emoji-3.png" height="35px"  class="opacityrate">
+  <img src="/emoji-4.png" height="30px"  class="opacityrate">
   <img src="/emoji-5.png" height="38px">
   <p class="mb-0 mt-2">Car interior & exterior cleanliness</p>
-  <img src="/emoji-1.png" height="30px">
-  <img src="/emoji-2.png" height="30px">
-  <img src="/emoji-3.png" height="35px">
-  <img src="/emoji-4.png" height="30px">
+  <img src="/emoji-1.png" height="30px" class="opacityrate">
+  <img src="/emoji-2.png" height="30px"  class="opacityrate">
+  <img src="/emoji-3.png" height="35px"  class="opacityrate">
+  <img src="/emoji-4.png" height="30px"  class="opacityrate">
   <img src="/emoji-5.png" height="38px">
 </div>
 <div class="container">

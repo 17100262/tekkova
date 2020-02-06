@@ -123,12 +123,13 @@
                   </tbody>
               </table>
           <center>
-            <%= link_to current_user.cars.count == 1 ? pickupdetails_path : car_steps_path(id: @car.id,step: 3) ,class: "btn btn-primary mb-1",role: "button" do %>  Back
-            <% end %>
+             <%= link_to 'Car as Advertised', car_details_path(@car), class:"btn btn-primary mb-3 owner-btn" %>
+            
              <%#= link_to 'Back', "/my_garage", class:"btn btn-primary mb-1" %>
           </center>
           <center>
-          <%= link_to 'Car as Advertised', car_details_path(@car), class:"btn btn-primary" %>
+         <%= link_to current_user.cars.count == 1 ? pickupdetails_path : car_steps_path(id: @car.id,step: 3) ,class: "btn btn-primary carshow-back-btn",role: "button" do %>  Back
+            <% end %>
           </center>
           </div>
       </div>    

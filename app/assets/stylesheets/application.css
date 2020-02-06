@@ -846,12 +846,16 @@ html .car-details-tabs .btn-primary:hover {
 .car-adver-tb {
   border-bottom: 0px !important;
 }
+.car_slider_pic {
+  width: 100% !important;
+}
 
 @media (min-width: 768px) {
   img.car_slider_pic {
     max-height: 400px;
     max-width: 100%;
   }
+
 
   .carousel-item.active,
   .carousel-item-next,
@@ -896,7 +900,7 @@ html .car-details-tabs .btn-primary:hover {
   color: #fff;
   display: inline-block;
   position: absolute;
-  bottom: 0px;
+  bottom: 6px;
   right: 0px;
   z-index: 0;
 }
@@ -1369,7 +1373,9 @@ label {
 }
 .slider-icon {
   font-size: 25px;
-  color: #a9a9a9;
+    background: #ddd;
+    padding: 40px 30px;
+    color: #50e4f0;
 }
 span.currency-symbol {
   position: absolute;
@@ -1386,3 +1392,64 @@ span.currency-symbol {
 .dollar-sign.form-control:focus {
 box-shadow: 0 0 0 0 rgb(34, 165, 214);
 }
+.specs-body {
+  background: #ddd;
+    padding: 11px 30px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.spec-show-text {
+  font-weight: 700;
+    font-size: 15px;
+}
+.owner-btn {
+  border-radius: 30px;
+    box-shadow: 0 8px 6px -6px #06aaf7;
+    padding: 13px 50px;
+    background-image: linear-gradient(to right, #06aaf7 , #58eeef );
+    border-color: #06aaf7 !important;
+    border: 0 !important;
+
+}
+a.btn.btn-primary.owner-btn:active {
+  border-radius: 30px;
+    box-shadow: 0 8px 6px -6px #06aaf7 !important;
+    padding: 13px 50px;
+    background-image: linear-gradient(to right, #06aaf7 , #58eeef ) !important;
+    border-color: #06aaf7 !important;
+    border: 0 !important;
+}
+
+.image-up-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px; 
+  z-index: 99999;
+  background-image: linear-gradient(to right, #03abf5 , #4ddeec );
+    border-color: #06aaf7 !important;
+    border: 0 !important;
+    border-radius: 5px;
+    padding: 12 px 30px;
+    font-size: 20px;
+}
+.opacityrate {
+  opacity: 0.7 !important;
+}
+.carshow-back-btn {
+  border-radius: 30px;
+    padding: 13px 92px;
+    border-color: #06aaf7 !important;
+    background: transparent !important;
+    color: #000 !important;
+}
+.carshow-back-btn:hover{
+  background-image: linear-gradient(to right, #06aaf7 , #58eeef ) !important;
+  color: #fff !important;
+}
+.carshow-back-btn:active{
+  background-image: linear-gradient(to right, #06aaf7 , #58eeef ) !important;
+  color: #fff !important;
+}
+a.btn.btn-primary.carshow-back-btn:focus{
+  background-image: linear-gradient(to right, #06aaf7 , #58eeef ) !important;
+  color: #fff !important;

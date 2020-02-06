@@ -5552,11 +5552,11 @@ button.close {
 }
 
 .carousel-control-prev {
-	left: 0;
+	left: -6px;
 }
 
 .carousel-control-next {
-	right: 0;
+	right: -17px;
 }
 
 .carousel-control-prev-icon,
