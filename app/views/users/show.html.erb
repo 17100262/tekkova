@@ -42,7 +42,7 @@
                   </span>
                   <span class="custom-text-color-2">
                     <%#= @user.research.present? ? (@user.research ? 'Yes': 'No'): 'Skipped' %>
-                    <%= @user.skip? ? 'Skipped':@user.research.capitalize %>
+                    <%= @user.skip? ? 'Skipped':@user.research&.capitalize %>
                   </span>
                 </li>
               </ul>
@@ -131,7 +131,7 @@
                       </label>
                     </div>
                   </div>
-                  
+
                   <div class="col-md-6">
                     <p class="font-weight-bold mb-0">Back of drivers licence</p>
                     <div class="custom-file-container" data-upload-id="imageback">
@@ -178,7 +178,7 @@
             <%= (link_to "View License Front", @user.licensefront.url) if @user.licensefront.present? %>
             <%= (link_to "View License Back", @user.licensefront.url) if @user.licenseback.present? %>
           <% end %>
-          
+
           <div class="comments mb-4">
             <strong>Comment:</strong>
             <%= form_for @user do |form| %>

@@ -1,5 +1,5 @@
-<div class="container">
-	<div class="col-md-4 mx-auto">
+<div class="container mt-5">
+	<div class="col-md-6 mx-auto">
 		<div class="card">
 			<div class="card-body">
 				<h2 class="text-center">Resend confirmation instructions</h2>
@@ -11,11 +11,11 @@
 				  </div>
 				  <div class="actions">
 				   <center> <%= f.submit "Resend confirmation instructions", class: 'btn btn-primary mt-3' %></center>
+				   <center> <%= link_to "Log In instead", "/users/sign_in", class: 'btn btn-primary mt-3' %></center>
 				  </div>
 			  	<% end %>
 			</div>
 		</div>
-		
+
 	</div>
-<%#= render "users/shared/links" %>
 </div>
