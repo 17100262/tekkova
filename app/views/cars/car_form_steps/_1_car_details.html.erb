@@ -140,7 +140,7 @@
     </div>  
     <div class="checkbox-form f-car">
     <%= form.collection_check_boxes(:car_feature_ids, CarFeature.all, :id, :name) do  |f| %>
-      <%= f.label class: "col-3" do %>
+      <%= f.label class: "col-md-2 col-5 feature-check-resp " do %>
         <%= f.check_box + f.text%>
       <% end %>
     <% end %>

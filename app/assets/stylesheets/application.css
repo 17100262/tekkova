@@ -102,6 +102,10 @@ h2.heading {
     background-repeat: no-repeat;
     background-size: contain;
   }
+  .feature-check-resp {
+    max-width: 24% !important;
+    display: inline-table;
+  }
 
   .btn-breadcrumb .btn {
     font-size: 18px;
