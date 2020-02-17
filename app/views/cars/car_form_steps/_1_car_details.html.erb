@@ -58,8 +58,13 @@
         <%=  form.text_field :series, required: true  %>
       </div>
       <div class="col-lg-3 col-md-6">
-        <%= form.label :odometer %> 
-        <%=  form.text_field :odometer, id: 'add_km', onfocusout:"auto_km()", required: true  %>
+        <%= form.label :odometer %>
+        <div class="input-group"> 
+        <%=  form.text_field :odometer, id: 'add_km', required: true  %>
+        <div class="input-group-append pre-dollar">
+        <span class="input-group-text">km</span>
+      </div>
+      </div>
       </div>
       <div class="col-lg-3 col-md-6">
         <label>Transmission </label>
@@ -166,7 +171,7 @@
           <div class="input-group-prepend pre-dollar">
             <span class="input-group-text" id="basic-addon1">$</span>
           </div>
-          <%= form.number_field :agreed_insurance_value, class:"currency_1 dollar-sign"%>
+          <%= form.text_field :agreed_insurance_value, class:"currency_1 comma"%>
         </div>
        <!--  <label>Agreed insurance value</label> -->
         <%#= form.label :agreed_insurance_value %> 
@@ -190,35 +195,14 @@
 </div>
 
 <script>
-  $("input.currency_1").val(function(i, val) {
-  return val.replace(/^\s*(\$)?/, "$");
+$('.comma').keyup(function(event) {
+  if(event.which >= 37 && event.which <= 40) return;
+  $(this).val(function(index, value) {
+    return value
+    .replace(/\D/g, "")
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    ;
+  });
 });
-
-
-// added "km" automatically
-function auto_km() {
-var myValue = $("#add_km").val();
-var text = 'km';
-if(myValue.indexOf() != 0) {
-  myValue = `${myValue} ${text}`;
-}
-document.getElementById("add_km").value = myValue;
-}
-
-(function($) {
-  $.fn.currencyInput = function() {
-    this.each(function() {
-      var wrapper = $("<div class='currency-input' />");
-      $(this).wrap(wrapper);
-      $(this).before("<span class='currency-symbol'>$</span>");
-    });
-  };
-})(jQuery);
-
-// $(document).ready(function() {
-//   $('input.dollar-sign').currencyInput();
-// });
-
-
 
 </script>

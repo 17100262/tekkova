@@ -44,8 +44,8 @@
       </div>
     </div>
     <div class="col-md-2">
-      <a href="" class="btn btn-primary mb-2 px-3 mt-2 owner-btn">Send Booking Request</a>
-      <a href="" class="btn btn-primary px-5 mt-2 mb-2 owner-btn">Contact Owner</a>
+      <a href="" class="btn btn-primary mb-2 d-block mt-2">Send Booking <br>Request</a>
+      <a href="" class="btn btn-primary d-block mt-2 mb-2">Contact <br>Owner</a>
     </div>
   </div>
 </div>
@@ -196,8 +196,10 @@
         <hr>
         <div class="row">
           <% @car.car_features.each do |feature|%>
-          <div class="col-md-4">
-            <%= feature.name%>
+            <div class="col-md-4">
+              <div class="specs-body spec-show-text">
+                <%= feature.name%>
+            </div>
           </div>
           <% end %>
         </div>

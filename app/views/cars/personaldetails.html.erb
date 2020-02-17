@@ -63,7 +63,7 @@
             </div>
             <div class="col-md-6">
               <%= form.label "Home Phone Number" %>
-              <%= form.text_field :home_phone_number  %>
+              <%= form.text_field :home_phone_number, maxlength:"10" %>
             </div>
           </div>
         </section>
@@ -111,4 +111,5 @@ function allowNumbersOnly(e) {
     e.preventDefault();
   }
 };
+
 </script>

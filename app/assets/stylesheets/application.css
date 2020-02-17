@@ -1456,4 +1456,7 @@ a.btn.btn-primary.owner-btn:active {
 }
 a.btn.btn-primary.carshow-back-btn:focus{
   background-image: linear-gradient(to right, #06aaf7 , #58eeef ) !important;
-  color: #fff !important;
+  color: #fff !important;}
+  div#error_explanation {
+    color: red !important;
+  }
