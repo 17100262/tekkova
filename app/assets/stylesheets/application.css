@@ -682,6 +682,10 @@ a.ftr-widget-txt:hover {
     float: right;
     margin-right: 12px;
   }
+  .push-left {
+    margin-left: 50px;
+    float: left;
+  }
 }
 
 .f-car {
@@ -1316,11 +1320,14 @@ img {
 }
 
 .file-document-design {
-  padding: 15px 40px;
+  padding: 15px 45px;
   background: #22a5d6;
   border: dotted 2px #000 !important;
   color: #fff;
   font-size: 40px;
+  display: inline-grid;
+  margin-top: 10px;
+
 }
 
 .file-document-design:hover {

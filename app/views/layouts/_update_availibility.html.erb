@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <label>State</label>
-                  <%= form.text_field :pickup_state,  class:"form-control"  %>
+                  <%= form.select :pickup_state, ["New South Wales","Northern Territory","Queensland","South Australia","Tasmania","ACT","Victoria","Western Australia"],{prompt: "Select State"},{class: "form-control"} %>
                 </div>
               </div>
               <hr>

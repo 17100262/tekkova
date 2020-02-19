@@ -412,3 +412,10 @@ $(document).ready(function() {
     chk2.prop('checked', this.checked);
   });
 });
+
+
+$(document).ready(function() {
+$('.select-state').select(function() {
+    $('#selected-state').val($(this).val());
+});
+});

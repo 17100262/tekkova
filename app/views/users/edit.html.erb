@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
               <%= f.label "State" %>
-              <%= f.text_field :personal_state, class: "form-control form-control-md", required: true %>
+              <%= f.select :personal_state, ["New South Wales","Northern Territory","Queensland","South Australia","Tasmania","ACT","Victoria","Western Australia"],{prompt: "Select State"},{class: "form-control form-control-md"} %>
             </div>
             <div class="form-group">
               <%= f.label "Post Code" %>
