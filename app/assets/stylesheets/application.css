@@ -106,6 +106,9 @@ h2.heading {
     max-width: 24% !important;
     display: inline-table;
   }
+  .align-payment-text {
+    margin-top: 70px !important;
+  }
 
   .btn-breadcrumb .btn {
     font-size: 18px;
@@ -1466,4 +1469,9 @@ a.btn.btn-primary.carshow-back-btn:focus{
   color: #fff !important;}
   div#error_explanation {
     color: red !important;
+  }
+ .remove-symbol{
+     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none !important;
   }
