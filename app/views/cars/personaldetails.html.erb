@@ -50,7 +50,7 @@
               <!-- <label>state</label>
               <input type="text" name="" id="selected-state" readonly> -->
               <%= form.label "State" %>
-              <%= form.select :personal_state, ["New South Wales","Northern Territory","Queensland","South Australia","Tasmania","ACT","Victoria","Western Australia"], prompt: "Select State" %>
+              <%= form.select :personal_state, ["New South Wales","Northern Territory","Queensland","South Australia","Tasmania","ACT","Victoria","Western Australia"], {prompt: "Select State"}, {class: 'colorful-select dropdown-primary'} %>
             </div>
             <div class="col-lg-4 col-md-6">
               <%= form.label "Postcode" %>
@@ -112,5 +112,6 @@ function allowNumbersOnly(e) {
     e.preventDefault();
   }
 };
+
 
 </script>

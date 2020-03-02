@@ -159,7 +159,7 @@
 
         <%= form.label :state %> 
         <%#= form.text_field :state  %>
-        <%= form.select :state, ["New South Wales","Northern Territory","Queensland","South Australia","Tasmania","ACT","Victoria","Western Australia"], {prompt: "Select State", selected: current_user.personal_state}, {class: 'select-state', disabled: current_user.personal_state.present?}  %>
+        <%= form.select :state, ["New South Wales","Northern Territory","Queensland","South Australia","Tasmania","ACT","Victoria","Western Australia"], {prompt: "Select State", selected: current_user.personal_state}, {class: 'select-state remove-symbol', disabled: current_user.personal_state.present?}  %>
       </div>
       <div class="col-md-4">
         <%= form.label :insurance_provider %> 
