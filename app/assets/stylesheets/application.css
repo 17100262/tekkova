@@ -882,8 +882,12 @@ html .car-details-tabs .btn-primary:hover {
   .indicator-fix-height {
     overflow-y: scroll;
     height: 400px;
+    scrollbar-color: rgba(0,0,0,0.3) #a9a9a9 !important;
   }
 }
+
+
+
 
 @media (max-width: 768px) {
   img.car_slider_pic {
