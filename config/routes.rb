@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     confirmations: 'users/confirmations'
   }
-
+  resources :users
   devise_scope :user do
     get '/users/auth/google_oauth2/callback' => 'users/omniauth_callbacks#google_oauth2'
     get '/users/auth/facebook/callback' => 'users/omniauth_callbacks#facebook'
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   get 'late_return_policy', to: 'users#late_return_policy', as: :late_return_policy
   get 'sign_up_page', to: 'users#sign_up_page', as: :sign_up_page
 
-  resources :users
+
   resources :car_steps
   resources :comment_files
   # , path: '/users/profile'

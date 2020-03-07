@@ -23,8 +23,4 @@ config.secret_key = '77c78c2181dfe988740b5030d2de29e925eaf7fd836f8571f2bd19ad0a8
   config.scoped_views = true
   config.sign_out_via = :delete
   config.send_password_change_notification = true
-  config.omniauth :facebook, Rails.application.secrets['fb_access_id'], Rails.application.secrets['fb_secret_id']
-  config.omniauth :linkedin, Rails.application.secrets['linkedin_access_id'], Rails.application.secrets['linkedin_secret_id']
-  config.omniauth :twitter , Rails.application.secrets['twitter_access_id'], Rails.application.secrets['twitter_secret_id']
-  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
 end
