@@ -32,7 +32,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
         if is_navigational_format?
           set_flash_message(:notice, :success, kind: 'Google')
-          end
+        end
       else
         session[:omniauth] = request.env['omniauth.auth'].except(:extra)
         redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
