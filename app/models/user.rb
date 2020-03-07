@@ -53,6 +53,8 @@ class User < ApplicationRecord
       user.firstname = auth.info.name
       # user.profile_picture = open(process_uri(auth.info.image))
       user.password = Devise.friendly_token[0, 20]
+      user.skip_confirmation!
+      user.save!
     end
   end
 
