@@ -18,7 +18,6 @@
 <div class="container py-4">
   <div id="" class="car_availibility">
     <%= form_for(@user) do |form| %>
-      <%  address = Geocoder.search(request.remote_ip).first %>
       <% if @user.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@user.errors.count, "error") %> prohibited this @user from being saved:</h2>
@@ -35,15 +34,15 @@
           <div class="row">
             <div class="col-lg-4 col-md-6">
               <label>Suburb</label>
-              <%= form.text_field :pickup_suburb,  class:"form-control", required: true, value: (address.city if address)  %>
+              <%= form.text_field :pickup_suburb,  class:"form-control", required: true  %>
             </div>
             <div class="col-lg-4 col-md-6">
               <label>Postcode</label>
-              <%= form.text_field :pickup_postcode,  class:"form-control", required: true ,value: (address.postal if address) %>
+              <%= form.text_field :pickup_postcode,  class:"form-control", required: true  %>
             </div>
             <div class="col-lg-4 col-md-6">
               <label>State</label>
-              <%= form.text_field :pickup_state,  class:"form-control", required: true ,value: (address.state if address)  %>
+              <%= form.select :pickup_state, ["ACT","New South Wales","Northern Territory","Queensland","South Australia","Tasmania","Victoria","Western Australia"], {required: true, prompt: "Select State", selected: current_user.personal_state},{class: "form-control remove-symbol",disabled: current_user.personal_state.present?} %>
             </div>
           </div>
           <hr>

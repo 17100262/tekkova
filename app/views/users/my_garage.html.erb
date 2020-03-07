@@ -38,7 +38,7 @@
           </tr>
           <tr>
             <td><span class="text-color-dark mygrge-prf">Availability Days:</span></td>
-            <td><span class="custom-text-color-2 mygrge-prf"><%= (JSON.parse(@user.availibility_days)).to_sentence if @user.availibility_days.present? %></span></td>
+            <td><span class="custom-text-color-2 mygrge-prf"><%= (JSON.parse(@user.availibility_days)).to_sentence(:last_word_connector => " and ") if @user.availibility_days.present? %></span></td>
           </tr>
         </table>
       </div>

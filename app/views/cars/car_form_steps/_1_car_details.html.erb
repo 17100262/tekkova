@@ -55,7 +55,7 @@
       </div>
       <div class="col-lg-3 col-md-6">
         <%= form.label :series %> 
-        <%=  form.text_field :series, required: true  %>
+        <%=  form.text_field :series%>
       </div>
       <div class="col-lg-3 col-md-6">
         <%= form.label :odometer %>
@@ -156,9 +156,10 @@
         <%= form.text_field :liecense_plate_number  %>
       </div>
       <div class="col-md-4">
+
         <%= form.label :state %> 
         <%#= form.text_field :state  %>
-        <%= form.select :state, ["New South Wales","Northern Territory","Queensland","South Australia","Tasmania","ACT","Victoria","Western Australia"], prompt: "Select State" %>
+        <%= form.select :state, ["ACT","New South Wales","Northern Territory","Queensland","South Australia","Tasmania","Victoria","Western Australia"], {prompt: "Select State", selected: current_user.personal_state}, {class: 'select-state', disabled: current_user.personal_state.present?}  %>
       </div>
       <div class="col-md-4">
         <%= form.label :insurance_provider %> 
@@ -184,7 +185,7 @@
     <%= form.hidden_field :step, value: 1 %>
 
   <div class="mt-2 mb-5">
-    <a class="btn btn-primary btn-sm pl-3 pr-3" role="button" href="<%= new_car_path %>"><i class="fas fa-caret-left"></i> Back</a>
+    <a class="btn btn-primary btn-sm pl-3 pr-3" role="button" href="<%= scenario === 'edit' ? my_garage_path : new_car_path %>"><i class="fas fa-caret-left"></i> Back</a>
   <span class="float-right mb-3">
   <%#= form.submit "Next", class: "btn btn-primary btn-sm pl-3 pr-3" %>
   <button type="submit" class="btn btn-primary btn-sm pl-3 pr-3">Next <i class="fas fa-caret-right"></i></button>

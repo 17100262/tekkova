@@ -12,7 +12,7 @@ car_features = ['Front Centre Armrests', 'Rear Centre Armrests',
                 'Driver airbag', 'Passenger airbags', 'Central locking',
                 'Sport paddles','Floor mats', 'Lane departure warning', 'Side airbags',
                 'Parking assist', 'Blind Spot Mirrors',
-                'Day time LED running lights', 'Storage Compartment/Center console']
+                'Day time LED running lights', 'Center console compartment']
 
 CarFeature.all.destroy_all
 

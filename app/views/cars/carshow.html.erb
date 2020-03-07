@@ -196,10 +196,8 @@
         <hr>
         <div class="row">
           <% @car.car_features.each do |feature|%>
-            <div class="col-md-4">
-              <div class="specs-body spec-show-text">
+            <div class="col-md-3 spec-show-text">
                 <%= feature.name%>
-            </div>
           </div>
           <% end %>
         </div>
@@ -295,3 +293,4 @@
     setTimeout(location.reload.bind(location), 2000);
   });
 </script>
+
