@@ -50,7 +50,7 @@ class User < ApplicationRecord
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
-      user.name = auth.info.name
+      user.firstname = auth.info.name
       # user.profile_picture = open(process_uri(auth.info.image))
       user.password = Devise.friendly_token[0, 20]
     end
