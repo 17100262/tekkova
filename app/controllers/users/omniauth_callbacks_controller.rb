@@ -1,7 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # You should configure your model like this:
     # devise :omniauthable, omniauth_providers: [:twitter,:facebook,:google_oauth2]
-
+    skip_before_action :verify_authenticity_token
     def facebook
       redirect_to_this = request.env['omniauth.params']['redirect_to']
         @user = User.from_omniauth(request.env["omniauth.auth"])
