@@ -22,6 +22,9 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
+  # force ssl
+  config.force_ssl = true
+
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
@@ -35,8 +38,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'https://tekkova.herokuapp.com' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  
-  
+
+
   ActionMailer::Base.delivery_method = :smtp
   # ActionMailer::Base.smtp_settings = {
   #   :address => 'smtpout.secureserver.net',
@@ -54,7 +57,7 @@ Rails.application.configure do
     :password => ENV['mailer_password'],
     :authentication => :plain
     }
-  
+
 
   # ActionMailer::Base.smtp_settings = {
   #   :address => "smtp.mailgun.org",
