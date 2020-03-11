@@ -171,7 +171,7 @@ ActiveRecord::Schema.define(version: 2020_03_07_151143) do
     t.text "comment"
     t.datetime "deleted_at"
     t.string "home_phone_number"
-    t.boolean "research"
+    t.integer "research"
     t.string "provider"
     t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
