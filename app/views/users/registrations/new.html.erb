@@ -1,12 +1,11 @@
 <div class="signup-bg">
-<div class="container-fluid py-5" >
+<div class="container-fluid  pb-5" >
   <div class="row">
     <div class="col-md-4 mx-auto">
       <div class="" id="dragit">
         <div class="top-icon-signup">
           <img src="/arrow.png" width="60px" class="darg-img-non">
         </div>
-  	  <div class="Signup-main px-4">
   				<h1>Join Tekkova</h1>
   				<%= alert %>
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -21,7 +20,7 @@
                 <%= f.email_field :email, autocomplete: "email",required: true, class: "form-control form-control-md mb-2", placeholder: "Enter Your Email" , id: "join_email" %>
                 <%= f.password_field :password, autocomplete: "off",required: true, class: "form-control form-control-md pss_next mb-2", placeholder: "Enter Your Password"  , id: "join_pword" %>
                 <%= f.password_field :password_confirmation, autocomplete: "off",required: true, class: "form-control form-control-md mb-2", placeholder: "Confirm Your Password", id: "join_cpword" %>
-                <div class="input-file-container">  
+                <div class="input-file-container">
                     <%= f.file_field :profile_image, accept:"image/*", required: false, class:"input-file", :data => { :buttonText => 'bar' } %>
                     <label tabindex="0" for="user_profile_image" class="input-file-trigger bg-primary mb-2">Upload Profile Picture</label>
                     <span class="file-return">No File Choosen</span>
@@ -29,9 +28,21 @@
                 <br>
                 <br>
                 <%= f.check_box :offers %> <span class="mb-0">Yes,send me special offers,discounts and updates</span><br>
-    					<input type="checkbox" required="true" id="agreed"> 
+    					<input type="checkbox" required="true" id="agreed">
               I Agree to <a href="/terms_and_conditions">Marketplace Terms and Conditions</a>, &nbsp;&nbsp;&nbsp;&nbsp;<a href="/privacy_policy">Privacy Policy</a> and <a href="/nd_policy">Non-Discrimination Policy</a><br><br>
     					  <%= f.submit "Sign Up", class: "login loginmodal-button loginmodal-submit text-center" %>
+
+
+      			<% end %>
+
+
+  				<hr class="hr-or">
+  				<p style="text-align: center;">Already a Member? <a href="/users/sign_in"> Login </a></p>
+      </div>
+  </div>
+</div>
+</div>
+
 <div class="container">
   <div class="modal fade modal-verticallly-centr" id="fbModal">
     <div class="modal-dialog modal-dialog-centered">
@@ -45,20 +56,20 @@
             <li><a href="/nd_policy" target="_blank">Non-discrimination Policy</a></li>
           </ul>
         </div>
-        
+
         <!-- Modal footer -->
         <div class="modal-footer">
           <%= link_to 'Continue',  "#{root_url}users/auth/facebook" ,:class => "btn btn-primary" %>
         <!--<input type="submit" name="commit" value="Sign Up" class="btn btn-primary" id="tick" data-disable-with="Sign Up">-->
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
-        
+
       </div>
     </div>
   </div>
   <!--facebook modal end-->
-  
-  
+
+
   <!--google modal start-->
   <div class="modal fade modal-verticallly-centr" id="googleModal">
     <div class="modal-dialog modal-dialog-centered">
@@ -71,35 +82,22 @@
             <li><a href="/nd_policy" target="_blank">Non-discrimination Policy</a></li>
           </ul>
         </div>
-        
+
         <!-- Modal footer -->
         <div class="modal-footer">
          <%= link_to 'Continue',  "#{root_url}users/auth/google_oauth2" ,:class => "btn btn-primary" %>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
-        
+
       </div>
     </div>
   </div>
   <!--google modal end-->
-  
-  
+
+
 </div>
-
-      			<% end %>
-
-  			
-  				<hr class="hr-or">
-  				<p style="text-align: center;">Already a Member? <a href="/users/sign_in"> Login </a></p>
-  		</div> 
-      </div>
-  </div>
-</div>
-</div>
-
-
 <script>
-  var draggable = $('#dragit'); 
+  var draggable = $('#dragit');
 draggable.on('mousedown', function(e){
   var dr = $(this).addClass("drag").css("cursor","move");
   height = dr.outerHeight();
