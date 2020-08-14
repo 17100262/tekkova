@@ -1488,3 +1488,27 @@ a.btn.btn-primary.carshow-back-btn:focus{
     -moz-appearance: none;
     appearance: none !important;
   }
+  .corona-banner {
+    position: fixed;
+    top: 0;
+    width: 30%;
+    z-index: 9999 !important;
+    right: 0;
+    background: red !important;
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    z-index: -555;
+  }
+  .coron-btn {
+    border: red;
+    background: #da2300;
+    color: #fff;
+    margin-left: 30px !important;
+    opacity: 1;
+    position: absolute;
+    right: 5px;
+    top: 10px;
+  }
+  
