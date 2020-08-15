@@ -95,6 +95,19 @@ h2.heading {
 
 /** The Spacing **/
 @media(min-width:768px) {
+  .corona-banner {
+    position: fixed;
+    top: 0;
+    width: 30%;
+    z-index: 9999 !important;
+    right: 0;
+    background: red !important;
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    z-index: -555;
+  }
   .video-bg-home {
     background-image: url('/bmw.jpg');
     background-position: right;
@@ -143,6 +156,19 @@ h2.heading {
 }
 
 @media(max-width:768px) {
+  .corona-banner {
+    position: fixed;
+    top: 0;
+    width: 95%;
+    z-index: 9999 !important;
+    right: 0;
+    background: red !important;
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    z-index: -555;
+  }
   .btn-breadcrumb .btn {
     padding: 5px 5px 5px 20px;
   }
@@ -1488,19 +1514,7 @@ a.btn.btn-primary.carshow-back-btn:focus{
     -moz-appearance: none;
     appearance: none !important;
   }
-  .corona-banner {
-    position: fixed;
-    top: 0;
-    width: 30%;
-    z-index: 9999 !important;
-    right: 0;
-    background: red !important;
-    color: #fff;
-    padding: 0.75rem 1.25rem;
-    margin-bottom: 1rem;
-    border-radius: 0.25rem;
-    z-index: -555;
-  }
+  
   .coron-btn {
     border: red;
     background: #da2300;
