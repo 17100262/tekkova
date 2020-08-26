@@ -1515,14 +1515,14 @@ a.btn.btn-primary.carshow-back-btn:focus{
     appearance: none !important;
   }
   
-  .coron-btn {
+  .corona-btn {
     border: red;
     background: #da2300;
     color: #fff;
     margin-left: 30px !important;
     opacity: 1;
     position: absolute;
-    right: 5px;
-    top: 10px;
+    right: 0px;
+    top: 0px;
   }
   

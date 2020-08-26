@@ -1,7 +1,3 @@
-<div class="corona-banner alert alert-info">
-  <button class="coron-btn"><i class="fas fa-check"></i></button>
-  <span class="pr-5">Due to unforeseen circumstances such as Covid 19, we have chosen to push back our vehicle registrations process up until the end of November of 2020. Please remain patient with us till we have enough cars listed, Thank you again</span>
-</div>
 <% if user_signed_in? and current_user.sign_in_count <= 1 %>
   <%= render 'cars/congrats' %>
 <% end %>

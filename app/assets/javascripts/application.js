@@ -370,9 +370,6 @@ $(window).load(function() {
     $(".corona-banner").hide();
     $("#accept-cookie").click(function() {
       $(".corona-banner").show();
-      $('.coron-btn').click(function(){
-         $(".corona-banner").remove();
-      })
       id_button = $(this).attr("id");
       action_button = (id_button == "accept-cookie") ? 'set' : 'not';
       createCookie("cookie_avert", action_button, 365);
@@ -425,10 +422,11 @@ $('.select-state').select(function() {
     $('#selected-state').val($(this).val());
 });
 });
+$(document).ready(function () {
+     $(".corona-banner").hide();
+    $('.corona-btn').click(function(){
+         $(".corona-banner").hide();
+      });
+        
+}); 
 
-
-
-  $(document).ready(function () {
-      
-      $(".corona-banner").hide();  
-      });  
