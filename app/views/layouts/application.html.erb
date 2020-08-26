@@ -13,6 +13,14 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   </head>
   <body>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-176395423-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-176395423-1');
+    </script>
+    
     <div class="corona-banner alert alert-info">
   <div class="row">
     <div class="col-11 pr-1">
@@ -39,13 +47,6 @@
     <% if !(request.path == "/admin" or request.path == "/users" or request.path == "/car_management" or request.path == "/violations" or request.path == "/mass_email" )  %>
       <%= render 'layouts/footer' %>
     <% end %>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-176395423-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-176395423-1');
-    </script>
   </body>
 </html>
 <script>
