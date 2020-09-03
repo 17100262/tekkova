@@ -423,7 +423,7 @@ $('.select-state').select(function() {
 });
 $(document).ready(function () {
     $('.corona-btn').click(function(){
-         $(".corona-banner").hide();
+         $(".corona-banner").remove();
       });
         
 }); 
