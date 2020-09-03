@@ -20,18 +20,8 @@
       gtag('js', new Date());
       gtag('config', 'UA-176395423-1');
     </script>
-    
-    <div class="corona-banner alert alert-info">
-  <div class="row">
-    <div class="col-11 pr-1">
-      <span class="pr-5">Due to unforeseen circumstances such as Covid 19, we have chosen to push back our vehicle registrations process up until the end of November of 2020. Please remain patient with us till we have enough cars listed, Thank you again</span>
-    </div>
-    <div class="col-1 pl-1">
-      <button class="corona-btn btn btn-sm"><i class="fas fa-check"></i></button>
-    </div>
-  </div>
-</div>
       <%= render 'layouts/header' %>
+
       <!--< if notice || alert %>-->
       <!--  <div class="alert alert-info" role="alert">-->
       <!--    <strong>Info!</strong> <= notice || alert %>-->
@@ -47,6 +37,16 @@
     <% if !(request.path == "/admin" or request.path == "/users" or request.path == "/car_management" or request.path == "/violations" or request.path == "/mass_email" )  %>
       <%= render 'layouts/footer' %>
     <% end %>
+    <div class="corona-banner alert alert-info">
+  <div class="row">
+    <div class="col-11 pr-1">
+      <span class="pr-5">Due to unforeseen circumstances such as Covid 19, we have chosen to push back our vehicle registrations process up until the end of November of 2020. Please remain patient with us until we have enough cars listed, Thank you again</span>
+    </div>
+    <div class="col-1 pl-1">
+      <button class="corona-btn btn btn-sm"><i class="fas fa-check"></i></button>
+    </div>
+  </div>
+</div>
   </body>
 </html>
 <script>
