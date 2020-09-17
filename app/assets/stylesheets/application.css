@@ -1537,18 +1537,22 @@ a.btn.btn-primary.carshow-back-btn:focus{
       margin-top: 43px !important;
     }
     .mt-6-neg { 
-      margin-top: 102px !important;
-      padding-bottom: 0px !important
+      margin-top: 45px !important;
+      padding-bottom: 20px !important
+    }
+     .mt-26-neg {
+          margin-top: 0px;
+          margin-bottom: 15px !important;
     }
     }
     @media screen and (min-width: 373px) and (max-width: 400px) {
     .mt-26-neg {
           margin-top: 3px;
-          margin-bottom: 6px !important;
+          margin-bottom: 18px !important;
     }
     .mt-6-neg { 
-      margin-top: 76px !important;
-      padding-bottom: 0px !important
+      margin-top: 18px !important;
+      padding-bottom: 7px !important
     }
     .mt-21-neg {
       margin-top: 41px !important;
