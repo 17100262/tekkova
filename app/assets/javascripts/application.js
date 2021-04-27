@@ -368,7 +368,6 @@ $(window).load(function() {
     banner_text = 'Please use a PC, laptop or a tablet instead of a mobile phone to signup, list your vehicle or if you are simply just browsing Tekkova, in order to have a smoother experience. Thank you. <button class="btn btn-success btn-gradient btn-sm" id="accept-cookie"><i class="fas fa-check"></i></button>';
     $("body").prepend('<div id="cookies-banner" class="alert alert-info pr-5">' + banner_text + '</div>');
     $("#accept-cookie").click(function() {
-      $(".corona-banner").show();
       id_button = $(this).attr("id");
       action_button = (id_button == "accept-cookie") ? 'set' : 'not';
       createCookie("cookie_avert", action_button, 365);
@@ -382,7 +381,6 @@ $(window).load(function() {
     setTimeout(function() {
       createCookie("cookie_avert", 365);
       $("#cookies-banner").slideUp(350).remove();
-      $(".corona-banner").show();
       $.ga.load(g_analytics_id, function(pageTracker) {
         pageTracker._setDomainName(host);
       });
@@ -421,10 +419,3 @@ $('.select-state').select(function() {
     $('#selected-state').val($(this).val());
 });
 });
-$(document).ready(function () {
-    $('.corona-btn').click(function(){
-         $(".corona-banner").remove();
-      });
-        
-}); 
-

@@ -94,7 +94,7 @@ h2.heading {
 }
 
 /** The Spacing **/
-@media(min-width:768px) {
+@media(min-width:769px) {
   .corona-banner {
     position: fixed;
     top: 0;
@@ -118,9 +118,6 @@ h2.heading {
   .feature-check-resp {
     max-width: 24% !important;
     display: inline-flex;
-  }
-  .align-payment-text {
-    margin-top: 70px !important;
   }
 
   .btn-breadcrumb .btn {
@@ -585,7 +582,7 @@ div.dt-button-info {
     left: 110px;
   }
   span.space-on-logo {
-    margin-left: 43px;
+    margin-left: 18px;
 }
 span.spc {
   opacity: 0;
@@ -598,6 +595,9 @@ span.spc {
   #icon-span::before {
     top: 35px;
     left: 130px;
+  }
+  .align-payment-text {
+    margin-top: 44px !important;
   }
 }
 
@@ -1347,7 +1347,10 @@ img {
   padding-bottom: 40px;
   background: radial-gradient(circle, rgba(225, 244, 248, 1) 0%, rgba(156, 211, 205, 1) 82%, rgba(156, 211, 205, 1) 92%);
 }
-
+.city-section {
+  padding-top: 40px;
+  padding-bottom: 50px;
+}
 .calculator-field-trans {
   background-color: transparent !important;
 }
@@ -1561,5 +1564,47 @@ a.btn.btn-primary.carshow-back-btn:focus{
       margin-top: 0px !important;
     }
     }
-
-  
+.f-40 {
+  font-size: 40px;
+}
+.va-16 {
+  vertical-align: -16px;
+}
+.perth-city {
+  background-image: url('/perth.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: .25rem;
+}
+.sydney-city {
+  background-image: url('/sydney.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: .25rem;
+}
+.brisbane-city {
+  background-image: url('/brisbane.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: .25rem;
+}
+.melbourne-city {
+  background-image: url('/melbourne.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: .25rem;
+}
+.goldcoast-city {
+  background-image: url('/goldcoast.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: .25rem;
+}
+.city-overlay {
+  padding: 66px 20px;
+  background: rgba(0,0,0,0.4);
+  border-radius: .25rem;
+}
+a.home-link {
+  text-decoration: none;
+}

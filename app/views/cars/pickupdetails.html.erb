@@ -41,8 +41,10 @@
               <%= form.text_field :pickup_postcode,  class:"form-control", required: true  %>
             </div>
             <div class="col-lg-4 col-md-6">
-              <label>State</label>
-              <%= form.select :pickup_state, ["ACT","New South Wales","Northern Territory","Queensland","South Australia","Tasmania","Victoria","Western Australia"], {required: true, prompt: "Select State", selected: current_user.personal_state},{class: "form-control remove-symbol",disabled: current_user.personal_state.present?} %>
+              <label>City</label>
+              <%= form.select :pickup_state, ["Perth","Sydney","Melbourne","Gold Coast","Brisbane"], {required: true, prompt: "Select State"},{class: "form-control"} %>
+
+              <%#= form.select :pickup_state, ["ACT","New South Wales","Northern Territory","Queensland","South Australia","Tasmania","Victoria","Western Australia"], {required: true, prompt: "Select State", selected: current_user.personal_state},{class: "form-control remove-symbol",disabled: current_user.personal_state.present?} %>
             </div>
           </div>
           <hr>

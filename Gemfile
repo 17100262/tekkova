@@ -53,6 +53,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'mimemagic', '~> 0.3.10'
 gem 'devise'
 gem 'jquery-rails'
 gem 'awesome_print'
