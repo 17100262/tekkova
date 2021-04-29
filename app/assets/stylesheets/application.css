@@ -1570,6 +1570,18 @@ a.btn.btn-primary.carshow-back-btn:focus{
 .va-16 {
   vertical-align: -16px;
 }
+.f-32 {
+  font-size: 32px;
+}
+.dark-background-section {
+  background-image: url('/Modified.jpg');
+  padding:  100px 0px 50px;
+  background-position: center center;
+  background-size: cover;
+}
+.mt-100-dark {
+  margin-top: 450px;;
+}
 .perth-city {
   background-image: url('/perth.jpg');
   background-size: cover;
