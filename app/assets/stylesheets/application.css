@@ -1548,6 +1548,12 @@ a.btn.btn-primary.carshow-back-btn:focus{
           margin-bottom: 15px !important;
     }
     }
+    @media (max-width: 400px) {
+      .bg-text-home {
+        background-color: #00800091;
+        padding: 3px 10px;
+        }
+    }
     @media screen and (min-width: 373px) and (max-width: 400px) {
     .mt-26-neg {
           margin-top: 3px;
@@ -1558,7 +1564,7 @@ a.btn.btn-primary.carshow-back-btn:focus{
       padding-bottom: 7px !important
     }
     .mt-21-neg {
-      margin-top: 41px !important;
+      margin-top: 100px !important;
     }
     .mt-14-neg {
       margin-top: 0px !important;
@@ -1574,7 +1580,7 @@ a.btn.btn-primary.carshow-back-btn:focus{
   font-size: 32px;
 }
 .dark-background-section {
-  background-image: url('/Modified.jpg');
+  background-image: url('/bg-dark1.jpg');
   padding:  100px 0px 50px;
   background-position: center center;
   background-size: cover;
@@ -1584,36 +1590,41 @@ a.btn.btn-primary.carshow-back-btn:focus{
 }
 .perth-city {
   background-image: url('/perth.jpg');
-  background-size: cover;
   background-position: center;
+  background-size: cover;
   border-radius: .25rem;
+  background-repeat: no-repeat;
 }
 .sydney-city {
   background-image: url('/sydney.jpg');
-  background-size: cover;
   background-position: center;
+  background-size: cover;
   border-radius: .25rem;
+  background-repeat: no-repeat;
 }
 .brisbane-city {
   background-image: url('/brisbane.jpg');
-  background-size: cover;
   background-position: center;
+  background-size: cover;
   border-radius: .25rem;
+  background-repeat: no-repeat;
 }
 .melbourne-city {
   background-image: url('/melbourne.jpg');
-  background-size: cover;
   background-position: center;
+  background-size: cover;
   border-radius: .25rem;
+  background-repeat: no-repeat;
 }
 .goldcoast-city {
   background-image: url('/goldcoast.jpg');
   background-size: cover;
   background-position: center;
   border-radius: .25rem;
+  background-repeat: no-repeat;
 }
 .city-overlay {
-  padding: 66px 20px;
+  padding: 140px 20px;
   background: rgba(0,0,0,0.4);
   border-radius: .25rem;
 }
