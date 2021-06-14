@@ -514,7 +514,7 @@ div.dt-button-info {
     margin-top: 110px !important;
   }
   #banner {
-    background-position: 100% 73%;
+    background-position: 100% 73% !important;
   }
 }
 @media (min-width: 1499px) {
