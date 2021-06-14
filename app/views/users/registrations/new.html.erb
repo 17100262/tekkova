@@ -11,7 +11,9 @@
   				<%= alert %>
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
               <%= devise_error_messages!   %>
+              <!--
               <a href="#" class="login loginmodal-button loginmodal-social loginmodal-fb" data-toggle="modal" data-target="#fbModal">Continue with Facebook</a>
+              -->
               <a href="#" class="login loginmodal-button loginmodal-google" data-toggle="modal" data-target="#googleModal">Continue with Google</a>
         				<%#= link_to 'Continue with Facebook',  "#{root_url}users/auth/facebook" ,:class => "login loginmodal-button loginmodal-social loginmodal-fb" %>
     						<%#= link_to 'Continue with Google',  "#{root_url}users/auth/google_oauth2" ,:class => "login loginmodal-button loginmodal-google" %>
