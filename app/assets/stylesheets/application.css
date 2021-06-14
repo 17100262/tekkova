@@ -93,6 +93,24 @@ h2.heading {
   z-index: 3;
 }
 
+@media(min-width:767px) {
+  #banner {
+    background-position: 100% -50px !important;
+  }
+  .bg-text-home {
+    margin-top: 65px !important;
+  }
+  
+}
+@media(min-width:1023px) {
+  #banner {
+    background-position: 100% -100px !important;
+  }
+  .bg-text-home {
+    margin-top: 65px !important;
+  }
+  
+}
 /** The Spacing **/
 @media(min-width:769px) {
   .corona-banner {
@@ -491,6 +509,22 @@ div.dt-button-info {
     display: none !important;
   }
 }
+@media (min-width: 1200px) {
+  .bg-text-home {
+    margin-top: 110px !important;
+  }
+  #banner {
+    background-position: 100% 73%;
+  }
+}
+@media (min-width: 1499px) {
+  .bg-text-home {
+    margin-top: 140px !important;
+  }
+  #banner {
+    background-position: 100% 67% !important;
+  }
+}
 
 @media(min-width: 991px) {
   .header-user {
@@ -612,6 +646,12 @@ span.spc {
   #icon-span::before {
     top: 140px;
     left: 165px;
+  }
+  #banner {
+    background-position: 50% -54px;
+  }
+  .bg-text-home {
+    margin-top: 60px !important;
   }
 }
 
@@ -1548,13 +1588,8 @@ a.btn.btn-primary.carshow-back-btn:focus{
           margin-bottom: 15px !important;
     }
     }
-    @media (max-width: 400px) {
-      .bg-text-home {
-        background-color: #5cb85cbd;
-        padding: 3px 10px;
-        }
-    }
     @media screen and (min-width: 373px) and (max-width: 400px) {
+
     .mt-26-neg {
           margin-top: 3px;
           margin-bottom: 18px !important;
@@ -1631,3 +1666,26 @@ a.btn.btn-primary.carshow-back-btn:focus{
 a.home-link {
   text-decoration: none;
 }
+.bg-text-home {
+  background-color: #5cb85cbd;
+  padding: 20px 10px;
+  display: inline-grid;
+  }
+
+  
+  @media screen and (max-width: 373px) { 
+    #banner {
+      background-position: 50% -22px;
+    }
+    .bg-text-home {
+      margin-top: 65px !important;
+    }
+  }
+  @media screen and (max-width: 376px) { 
+    #banner {
+      background-position: 50% -27px;
+    }
+    .bg-text-home {
+      margin-top: 65px !important;
+    }
+  }
