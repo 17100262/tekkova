@@ -253,8 +253,8 @@ html .btn-default.hover {
   background: url('/banner.jpg') center center;
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #3f568c;
 }
-
 .ui-slider-handle {
   margin-left: -9px !important;
   top: -6px !important;
@@ -509,7 +509,15 @@ div.dt-button-info {
     display: none !important;
   }
 }
+@media (max-width: 1200px) {
+.mt-100-dark {
+  margin-top: 500px !important;
+}
+}
 @media (min-width: 1200px) {
+  .mt-100-dark {
+    margin-top: 500px !important;
+  }
   .bg-text-home {
     margin-top: 110px !important;
   }
@@ -518,6 +526,9 @@ div.dt-button-info {
   }
 }
 @media (min-width: 1499px) {
+  .mt-100-dark {
+    margin-top: 660px !important;
+  }
   .bg-text-home {
     margin-top: 140px !important;
   }
@@ -1406,6 +1417,7 @@ img {
 }
 
 @media only screen and (min-width: 360px) {
+ 
   .list-checkox-width {
     max-width: 4.5%;
   }
@@ -1616,13 +1628,11 @@ a.btn.btn-primary.carshow-back-btn:focus{
 }
 .dark-background-section {
   background-image: url('/bg-dark1.jpg');
-  padding:  100px 0px 50px;
+  padding:  50px 0px 50px;
   background-position: center center;
   background-size: cover;
 }
-.mt-100-dark {
-  margin-top: 550px;;
-}
+
 .perth-city {
   background-image: url('/perth.jpg');
   background-position: center;
