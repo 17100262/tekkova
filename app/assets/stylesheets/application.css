@@ -1685,7 +1685,7 @@ a.home-link {
   
   @media screen and (max-width: 373px) { 
     #banner {
-      background-position: 50% -22px;
+      background-position: 50% -22px !important;
     }
     .bg-text-home {
       margin-top: 65px !important;
@@ -1693,7 +1693,7 @@ a.home-link {
   }
   @media screen and (max-width: 376px) { 
     #banner {
-      background-position: 50% -27px;
+      background-position: 50% -60px;
     }
     .bg-text-home {
       margin-top: 65px !important;
