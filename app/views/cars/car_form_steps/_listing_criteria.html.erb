@@ -13,22 +13,22 @@
               </div>
             <% end %>
 
-              <p>Please ensure that your vehicle meets the following criteria</p>
+              <p>Please ensure that your vehicle meets the following criteria:</p>
               <%= f.check_box :model_year_check, required: true, id:"1" %>
-              <label for="1">2013-2022 model year</label> <br>
+              <label for="1">2013-2022 model year.</label> <br>
 
               <%= f.check_box :usage_limit_check, required: true, id:"2" %>
-              <label for="2">Less than 150,000 in kms</label> <br>
+              <label for="2">Less than 150,000 in kms.</label> <br>
 
 
               <%= f.check_box :road_worthy_check, required: true, id:"4" %>
-              <label for="4">Road Worthy</label> <br>
+              <label for="4">Road Worthy.</label> <br>
 
               <%= f.check_box :write_off_check, required: true, id:"5" %>
-              <label for="5">No write off history</label> <br>
+              <label for="5">No write off history.</label> <br>
 
               <%= f.check_box :maintained_check, required: true, id:"6" %>
-             <label for="6">Well maintained, serviced as scheduled and recommended by the manafacturer </label><br>
+             <label for="6">Well maintained, serviced as scheduled and recommended by the manafacturer. </label><br>
               <div class="row mb-2">
                 <div class="col-1 pr-0 list-checkox-width">
                   <%= f.check_box :register_check, required: true, id:"3" %>
@@ -38,7 +38,7 @@
                 </div>
               </div>
              <%= f.check_box :availability_check, required: true, id:"7" %>
-             <label for="7">Vehicle needs to be available 3 days a week or more. Availability days of the vehicle does not have to be consecutive</label><br><br>
+             <label for="7">Vehicle needs to be available 3 days a week or more. Availability days of the vehicle does not have to be consecutive.</label><br><br>
               <%= f.hidden_field :step, value: 0 %>
               <%= f.hidden_field :status, value: "not_completed" %>
               <div class="row">
