@@ -1677,10 +1677,14 @@ a.home-link {
   text-decoration: none;
 }
 .bg-text-home {
-  background-color: #5cb85cbd;
+  background-color: #c3ceef;
   padding: 20px 10px;
   display: inline-grid;
   }
+  .bg-text-home2 {
+    background-color: #c3ceef;
+    padding: 20px 10px 10px;
+    }
 
   
   @media screen and (max-width: 373px) { 
@@ -1869,4 +1873,7 @@ a.home-link {
   background-color: #5cb85cbd;
   padding: 2px 12px;
   display: inline-grid;
+  }
+  .text-black {
+    color: #000 !important;
   }
