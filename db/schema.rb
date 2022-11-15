@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2020_03_07_151143) do
     t.datetime "updated_at", null: false
     t.string "avatar_file_name"
     t.string "avatar_content_type"
-    t.integer "avatar_file_size"
+    t.bigint "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer "position"
     t.index ["car_id"], name: "index_car_pictures_on_car_id"
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 2020_03_07_151143) do
     t.datetime "updated_at", null: false
     t.string "file_file_name"
     t.string "file_content_type"
-    t.integer "file_file_size"
+    t.bigint "file_file_size"
     t.datetime "file_updated_at"
   end
 
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 2020_03_07_151143) do
     t.bigint "user_id"
     t.string "file_file_name"
     t.string "file_content_type"
-    t.integer "file_file_size"
+    t.bigint "file_file_size"
     t.datetime "file_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -158,15 +158,15 @@ ActiveRecord::Schema.define(version: 2020_03_07_151143) do
     t.datetime "updated_at", null: false
     t.string "licensefront_file_name"
     t.string "licensefront_content_type"
-    t.integer "licensefront_file_size"
+    t.bigint "licensefront_file_size"
     t.datetime "licensefront_updated_at"
     t.string "licenseback_file_name"
     t.string "licenseback_content_type"
-    t.integer "licenseback_file_size"
+    t.bigint "licenseback_file_size"
     t.datetime "licenseback_updated_at"
     t.string "profile_image_file_name"
     t.string "profile_image_content_type"
-    t.integer "profile_image_file_size"
+    t.bigint "profile_image_file_size"
     t.datetime "profile_image_updated_at"
     t.text "comment"
     t.datetime "deleted_at"
