@@ -94,18 +94,18 @@ h2.heading {
 }
 
 @media(min-width:767px) {
-  #banner {
+  /* #banner {
     background-position: 100% -50px !important;
-  }
+  } */
   .bg-text-home {
     margin-top: 65px !important;
   }
   
 }
 @media(min-width:1023px) {
-  #banner {
+  /* #banner {
     background-position: 100% -100px !important;
-  }
+  } */
   .bg-text-home {
     margin-top: 65px !important;
   }
@@ -250,7 +250,7 @@ html .btn-default.hover {
 }
 
 #banner {
-  background: url('/banner.jpg') center center;
+  background: url('/top-home.jpg') center center;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: #3f568c;
@@ -521,9 +521,9 @@ div.dt-button-info {
   .bg-text-home {
     margin-top: 110px !important;
   }
-  #banner {
+  /* #banner {
     background-position: 100% 67% !important;
-  }
+  } */
 }
 @media (min-width: 1499px) {
   .mt-100-dark {
@@ -532,9 +532,9 @@ div.dt-button-info {
   .bg-text-home {
     margin-top: 140px !important;
   }
-  #banner {
+  /* #banner {
     background-position: 100% 63% !important;
-  }
+  } */
 }
 
 @media(min-width: 991px) {
