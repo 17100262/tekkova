@@ -250,7 +250,8 @@ html .btn-default.hover {
 }
 
 #banner {
-  background: url('/top-home.jpg') center center;
+  background: url('/top-home.jpg');
+  background-position: right;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: #3f568c;
