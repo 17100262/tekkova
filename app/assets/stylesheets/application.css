@@ -658,9 +658,9 @@ span.spc {
     top: 140px;
     left: 165px;
   }
-  #banner {
+  /* #banner {
     background-position: 50% -54px;
-  }
+  } */
   .bg-text-home {
     margin-top: 60px !important;
   }
@@ -1688,17 +1688,17 @@ a.home-link {
 
   
   @media screen and (max-width: 373px) { 
-    #banner {
+    /* #banner {
       background-position: 50% -22px !important;
-    }
+    } */
     .bg-text-home {
       margin-top: 65px !important;
     }
   }
   @media screen and (max-width: 376px) { 
-    #banner {
+    /* #banner {
       background-position: 50% -60px;
-    }
+    } */
     .bg-text-home {
       margin-top: 65px !important;
     }
